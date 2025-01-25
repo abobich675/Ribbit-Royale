@@ -32,21 +32,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         DoMovement();
-
-        if (interactAction.triggered)
-        {
-            Debug.Log("Interact Triggered");
-            {
-                RaycastHit hit;
-                Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-                Debug.DrawRay(ray.origin, ray.direction * 100, Color.yellow, 2);
-
-                if (Physics.Raycast(ray, out hit))
-                {
-                    Debug.Log(hit.transform.name);
-                }
-            }
-        }
+        DoInteraction();
 
         void DoMovement()
         {
@@ -63,6 +49,22 @@ public class PlayerController : MonoBehaviour
             else
             {
                 rb.gravityScale = GRAVITYSCALE;
+            }
+        }
+
+        void DoInteraction()
+        {
+            if (interactAction.triggered)
+            {
+                Debug.Log("Interact Triggered");
+
+                Vector2 mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
+                RaycastHit2D[] hits = Physics2D.RaycastAll(mousePosition, Vector2.zero);
+
+                foreach (RaycastHit2D hit in hits)
+                {
+                    Debug.Log(hit.transform.name);
+                }
             }
         }
     }
