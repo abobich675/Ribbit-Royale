@@ -1,6 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerCtrl : MonoBehaviour
+public class PlayerCtrl : NetworkBehaviour
 {
     public float movSpeed;
     float speedx, speedy;
