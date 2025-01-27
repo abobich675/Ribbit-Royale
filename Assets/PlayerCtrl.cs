@@ -15,6 +15,9 @@ public class PlayerCtrl : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!IsOwner){
+            return;
+        }
         speedx = Input.GetAxisRaw("Horizontal") * movSpeed;
         speedy = Input.GetAxisRaw("Vertical") * movSpeed;
 
