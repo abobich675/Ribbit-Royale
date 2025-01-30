@@ -617,6 +617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 10
   dampingFactor: 3
+  swingingMovementBonus: 0
   camera: {fileID: 742085408}
   tongue: {fileID: 905043956}
 --- !u!114 &747205084
@@ -669,7 +670,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 1
   m_DampingRatio: 0.7
-  m_Frequency: 0.5
+  m_Frequency: 1
 --- !u!1 &877090762 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7866868302527231828, guid: f96091ba4d54108409c37fdf2ecf9592, type: 3}
