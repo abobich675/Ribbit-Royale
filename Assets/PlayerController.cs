@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,24 +7,32 @@ public class PlayerController : MonoBehaviour
 {
     const float GRAVITYSCALE = 1;
 
-    float Speed = 5;
+    float Acceleration = 5;
     float FastFallMultiplier = 1.25f;
 
+    public float maxSpeed;
+    public float dampingFactor;
+
+    public float swingingMovementBonus;
+
     public Camera camera;
+    public GameObject tongue;
+    GameObject connectedObject;
+    bool isSwinging = false;
 
 
 
     Rigidbody2D rb;
 
     InputAction moveAction;
-    InputAction interactAction;
+    InputAction attackAction;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         PlayerInput input = GetComponent<PlayerInput>();
         moveAction = input.actions["Move"];
-        interactAction = input.actions["Interact"];
+        attackAction = input.actions["Attack"];
 
         rb = GetComponent<Rigidbody2D>();
     }
@@ -31,19 +40,138 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DoMovement();
         DoInteraction();
+        DoMovement();
+    }
 
-        void DoMovement()
+    void DoInteraction()
+    {
+        // Add tongue if click started
+        if (attackAction.triggered)
+        {
+            // Locate object to connect to
+            Vector2 mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(mousePosition, Vector2.zero);
+
+            foreach (RaycastHit2D hit in hits)
+            {
+                // TODO: Check which object should take priority
+                Debug.Log(hit.transform.name);
+                connectedObject = hit.transform.gameObject;
+                tongue.SetActive(true);
+
+
+                GetComponent<SpringJoint2D>().enabled = true;
+                GetComponent<SpringJoint2D>().connectedBody = connectedObject.GetComponent<Rigidbody2D>();
+
+                isSwinging = true;
+            }
+        }
+
+        // Remove tongue if click released
+        if (attackAction.WasReleasedThisFrame())
+        {
+            tongue.SetActive(false);
+            connectedObject = null;
+            GetComponent<SpringJoint2D>().enabled = false;
+            isSwinging = false;
+        }
+
+        // Update tongue position
+        if (tongue.activeSelf) {
+            Vector2 direction = connectedObject.transform.position - transform.position;
+            float tongueWidth = direction.magnitude;
+            direction.Normalize();
+
+            tongue.transform.localScale = new Vector3(tongueWidth, 0.2f, 1);
+            tongue.transform.position = transform.position + (Vector3)direction * tongueWidth / 2;
+            tongue.transform.position = new Vector3(tongue.transform.position.x, tongue.transform.position.y, 2);
+            tongue.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+
+            // Update player rotation
+            Vector2 playerToConnected = connectedObject.transform.position - transform.position;
+            float angle = Mathf.Atan2(playerToConnected.y, playerToConnected.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
+            transform.rotation = Quaternion.SlerpUnclamped(transform.rotation, targetRotation, Time.deltaTime * 10);
+
+            // Add swinging movement bonus
+            // Increases speed of the player rotating around the node
+            if (transform.position.y < connectedObject.transform.position.y)
+            {
+                if (rb.linearVelocityX > 0)
+                {
+                    rb.AddForce(Vector2.right * swingingMovementBonus);
+                }
+                else if (rb.linearVelocityX < 0)
+                {
+                    rb.AddForce(Vector2.left * swingingMovementBonus);
+                }
+
+                if (rb.linearVelocityY > 0)
+                {
+                    rb.AddForce(Vector2.up * swingingMovementBonus);
+                }
+                else if (rb.linearVelocityY < 0)
+                {
+                    rb.AddForce(Vector2.down * swingingMovementBonus);
+                }
+            }
+        }
+    }
+
+    void DoMovement()
+    {
+        
+        Vector2 moveInput = moveAction.ReadValue<Vector2>();
+
+        // Linear Damping
+        // if (rb.linearVelocityX > 0)
+        // {
+        //     rb.AddForce(Vector2.left * dampingFactor);
+        // }
+        // else if (rb.linearVelocityX < 0)
+        // {
+        //     rb.AddForce(Vector2.right * dampingFactor);
+        // }
+
+        if (isSwinging)
         {
             // Movement
-            Vector2 moveInput = moveAction.ReadValue<Vector2>();
-            rb.linearVelocityX = moveInput.x * Speed;
+            if (rb.linearVelocityX < maxSpeed && moveInput.x > 0 ||
+                rb.linearVelocityX > -maxSpeed && moveInput.x < 0)
+            {
+                rb.AddForce(new Vector2(moveInput.x * Acceleration / 2, 0));
+            }
+        }
+        else
+        {
+            // Movement
+            if (rb.linearVelocityX < maxSpeed && moveInput.x > 0 ||
+                rb.linearVelocityX > -maxSpeed && moveInput.x < 0)
+            {
+                rb.AddForce(new Vector2(moveInput.x * Acceleration, 0));
+            }
+
+            // Stop player if speed is approaching 0
+            if (Mathf.Abs(moveInput.x) <= 0.1 && Mathf.Abs(rb.linearVelocityX) < 0.1)
+                rb.linearVelocityX = 0;
+            
+            // % Damping
+            Vector2 counterForce = new Vector2(-rb.linearVelocityX / dampingFactor, 0);
+            rb.AddForce(counterForce);
+
+            // Update player rotation
+            if (rb.linearVelocity != Vector2.zero)
+            {
+                float angle = Mathf.Atan2(rb.linearVelocity.y, rb.linearVelocity.x) * Mathf.Rad2Deg;
+                Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
+                transform.rotation = Quaternion.SlerpUnclamped(transform.rotation, targetRotation, Time.deltaTime * 10);
+            }
 
             // Fast Fall
             if (moveInput.y < 0)
             {
-                Debug.Log("Fast Fall");
+                // Debug.Log("Fast Fall");
                 rb.gravityScale = GRAVITYSCALE * FastFallMultiplier;
             }
             else
@@ -51,21 +179,11 @@ public class PlayerController : MonoBehaviour
                 rb.gravityScale = GRAVITYSCALE;
             }
         }
-
-        void DoInteraction()
-        {
-            if (interactAction.triggered)
-            {
-                Debug.Log("Interact Triggered");
-
-                Vector2 mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
-                RaycastHit2D[] hits = Physics2D.RaycastAll(mousePosition, Vector2.zero);
-
-                foreach (RaycastHit2D hit in hits)
-                {
-                    Debug.Log(hit.transform.name);
-                }
-            }
-        }
+        
+        
+        // if (GetComponent<BoxCollider2D>().IsTouchingLayers())
+        // {
+            
+        // }
     }
 }
