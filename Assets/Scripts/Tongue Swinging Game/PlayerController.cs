@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     public float swingingMovementBonus;
 
-    public Camera camera;
+    public new Camera camera;
     public GameObject tongue;
     GameObject connectedObject;
     bool isSwinging = false;
@@ -124,16 +124,6 @@ public class PlayerController : MonoBehaviour
         
         Vector2 moveInput = moveAction.ReadValue<Vector2>();
 
-        // Linear Damping
-        // if (rb.linearVelocityX > 0)
-        // {
-        //     rb.AddForce(Vector2.left * dampingFactor);
-        // }
-        // else if (rb.linearVelocityX < 0)
-        // {
-        //     rb.AddForce(Vector2.right * dampingFactor);
-        // }
-
         if (isSwinging)
         {
             // Movement
@@ -179,11 +169,5 @@ public class PlayerController : MonoBehaviour
                 rb.gravityScale = GRAVITYSCALE;
             }
         }
-        
-        
-        // if (GetComponent<BoxCollider2D>().IsTouchingLayers())
-        // {
-            
-        // }
     }
 }

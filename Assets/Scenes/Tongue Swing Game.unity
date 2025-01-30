@@ -222,8 +222,8 @@ Transform:
   m_GameObject: {fileID: 274792381}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.16, z: 0}
-  m_LocalScale: {x: 16.88, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 151.1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -313,6 +313,7 @@ GameObject:
   - component: {fileID: 742085408}
   - component: {fileID: 742085407}
   - component: {fileID: 742085410}
+  - component: {fileID: 742085411}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -363,7 +364,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -438,6 +439,22 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &742085411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742085406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d2153e706b5c4d1e956ef0997e212ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followRate: 10
+  xOffset: 0
+  yOffset: 0
+  target: {fileID: 747205080}
 --- !u!1 &747205078
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,7 +541,7 @@ Transform:
   m_GameObject: {fileID: 747205078}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.51, y: 5.46, z: 0}
+  m_LocalPosition: {x: -1.51, y: 1, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -616,8 +633,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 10
-  dampingFactor: 3
-  swingingMovementBonus: 0
+  dampingFactor: 6
+  swingingMovementBonus: 0.5
   camera: {fileID: 742085408}
   tongue: {fileID: 905043956}
 --- !u!114 &747205084
@@ -777,13 +794,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1897766639485638102, guid: f96091ba4d54108409c37fdf2ecf9592, type: 3}
+      propertyPath: m_Radius
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6490052769684828384, guid: f96091ba4d54108409c37fdf2ecf9592, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.46
+      value: 3.16
       objectReference: {fileID: 0}
     - target: {fileID: 6490052769684828384, guid: f96091ba4d54108409c37fdf2ecf9592, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.16
+      value: 6.75
       objectReference: {fileID: 0}
     - target: {fileID: 6490052769684828384, guid: f96091ba4d54108409c37fdf2ecf9592, type: 3}
       propertyPath: m_LocalPosition.z
