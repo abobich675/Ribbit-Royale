@@ -9,3 +9,6 @@ The objective is to provide a distinctive experience that blends competitive gam
 As a team of newcomers to game development, this project also provides a unique opportunity to grow our skills in game design, networking, and the Unity engine, while contributing to a project that could offer both personal and professional rewards.
 
 Our repository currently contains a main branch and a reports branch for our weekly reports.
+
+Trello: https://trello.com/b/ebDvr63Y/software-engineering-2
+
