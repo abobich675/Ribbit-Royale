@@ -11,14 +11,25 @@ public class PlayerCtrl : NetworkBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
+
         // Ensure only the local player has an active camera
         if (IsOwner)
         {
-            playerCamera = Camera.main; // Get the main camera
-            playerCamera.transform.SetParent(transform); // Attach it to this player
-            playerCamera.transform.localPosition = new Vector3(0, 0, -10); // Adjust camera position
+            SetupCamera();
         }
+    }
+
+    void SetupCamera()
+    {
+        // Create a new camera for this player
+        playerCamera = new GameObject("Player Camera").AddComponent<Camera>();
+
+        // Attach the camera to the player
+        playerCamera.transform.SetParent(transform);
+        playerCamera.transform.localPosition = new Vector3(0, 0, -10); // Offset the camera behind the player
+
+        // Make sure this camera is active and rendering only for this player
+        playerCamera.gameObject.tag = "MainCamera";
     }
 
     void Update()

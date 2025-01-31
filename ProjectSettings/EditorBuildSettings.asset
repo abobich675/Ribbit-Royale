@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PreLobbyScene.unity
     guid: 99c0d898b31c28b45953710c759fe98e
+  - enabled: 1
+    path: Assets/Scenes/NetworkLobbyScene.unity
+    guid: 9a619f3edd0713d4992823713a850933
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 641b207078a3d514da06b8a5294d2421, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

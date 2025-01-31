@@ -10,12 +10,12 @@ public class TestingNetcodeUI : MonoBehaviour
     private void Awake(){
         startHostButton.onClick.AddListener(() =>{
             Debug.Log("HOST");
-            NetworkManager.Singleton.StartHost();
+            RibbitRoyaleMultiplayer.Instance.StartHost();
             Hide();
         });
         startClientButton.onClick.AddListener(() =>{
             Debug.Log("ClIENT");
-            NetworkManager.Singleton.StartClient();
+            RibbitRoyaleMultiplayer.Instance.StartClient();
             Hide();
         });
     }
