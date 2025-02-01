@@ -731,6 +731,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  playerColorList:
+  - {r: 1, g: 0.8534628, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0.52729654, a: 1}
+  - {r: 0.620486, g: 0, b: 0.7264151, a: 1}
+  - {r: 0, g: 0.4419365, b: 1, a: 1}
+  - {r: 1, g: 0.41951597, b: 0, a: 1}
+  - {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &342283204
 MonoBehaviour:
   m_ObjectHideFlags: 0

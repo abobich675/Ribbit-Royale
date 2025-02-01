@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerCtrl : NetworkBehaviour
 {
+
+    [SerializeField] private PlayerVisual playerVisual;
     public float movSpeed;
     private float speedx, speedy;
     private Rigidbody2D rb;
@@ -17,6 +19,7 @@ public class PlayerCtrl : NetworkBehaviour
         {
             SetupCamera();
         }
+
     }
 
     void SetupCamera()

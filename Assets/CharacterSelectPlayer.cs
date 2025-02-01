@@ -7,6 +7,9 @@ public class CharacterSelectPlayer : MonoBehaviour
 {
     [SerializeField] private int playerIndex;
     [SerializeField] private GameObject readyGameObject;
+    [SerializeField] private PlayerVisual spriteRenderer;
+
+
     private void Start(){
         RibbitRoyaleMultiplayer.Instance.onPlayerDataNetworkListChanged += RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged;
         CharacterSelectReady.Instance.OnReadyChanged += CharacterSelectReady_OnReadyChanged;
@@ -28,6 +31,7 @@ public class CharacterSelectPlayer : MonoBehaviour
             Show();
             PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
             readyGameObject.SetActive(CharacterSelectReady.Instance.IsPlayerReady(playerData.clientId));
+            spriteRenderer.SetPlayerColor(RibbitRoyaleMultiplayer.Instance.GetPlayerColor(playerIndex));
         }else{
             Hide();
         }
