@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using Unity.Netcode;
 using UnityEngine;
@@ -16,7 +15,6 @@ public class RibbitRoyaleMultiplayer: NetworkBehaviour
     public event EventHandler onPlayerDataNetworkListChanged;
 
     private NetworkList<PlayerData> playerDataNetworkList;
-    [SerializeField] private List<Color> playerColorList;
 
     private void Awake(){
         Instance = this;
@@ -86,12 +84,4 @@ public class RibbitRoyaleMultiplayer: NetworkBehaviour
         return playerDataNetworkList[playerIndex];
     }
 
-    public Color GetPlayerColor(int colorId){
-        return playerColorList[colorId];
-    }
-
-    internal PlayerData GetPlayerData(ulong ownerClientId)
-    {
-        throw new NotImplementedException();
-    }
 }

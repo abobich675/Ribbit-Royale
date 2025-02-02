@@ -154,7 +154,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 11.439941, y: 8.299988}
+=======
+  m_AnchoredPosition: {x: 0, y: 0}
+>>>>>>> parent of fb76ff1 (Color Selection)
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &59594033
@@ -548,11 +552,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2339445549721757838, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
       propertyPath: m_LocalPosition.x
+<<<<<<< HEAD
       value: -2.43
       objectReference: {fileID: 0}
     - target: {fileID: 2339445549721757838, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.4
+=======
+      value: 455.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339445549721757838, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 92.52
+>>>>>>> parent of fb76ff1 (Color Selection)
       objectReference: {fileID: 0}
     - target: {fileID: 2339445549721757838, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
       propertyPath: m_LocalPosition.z
@@ -594,18 +606,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_1
       objectReference: {fileID: 0}
-    - target: {fileID: 7247109044682258221, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 2722640751
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 1194924179901106031, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2680285101383987455, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
 --- !u!1001 &1549414420
 PrefabInstance:
@@ -625,11 +630,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2339445549721757838, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
       propertyPath: m_LocalPosition.x
+<<<<<<< HEAD
       value: 10.26
       objectReference: {fileID: 0}
     - target: {fileID: 2339445549721757838, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.41
+=======
+      value: 447.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339445549721757838, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 92.55
+>>>>>>> parent of fb76ff1 (Color Selection)
       objectReference: {fileID: 0}
     - target: {fileID: 2339445549721757838, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
       propertyPath: m_LocalPosition.z
@@ -675,26 +688,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_3
       objectReference: {fileID: 0}
-    - target: {fileID: 7112710362812134769, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -3.68
-      objectReference: {fileID: 0}
-    - target: {fileID: 7112710362812134769, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 1.43
-      objectReference: {fileID: 0}
-    - target: {fileID: 7247109044682258221, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 4088640652
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 1194924179901106031, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2680285101383987455, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
 --- !u!1 &1615470406
 GameObject:
@@ -1259,11 +1257,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2339445549721757838, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
       propertyPath: m_LocalPosition.x
+<<<<<<< HEAD
       value: 2.53
       objectReference: {fileID: 0}
     - target: {fileID: 2339445549721757838, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.42
+=======
+      value: 450.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339445549721757838, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 92.55
+>>>>>>> parent of fb76ff1 (Color Selection)
       objectReference: {fileID: 0}
     - target: {fileID: 2339445549721757838, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1305,18 +1311,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_2
       objectReference: {fileID: 0}
-    - target: {fileID: 7247109044682258221, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 6440411
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 1194924179901106031, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2680285101383987455, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
 --- !u!1001 &7598387480520956133
 PrefabInstance:
@@ -1336,11 +1335,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2339445549721757838, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
       propertyPath: m_LocalPosition.x
+<<<<<<< HEAD
       value: -58.97
       objectReference: {fileID: 0}
     - target: {fileID: 2339445549721757838, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
       propertyPath: m_LocalPosition.y
       value: 20.67
+=======
+      value: 453.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339445549721757838, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 92.52
+>>>>>>> parent of fb76ff1 (Color Selection)
       objectReference: {fileID: 0}
     - target: {fileID: 2339445549721757838, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1374,6 +1381,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 3910874416836293277, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
       propertyPath: m_LocalPosition.x
       value: 51.92
@@ -1390,10 +1398,13 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -21.08
       objectReference: {fileID: 0}
+=======
+>>>>>>> parent of fb76ff1 (Color Selection)
     - target: {fileID: 6573465738237115509, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
       propertyPath: m_Name
       value: Player_0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 7112710362812134769, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 52.09
@@ -1410,11 +1421,12 @@ PrefabInstance:
     - {fileID: 7807556979688450131, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1194924179901106031, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
+=======
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+>>>>>>> parent of fb76ff1 (Color Selection)
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2680285101383987455, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2f3b2a249131e14a9e32bd548002896, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
