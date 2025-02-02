@@ -47,4 +47,6 @@ public class PlayerCtrl : NetworkBehaviour
 
         rb.linearVelocity = new Vector2(speedx, speedy);
     }
+
+    
 }
