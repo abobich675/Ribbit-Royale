@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,6 +10,8 @@ public class PlayerController : MonoBehaviour
 
     float Acceleration = 5;
     float FastFallMultiplier = 1.25f;
+    float BounceSpeedIncrease = 3;
+    float BounceHeight = 12.5f;
 
     public float maxSpeed;
     public float dampingFactor;
@@ -53,13 +56,23 @@ public class PlayerController : MonoBehaviour
             Vector2 mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D[] hits = Physics2D.RaycastAll(mousePosition, Vector2.zero);
 
+            int bestHitIndex = -1;
             foreach (RaycastHit2D hit in hits)
             {
-                // TODO: Check which object should take priority
-                Debug.Log(hit.transform.name);
-                connectedObject = hit.transform.gameObject;
+                // If this is the first hit
+                if (bestHitIndex == -1) {
+                    bestHitIndex = Array.IndexOf(hits, hit);
+                }
+                // If the hit object is closer to the player than the current best hit
+                else if (Vector2.Distance(hit.transform.position, transform.position) < Vector2.Distance(hits[bestHitIndex].transform.position, transform.position))
+                {
+                    bestHitIndex = Array.IndexOf(hits, hit);
+                }
+            }
+            if (bestHitIndex != -1)
+            {
+                connectedObject = hits[bestHitIndex].transform.gameObject;
                 tongue.SetActive(true);
-
 
                 GetComponent<SpringJoint2D>().enabled = true;
                 GetComponent<SpringJoint2D>().connectedBody = connectedObject.GetComponent<Rigidbody2D>();
@@ -168,6 +181,22 @@ public class PlayerController : MonoBehaviour
             {
                 rb.gravityScale = GRAVITYSCALE;
             }
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // When player hits the ground
+        if (collision.gameObject.GetComponent<PlatformEffector2D>() != null)
+        {
+            Vector2 perpendicular = Vector2.Perpendicular(collision.GetContact(0).normal);
+
+            // Project velocity onto vector parallel to the surface
+            float dot = Vector2.Dot(perpendicular, rb.linearVelocity);
+            Vector2 newVelocity = dot / math.square(perpendicular.magnitude) * perpendicular * BounceSpeedIncrease;
+            newVelocity += collision.GetContact(0).normal * BounceHeight; // Add bounce height
+
+            rb.linearVelocity = newVelocity; // Update velocity
         }
     }
 }
