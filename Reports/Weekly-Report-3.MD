@@ -1,5 +1,11 @@
 # Weekly Report: 01/23 - 01/29
 
+## Overview
+- Created initial sprites and animations for movement
+- Set up movements for the Tongue Swinging Game
+- Created basic sound files
+- Set up UI for Main Menu and Scoreboard
+
 ## What you did, what worked, what you laerned, where you had trouble, and where you are stuck:
 ### Aidan: 
 - Created frog sprite 
@@ -17,12 +23,13 @@
 - Figuring out what each sound should sound like
 - Stuck on researching frog sounds
 ### Luke:
--Setup local server hosting and client connection
--Created the Main Menu with Play and Quit buttons
--Play button takes you to Host and Client screen
+- Setup local server hosting and client connection
+- Created the Main Menu with Play and Quit buttons
+- Play button takes you to Host and Client screen
 ### Ryan:
 - Created point counter UI and script
 - Created token collection script
+
 
 ## Plans and goals for the following week:
 ### Aidan:
@@ -38,8 +45,8 @@
 - Continue researching frog sounds
 - Hopefully have tongue, ribbit, and interaction done.
 ### Luke:
--Implement Unity relay service for server hosting 
--Setup connection/sync in the pre-lobby
+- Implement Unity relay service for server hosting 
+- Setup connection/sync in the pre-lobby
 ### Ryan:
 - Persistent scoreboard stored and referenced between rounds
 - Per player scoreboard, adapts to player count dynamically
