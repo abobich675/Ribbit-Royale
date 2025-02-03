@@ -193,7 +193,9 @@ public class PlayerController : MonoBehaviour
 
             // Project velocity onto vector parallel to the surface
             float dot = Vector2.Dot(perpendicular, rb.linearVelocity);
-            Vector2 newVelocity = dot / math.square(perpendicular.magnitude) * perpendicular * BounceSpeedIncrease;
+            Vector2 newVelocity = dot / math.square(perpendicular.magnitude) * perpendicular;
+            
+            newVelocity = new Vector2(newVelocity.x * BounceSpeedIncrease, newVelocity.y); // Increase x speed
             newVelocity += collision.GetContact(0).normal * BounceHeight; // Add bounce height
 
             rb.linearVelocity = newVelocity; // Update velocity
