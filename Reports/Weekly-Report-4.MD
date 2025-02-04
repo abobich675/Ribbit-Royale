@@ -12,6 +12,7 @@
 ### Adam:
 - Fixed a problem in tongue swinging game where 2 nodes right next to one another would lead to inconsistent results
 - Added bouncing in tongue swinging game
+- Created basic test course for tongue swinging game
 ### Baron:
 - 
 ### Chase:
@@ -28,6 +29,7 @@
 ### Adam:
 - 
 ### Baron:
+- 
 ### Chase:
 - 
 ### Luke:

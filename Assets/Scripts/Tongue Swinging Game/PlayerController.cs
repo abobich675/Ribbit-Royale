@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    const float GRAVITYSCALE = 1;
+    const float GRAVITYSCALE = 2f;
 
     float Acceleration = 5;
     float FastFallMultiplier = 1.25f;
@@ -38,6 +38,9 @@ public class PlayerController : MonoBehaviour
         attackAction = input.actions["Attack"];
 
         rb = GetComponent<Rigidbody2D>();
+
+        tongue = Instantiate(tongue);
+        tongue.SetActive(false);
     }
 
     // Update is called once per frame
@@ -194,7 +197,7 @@ public class PlayerController : MonoBehaviour
             // Project velocity onto vector parallel to the surface
             float dot = Vector2.Dot(perpendicular, rb.linearVelocity);
             Vector2 newVelocity = dot / math.square(perpendicular.magnitude) * perpendicular;
-            
+
             newVelocity = new Vector2(newVelocity.x * BounceSpeedIncrease, newVelocity.y); // Increase x speed
             newVelocity += collision.GetContact(0).normal * BounceHeight; // Add bounce height
 
