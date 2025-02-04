@@ -18,6 +18,9 @@
     - Set up interact button to send tongue forward and connect to a node / object to swing off of
     - Add swing affect between tongue and node
 ### Baron:
+- Created temp lobby hub background
+- Started animation of hub background
+- Stuck researching 2D platformer
 ### Chase:
 - Started working on sound files (tongue noise, ribbit noise, interaction noise)
 - Figuring out what each sound should sound like
