@@ -11,7 +11,8 @@
 ### Chase:
 - Researched sounds from other games to create ideas
 ### Luke:
-- 
+- Began working on basic UI like the main menu. 
+- Worked on living document. 
 ### Ryan:
 - 
 
@@ -28,6 +29,6 @@
 ### Chase:
 - Start creating the sound files for the ribbit sound and tongue sound
 ### Luke:
-- 
+- Start implementing host and client connections for multiplayer compatibility.
 ### Ryan:
 - 
