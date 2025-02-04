@@ -190,7 +190,7 @@ public class PlayerController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         // When player hits the ground
-        if (collision.gameObject.GetComponent<PlatformEffector2D>() != null)
+        if (collision.gameObject.GetComponent<PlatformEffector2D>() != null && !isSwinging)
         {
             Vector2 perpendicular = Vector2.Perpendicular(collision.GetContact(0).normal);
 
