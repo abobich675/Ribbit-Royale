@@ -44,6 +44,8 @@
     - Set up bouncing off of platforms
     - Create small example course
 ### Baron:
+- Continue working on lobby hub
+- Begin working on 2D snake chase game
 ### Chase:
 - Continue researching frog sounds
 - Hopefully have tongue, ribbit, and interaction done.
