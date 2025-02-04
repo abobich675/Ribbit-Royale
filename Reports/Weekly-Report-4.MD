@@ -8,7 +8,8 @@
 
 ## What you did, what worked, what you laerned, where you had trouble, and where you are stuck:
 ### Aidan: 
-- 
+- Created the jumping animation for the frog player character
+- Researching basica animation principles
 ### Adam:
 - Fixed a problem in tongue swinging game where 2 nodes right next to one another would lead to inconsistent results
 - Added bouncing in tongue swinging game
@@ -25,6 +26,7 @@
 
 ## Plans and goals for the following week:
 ### Aidan:
+- Create a talking animation for the frogs
 - 
 ### Adam:
 - 
