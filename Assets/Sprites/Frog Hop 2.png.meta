@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Frog Hop 2_0: 5025676262729963738
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
