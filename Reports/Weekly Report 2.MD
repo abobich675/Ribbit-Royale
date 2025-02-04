@@ -9,7 +9,7 @@
 ### Baron:
 - 
 ### Chase:
-- 
+- Researched sounds from other games to create ideas
 ### Luke:
 - 
 ### Ryan:
@@ -26,7 +26,7 @@
 ### Baron:
 - 
 ### Chase:
-- 
+- Start creating the sound files for the ribbit sound and tongue sound
 ### Luke:
 - 
 ### Ryan:
