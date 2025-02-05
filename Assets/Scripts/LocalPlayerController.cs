@@ -5,6 +5,7 @@ public class LocalPlayerController : MonoBehaviour
     public float movSpeed;
     float speedx, speedy;
     Rigidbody2D rb;
+    public GameObject ScoreboardPanel;
 
     void Start()
     {
@@ -19,5 +20,10 @@ public class LocalPlayerController : MonoBehaviour
 
         // Use linearVelocity or velocity for Rigidbody2D
         rb.linearVelocity = new Vector2(speedx, speedy);
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            ScoreboardPanel.SetActive(!ScoreboardPanel.activeSelf);
+        }
     }
 }
