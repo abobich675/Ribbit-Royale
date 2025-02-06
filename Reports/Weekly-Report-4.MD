@@ -33,7 +33,9 @@
 ## Plans and goals for the following week:
 ### Aidan:
 - Create a talking animation for the frogs
-- 
+- Create alternate skins for frogs
+- Create tongue animation
+- Familiarize with Unity
 ### Adam:
 - 
 ### Baron:
