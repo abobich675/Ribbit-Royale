@@ -1,7 +1,7 @@
 # Weekly Report: 01/29 - 02/05
 
 ## Overview
-- 
+- Created basic prototype enviroment for the Tongue Swinging Game (Ready to start multiplayer implementation)
 - 
 - 
 - 
@@ -37,7 +37,7 @@
 - Create tongue animation
 - Familiarize with Unity
 ### Adam:
-- 
+- Make count the animal minigame prototype
 ### Baron:
 - 
 ### Chase:
