@@ -2,10 +2,9 @@
 
 ## Overview
 - Created basic prototype enviroment for the Tongue Swinging Game (Ready to start multiplayer implementation)
-- 
-- 
-- 
-
+- Began implementation of the character selection scene where users can ready up and select color of character
+- Keep working on the leaderboard system
+- Added animations for the movement of the frog
 ## What you did, what worked, what you laerned, where you had trouble, and where you are stuck:
 ### Aidan: 
 - Created the jumping animation for the frog player character
