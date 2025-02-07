@@ -14,7 +14,9 @@
 - Added bouncing in tongue swinging game
 - Created basic test course for tongue swinging game
 ### Baron:
-- 
+- Created the base of the snake chase game
+- Researching procedural background generation
+- Creating models for trees, branches, etc.
 ### Chase:
 - Created prototypes for ribbit sound, tongue sound, and jump sound
 - Still stuck on jump sound, can't get a good boing noise 
@@ -39,7 +41,9 @@
 ### Adam:
 - Make count the animal minigame prototype
 ### Baron:
-- 
+- Finish tree/branches models
+- Add platforms to snake chase game
+- Create snake model
 ### Chase:
 - Start on lily pad falling game
 - Finish sounds
