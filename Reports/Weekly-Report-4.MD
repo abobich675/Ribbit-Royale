@@ -17,7 +17,8 @@
 ### Baron:
 - 
 ### Chase:
-- 
+- Created prototypes for ribbit sound, tongue sound, and jump sound
+- Still stuck on jump sound, can't get a good boing noise 
 ### Luke:
 - Created character selection scene where the user will be able to choose the color of their frog
 - When 4 players are connected then each player will need to ready up to be brought to a pre-lobby 
@@ -41,7 +42,8 @@
 ### Baron:
 - 
 ### Chase:
-- 
+- Start on lily pad falling game
+- Finish sounds
 ### Luke:
 - Add buttons to manually select the color of the frog
 - Implement the lobby system, players can view all of the lobbys that have been created and creating a new lobby gives you a code so you can invite friends.
