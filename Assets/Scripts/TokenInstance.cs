@@ -9,13 +9,14 @@ using Vector2 = System.Numerics.Vector2;
 
 public class TokenInstance : MonoBehaviour
 {
-    public Vector3 positionToMoveTo;
+    private Vector3 positionToMoveTo;
+    public int pointValue;
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Player")
         {
-            StartCoroutine(LerpPosition(transform.position, 1, 0.5f));
-            ScoreManager.instance.AddPoint();
+            StartCoroutine(LerpPosition(transform.position, 1, 0.4f));
+            ScoreManager.Instance.IncrementPlayerScore(col.gameObject.name, pointValue);
             GetComponent<BoxCollider2D>().enabled = false;
             Debug.Log("ScoreManager - destroyed token" + col.gameObject);
         }
@@ -23,25 +24,7 @@ public class TokenInstance : MonoBehaviour
     
     public static float CustomInterpolation(float t)
     {
-        //t = Mathf.Clamp01(t);
-
-        // float sMid = Mathf.Sin(t * Mathf.PI * 1.2f);
-        // float fStart = Mathf.Pow(t, 0.15f);
-        // float fEnd = Mathf.Pow(1 - t, 0.5f);
-        // float overshoot = Mathf.SmoothStep(0, 0.2f, t);
-
-        // //return fStart * sMid + (1 - fEnd) * 0.15f + overshoot;
-        // if (t <= 0.5)
-        // {
-        //     return (-1) * Mathf.Pow(Mathf.Sin(Mathf.PI * t + Mathf.PI / 2), 4) + 1;
-        // }
-        // else
-        // {
-        //     return (-1) * Mathf.Pow(Mathf.Sin(Mathf.PI * t + Mathf.PI + Mathf.PI / 2), 4) + 1;
-        // }
-
-        return -8*(Mathf.Pow(t-0.35f, 2))/(Mathf.Sqrt(1+Mathf.Pow(t, 2)))+1;
-
+        return -16*(Mathf.Pow(t-0.25f, 2))/(Mathf.Sqrt(1+Mathf.Pow(t, 2)))+1;
     }
 
     

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 987aaff9f2cccb04a90909d017762025
+=======
+guid: f75334f987bbd43a4b99e7539b9ff1bc
+>>>>>>> ab3f138b91365f361d9d68e894fba21ba55b7e7d
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -147,7 +151,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
+<<<<<<< HEAD
     nameFileIdTable: {}
+=======
+    nameFileIdTable:
+      Frog Hop 7_0: 252650333151938282
+>>>>>>> ab3f138b91365f361d9d68e894fba21ba55b7e7d
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
