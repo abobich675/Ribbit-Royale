@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 
 public class ScoreManager : MonoBehaviour
@@ -12,7 +15,13 @@ public class ScoreManager : MonoBehaviour
     public Transform scoreboardContent;
     public float moveDuration = 10.0f;
 
-    public Sprite sprite1;
+    public Sprite spriteRed;
+    public Sprite spriteBlue;
+    public Sprite spriteGreen;
+    public Sprite spriteYellow;
+
+    private Dictionary<string, (Color, Sprite)> colorSpriteDictionary = new Dictionary<string, (Color, Sprite)>();
+    private Dictionary<string, string> playerColorDictionary = new Dictionary<string, string>();
 
     private Dictionary<string, (int score, GameObject entry)> playerEntries = new Dictionary<string, (int, GameObject)>();
 
@@ -26,12 +35,22 @@ public class ScoreManager : MonoBehaviour
     {
         Debug.Log("ScoreManager Start() executing...");
         ScoreManager scoreboard = ScoreManager.Instance;
-        scoreboard.UpdatePlayerScore("Player0", 29, sprite1);
-        scoreboard.UpdatePlayerScore("Player1", 30, sprite1);
+        colorSpriteDictionary.Add("red", (Color.red, spriteRed));
+        colorSpriteDictionary.Add("blue", (Color.blue, spriteBlue));
+        colorSpriteDictionary.Add("green", (Color.green, spriteGreen));
+        colorSpriteDictionary.Add("yellow", (Color.yellow, spriteYellow));
+        playerColorDictionary.Add("Player0", "red");
+        playerColorDictionary.Add("Player1", "blue");
+        playerColorDictionary.Add("Player2", "yellow");
+        playerColorDictionary.Add("Player3", "green");
+        scoreboard.UpdatePlayerScore("Player0", 29);
+        scoreboard.UpdatePlayerScore("Player1", 30);
+        scoreboard.UpdatePlayerScore("Player2", 15);
+        scoreboard.UpdatePlayerScore("Player3", 31);
         scoreboard.UpdateRanking();
     }
 
-    public void UpdatePlayerScore(string playerName, int score, Sprite avatar)
+    public void UpdatePlayerScore(string playerName, int score)
     {
         // if already existing profile
         if (playerEntries.ContainsKey(playerName))
@@ -45,9 +64,10 @@ public class ScoreManager : MonoBehaviour
             Debug.Log("Instantiating new profile in scoreboard " + playerName);
             GameObject newEntry = Instantiate(scoreEntryPrefab, scoreboardContent);
             UpdateScoreText(newEntry, playerName, score);
-            newEntry.transform.Find("AvatarImage").GetComponent<Image>().sprite = avatar;
-            newEntry.transform.Find("AvatarBorder").GetComponent<Image>().color =
-                new Color(Random.value, Random.value, Random.value);
+            string playerColor = playerColorDictionary[playerName];
+            var tupleColor = colorSpriteDictionary[playerColor];
+            newEntry.transform.Find("AvatarImage").GetComponent<Image>().sprite = tupleColor.Item2;
+            newEntry.transform.Find("AvatarBorder").GetComponent<Image>().color = tupleColor.Item1;
             playerEntries.Add(playerName, (score, newEntry));
         }
     }
@@ -57,7 +77,7 @@ public class ScoreManager : MonoBehaviour
         if (playerEntries.ContainsKey(playerName))
         {
             int newScore = playerEntries[playerName].score + amount;
-            UpdatePlayerScore(playerName, newScore, playerEntries[playerName].entry.transform.Find("AvatarImage").GetComponent<Image>().sprite);
+            UpdatePlayerScore(playerName, newScore);
         }
         Debug.Log("Player not instantiated, ERROR");
     }
