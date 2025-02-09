@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Yellow Ribbit Jump6_0: -2684354016780269734
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

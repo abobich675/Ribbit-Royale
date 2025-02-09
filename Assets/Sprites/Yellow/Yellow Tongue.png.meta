@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Yellow Tongue_0: -8805885114125722510
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

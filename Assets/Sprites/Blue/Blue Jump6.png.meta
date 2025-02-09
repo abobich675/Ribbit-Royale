@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Blue Jump6_0: 227353755803281112
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
