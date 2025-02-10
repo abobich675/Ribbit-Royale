@@ -4,7 +4,7 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync(1);
+        Loader.load(Loader.Scene.NetworkLobbyScene);
         
     }
     public void DoExitGame(){
