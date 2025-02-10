@@ -594,9 +594,67 @@ Transform:
   - {fileID: 588474894}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2067823331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2067823333}
+  - component: {fileID: 2067823332}
+  m_Layer: 0
+  m_Name: Game Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2067823332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067823331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e35fdfa88390e44d8df2aab33531dee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GAME_LENGTH: 10
+  MIN_SPAWN_DELAY: 0.3
+  MAX_SPAWN_DELAY: 3
+  birdPrefab: {fileID: 6236229912875086690, guid: 2ff305b4629be48449d7c123325bae2e, type: 3}
+  flyPrefab: {fileID: 509727752531180056, guid: 9cf0620603298e440938c4140c946bc7, type: 3}
+  monkeyPrefab: {fileID: 6959993724770082251, guid: 0e33a351a92c6dc4c8df1d567632c8e2, type: 3}
+  snakePrefab: {fileID: 1124779554039139143, guid: c859d94d2ce28c342a301944023f39e5, type: 3}
+  turtlePrefab: {fileID: 6885425237867747088, guid: e03fc674826626e42ae4c377dd2eabfd, type: 3}
+  birdCount: 0
+  flyCount: 0
+  monkeyCount: 0
+  snakeCount: 0
+  turtleCount: 0
+--- !u!4 &2067823333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067823331}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 623717969}
   - {fileID: 1724241028}
+  - {fileID: 2067823333}
