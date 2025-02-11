@@ -7,7 +7,9 @@
 - 
 ## What you did, what worked, what you laerned, where you had trouble, and where you are stuck:
 ### Aidan: 
-- 
+- Added alternate skins for frogs
+- Added ribbit animation
+- Added tongue animation
 ### Adam:
 - Worked on Count the Animal Game
   - Created animals with stand-in sprites that will spawn at random intervals (multiple times a second)
