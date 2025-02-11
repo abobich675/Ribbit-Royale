@@ -9,7 +9,10 @@
 ### Aidan: 
 - 
 ### Adam:
-- 
+- Worked on Count the Animal Game
+  - Created animals with stand-in sprites that will spawn at random intervals (multiple times a second)
+  - Animals will start on one side of the screen at random locations and then move across the scene
+  - Game will run for 20 seconds, counting animals as their created
 ### Baron:
 - 
 ### Chase:
@@ -24,7 +27,9 @@
 ### Aidan:
 - 
 ### Adam:
-- 
+- Animal Count Game
+  - Add a system where the user can input their guess / increment their tally
+  - Add a scoring system
 ### Baron:
 - 
 ### Chase:
