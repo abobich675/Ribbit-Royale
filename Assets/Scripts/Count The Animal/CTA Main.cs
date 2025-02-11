@@ -8,6 +8,10 @@ public class CTAMain : MonoBehaviour
     public float MIN_SPAWN_DELAY = 0.1f;
     public float MAX_SPAWN_DELAY = 1f;
 
+    // Barriers
+    public GameObject leftBarrier;
+    public GameObject rightBarrier;
+
     // Animal Prefabs
     public GameObject birdPrefab;
     public GameObject flyPrefab;
@@ -40,27 +44,26 @@ public class CTAMain : MonoBehaviour
     {
         // Randomly select an animal to spawn
         int animalIndex = Random.Range(0, 5);
-
         switch (animalIndex)
         {
             case 0:
-                Instantiate(flyPrefab);
+                SummonAnimal(flyPrefab, "fly");
                 flyCount++;
                 break;
             case 1:
-                Instantiate(birdPrefab);
+                SummonAnimal(flyPrefab, "bird");
                 birdCount++;
                 break;
             case 2:
-                Instantiate(monkeyPrefab);
+                SummonAnimal(flyPrefab, "monkey");
                 monkeyCount++;
                 break;
             case 3:
-                Instantiate(turtlePrefab);
+                SummonAnimal(flyPrefab, "turtle");
                 turtleCount++;
                 break;
             case 4:
-                Instantiate(snakePrefab);
+                SummonAnimal(flyPrefab, "snake");
                 snakeCount++;
                 break;
         }
@@ -68,6 +71,15 @@ public class CTAMain : MonoBehaviour
         // Randomly select a time to wait before spawning the next animal
         float delay = Random.Range(MIN_SPAWN_DELAY, MAX_SPAWN_DELAY);
         Invoke("SummonRandomAnimal", delay);
+    }
+
+    void SummonAnimal(GameObject animalPrefab, string animalType)
+    {
+        GameObject animal = Instantiate(animalPrefab);
+        CTAAnimalScript animalScript = animal.GetComponent<CTAAnimalScript>();
+        animalScript.animalType = animalType;
+        animalScript.leftBarrier = leftBarrier;
+        animalScript.rightBarrier = rightBarrier;
     }
 
     void EndGame()
