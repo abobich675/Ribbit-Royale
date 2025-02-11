@@ -1,4 +1,3 @@
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class CTAMain : MonoBehaviour
@@ -29,6 +28,7 @@ public class CTAMain : MonoBehaviour
     void Start()
     {
         // Start the game timer
+        Invoke("StopSpawning", GAME_LENGTH - 3);
         Invoke("EndGame", GAME_LENGTH);
 
         Invoke("SummonRandomAnimal", MAX_SPAWN_DELAY);
@@ -51,19 +51,19 @@ public class CTAMain : MonoBehaviour
                 flyCount++;
                 break;
             case 1:
-                SummonAnimal(flyPrefab, "bird");
+                SummonAnimal(birdPrefab, "bird");
                 birdCount++;
                 break;
             case 2:
-                SummonAnimal(flyPrefab, "monkey");
+                SummonAnimal(monkeyPrefab, "monkey");
                 monkeyCount++;
                 break;
             case 3:
-                SummonAnimal(flyPrefab, "turtle");
+                SummonAnimal(turtlePrefab, "turtle");
                 turtleCount++;
                 break;
             case 4:
-                SummonAnimal(flyPrefab, "snake");
+                SummonAnimal(snakePrefab, "snake");
                 snakeCount++;
                 break;
         }
@@ -80,6 +80,11 @@ public class CTAMain : MonoBehaviour
         animalScript.animalType = animalType;
         animalScript.leftBarrier = leftBarrier;
         animalScript.rightBarrier = rightBarrier;
+    }
+
+    void StopSpawning()
+    {
+        CancelInvoke("SummonRandomAnimal");
     }
 
     void EndGame()

@@ -46,8 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 254025c99d78043dba7397944288e25a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VELOCITY: 8
   animalType: 
-  spawnLocation: -1
+  leftBarrier: {fileID: 0}
+  rightBarrier: {fileID: 0}
 --- !u!50 &2482413575340175350
 Rigidbody2D:
   serializedVersion: 5
@@ -58,7 +60,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 8239391400089155684}
   m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
