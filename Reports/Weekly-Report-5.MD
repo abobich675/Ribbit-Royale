@@ -1,10 +1,13 @@
 # Weekly Report: 01/29 - 02/05
 
 ## Overview
+- Started on Count the Animal game prototype
+- Ribbit and tongue animations
 - 
-- 
-- 
-- 
+
+## Next week
+- Finish basic prototype of Count the Animal game
+
 ## What you did, what worked, what you laerned, where you had trouble, and where you are stuck:
 ### Aidan: 
 - Added alternate skins for frogs
