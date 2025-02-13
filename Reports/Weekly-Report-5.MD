@@ -23,7 +23,8 @@
 ### Chase:
 - 
 ### Luke:
-- 
+- Merged character selection branch to the master branch, fixed some merging issues
+- Start implementation of server/client connections using relay 
 ### Ryan:
 - Added some additional functionality to scoreboard
   - Syncronized avatar and border color selection
@@ -44,7 +45,7 @@
 ### Chase:
 - 
 ### Luke:
-- 
+- Finish the implementation of the multiplayer so users can create lobbyies and join them while they are on different devices
 ### Ryan:
 - Connect to character selection module
   - Populate player entries and color selections based on player selection
