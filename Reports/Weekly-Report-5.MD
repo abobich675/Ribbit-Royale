@@ -25,7 +25,9 @@
 ### Luke:
 - 
 ### Ryan:
-- 
+- Added some additional functionality to scoreboard
+  - Syncronized avatar and border color selection
+  - Tied color selection to dictionary instead of random assignment
 
 
 ## Plans and goals for the following week:
@@ -44,4 +46,5 @@
 ### Luke:
 - 
 ### Ryan:
-- 
+- Connect to character selection module
+  - Populate player entries and color selections based on player selection
