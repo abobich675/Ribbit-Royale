@@ -20,7 +20,7 @@
   - Animals will start on one side of the screen at random locations and then move across the scene
   - Game will run for 20 seconds, counting animals as their created
 ### Baron:
-- 
+- Snake Escape Game
 ### Chase:
 - 
 ### Luke:
@@ -42,7 +42,7 @@
   - Add a system where the user can input their guess / increment their tally
   - Add a scoring system
 ### Baron:
-- 
+- Refine Snake Escape Prototype
 ### Chase:
 - 
 ### Luke:
