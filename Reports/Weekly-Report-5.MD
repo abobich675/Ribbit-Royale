@@ -3,10 +3,11 @@
 ## Overview
 - Started on Count the Animal game prototype
 - Ribbit and tongue animations
-- 
 
-## Next week
+### Next week
 - Finish basic prototype of Count the Animal game
+- Do background art
+- Implement multiplayer
 
 ## What you did, what worked, what you laerned, where you had trouble, and where you are stuck:
 ### Aidan: 
