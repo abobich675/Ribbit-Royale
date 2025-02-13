@@ -30,7 +30,9 @@
 
 ## Plans and goals for the following week:
 ### Aidan:
-- 
+- Animal Count Game
+  -Sprites for Animal Count Game
+- Background Art for Minigames
 ### Adam:
 - Animal Count Game
   - Add a system where the user can input their guess / increment their tally
