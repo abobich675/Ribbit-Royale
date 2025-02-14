@@ -27,6 +27,9 @@ public class CTAAnimalScript : MonoBehaviour
         }
     }
 
+    // Chooses and sets a random spawn location for the animal
+    // Chooses between the left and right side
+    // Sets a random y position based on the animal type
     void SetSpawnLocation()
     {
         // Pick side to spawn on
@@ -58,12 +61,16 @@ public class CTAAnimalScript : MonoBehaviour
         }
         else
         {
+            GetComponent<SpriteRenderer>().flipX = true;
             transform.position = new Vector3(rightBarrier.transform.position.x, yPos, transform.position.z);
         }
 
         SetSpawnVelocity(spawnLocation);
     }
 
+    // Sets the velocity of the animal
+    // Moves across the screen with slight vertical movement
+    // Vertical movement will tend towards the center of the screen
     void SetSpawnVelocity(int spawnLocation)
     {
         float yVel = 0;
@@ -89,21 +96,23 @@ public class CTAAnimalScript : MonoBehaviour
         // Set Velocity
         if (spawnLocation == 0)
         {
-            rb.linearVelocity = new Vector2(-VELOCITY, yVel);
+            rb.linearVelocity = new Vector2(VELOCITY, yVel);
         }
         else
         {
-            rb.linearVelocity = new Vector2(VELOCITY, yVel);
+            rb.linearVelocity = new Vector2(-VELOCITY, yVel);
         }
     }
     
+    // Detects collision with the barriers
+    // Destroys the animal if it collides with the proper barrier
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (rb.linearVelocityX > 0 && collision.gameObject == leftBarrier)
+        if (rb.linearVelocityX < 0 && collision.gameObject == leftBarrier)
         {
             Destroy(gameObject);
         }
-        else if (rb.linearVelocityX < 0 && collision.gameObject == rightBarrier)
+        else if (rb.linearVelocityX > 0 && collision.gameObject == rightBarrier)
         {
             Destroy(gameObject);
         }

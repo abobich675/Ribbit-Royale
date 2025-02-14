@@ -72,6 +72,8 @@ public class CTAMain : MonoBehaviour
         countedAnimalImage.sprite = animals[animalIndex].animalPrefab.GetComponent<SpriteRenderer>().sprite;
     }
 
+    // Summon a Random Animal
+    // Invokes this function again to spawn a random animal at a delay
     void SummonRandomAnimal()
     {
         // Randomly select an animal to spawn
@@ -84,6 +86,8 @@ public class CTAMain : MonoBehaviour
         Invoke("SummonRandomAnimal", delay);
     }
 
+    // Summon an animal of a specific type
+    // Instantiates the animal and sets the animal's script
     void SummonAnimal(GameObject animalPrefab, string animalType)
     {
         GameObject animal = Instantiate(animalPrefab);
@@ -93,11 +97,15 @@ public class CTAMain : MonoBehaviour
         animalScript.rightBarrier = rightBarrier;
     }
 
+    // Stop spawning animals
+    // To be called briefly before the end of the game, 
     void StopSpawning()
     {
         CancelInvoke("SummonRandomAnimal");
     }
 
+    // Ends the game
+    // Sets the time scale to 0
     void EndGame()
     {
         // Stop the game
