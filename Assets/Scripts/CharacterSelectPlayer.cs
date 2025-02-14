@@ -44,4 +44,9 @@ public class CharacterSelectPlayer : MonoBehaviour
     private void Hide(){
         gameObject.SetActive(false);
     }
+
+    private void OnDestroy(){
+        RibbitRoyaleMultiplayer.Instance.onPlayerDataNetworkListChanged -= RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged;
+
+    }
 }

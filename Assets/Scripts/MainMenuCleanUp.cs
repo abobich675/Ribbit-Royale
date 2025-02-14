@@ -10,6 +10,9 @@ public class MainMenuCleanUp : MonoBehaviour
         if (RibbitRoyaleMultiplayer.Instance != null){
             Destroy(RibbitRoyaleMultiplayer.Instance.gameObject);
         }
+        if (RibbitRoyaleLobby.Instance != null){
+            Destroy(RibbitRoyaleLobby.Instance.gameObject);
+        }
     }
 
 

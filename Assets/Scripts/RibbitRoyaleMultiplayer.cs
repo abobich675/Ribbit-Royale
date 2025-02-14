@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class RibbitRoyaleMultiplayer : NetworkBehaviour
 {
-    private const int MAX_PLAYER_AMOUNT = 4;
+    public const int MAX_PLAYER_AMOUNT = 4;
     public static RibbitRoyaleMultiplayer Instance { get; private set; }
 
     public event EventHandler OnTryingToJoinGame;
@@ -34,7 +34,19 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
     {
         NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
         NetworkManager.Singleton.OnClientConnectedCallback += NetworkManager_OnClientConnnectedCallback;
+        NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Server_OnClientDisconnectCallback;
         NetworkManager.Singleton.StartHost();
+    }
+
+    private void NetworkManager_Server_OnClientDisconnectCallback(ulong clientId)
+    {
+        for (int i = 0; i < playerDataNetworkList.Count; i++){
+            PlayerData playerData = playerDataNetworkList[i];
+            if(playerData.clientId == clientId){
+                //Disconnected!
+                playerDataNetworkList.RemoveAt(i);
+            }
+        }
     }
 
     private void NetworkManager_OnClientConnnectedCallback(ulong clientId)
@@ -46,7 +58,7 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
         });
     }
 
-    private void NetworkManager_OnClientDisconnectCallback(ulong clientId)
+    private void NetworkManager_Client_OnClientDisconnectCallback(ulong clientId)
     {
         OnTFailedToJoinGame?.Invoke(this, EventArgs.Empty);
     }
@@ -75,7 +87,7 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
     public void StartClient()
     {
         OnTryingToJoinGame?.Invoke(this, EventArgs.Empty);
-        NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
+        NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Client_OnClientDisconnectCallback;
         NetworkManager.Singleton.StartClient();
     }
 
@@ -100,7 +112,7 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
         {
             if (playerDataNetworkList[i].clientId == clientId) // ✅ Fixed syntax
             {
-                return i; // ✅ Fixed syntax
+                return i;
             }
         }
         return -1;
