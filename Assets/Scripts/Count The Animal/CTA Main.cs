@@ -1,4 +1,8 @@
 using UnityEngine;
+using UnityEditor;
+using System;
+using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class CTAMain : MonoBehaviour
 {
@@ -7,26 +11,36 @@ public class CTAMain : MonoBehaviour
     public float MIN_SPAWN_DELAY = 0.1f;
     public float MAX_SPAWN_DELAY = 1f;
 
+
+
+    // Animal struct for each animal type
+    // Contains the name of the animal, the prefab of the animal, and the count of the animal
+    [Serializable]
+    public struct Animal
+    {
+        public string name;
+        public GameObject animalPrefab;
+        public int count;
+    }
+
+
+
     // Barriers
     public GameObject leftBarrier;
     public GameObject rightBarrier;
 
-    // Animal Prefabs
-    public GameObject birdPrefab;
-    public GameObject flyPrefab;
-    public GameObject monkeyPrefab;
-    public GameObject snakePrefab;
-    public GameObject turtlePrefab;
+    // Chosen animal for the players to count and it's image
+    string countedAnimal = "";
+    public Image countedAnimalImage;
 
-    // Count the number of animals as they're created
-    public int birdCount = 0;
-    public int flyCount = 0;
-    public int monkeyCount = 0;
-    public int snakeCount = 0;
-    public int turtleCount = 0;
+    // Array of animals
+    public Animal[] animals;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        ChooseAnimalToCount();
+
         // Start the game timer
         Invoke("StopSpawning", GAME_LENGTH - 3);
         Invoke("EndGame", GAME_LENGTH);
@@ -40,33 +54,30 @@ public class CTAMain : MonoBehaviour
         
     }
 
+    Animal GetAnimal(string name) {
+        foreach (Animal animal in animals) {
+            if (animal.name == name) {
+                return animal;
+            }
+        }
+        return new Animal();
+    }
+
+    
+    // Randomly select an animal to count
+    void ChooseAnimalToCount()
+    {
+        int animalIndex = Random.Range(0, 5);
+        countedAnimal = animals[animalIndex].name;
+        countedAnimalImage.sprite = animals[animalIndex].animalPrefab.GetComponent<SpriteRenderer>().sprite;
+    }
+
     void SummonRandomAnimal()
     {
         // Randomly select an animal to spawn
         int animalIndex = Random.Range(0, 5);
-        switch (animalIndex)
-        {
-            case 0:
-                SummonAnimal(flyPrefab, "fly");
-                flyCount++;
-                break;
-            case 1:
-                SummonAnimal(birdPrefab, "bird");
-                birdCount++;
-                break;
-            case 2:
-                SummonAnimal(monkeyPrefab, "monkey");
-                monkeyCount++;
-                break;
-            case 3:
-                SummonAnimal(turtlePrefab, "turtle");
-                turtleCount++;
-                break;
-            case 4:
-                SummonAnimal(snakePrefab, "snake");
-                snakeCount++;
-                break;
-        }
+        SummonAnimal(animals[animalIndex].animalPrefab, animals[animalIndex].name);
+        animals[animalIndex].count++;
 
         // Randomly select a time to wait before spawning the next animal
         float delay = Random.Range(MIN_SPAWN_DELAY, MAX_SPAWN_DELAY);
@@ -92,11 +103,8 @@ public class CTAMain : MonoBehaviour
         // Stop the game
         Time.timeScale = 0;
 
-        // Display the results
-        Debug.Log("Fly Count: " + flyCount);
-        Debug.Log("Bird Count: " + birdCount);
-        Debug.Log("Monkey Count: " + monkeyCount);
-        Debug.Log("Turtle Count: " + turtleCount);
-        Debug.Log("Snake Count: " + snakeCount);
+        foreach (Animal animal in animals) {
+            Debug.Log(animal.name + " count: " + animal.count);
+        }
     }
 }
