@@ -31,7 +31,7 @@ public class CharacterSelectPlayer : MonoBehaviour
             Show();
             PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
             readyGameObject.SetActive(CharacterSelectReady.Instance.IsPlayerReady(playerData.clientId));
-            spriteRenderer.SetPlayerColor(RibbitRoyaleMultiplayer.Instance.GetPlayerColor(playerIndex));
+            spriteRenderer.SetPlayerColor(RibbitRoyaleMultiplayer.Instance.GetPlayerColor(playerData.colorId));
         }else{
             Hide();
         }

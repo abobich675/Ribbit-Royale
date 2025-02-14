@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class PlayerCtrl : NetworkBehaviour
 {
-
-    [SerializeField] private PlayerVisual playerVisual;
+    [SerializeField] private PlayerVisual playerVisual; // Reference to PlayerVisual    
     public float movSpeed;
     private float speedx, speedy;
     private Rigidbody2D rb;
@@ -19,6 +18,10 @@ public class PlayerCtrl : NetworkBehaviour
         {
             SetupCamera();
         }
+
+        PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        playerVisual.SetPlayerColor(RibbitRoyaleMultiplayer.Instance.GetPlayerColor(playerData.colorId));
+
 
     }
 

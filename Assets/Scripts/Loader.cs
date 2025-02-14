@@ -8,7 +8,8 @@ public static class Loader
         MainMenuScene,
         PreLobbyScene,
         NetworkLobbyScene,
-        CharacterSelectScene
+        CharacterSelectScene,
+        TongueSwingGame
     }
     public static int targetSceneIndex;
 
