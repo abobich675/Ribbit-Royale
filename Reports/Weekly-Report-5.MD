@@ -1,4 +1,4 @@
-# Weekly Report: 01/29 - 02/05
+# Weekly Report: 02/05 - 02/12
 
 ## Overview
 - Started on Count the Animal game prototype
