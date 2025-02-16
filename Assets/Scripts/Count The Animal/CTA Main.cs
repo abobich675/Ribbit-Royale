@@ -36,9 +36,14 @@ public class CTAMain : MonoBehaviour
     // Array of animals
     public Animal[] animals;
 
+
+    bool gameActive;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        gameActive = true;
+
         ChooseAnimalToCount();
 
         // Start the game timer
@@ -110,9 +115,14 @@ public class CTAMain : MonoBehaviour
     {
         // Stop the game
         Time.timeScale = 0;
+        gameActive = false;
 
         foreach (Animal animal in animals) {
             Debug.Log(animal.name + " count: " + animal.count);
         }
+    }
+
+    public bool GameActive() {
+        return gameActive;
     }
 }
