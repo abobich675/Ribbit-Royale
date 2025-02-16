@@ -13,6 +13,7 @@ public class CharacterSelectUI : MonoBehaviour
 
     private void Awake(){
         mainMenuButton.onClick.AddListener(() =>{
+            RibbitRoyaleLobby.Instance.LeaveLobby();
             NetworkManager.Singleton.Shutdown();
             Loader.load(Loader.Scene.MainMenuScene);
 
