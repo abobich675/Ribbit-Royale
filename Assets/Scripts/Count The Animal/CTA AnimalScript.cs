@@ -61,7 +61,7 @@ public class CTAAnimalScript : MonoBehaviour
         }
         else
         {
-            GetComponent<SpriteRenderer>().flipX = true;
+            GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX; // invert x flip
             transform.position = new Vector3(rightBarrier.transform.position.x, yPos, transform.position.z);
         }
 
