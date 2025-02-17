@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f2f257ccffb264e9aaab5cc452f3025b
+guid: 604d5cbc0261f8e4f96052afa4f4ccd2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7104874855621525860
-    second: Snake_Idle_0
+      213: 999950442945655130
+    second: Monkey Idle_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Snake_Idle_0
+      name: Monkey Idle_0
       rect:
         serializedVersion: 2
-        x: 19
-        y: 119
-        width: 481
-        height: 72
+        x: 49
+        y: 19
+        width: 222
+        height: 202
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4610de6b906999260800000000000000
-      internalID: 7104874855621525860
+      spriteID: a5135c041a980ed00800000000000000
+      internalID: 999950442945655130
       vertices: []
       indices: 
       edges: []

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c912893322c24484fb2369aeb7c90fdf
+guid: 51c7f4e2af66eb64c99ec9e173d62e89
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7442915053277858766
-    second: Turtle_Idle_0
+      213: 4475490405032367770
+    second: Turtle Idle_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,24 +96,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Turtle_Idle_0
+      name: Turtle Idle_0
       rect:
         serializedVersion: 2
         x: 19
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 23437fb713475b890800000000000000
-      internalID: -7442915053277858766
+      spriteID: a969f9bafc22c1e30800000000000000
+      internalID: 4475490405032367770
       vertices: []
       indices: 
       edges: []
