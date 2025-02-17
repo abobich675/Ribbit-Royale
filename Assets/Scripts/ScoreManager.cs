@@ -1,10 +1,7 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 
 public class ScoreManager : MonoBehaviour
@@ -35,6 +32,11 @@ public class ScoreManager : MonoBehaviour
     {
         Debug.Log("ScoreManager Start() executing...");
         ScoreManager scoreboard = ScoreManager.Instance;
+        CreateExampleInstance(scoreboard);
+    }
+
+    private void CreateExampleInstance(ScoreManager scoreboard)
+    {
         colorSpriteDictionary.Add("red", (Color.red, spriteRed));
         colorSpriteDictionary.Add("blue", (Color.blue, spriteBlue));
         colorSpriteDictionary.Add("green", (Color.green, spriteGreen));
@@ -48,6 +50,7 @@ public class ScoreManager : MonoBehaviour
         scoreboard.UpdatePlayerScore("Player2", 15);
         scoreboard.UpdatePlayerScore("Player3", 31);
         scoreboard.UpdateRanking();
+        Debug.Log("ScoreManager example instance initialization complete.");
     }
 
     public void UpdatePlayerScore(string playerName, int score)
@@ -56,14 +59,14 @@ public class ScoreManager : MonoBehaviour
         if (playerEntries.ContainsKey(playerName))
         {
             playerEntries[playerName] = (score, playerEntries[playerName].entry);
-            UpdateScoreText(playerEntries[playerName].entry, playerName, score);
+            UpdateScoreText(playerEntries[playerName].entry, score);
         }
         else
         // if creating new user in leaderboard
         {
             Debug.Log("Instantiating new profile in scoreboard " + playerName);
             GameObject newEntry = Instantiate(scoreEntryPrefab, scoreboardContent);
-            UpdateScoreText(newEntry, playerName, score);
+            UpdateScoreText(newEntry, score);
             string playerColor = playerColorDictionary[playerName];
             var tupleColor = colorSpriteDictionary[playerColor];
             newEntry.transform.Find("AvatarImage").GetComponent<Image>().sprite = tupleColor.Item2;
@@ -79,10 +82,13 @@ public class ScoreManager : MonoBehaviour
             int newScore = playerEntries[playerName].score + amount;
             UpdatePlayerScore(playerName, newScore);
         }
-        Debug.Log("Player not instantiated, ERROR");
+        else
+        {
+            Debug.Log("Player not instantiated, IncrementPlayerScore() ERROR");
+        }
     }
 
-    private void UpdateScoreText(GameObject entry, string playerName, int score)
+    private void UpdateScoreText(GameObject entry, int score)
     // Updates the score field of a given player
     // Takes GameObject entry [player entry in scoreboard], playerName [string], score [int]
     {
@@ -93,21 +99,28 @@ public class ScoreManager : MonoBehaviour
 
     private void UpdateRanking()
     {
+        // Creates a list <string, (score, entry)> sortedPlayers
         List<KeyValuePair<string, (int score, GameObject entry)>> sortedPlayers =
             new List<KeyValuePair<string, (int, GameObject)>>(playerEntries);
+        
+        // Sorts sortedPlayers list by (a, b), and (b score CompareTo a score)
         sortedPlayers.Sort((a, b) => b.Value.score.CompareTo(a.Value.score));
-
+        // x.CompareTo(y) will return 0 if sorted (e.g. x == y), -1 if preceding (e.g. x < y), +1 if should follow (e.g. x > y)
+        
+        // Creates an array startPositions of player-entry:y-value
         Dictionary<GameObject, float> startPositions = new Dictionary<GameObject, float>();
         foreach (var player in sortedPlayers)
         {
             startPositions[player.Value.entry] = player.Value.entry.transform.localPosition.y;
         }
         
+        // Sets the siblingindex for each entry in sortedPlayers - reorders object hierarchy in scene 
         for (int i = 0; i < sortedPlayers.Count; i++)
         {
             sortedPlayers[i].Value.entry.transform.SetSiblingIndex(i);
         }
 
+        Debug.Log("Rankings Sorted, Starting AnimateRankChange()");
         StartCoroutine(AnimateRankChange(sortedPlayers, startPositions));
     }
 
@@ -117,6 +130,7 @@ public class ScoreManager : MonoBehaviour
         yield return null;
         
         Dictionary<GameObject, float> targetPositions = new Dictionary<GameObject, float>();
+        // Gets the current y value of each entry sorted by score
         foreach (var player in sortedPlayers)
         {
             targetPositions[player.Value.entry] = player.Value.entry.transform.localPosition.y;
@@ -127,10 +141,14 @@ public class ScoreManager : MonoBehaviour
         //Dictionary<GameObject, float> startPositions = new Dictionary<GameObject, float>();
 
         while (elapsed < moveDuration)
+        // Iterates through animation time duration
         {
             elapsed += Time.deltaTime;
             float t = elapsed / moveDuration;
 
+            // interpolates all entries, moving 1.y to 2.y and vice versa
+            // if no change, moves 1.y to 1.y, etc.
+            // needs updating to only interpolate relevant entries, and only call on relevant score update
             foreach (var player in sortedPlayers)
             {
                 GameObject playerEntry = player.Value.entry;
@@ -146,6 +164,8 @@ public class ScoreManager : MonoBehaviour
             yield return null;
         }
 
+        // After animation is done, iterates through sortedPlayers and assigns their rank to their index + 1
+        // Really, each entry should be an object that can be easily updated, rework that next!
         for (int i = 0; i < sortedPlayers.Count; i++)
         {
             GameObject playerEntry = sortedPlayers[i].Value.entry;
