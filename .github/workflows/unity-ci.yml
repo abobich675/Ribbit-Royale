@@ -1,4 +1,4 @@
-name: Unity CI
+name: Unity Test Workflow
 
 on:
   push:
@@ -16,20 +16,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Decode Unity License
+        run: |
+          echo "${{ secrets.UNITY_LICENSE }}" | base64 --decode > unity_license.ulf
+          
       - name: Set up Unity License
-        uses: game-ci/unity-builder@v4 
+        uses: game-ci/unity-builder@v4  
         with:
           version: 6000.0.34f1
-          license: ${{ secrets.UNITY_LICENSE }}  
+          license: ./unity_license.ulf  
           email: ${{ secrets.UNITY_EMAIL }} 
-          password: ${{ secrets.UNITY_PASSWORD }}  
+          password: ${{ secrets.UNITY_PASSWORD }} 
 
       - name: Run Unit Tests
         run: |
           ./unity/Editor/Unity -batchmode -nographics -logFile -projectPath . -executeMethod UnityEditor.TestTools.TestRunner.Api.ExecuteTests
 
       - name: Upload test results
-        uses: actions/upload-artifact@v4  # Latest version of artifact upload action
+        uses: actions/upload-artifact@v4  
         with:
           name: test-results
           path: /path/to/test/results.xml
