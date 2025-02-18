@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3  
+        uses: actions/checkout@v3
 
       - name: Set up Unity
-        uses: game-ci/unity-actions/setup@v3  
+        uses: game-ci/unity-builder@v1  
         with:
           version: 6000.0.34f1
 
@@ -26,7 +26,7 @@ jobs:
           ./unity/Editor/Unity -batchmode -nographics -logFile -projectPath . -executeMethod UnityEditor.TestTools.TestRunner.Api.ExecuteTests
 
       - name: Upload test results
-        uses: actions/upload-artifact@v3  
+        uses: actions/upload-artifact@v4  
         with:
           name: test-results
           path: /path/to/test/results.xml
