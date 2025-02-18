@@ -4,10 +4,10 @@ Adam Bobich, Aidan Caughey, Baron Baker, Chase Bennett, Luke Garci, Ryan Dobkin
 #### Description:
 Ribbit Royale is a multiplayer party game built in Unity for PC. The game offers minigame experiences where you can compete with your friends for the most points and first place. Hop to the top of the leaderboard!
 #### Installation:
-  Prerequisites:
-  - Operating System: Windows 10 or later, macOS (TBD)
-  - Hardware: Minimum 4GB RAM, 2GB VRAM, Intel i5 or equivalent processor
-  - Software: Unity Game Engine 6000.0.34f1
+    Prerequisites:
+    - Operating System: Windows 10 or later, macOS (TBD)
+    - Hardware: Minimum 4GB RAM, 2GB VRAM, Intel i5 or equivalent processor
+    - Software: Unity Game Engine 6000.0.34f1
 Installation Steps:
   1. Download the latest game build from our GitHub repository
   2. Extract the donwloaded ZIP file to your desired location
