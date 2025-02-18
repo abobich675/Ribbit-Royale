@@ -21,21 +21,21 @@ jobs:
         uses: actions/cache@v3
         with:
           path: Library
-          key: Library-${{ runner.os }}-${{ github.sha }}
+          key: Library-${{ runner.os }}-${{ github.ref_name }}
           restore-keys: |
             Library-${{ runner.os }}
 
       - name: Set up Unity License
         run: |
           mkdir -p ~/.local/share/unity3d
-          echo "$UNITY_LICENSE" > ~/.local/share/unity3d/Unity_lic.ulf
+          echo "$UNITY_LICENSE" | base64 --decode > ~/.local/share/unity3d/Unity_lic.ulf
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
-      - name: Set up Unity
+      - name: Run Unity Tests
         uses: game-ci/unity-test-runner@v4
         with:
-          unityVersion: 6000.0.34f1
+          unityVersion: 2022.3.10f1 # Replace with your actual Unity version
 
   build:
     name: Build Unity Project
@@ -49,14 +49,14 @@ jobs:
       - name: Set up Unity License
         run: |
           mkdir -p ~/.local/share/unity3d
-          echo "$UNITY_LICENSE" > ~/.local/share/unity3d/Unity_lic.ulf
+          echo "$UNITY_LICENSE" | base64 --decode > ~/.local/share/unity3d/Unity_lic.ulf
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
-      - name: Set up Unity
+      - name: Build Unity Project
         uses: game-ci/unity-builder@v4
         with:
-          unityVersion: 6000.0.34f1
+          unityVersion: 2022.3.10f1 # Replace with your actual Unity version
           targetPlatform: StandaloneWindows64
 
       - name: Upload Build Artifact
