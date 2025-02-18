@@ -1,12 +1,40 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreEntry
 {
+
     private Color entryColor;
     private int entryRank;
     private int entryScore;
+    private Image entryAvatar;
     private string entryPlayerName;
     private GameObject entryGameObject;
+    private float yPos;
+
+    private ScoreEntryUI uiController;
+
+    public void Initialize()
+    {
+        uiController = entryGameObject.GetComponent<ScoreEntryUI>();
+        entryColor = Color.white;
+        entryRank = 0;
+        entryScore = 0;
+        //entryPlayerName = "default";
+        //entryGameObject = null;
+        yPos = 0;
+    }
+    
+    // get, set ypos
+    public float GetY()
+    {
+        return yPos;
+    }
+
+    public void SetY(float newY)
+    {
+        yPos = newY;
+    }
     
     
     // get, set gameobject
@@ -32,14 +60,26 @@ public class ScoreEntry
     }
 
     // get, set color
-    public Color GetColor()
+    public Color GetEntryColor()
     {
         return entryColor;
     }
 
-    public void SetColor(Color color)
+    public void SetEntryColor(Color color)
     {
         entryColor = color;
+    }
+    
+    // get, set avatar
+    public Image GetAvatar()
+    {
+        return entryAvatar;
+    }
+
+    public void SetAvatar(Image newAvatar)
+    {
+        entryAvatar = newAvatar;
+        uiController.avatarImage = entryAvatar;
     }
     
     // get, set rank
@@ -51,6 +91,7 @@ public class ScoreEntry
     public void SetRank(int rank)
     {
         entryRank = rank;
+        uiController.rankText.text = entryRank.ToString();
     }
     
     // get, set score
@@ -62,5 +103,6 @@ public class ScoreEntry
     public void SetScore(int score)
     {
         entryScore = score;
+        uiController.scoreText.text = entryScore.ToString();
     }
 }
