@@ -20,8 +20,8 @@ public class ScoreManager : MonoBehaviour
     private Dictionary<string, (Color, Sprite)> colorSpriteDictionary = new Dictionary<string, (Color, Sprite)>();
     private Dictionary<string, string> playerColorDictionary = new Dictionary<string, string>();
 
-    private Dictionary<string, (int score, GameObject entry)> playerEntries = new Dictionary<string, (int, GameObject)>();
-
+    //private Dictionary<string, (int score, GameObject entry)> playerEntries = new Dictionary<string, (int, GameObject)>();
+    private List<ScoreEntry> scoreEntries = new List<ScoreEntry>();
 
     void Awake()
     {
@@ -45,7 +45,8 @@ public class ScoreManager : MonoBehaviour
         playerColorDictionary.Add("Player1", "blue");
         playerColorDictionary.Add("Player2", "yellow");
         playerColorDictionary.Add("Player3", "green");
-        scoreboard.UpdatePlayerScore("Player0", 29);
+        //var getColor = RibbitRoyaleMultiplayer.GetPlayerColor(0);
+        //scoreboard.UpdatePlayerScore("Player0", 29);
         scoreboard.UpdatePlayerScore("Player1", 30);
         scoreboard.UpdatePlayerScore("Player2", 15);
         scoreboard.UpdatePlayerScore("Player3", 31);
@@ -53,8 +54,17 @@ public class ScoreManager : MonoBehaviour
         Debug.Log("ScoreManager example instance initialization complete.");
     }
 
+    private ScoreEntry AddPlayer(string playerName)
+    {
+        ScoreEntry scoreEntry = new ScoreEntry();
+        scoreEntry.SetPlayerName(playerName);
+        return scoreEntry;
+    }
+
     public void UpdatePlayerScore(string playerName, int score)
     {
+        if (playerEntries.Contains(ScoreEntry.))
+        
         // if already existing profile
         if (playerEntries.ContainsKey(playerName))
         {
