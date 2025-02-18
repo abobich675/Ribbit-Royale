@@ -28,11 +28,11 @@ Ribbit Royale is a multiplayer party game built in Unity for PC. The game offers
       - Interact: E / Left Mouse Button
 #### Bug Reports:
   - If you encounter a bug, please report it via our GitHub issue tracker
-    Title: Brief description of the issue
-    Description: Steps to reproduce the bug
-    Expected Behavior: What should happen
-    Actual Behavior: What actually happens
-    Screenshots/Logs: Attach any relevant screenshots or log files
+    - Title: Brief description of the issue
+    - Description: Steps to reproduce the bug
+    - Expected Behavior: What should happen
+    - Actual Behavior: What actually happens
+    - Screenshots/Logs: Attach any relevant screenshots or log files
 #### Known Bugs:
   - Some animations may not play smoothly (Work in Progress)
   - Sound effects missing in some minigames (To be added)
