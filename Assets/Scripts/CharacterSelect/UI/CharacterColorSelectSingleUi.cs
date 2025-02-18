@@ -3,50 +3,24 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Character : MonoBehaviour
 {
+    // This will control the color of the button based of the color ids in the RibbitRoyaleMultiplayer color list field
     [SerializeField] private int colorId;
+    // The image (color) of the button chnages based off the color off the colorId
     [SerializeField] private Image image;
+    // This will display the button with a checkmark if the button is selected
     [SerializeField] private GameObject selectedGameObject;
 
-
+    // Awake function for the different color options (buttons)
     private void Awake() {
-        if (RibbitRoyaleMultiplayer.Instance == null) {
-            Debug.LogError("RibbitRoyaleMultiplayer.Instance is null! Character script is executing too early.");
-            return;
-        }
-
-        Debug.Log("Character Awake");
+        // This will get the button component of the prefab CharacterColorSelectUI
         var button = GetComponent<Button>();
-        if (button == null) {
-            Debug.LogError("Button component is missing on " + gameObject.name);
-            return;
-        }
-
+        // When the button is cliecked
         button.onClick.AddListener(() => {
+            // Call the instance for the ChangePlayerColor function passing in the colorId of the button that has been pressed to set the character to the color of the button
             RibbitRoyaleMultiplayer.Instance.ChangePlayerColor(colorId);
         });
     }
 private void Start() {
-    // Check if RibbitRoyaleMultiplayer.Instance is not null
-    if (RibbitRoyaleMultiplayer.Instance == null) {
-        Debug.LogError("RibbitRoyaleMultiplayer.Instance is null! The Character script is running too early.");
-        return;
-    }
-    // Log the current GameObject this script is attached to
-    Debug.Log("Character script attached to GameObject: " + gameObject.name);
-    // Check if the image field is assigned in the Inspector
-    if (image == null) {
-        Debug.LogError("Image component is missing! Please assign an Image to the Character script on GameObject: " + gameObject.name);
-        return;
-    } else {
-        Debug.Log("Image component found on GameObject: " + gameObject.name);
-    }
-    // Check if the selectedGameObject is assigned in the Inspector
-    if (selectedGameObject == null) {
-        Debug.LogError("Selected GameObject is missing! Please assign the selected GameObject on GameObject: " + gameObject.name);
-        return;
-    } else {
-        Debug.Log("Selected GameObject found: " + selectedGameObject.name);
-    }
     // Subscribe to the event
     RibbitRoyaleMultiplayer.Instance.onPlayerDataNetworkListChanged += RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged;
     // Set the player's color
@@ -56,12 +30,14 @@ private void Start() {
 }
 
 
-    private void RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged(object sender, EventArgs e)
-    {
+    private void RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged(object sender, EventArgs e){
         UpdateIsSelected();
     }
 
+    // Function is used to update the imgae of the button based on when it is pressed (selected) 
     private void UpdateIsSelected(){
+        // Create an instance of the RibbitRoyaleMultiplayer and call function to get the colorId
+        //If the colorId matches the colorId of the button then set image to the selectedGameObject
         if (RibbitRoyaleMultiplayer.Instance.GetPlayerData().colorId == colorId){
             selectedGameObject.SetActive(true);
         } else{

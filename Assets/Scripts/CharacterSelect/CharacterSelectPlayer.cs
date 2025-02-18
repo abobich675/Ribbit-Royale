@@ -5,6 +5,7 @@ using UnityEngine.TextCore.Text;
 
 public class CharacterSelectPlayer : MonoBehaviour
 {
+    // Create fields for the sprites, players, and whether they are ready or not
     [SerializeField] private int playerIndex;
     [SerializeField] private GameObject readyGameObject;
     [SerializeField] private PlayerVisual spriteRenderer;
@@ -16,13 +17,11 @@ public class CharacterSelectPlayer : MonoBehaviour
         UpdatePlayer();
     }
 
-    private void CharacterSelectReady_OnReadyChanged(object sender, EventArgs e)
-    {
+    private void CharacterSelectReady_OnReadyChanged(object sender, EventArgs e){
         UpdatePlayer();
     }
 
-    private void RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged(object sender, EventArgs e)
-    {
+    private void RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged(object sender, EventArgs e){
         UpdatePlayer();
     }
 

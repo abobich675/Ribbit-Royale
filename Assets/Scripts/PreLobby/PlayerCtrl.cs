@@ -18,8 +18,9 @@ public class PlayerCtrl : NetworkBehaviour
         {
             SetupCamera();
         }
-
+        // This will get a players data based off the clientId 
         PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        // Using the player data call the function SetPlayerColor, get the players color using the playerData
         playerVisual.SetPlayerColor(RibbitRoyaleMultiplayer.Instance.GetPlayerColor(playerData.colorId));
 
 

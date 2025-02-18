@@ -20,7 +20,7 @@ public class LobbyUI : MonoBehaviour
     private void Awake(){
         mainMenuButton.onClick.AddListener(() => {
             RibbitRoyaleLobby.Instance.LeaveLobby();
-            Loader.load(Loader.Scene.MainMenuScene);
+            Loader.Load(Loader.Scene.MainMenuScene);
         });
         createLobbyButton.onClick.AddListener(() => {
             lobbyCreateUI.Show();

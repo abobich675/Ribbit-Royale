@@ -16,8 +16,7 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
     private NetworkList<PlayerData> playerDataNetworkList;
     [SerializeField] private List<Color> playerColorList;
 
-    private void Awake()
-    {
+    private void Awake(){
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
@@ -25,21 +24,18 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
         playerDataNetworkList.OnListChanged += playerDataNetworkList_OnListChanged;
     }
 
-    private void playerDataNetworkList_OnListChanged(NetworkListEvent<PlayerData> changeEvent)
-    {
+    private void playerDataNetworkList_OnListChanged(NetworkListEvent<PlayerData> changeEvent){
         onPlayerDataNetworkListChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public void StartHost()
-    {
+    public void StartHost(){
         NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApprovalCallback;
         NetworkManager.Singleton.OnClientConnectedCallback += NetworkManager_OnClientConnnectedCallback;
         NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Server_OnClientDisconnectCallback;
         NetworkManager.Singleton.StartHost();
     }
 
-    private void NetworkManager_Server_OnClientDisconnectCallback(ulong clientId)
-    {
+    private void NetworkManager_Server_OnClientDisconnectCallback(ulong clientId){
         for (int i = 0; i < playerDataNetworkList.Count; i++){
             PlayerData playerData = playerDataNetworkList[i];
             if(playerData.clientId == clientId){
@@ -49,8 +45,7 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
         }
     }
 
-    private void NetworkManager_OnClientConnnectedCallback(ulong clientId)
-    {
+    private void NetworkManager_OnClientConnnectedCallback(ulong clientId){
         playerDataNetworkList.Add(new PlayerData
         {
             clientId = clientId,
@@ -58,13 +53,11 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
         });
     }
 
-    private void NetworkManager_Client_OnClientDisconnectCallback(ulong clientId)
-    {
+    private void NetworkManager_Client_OnClientDisconnectCallback(ulong clientId){
         OnTFailedToJoinGame?.Invoke(this, EventArgs.Empty);
     }
 
-    private void NetworkManager_ConnectionApprovalCallback(NetworkManager.ConnectionApprovalRequest connectionApprovalRequest, NetworkManager.ConnectionApprovalResponse connectionApprovalResponse)
-    {
+    private void NetworkManager_ConnectionApprovalCallback(NetworkManager.ConnectionApprovalRequest connectionApprovalRequest, NetworkManager.ConnectionApprovalResponse connectionApprovalResponse){
         if (IsServer)
         {
             connectionApprovalResponse.Approved = true;
@@ -84,33 +77,28 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
         connectionApprovalResponse.Approved = true;
     }
 
-    public void StartClient()
-    {
+    public void StartClient(){
         OnTryingToJoinGame?.Invoke(this, EventArgs.Empty);
         NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_Client_OnClientDisconnectCallback;
         NetworkManager.Singleton.StartClient();
     }
 
-    public bool IsPlayerIndexConnected(int playerIndex)
-    {
+    public bool IsPlayerIndexConnected(int playerIndex){
         return playerIndex < playerDataNetworkList.Count;
     }
 
-    public PlayerData GetPlayerDataFromPlayerIndex(int playerIndex)
-    {
+    public PlayerData GetPlayerDataFromPlayerIndex(int playerIndex){
         return playerDataNetworkList[playerIndex];
     }
 
-    public Color GetPlayerColor(int colorId)
-    {
+    public Color GetPlayerColor(int colorId){
         return playerColorList[colorId];
     }
 
-    public int GetPlayerDataIndexFromClientId(ulong clientId)
-    {
+    public int GetPlayerDataIndexFromClientId(ulong clientId){
         for (int i = 0; i < playerDataNetworkList.Count; i++)
         {
-            if (playerDataNetworkList[i].clientId == clientId) // ✅ Fixed syntax
+            if (playerDataNetworkList[i].clientId == clientId) 
             {
                 return i;
             }
@@ -118,8 +106,7 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
         return -1;
     }
 
-    public PlayerData GetPlayerDataFromClientId(ulong clientId)
-    {
+    public PlayerData GetPlayerDataFromClientId(ulong clientId){
         foreach (PlayerData playerData in playerDataNetworkList)
         {
             if (playerData.clientId == clientId)
@@ -130,35 +117,31 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
         return default;
     }
 
-    public PlayerData GetPlayerData()
-    {
+    public PlayerData GetPlayerData(){
         return GetPlayerDataFromClientId(NetworkManager.Singleton.LocalClientId);
     }
 
-    public void ChangePlayerColor(int colorId)
-    {
+    public void ChangePlayerColor(int colorId){
         ChangePlayerColorServerRpc(colorId);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void ChangePlayerColorServerRpc(int colorId, ServerRpcParams serverRpcParams = default)
-    {
+    private void ChangePlayerColorServerRpc(int colorId, ServerRpcParams serverRpcParams = default){
         if (!IsColorAvailable(colorId))
         {
             return;
         }
 
-        int playerDataIndex = GetPlayerDataIndexFromClientId(serverRpcParams.Receive.SenderClientId); // ✅ Fixed spelling
+        int playerDataIndex = GetPlayerDataIndexFromClientId(serverRpcParams.Receive.SenderClientId); 
         if (playerDataIndex == -1) return;
 
-        PlayerData playerData = playerDataNetworkList[playerDataIndex]; // ✅ Fixed syntax
+        PlayerData playerData = playerDataNetworkList[playerDataIndex]; 
         playerData.colorId = colorId;
 
         playerDataNetworkList[playerDataIndex] = playerData;
     }
 
-    private bool IsColorAvailable(int colorId)
-    {
+    private bool IsColorAvailable(int colorId){
         foreach (PlayerData playerData in playerDataNetworkList)
         {
             if (playerData.colorId == colorId)
@@ -169,8 +152,7 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
         return true;
     }
 
-    private int GetFirstUnusedColorId()
-    {
+    private int GetFirstUnusedColorId(){
         for (int i = 0; i < playerColorList.Count; i++)
         {
             if (IsColorAvailable(i))
