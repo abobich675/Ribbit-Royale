@@ -11,7 +11,7 @@ Ribbit Royale is a multiplayer party game built in Unity for PC. The game offers
     
     Installation Steps:
       1. Download the latest game build from our GitHub repository
-      2. Extract the donwloaded ZIP file to your desired location
+      2. Extract the downloaded ZIP file to your desired location
       3. Run the executable file (RibbitRoyale.exe)
 #### How to run:
   1. Open the game by launching the RibbitRoyale.exe file.
@@ -35,4 +35,4 @@ Ribbit Royale is a multiplayer party game built in Unity for PC. The game offers
     - Screenshots/Logs: Attach any relevant screenshots or log files
 #### Known Bugs:
   - Some animations may not play smoothly (Work in Progress)
-  - Sound effects missing in some minigames (To be added)
+  - Sound effects missing in some minigames (Work in Progress)
