@@ -9,98 +9,29 @@ on:
       - master
 
 jobs:
-  test:
-    name: Run Unity Tests
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Cache Library
-        uses: actions/cache@v3
-        with:
-          path: Library
-          key: Library-${{ runner.os }}-${{ github.sha }}
-          restore-keys: |
-            Library-${{ runner.os }}
-
-      - name: Check Unity Credentials
-        run: |
-          if [ -z "${{ secrets.UNITY_EMAIL }}" ] || [ -z "${{ secrets.UNITY_PASSWORD }}" ]; then
-            echo "UNITY_EMAIL or UNITY_PASSWORD not set"
-            exit 1
-          fi
-          echo "Unity credentials found. Proceeding with activation..."
-
-      - name: Install Unity CLI for License Activation
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y unzip
-          curl -Ls https://public-cdn.cloud.unity3d.com/hub/prod/UnityHub.AppImage -o UnityHub.AppImage
-          chmod +x UnityHub.AppImage
-          ./UnityHub.AppImage --headless install --version 2021.3.22f1
-
-      - name: Activate Unity License
-        run: |
-          ./UnityHub.AppImage --headless license --email "${{ secrets.UNITY_EMAIL }}" --password "${{ secrets.UNITY_PASSWORD }}"
-        env:
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-
-      - name: Set up Unity
-        uses: game-ci/unity-test-runner@v4
-        with:
-          unityVersion: 2021.3.22f1
-
   build:
-    name: Build Unity Project
-    needs: test
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Cache Library
-        uses: actions/cache@v3
-        with:
-          path: Library
-          key: Library-${{ runner.os }}-${{ github.sha }}
-          restore-keys: |
-            Library-${{ runner.os }}
-
-      - name: Check Unity Credentials
-        run: |
-          if [ -z "${{ secrets.UNITY_EMAIL }}" ] || [ -z "${{ secrets.UNITY_PASSWORD }}" ]; then
-            echo "UNITY_EMAIL or UNITY_PASSWORD not set"
-            exit 1
-          fi
-          echo "Unity credentials found. Proceeding with activation..."
-
-      - name: Install Unity CLI for License Activation
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y unzip
-          curl -Ls https://public-cdn.cloud.unity3d.com/hub/prod/UnityHub.AppImage -o UnityHub.AppImage
-          chmod +x UnityHub.AppImage
-          ./UnityHub.AppImage --headless install --version 2021.3.22f1
-
-      - name: Activate Unity License
-        run: |
-          ./UnityHub.AppImage --headless license --email "${{ secrets.UNITY_EMAIL }}" --password "${{ secrets.UNITY_PASSWORD }}"
-        env:
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - name: Set up Unity
-        uses: game-ci/unity-builder@v4
+        uses: game-ci/unity-actions/setup@v2
         with:
-          unityVersion: 2021.3.22f1
-          targetPlatform: StandaloneWindows64
+          version: 6000.0.34f1
 
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
+      - name: Install Unity Test Framework
+        run: |
+          curl -sSL https://download.unity3d.com/download_unity/UnitySetup.tar.xz | tar -xJ
+          ./unity/Editor/Unity -batchmode -nographics -logFile -projectPath . -executeMethod TestRunner.RunTests
+
+      - name: Run Unit Tests
+        run: |
+          ./unity/Editor/Unity -batchmode -nographics -logFile -projectPath . -executeMethod UnityEditor.TestTools.TestRunner.Api.ExecuteTests
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v2
         with:
-          name: GameBuild
-          path: build/
+          name: test-results
+          path: /path/to/test/results.xml
