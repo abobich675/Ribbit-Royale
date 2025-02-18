@@ -8,6 +8,7 @@ Ribbit Royale is a multiplayer party game built in Unity for PC. The game offers
     - Operating System: Windows 10 or later, macOS (TBD)
     - Hardware: Minimum 4GB RAM, 2GB VRAM, Intel i5 or equivalent processor
     - Software: Unity Game Engine 6000.0.34f1
+    
     Installation Steps:
       1. Download the latest game build from our GitHub repository
       2. Extract the donwloaded ZIP file to your desired location
