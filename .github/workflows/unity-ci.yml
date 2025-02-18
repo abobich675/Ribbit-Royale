@@ -1,4 +1,4 @@
-name: Unity CI
+name: Unity Test Workflow
 
 on:
   push:
@@ -14,24 +14,19 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  
 
       - name: Set up Unity
-        uses: game-ci/unity-actions/setup@v2
+        uses: game-ci/unity-actions/setup@v3  
         with:
           version: 6000.0.34f1
-
-      - name: Install Unity Test Framework
-        run: |
-          curl -sSL https://download.unity3d.com/download_unity/UnitySetup.tar.xz | tar -xJ
-          ./unity/Editor/Unity -batchmode -nographics -logFile -projectPath . -executeMethod TestRunner.RunTests
 
       - name: Run Unit Tests
         run: |
           ./unity/Editor/Unity -batchmode -nographics -logFile -projectPath . -executeMethod UnityEditor.TestTools.TestRunner.Api.ExecuteTests
 
       - name: Upload test results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3  
         with:
           name: test-results
           path: /path/to/test/results.xml
