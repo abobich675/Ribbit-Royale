@@ -1,4 +1,4 @@
-name: Unity Test Workflow
+name: Unity CI
 
 on:
   push:
@@ -9,31 +9,58 @@ on:
       - master
 
 jobs:
-  build:
+  test:
+    name: Run Unity Tests
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - name: Decode Unity License
-        run: |
-          echo "${{ secrets.UNITY_LICENSE }}" | base64 --decode > unity_license.ulf
-          
+      - name: Cache Library
+        uses: actions/cache@v3
+        with:
+          path: Library
+          key: Library-${{ runner.os }}-${{ github.sha }}
+          restore-keys: |
+            Library-${{ runner.os }}
+
       - name: Set up Unity License
-        uses: game-ci/unity-builder@v4  
-        with:
-          version: 6000.0.34f1
-          license: ./unity_license.ulf  
-          email: ${{ secrets.UNITY_EMAIL }} 
-          password: ${{ secrets.UNITY_PASSWORD }} 
-
-      - name: Run Unit Tests
         run: |
-          ./unity/Editor/Unity -batchmode -nographics -logFile -projectPath . -executeMethod UnityEditor.TestTools.TestRunner.Api.ExecuteTests
+          mkdir -p ~/.local/share/unity3d
+          echo "$UNITY_LICENSE" > ~/.local/share/unity3d/Unity_lic.ulf
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
-      - name: Upload test results
-        uses: actions/upload-artifact@v4  
+      - name: Set up Unity
+        uses: game-ci/unity-test-runner@v4
         with:
-          name: test-results
-          path: /path/to/test/results.xml
+          unityVersion: 6000.0.34f1
+
+  build:
+    name: Build Unity Project
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Unity License
+        run: |
+          mkdir -p ~/.local/share/unity3d
+          echo "$UNITY_LICENSE" > ~/.local/share/unity3d/Unity_lic.ulf
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+      - name: Set up Unity
+        uses: game-ci/unity-builder@v4
+        with:
+          unityVersion: 6000.0.34f1
+          targetPlatform: StandaloneWindows64
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: GameBuild
+          path: build/
