@@ -18,7 +18,8 @@
 ### Luke:
 - 
 ### Ryan:
-- 
+- Refactored score manager to be more efficient, easier to interface with.
+- Created internal documentation for score manager, additionally added inline comments to help describe functionality.
 
 
 ## Plans and goals for the following week:
@@ -33,4 +34,5 @@
 ### Luke:
 - 
 ### Ryan:
-- 
+- Work with Luke to integrate score manager with existing networking scripts.
+- Centralize all character data to GameData class, change score manager to use the new data source, switch player identification to be based on global IDs.
