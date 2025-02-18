@@ -1,4 +1,4 @@
-name: Unity Test Workflow
+name: Unity CI
 
 on:
   push:
@@ -17,9 +17,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up Unity
-        uses: game-ci/unity-builder@v1  
+        uses: game-ci/unity-actions/setup@v4  
         with:
-          version: 6000.0.34f1
+          version: 6000.0.34f1  
 
       - name: Run Unit Tests
         run: |
