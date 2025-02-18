@@ -11,7 +11,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Request Unity License File
-        uses: game-ci/unity-activate@v4
+      - name: Request Unity License
+        uses: game-ci/unity-request-activation-file@v2
         with:
-          unityVersion: 6000.0.34f1 
+          unityVersion: 6000.0.34f1
