@@ -11,6 +11,7 @@
 - Created Idle animations for Count the Animal animals (Turtle, Snake, Monkey, Fly and Bird)
 ### Adam:
 - Finished Count the Animal protoype (still waiting for some art)
+  - Added a system where the user can input their guess / increment their tally
 ### Baron:
 - 
 ### Chase:
