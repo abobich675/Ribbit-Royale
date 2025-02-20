@@ -17,7 +17,9 @@
 ### Chase:
 - 
 ### Luke:
-- 
+- Completed the network lobby scene where users can see the list of lobbies that are available to join
+- Added the relay asset so players can connect from any device 
+- Updated the UI 
 ### Ryan:
 - Refactored score manager to be more efficient, easier to interface with.
 - Created internal documentation for score manager, additionally added inline comments to help describe functionality.
@@ -33,7 +35,7 @@
 ### Chase:
 - 
 ### Luke:
-- 
+- Begin working on transitions between the pre lobby and the minigames
 ### Ryan:
 - Work with Luke to integrate score manager with existing networking scripts.
 - Centralize all character data to GameData class, change score manager to use the new data source, switch player identification to be based on global IDs.
