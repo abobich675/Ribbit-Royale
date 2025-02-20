@@ -13,7 +13,8 @@
 - Finished Count the Animal protoype (still waiting for some art)
   - Added a system where the user can input their guess / increment their tally
 ### Baron:
-- 
+- Finished Snake Game prototype
+- Created background sprite for main lobby
 ### Chase:
 - 
 ### Luke:
@@ -31,7 +32,9 @@
 ### Adam:
 - 
 ### Baron:
-- 
+- Implement animations for "ready up" on main lobby screen
+- Improve temp sprites for Snake Escape Game
+- Implement procedural/continuous generation of platforms
 ### Chase:
 - 
 ### Luke:
