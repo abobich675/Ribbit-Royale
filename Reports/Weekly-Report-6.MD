@@ -28,7 +28,7 @@
 
 ## Plans and goals for the following week:
 ### Aidan:
-- Moving/Flying animations for Count the Animal animals (Snake, Bird, Turtle)
+- Moving/Flying animations for Count the Animal animals (Snake, Bird, Turtle) 
 ### Adam:
 - 
 ### Baron:
