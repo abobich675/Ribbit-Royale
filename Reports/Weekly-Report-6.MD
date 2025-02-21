@@ -29,7 +29,7 @@
 
 ## Plans and goals for the following week:
 ### Aidan:
-- Moving/Flying animations for Count the Animal animals
+- Moving/Flying animations for Count the Animal animals (Snake, Bird, Turtle) 
 ### Adam:
 - Single Player for Tongue Swinging Game
 - Single Player for Count the Animal Game
