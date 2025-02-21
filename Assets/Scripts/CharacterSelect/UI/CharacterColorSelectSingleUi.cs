@@ -22,7 +22,7 @@ public class Character : MonoBehaviour
     }
 private void Start() {
     // Subscribe to the event
-    RibbitRoyaleMultiplayer.Instance.onPlayerDataNetworkListChanged += RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged;
+    RibbitRoyaleMultiplayer.Instance.OnPlayerDataNetworkListChanged += RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged;
     // Set the player's color
     image.color = RibbitRoyaleMultiplayer.Instance.GetPlayerColor(colorId);
     // Update the selection state
@@ -46,7 +46,7 @@ private void Start() {
     }
 
     private void OnDestroy(){
-        RibbitRoyaleMultiplayer.Instance.onPlayerDataNetworkListChanged -= RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged;
+        RibbitRoyaleMultiplayer.Instance.OnPlayerDataNetworkListChanged -= RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged;
 
     }
 }

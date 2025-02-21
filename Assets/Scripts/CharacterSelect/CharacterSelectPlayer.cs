@@ -12,7 +12,7 @@ public class CharacterSelectPlayer : MonoBehaviour
 
 
     private void Start(){
-        RibbitRoyaleMultiplayer.Instance.onPlayerDataNetworkListChanged += RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged;
+        RibbitRoyaleMultiplayer.Instance.OnPlayerDataNetworkListChanged += RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged;
         CharacterSelectReady.Instance.OnReadyChanged += CharacterSelectReady_OnReadyChanged;
         UpdatePlayer();
     }
@@ -45,7 +45,7 @@ public class CharacterSelectPlayer : MonoBehaviour
     }
 
     private void OnDestroy(){
-        RibbitRoyaleMultiplayer.Instance.onPlayerDataNetworkListChanged -= RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged;
+        RibbitRoyaleMultiplayer.Instance.OnPlayerDataNetworkListChanged -= RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged;
 
     }
 }
