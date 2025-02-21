@@ -1,3 +1,4 @@
+using Unity.Multiplayer.Samples.Utilities.ClientAuthority;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,16 +8,19 @@ public class ScoreEntry
     private Color entryColor;
     private int entryRank;
     private int entryScore;
-    private Image entryAvatar;
+    private Sprite entryAvatar;
     private string entryPlayerName;
     private GameObject entryGameObject;
+    private GameObject inGameEntryGameObject;
     private float yPos;
 
     private ScoreEntryUI uiController;
+    private ScoreEntryUI uiController_inGame;
 
     public void Initialize()
     {
         uiController = entryGameObject.GetComponent<ScoreEntryUI>();
+        uiController_inGame = inGameEntryGameObject.GetComponent<ScoreEntryUI>();
         entryColor = Color.white;
         entryRank = 0;
         entryScore = 0;
@@ -24,6 +28,17 @@ public class ScoreEntry
         //entryGameObject = null;
         yPos = 0;
     }
+
+    public void SetInGameGameObject(GameObject inGameObject)
+    {
+        inGameEntryGameObject = inGameObject;
+    }
+    
+    public GameObject GetInGameGameObject()
+    {
+        return inGameEntryGameObject;
+    }
+    
     
     // get, set ypos
     public float GetY()
@@ -68,18 +83,22 @@ public class ScoreEntry
     public void SetEntryColor(Color color)
     {
         entryColor = color;
+        uiController.avatarBorder.color = entryColor;
+        uiController_inGame.avatarBorder.color = entryColor;
     }
     
     // get, set avatar
-    public Image GetAvatar()
+    public Sprite GetAvatar()
     {
         return entryAvatar;
     }
 
-    public void SetAvatar(Image newAvatar)
+    public void SetAvatar(Sprite newAvatar)
     {
+        Debug.Log("SetAvatar: " + newAvatar);
         entryAvatar = newAvatar;
-        uiController.avatarImage = entryAvatar;
+        uiController.avatarImage.sprite = entryAvatar;
+        uiController_inGame.avatarImage.sprite = entryAvatar;
     }
     
     // get, set rank
@@ -90,8 +109,10 @@ public class ScoreEntry
 
     public void SetRank(int rank)
     {
+        //Debug.Log("SetRank: " + rank);
         entryRank = rank;
         uiController.rankText.text = entryRank.ToString();
+        uiController_inGame.rankText.text = entryRank.ToString();
     }
     
     // get, set score
@@ -102,7 +123,9 @@ public class ScoreEntry
 
     public void SetScore(int score)
     {
+        Debug.Log("SetScore: " + score);
         entryScore = score;
         uiController.scoreText.text = entryScore.ToString();
+        uiController_inGame.scoreText.text = entryScore.ToString();
     }
 }

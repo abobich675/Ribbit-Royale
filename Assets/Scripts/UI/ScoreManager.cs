@@ -12,15 +12,17 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance { get; private set; }
     
     public GameObject scoreEntryPrefab;
+    public GameObject inGameScoreEntryPrefab;
     public Transform scoreboardContent;
+    public Transform inGameScoreboardContent;
     public float moveDuration = 10.0f;
 
-    public Image spriteRed;
-    public Image spriteBlue;
-    public Image spriteGreen;
-    public Image spriteYellow;
+    public Sprite spriteRed;
+    public Sprite spriteBlue;
+    public Sprite spriteGreen;
+    public Sprite spriteYellow;
 
-    private Dictionary<string, (Color, Image)> colorSpriteDictionary = new Dictionary<string, (Color, Image)>();
+    private Dictionary<string, (Color, Sprite)> colorSpriteDictionary = new Dictionary<string, (Color, Sprite)>();
     private Dictionary<string, string> playerColorDictionary = new Dictionary<string, string>();
 
     //private Dictionary<string, (int score, GameObject entry)> playerEntries = new Dictionary<string, (int, GameObject)>();
@@ -49,10 +51,10 @@ public class ScoreManager : MonoBehaviour
         playerColorDictionary.Add("Player2", "yellow");
         playerColorDictionary.Add("Player3", "green");
         //var getColor = RibbitRoyaleMultiplayer.GetPlayerColor(0);
-        //scoreboard.UpdatePlayerScore("Player0", 29);
-        scoreboard.UpdatePlayerScore("Player1", 30);
-        scoreboard.UpdatePlayerScore("Player2", 15);
-        scoreboard.UpdatePlayerScore("Player3", 31);
+        scoreboard.UpdatePlayerScore("Player0", 29, false);
+        scoreboard.UpdatePlayerScore("Player1", 30, false);
+        scoreboard.UpdatePlayerScore("Player2", 15, false);
+        scoreboard.UpdatePlayerScore("Player3", 31, false);
         scoreboard.UpdateRanking();
         Debug.Log("ScoreManager example instance initialization complete.");
     }
@@ -63,18 +65,26 @@ public class ScoreManager : MonoBehaviour
         ScoreEntry scoreEntry = new ScoreEntry();
         scoreEntry.SetPlayerName(playerName);
         scoreEntry.SetGameObject(Instantiate(scoreEntryPrefab, scoreboardContent));
+        scoreEntry.SetInGameGameObject(Instantiate(inGameScoreEntryPrefab, inGameScoreboardContent));
         scoreEntry.Initialize();
         scoreEntries.Add(scoreEntry);
         return scoreEntry;
     }
 
-    public void UpdatePlayerScore(string playerName, int score)
+    public void UpdatePlayerScore(string playerName, int score, bool isIncrement)
     {
         foreach (ScoreEntry entry in scoreEntries)
         {
             if (entry.GetPlayerName() == playerName)
             {
-                entry.SetScore(score);
+                if (isIncrement)
+                {
+                    UpdateScoreText(entry, entry.GetScore() + score);
+                }
+                else
+                {
+                    UpdateScoreText(entry, score);
+                }
                 return;
             }
         }
@@ -92,7 +102,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public void UpdateEntryColors(ScoreEntry entry, Color teamColor, Image avatar)
+    public void UpdateEntryColors(ScoreEntry entry, Color teamColor, Sprite avatar)
     {
         entry.SetAvatar(avatar);
         entry.SetEntryColor(teamColor);
@@ -144,15 +154,16 @@ public class ScoreManager : MonoBehaviour
             sortedP[i].GetGameObject().transform.SetSiblingIndex(i);
         }
 
-        Debug.Log("Rankings Sorted, Starting AnimateRankChange()");
-        if (sortedP != scoreEntries)
-        {
+        Debug.Log("Rankings Sorted, Starting AnimateRankChange() : " + scoreEntries + " : " + sortedP);
+        //if (sortedP != scoreEntries)
+        //{
             StartCoroutine(AnimateRankChange(sortedP));
-        }
+        //}
     }
 
     private IEnumerator AnimateRankChange(List<ScoreEntry> sortedP)
     {
+        Debug.Log("AnimateRankChange Entry");
         yield return null;
         
         Dictionary<GameObject, float> targetPositions = new Dictionary<GameObject, float>();
@@ -161,6 +172,7 @@ public class ScoreManager : MonoBehaviour
         {
             targetPositions[player.GetGameObject()] = player.GetGameObject().transform.localPosition.y;
         }
+        Debug.Log("AnimateRankChange Pos1");
         
         float elapsed = 0f;
 
@@ -189,6 +201,7 @@ public class ScoreManager : MonoBehaviour
 
             yield return null;
         }
+        Debug.Log("AnimateRankChange While Complete");
 
         // After animation is done, iterates through sortedPlayers and assigns their rank to their index + 1
         // Really, each entry should be an object that can be easily updated, rework that next!
@@ -196,6 +209,7 @@ public class ScoreManager : MonoBehaviour
         {
             sortedP[i].SetRank(i+1);
         }
+        Debug.Log("AnimateRankChange Complete");
     }
 
 //     public void RemovePlayer(string playerName)
