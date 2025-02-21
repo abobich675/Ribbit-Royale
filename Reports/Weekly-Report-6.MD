@@ -12,6 +12,7 @@
 ### Adam:
 - Finished Count the Animal protoype (still waiting for some art)
   - Added a system where the user can input their guess / increment their tally
+- Started on implementing basic animations in Tongue Swinging game
 ### Baron:
 - Finished Snake Game prototype
 - Created background sprite for main lobby
@@ -30,7 +31,8 @@
 ### Aidan:
 - Moving/Flying animations for Count the Animal animals
 ### Adam:
-- 
+- Single Player for Tongue Swinging Game
+- Single Player for Count the Animal Game
 ### Baron:
 - Implement animations for "ready up" on main lobby screen
 - Improve temp sprites for Snake Escape Game
