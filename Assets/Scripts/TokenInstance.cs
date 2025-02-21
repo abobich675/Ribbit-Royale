@@ -16,7 +16,7 @@ public class TokenInstance : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             StartCoroutine(LerpPosition(transform.position, 1, 0.4f));
-            ScoreManager.Instance.IncrementPlayerScore(col.gameObject.name, pointValue);
+            ScoreManager.Instance.UpdatePlayerScore(col.gameObject.name, pointValue, true);
             GetComponent<BoxCollider2D>().enabled = false;
             Debug.Log("ScoreManager - destroyed token" + col.gameObject);
         }
