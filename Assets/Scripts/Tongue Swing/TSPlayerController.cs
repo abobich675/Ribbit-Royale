@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
 
     Rigidbody2D rb;
+    Animator animator;
 
     InputAction moveAction;
     InputAction attackAction;
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
         attackAction = input.actions["Attack"];
 
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
         tongue = Instantiate(tongue);
         tongue.SetActive(false);
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour
     {
         DoInteraction();
         DoMovement();
+        UpdateAnimator();
     }
 
     void DoInteraction()
@@ -203,5 +206,11 @@ public class PlayerController : MonoBehaviour
 
             rb.linearVelocity = newVelocity; // Update velocity
         }
+    }
+
+    void UpdateAnimator()
+    {
+        animator.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
+        animator.SetBool("isSwinging", isSwinging);
     }
 }

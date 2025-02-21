@@ -12,8 +12,6 @@ public class CharacterSelectUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI lobbyNameText;
     [SerializeField] private TextMeshProUGUI lobbyCodeText;
 
-    //Test Commit for build testing
-
     
     private void Awake(){
         // When the main menu button is clicked
@@ -31,7 +29,6 @@ public class CharacterSelectUI : MonoBehaviour
             CharacterSelectReady.Instance.SetPlayerReady();
         });
     }
-
     private void Start(){
         // Get lobby information when the character select scene starts 
        Lobby lobby = RibbitRoyaleLobby.Instance.GetLobby();
