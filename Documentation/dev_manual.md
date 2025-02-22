@@ -20,6 +20,7 @@ Adam Bobich, Aidan Caughey, Baron Baker, Chase Bennett, Luke Garci, Ryan Dobkin
   2. Perform manual testing by playing through minigames and verifying expected behaviors.
 ## How to Add Tests:
   - Place test scripts in the `/Tests` directory.
+  - Depending on what type of test it is, place it in the EditMode directory or the PlayMode directory
   - Use Unity's Test Framework for writing unit tests (NUnit).
   - Test files should follow this naming convention: `Test_<Feature>.cs`.
 ## How to Build for Release:
