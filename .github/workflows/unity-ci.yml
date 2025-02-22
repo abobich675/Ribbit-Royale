@@ -26,6 +26,12 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
+          
+      - name: Clean generated files
+        run: |
+          rm -rf ./Library
+          rm -rf ./Build
+          rm -rf ./obj
 
       - uses: actions/cache@v3
         with:
@@ -57,9 +63,9 @@ jobs:
       fail-fast: false
       matrix:
         targetPlatform:
-          - StandaloneOSX 
-          - StandaloneWindows 
-          - StandaloneWindows64 
+          - StandaloneOSX
+          - StandaloneWindows
+          - StandaloneWindows64
           - StandaloneLinux64
     steps:
       - name: Free up disk space
@@ -75,6 +81,12 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
+
+      - name: Clean generated files
+        run: |
+          rm -rf ./Library
+          rm -rf ./Build
+          rm -rf ./obj
 
       - uses: actions/cache@v3
         with:
