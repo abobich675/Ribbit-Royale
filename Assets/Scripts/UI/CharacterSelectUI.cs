@@ -12,6 +12,7 @@ public class CharacterSelectUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI lobbyNameText;
     [SerializeField] private TextMeshProUGUI lobbyCodeText;
 
+
     
     private void Awake(){
         // When the main menu button is clicked
