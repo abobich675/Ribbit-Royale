@@ -6,7 +6,7 @@ public class CharacterSelectUI : MonoBehaviour
 {
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private Button readyButton;
-    //Test Commit for build testing
+    
 
     private void Awake(){
         mainMenuButton.onClick.AddListener(() =>{
