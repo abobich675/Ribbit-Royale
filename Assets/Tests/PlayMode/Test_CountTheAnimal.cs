@@ -4,14 +4,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
-public class SceneLoadTest
+public class CountTheAnimalTests
 {
+    float MAX_LOAD_TIME = 5f;
+    
     [UnityTest]
-    public IEnumerator TestSnakeChaseSceneLoadTime()
+    public IEnumerator TestCountTheAnimalSceneLoadTime()
     {
         float startTime = Time.realtimeSinceStartup;
         
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("SnakeChaseGame");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("CountTheAnimalGame");
         while (!asyncLoad.isDone)
         {
             yield return null;
@@ -20,9 +22,9 @@ public class SceneLoadTest
         yield return new WaitForSeconds(1f);
 
         float loadTime = Time.realtimeSinceStartup - startTime;
-        Debug.Log($"SnakeChaseScene Load Time: {loadTime} seconds");
+        Debug.Log($"CountTheAnimal Scene Load Time: {loadTime} seconds");
 
         // Set an assertion for reasonable load time
-        Assert.Less(loadTime, 5f, "Scene took too long to load!");
+        Assert.Less(loadTime, MAX_LOAD_TIME, "Scene took too long to load!");
     }
 }
