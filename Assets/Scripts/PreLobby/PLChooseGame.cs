@@ -1,6 +1,8 @@
 using UnityEngine;
 using System;
+#if UNITY_EDITOR
 using UnityEditor.SearchService;
+#endif 
 using System.Threading;
 using Unity.VisualScripting;
 using System.Collections.Generic;
