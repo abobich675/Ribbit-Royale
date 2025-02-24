@@ -950,6 +950,7 @@ GameObject:
   m_Component:
   - component: {fileID: 747205080}
   - component: {fileID: 747205079}
+  - component: {fileID: 747205088}
   - component: {fileID: 747205083}
   - component: {fileID: 747205081}
   - component: {fileID: 747205084}
@@ -1072,11 +1073,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b367f08bcac05304bb8fb7d43e400993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   maxSpeed: 10
   dampingFactor: 8
   swingingMovementBonus: 0.1
   camera: {fileID: 742085408}
   tongue: {fileID: 8838113352694672605, guid: c45ee84891523ae458242adc07ec4c59, type: 3}
+  animators:
+  - {fileID: 9100000, guid: 29bdcbd42eadf4311b2996d9cb847301, type: 2}
+  - {fileID: 9100000, guid: 2e4f5bd955d0449d29a6360c0672075a, type: 2}
+  - {fileID: 9100000, guid: d5921f83003264c49a5fc1b89a6bad3e, type: 2}
+  - {fileID: 9100000, guid: 8e2179e0e60aa4330bc581b65ecc2aae, type: 2}
 --- !u!114 &747205084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1138,7 +1145,7 @@ Animator:
   m_GameObject: {fileID: 747205078}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d5921f83003264c49a5fc1b89a6bad3e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8e2179e0e60aa4330bc581b65ecc2aae, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1186,6 +1193,31 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &747205088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747205078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1465185915
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!4 &818724826 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8616327398405809571, guid: 41e0b98da97d14da588be5a68779b1a9, type: 3}

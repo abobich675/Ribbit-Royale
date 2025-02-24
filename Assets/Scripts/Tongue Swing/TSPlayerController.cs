@@ -1,10 +1,13 @@
+using Unity.Netcode;
 using System;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using UnityEditor.Animations;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     const float GRAVITYSCALE = 2f;
 
@@ -20,6 +23,8 @@ public class PlayerController : MonoBehaviour
 
     public new Camera camera;
     public GameObject tongue;
+    public AnimatorController[] animators;
+
     GameObject connectedObject;
     bool isSwinging = false;
 
@@ -43,6 +48,8 @@ public class PlayerController : MonoBehaviour
 
         tongue = Instantiate(tongue);
         tongue.SetActive(false);
+
+        SetColor();
     }
 
     // Update is called once per frame
@@ -51,6 +58,20 @@ public class PlayerController : MonoBehaviour
         DoInteraction();
         DoMovement();
         UpdateAnimator();
+    }
+    
+    void SetColor() {
+        // This will get a players data based off the clientId 
+        PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        
+        if (playerData.colorId < 0 || playerData.colorId >= animators.Length) {
+            Debug.LogError("Player color ID out of bounds");
+            return;
+        }
+
+        animator.runtimeAnimatorController = animators[playerData.colorId];
+        // Using the player data call the function SetPlayerColor, get the players color using the playerData
+        // RibbitRoyaleMultiplayer.Instance.GetPlayerColor(playerData.colorId)
     }
 
     void DoInteraction()
