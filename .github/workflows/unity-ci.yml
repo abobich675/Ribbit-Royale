@@ -1,21 +1,44 @@
 name: Unity CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   testProject:
     name: Run Tests
     runs-on: ubuntu-latest
     steps:
+      - name: Free up disk space
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: true
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           lfs: true
+          
+      - name: Clean generated files
+        run: |
+          rm -rf ./Library
+          rm -rf ./Build
+          rm -rf ./obj
+
       - uses: actions/cache@v3
         with:
           path: Library
           key: Library-Test-${{ hashFiles('Packages/manifest.json') }}
           restore-keys: Library-Test-
+
       - name: Run Unity Tests
         uses: game-ci/unity-test-runner@v4
         env:
@@ -25,6 +48,7 @@ jobs:
         with:
           testMode: all
           artifactsPath: test-results
+          coverageOptions: none
 
       - uses: actions/upload-artifact@v4
         with:
@@ -39,20 +63,37 @@ jobs:
       fail-fast: false
       matrix:
         targetPlatform:
-          - StandaloneOSX 
-          - StandaloneWindows 
-          - StandaloneWindows64 
+          - StandaloneOSX
+          - StandaloneWindows
+          - StandaloneWindows64
           - StandaloneLinux64
     steps:
+      - name: Free up disk space
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: true
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           lfs: true
+
+      - name: Clean generated files
+        run: |
+          rm -rf ./Library
+          rm -rf ./Build
+          rm -rf ./obj
+
       - uses: actions/cache@v3
         with:
           path: Library
           key: Library-${{ matrix.targetPlatform }}-${{ hashFiles('Packages/manifest.json') }}
           restore-keys: Library-
+
       - uses: game-ci/unity-builder@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -60,6 +101,7 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
+
       - uses: actions/upload-artifact@v4
         with:
           name: Build-${{ matrix.targetPlatform }}

@@ -45,6 +45,7 @@ public class CharacterSelectReady : NetworkBehaviour
 
         if (allClientsReady)
         {
+            RibbitRoyaleLobby.Instance.DeleteLobby();
             Loader.LoadNetwork(Loader.Scene.PreLobbyScene);
         }
     }

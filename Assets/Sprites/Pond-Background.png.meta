@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f0499e1f96df6e4489af756146bdeaad
+guid: 8a27d63d4f6725c4788ebbc2161f4edc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6440892497565831658
-    second: Fly Idle_0
+      213: -2913067855694295909
+    second: Pond-Background_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fly Idle_0
+      name: Pond-Background_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 19
-        width: 320
-        height: 272
+        y: 0
+        width: 1280
+        height: 1280
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ae1d3e9e995a26950800000000000000
-      internalID: 6440892497565831658
+      spriteID: b9c8bb62834b297d0800000000000000
+      internalID: -2913067855694295909
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Fly Idle_0: 6440892497565831658
+      Pond-Background_0: -2913067855694295909
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

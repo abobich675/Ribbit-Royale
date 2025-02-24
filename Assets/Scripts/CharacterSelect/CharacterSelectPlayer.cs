@@ -5,24 +5,23 @@ using UnityEngine.TextCore.Text;
 
 public class CharacterSelectPlayer : MonoBehaviour
 {
+    // Create fields for the sprites, players, and whether they are ready or not
     [SerializeField] private int playerIndex;
     [SerializeField] private GameObject readyGameObject;
     [SerializeField] private PlayerVisual spriteRenderer;
 
 
     private void Start(){
-        RibbitRoyaleMultiplayer.Instance.onPlayerDataNetworkListChanged += RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged;
+        RibbitRoyaleMultiplayer.Instance.OnPlayerDataNetworkListChanged += RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged;
         CharacterSelectReady.Instance.OnReadyChanged += CharacterSelectReady_OnReadyChanged;
         UpdatePlayer();
     }
 
-    private void CharacterSelectReady_OnReadyChanged(object sender, EventArgs e)
-    {
+    private void CharacterSelectReady_OnReadyChanged(object sender, EventArgs e){
         UpdatePlayer();
     }
 
-    private void RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged(object sender, EventArgs e)
-    {
+    private void RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged(object sender, EventArgs e){
         UpdatePlayer();
     }
 
@@ -31,7 +30,7 @@ public class CharacterSelectPlayer : MonoBehaviour
             Show();
             PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromPlayerIndex(playerIndex);
             readyGameObject.SetActive(CharacterSelectReady.Instance.IsPlayerReady(playerData.clientId));
-            spriteRenderer.SetPlayerColor(RibbitRoyaleMultiplayer.Instance.GetPlayerColor(playerIndex));
+            spriteRenderer.SetPlayerColor(RibbitRoyaleMultiplayer.Instance.GetPlayerColor(playerData.colorId));
         }else{
             Hide();
         }
@@ -43,5 +42,10 @@ public class CharacterSelectPlayer : MonoBehaviour
 
     private void Hide(){
         gameObject.SetActive(false);
+    }
+
+    private void OnDestroy(){
+        RibbitRoyaleMultiplayer.Instance.OnPlayerDataNetworkListChanged -= RibbitRoyaleMultiplayer_OnPlayerDataNetworkListChanged;
+
     }
 }
