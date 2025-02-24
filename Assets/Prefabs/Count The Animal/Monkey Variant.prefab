@@ -8,6 +8,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2137891627087611147, guid: b60482a481c4249f391604290f14d481, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2137891627087611147, guid: b60482a481c4249f391604290f14d481, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2137891627087611147, guid: b60482a481c4249f391604290f14d481, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2137891627087611147, guid: b60482a481c4249f391604290f14d481, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2137891627087611147, guid: b60482a481c4249f391604290f14d481, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 2137891627087611147, guid: b60482a481c4249f391604290f14d481, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 2.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2137891627087611147, guid: b60482a481c4249f391604290f14d481, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4950168393439334685, guid: b60482a481c4249f391604290f14d481, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -109,9 +137,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -353742103502072235, guid: f9bc64ee1e5286f4dba6636f888f6635, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
