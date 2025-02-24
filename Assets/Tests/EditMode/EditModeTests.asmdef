@@ -1,8 +1,12 @@
 {
-  "name": "EditModeTests",
+  "name": "Tests.EditMode",
   "references": [
-    "UnityEngine.TestRunner",  // For test runner functionality
-    "UnityEngine.TestTools",   // For Unity test tools and attributes
-    "nunit.framework"          // For NUnit testing functionality
-  ]
+    "UnityEngine.TestRunner",
+    "UnityEditor.TestRunner"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "allowUnsafeCode": false,
+  "autoReferenced": true
 }

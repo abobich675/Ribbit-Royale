@@ -1,8 +1,9 @@
 {
-  "name": "PlayModeTests",
+  "name": "Tests.PlayMode",
   "references": [
-    "UnityEngine.TestRunner",  // For test runner functionality
-    "UnityEngine.TestTools",   // For Unity test tools and attributes
-    "nunit.framework"          // For NUnit testing functionality
-  ]
+    "UnityEngine.TestRunner"
+  ],
+  "includePlatforms": [],
+  "allowUnsafeCode": false,
+  "autoReferenced": true
 }
