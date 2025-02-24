@@ -46,7 +46,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: b3e5a940b3e4d43deba79cf35bd9afbc, type: 2}
+  m_Motion: {fileID: 7400000, guid: bc5ac667632724e839e190e50d8788bc, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -134,7 +134,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TS Frog
+  m_Name: TS Frog Yellow
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: speed
@@ -183,7 +183,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 94e015fd7f4f64351860f0684140b7a8, type: 2}
+  m_Motion: {fileID: 7400000, guid: e3ef6ab7e9b03425e9657c487226ff2a, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -235,7 +235,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 417a4a997cdeb4bdfa7e63e79f7206da, type: 2}
+  m_Motion: {fileID: 7400000, guid: bb6414f9e96e24d41a3cac3d70404f06, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
