@@ -1,7 +1,7 @@
 {
   "name": "Tests.PlayMode",
   "references": [
-    "UnityEngine.TestRunner"
+    "UnityEngine.TestRunner",
     "UnityEditor.TestRunner"
   ],
   "includePlatforms": [],
