@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerCtrl : NetworkBehaviour
 {
@@ -8,8 +9,13 @@ public class PlayerCtrl : NetworkBehaviour
     private float speedx, speedy;
     private Rigidbody2D rb;
 
+    InputAction moveAction;
+
     void Start()
     {
+        PlayerInput input = GetComponent<PlayerInput>();
+        moveAction = input.actions["Move"];
+
         rb = GetComponent<Rigidbody2D>();
         
         // This will get a players data based off the clientId 
@@ -27,9 +33,7 @@ public class PlayerCtrl : NetworkBehaviour
             return;
         }
 
-        speedx = Input.GetAxisRaw("Horizontal") * movSpeed;
-        speedy = Input.GetAxisRaw("Vertical") * movSpeed;
-
-        rb.linearVelocity = new Vector2(speedx, speedy);
+        Vector2 moveInput = moveAction.ReadValue<Vector2>();
+        rb.linearVelocity = moveInput * movSpeed;
     }
 }

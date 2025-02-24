@@ -40,7 +40,6 @@ public class PreLobbyManager : NetworkBehaviour
                 }
                 break;
         }
-        Debug.Log(state.Value);
     }
 
     public bool IsGamePlaying(){
