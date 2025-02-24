@@ -112,7 +112,7 @@ public class ScoreEntry
         //Debug.Log("SetRank: " + rank);
         entryRank = rank;
         uiController.rankText.text = entryRank.ToString();
-        uiController_inGame.rankText.text = entryRank.ToString();
+        //uiController_inGame.rankText.text = entryRank.ToString();
     }
     
     // get, set score
