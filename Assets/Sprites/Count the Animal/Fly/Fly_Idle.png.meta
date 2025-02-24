@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b882fa1735ace724e9ae1e654362c9f7
+guid: 2d3dd5775ad49b14fb85bfa5069b6448
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1170314142166883259
-    second: birdbody_0
+      213: -7373972504780143647
+    second: Fly_Idle_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: birdbody_0
+      name: Fly_Idle_0
       rect:
         serializedVersion: 2
-        x: 120
-        y: 8
-        width: 618
-        height: 664
+        x: 9
+        y: 19
+        width: 482
+        height: 282
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 544e6800d7532cfe0800000000000000
-      internalID: -1170314142166883259
+      spriteID: 1e3051d63136aa990800000000000000
+      internalID: -7373972504780143647
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      birdbody_0: -1170314142166883259
+      Fly_Idle_0: -7373972504780143647
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

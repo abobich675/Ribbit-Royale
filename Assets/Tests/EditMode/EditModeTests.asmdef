@@ -1,0 +1,12 @@
+{
+  "name": "Tests.EditMode",
+  "references": [
+    "UnityEngine.TestRunner",
+    "UnityEditor.TestRunner"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "allowUnsafeCode": false,
+  "autoReferenced": true
+}

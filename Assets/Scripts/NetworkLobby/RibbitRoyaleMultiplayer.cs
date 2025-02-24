@@ -206,4 +206,8 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
         }
         return -1;
     }
+
+    public int GetPlayerCount(){
+        return playerDataNetworkList.Count;
+    }
 }

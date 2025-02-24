@@ -1,0 +1,9 @@
+{
+  "name": "Tests.PlayMode",
+  "references": [
+    "UnityEngine.TestRunner"
+  ],
+  "includePlatforms": [],
+  "allowUnsafeCode": false,
+  "autoReferenced": true
+}

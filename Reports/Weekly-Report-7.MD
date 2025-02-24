@@ -1,0 +1,38 @@
+# Weekly Report: 02/19 - 02/26
+
+## Overview
+- 
+
+### Next week
+- 
+
+## What you did, what worked, what you laerned, where you had trouble, and where you are stuck:
+### Aidan: 
+- 
+### Adam:
+- Created prelobby scene: allows users to vote for a game and puts everyone into a minigame once everyone's voted
+  - is prereq for implementing singleplayer
+- 
+### Baron:
+- 
+### Chase:
+- 
+### Luke:
+- 
+### Ryan:
+- 
+
+
+## Plans and goals for the following week:
+### Aidan:
+- 
+### Adam:
+- 
+### Baron:
+- 
+### Chase:
+- 
+### Luke:
+- 
+### Ryan:
+- 

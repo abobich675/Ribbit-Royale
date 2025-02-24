@@ -10,7 +10,9 @@ public static class Loader
         PreLobbyScene,
         NetworkLobbyScene,
         CharacterSelectScene,
-        TongueSwingGame
+        TongueSwingGame,
+        CountTheAnimalGame,
+        SnakeChaseGame
     }
     // Varaible for the index of the target scene
     public static int targetSceneIndex;

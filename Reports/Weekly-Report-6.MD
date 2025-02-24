@@ -1,10 +1,14 @@
 # Weekly Report: 02/12 - 02/19
 
 ## Overview
-- 
+- Created art for Count the Animal and finished the game's prototype
+- Completed network lobby screen
+- Finished Snake Game Prototype
 
 ### Next week
-- 
+- Add single player implementations for 2 of the minigames
+- Add animations to Count the Animal Game
+- Implement muliplayer for 1-2 minigames (if able)
 
 ## What you did, what worked, what you laerned, where you had trouble, and where you are stuck:
 ### Aidan: 
@@ -12,6 +16,7 @@
 ### Adam:
 - Finished Count the Animal protoype (still waiting for some art)
   - Added a system where the user can input their guess / increment their tally
+- Started on implementing basic animations in Tongue Swinging game
 ### Baron:
 - Finished Snake Game prototype
 - Created background sprite for main lobby
@@ -28,9 +33,10 @@
 
 ## Plans and goals for the following week:
 ### Aidan:
-- Moving/Flying animations for Count the Animal animals (Snake, Bird, Turtle) 
+- Moving/Flying animations for Count the Animal animals (Snake, Bird, Turtle)
 ### Adam:
-- 
+- Single Player for Tongue Swinging Game
+- Single Player for Count the Animal Game
 ### Baron:
 - Implement animations for "ready up" on main lobby screen
 - Improve temp sprites for Snake Escape Game

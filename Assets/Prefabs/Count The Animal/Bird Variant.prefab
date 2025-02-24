@@ -26,27 +26,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2137891627087611147, guid: b60482a481c4249f391604290f14d481, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 6.18
+      value: 1.62
       objectReference: {fileID: 0}
     - target: {fileID: 2137891627087611147, guid: b60482a481c4249f391604290f14d481, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 6.64
+      value: 0.82
       objectReference: {fileID: 0}
     - target: {fileID: 2137891627087611147, guid: b60482a481c4249f391604290f14d481, type: 3}
       propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4950168393439334685, guid: b60482a481c4249f391604290f14d481, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4950168393439334685, guid: b60482a481c4249f391604290f14d481, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4950168393439334685, guid: b60482a481c4249f391604290f14d481, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4950168393439334685, guid: b60482a481c4249f391604290f14d481, type: 3}
       propertyPath: m_LocalPosition.x
@@ -149,9 +137,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1170314142166883259, guid: b882fa1735ace724e9ae1e654362c9f7, type: 3}
+  m_Sprite: {fileID: 5787229956215905792, guid: 6e025d7a5ab7f664fa1b9787f175e84e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
