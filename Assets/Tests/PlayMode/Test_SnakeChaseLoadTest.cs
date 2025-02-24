@@ -11,7 +11,7 @@ public class SceneLoadTest
     {
         float startTime = Time.realtimeSinceStartup;
         
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("SnakeChaseScene");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("SnakeChaseGame");
         while (!asyncLoad.isDone)
         {
             yield return null;
