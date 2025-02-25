@@ -7,7 +7,6 @@ using UnityEngine.TestTools;
 #if UNITY_EDITOR
 namespace Tests.PlayMode
 {
-    /*
     public class ScoreboardManagerTests
     {
         private float MAX_LOAD_TIME = 2f;
@@ -62,6 +61,6 @@ namespace Tests.PlayMode
 
             yield return null;
         }
-    }*/
+    }
 }
 #endif
