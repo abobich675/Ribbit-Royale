@@ -8,6 +8,12 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
     public ulong clientId;
     // Create a variable to store the colorId of the user when they join the lobby
     public int colorId;
+
+    public Loader.Scene currentScene;
+
+    public Vector3 playerPos;
+    public Quaternion playerRot;
+
     // This function will store player data based off of that players clientId
     public bool Equals(PlayerData other)
     {

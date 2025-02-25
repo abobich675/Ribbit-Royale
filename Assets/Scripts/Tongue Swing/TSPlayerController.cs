@@ -63,7 +63,7 @@ public class PlayerController : NetworkBehaviour
         try {
             // This will get a players data based off the clientId 
             playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
-        } catch (Exception e) {
+        } catch {
             Debug.Log("Failed to get player data from clientId");
             return;
         }

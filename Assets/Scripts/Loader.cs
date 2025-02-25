@@ -18,6 +18,16 @@ public static class Loader
     public static int targetSceneIndex;
     // This function calls the scene manager function called LoadScene and passes the targetScene argument and converts to a string
     public static void Load(Scene targetScene){
+        try
+        {
+            PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
+            playerData.currentScene = targetScene;
+        }
+        catch
+        {
+            Debug.Log("PlayerData not found");
+        }
+
         SceneManager.LoadScene(targetScene.ToString());
     }
     // This function attaches the network mangaer singleton to the scene manager to load the scene over a netwrok

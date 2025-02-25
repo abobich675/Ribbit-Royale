@@ -6,8 +6,10 @@ using UnityEditor.SearchService;
 using System.Threading;
 using Unity.VisualScripting;
 using System.Collections.Generic;
+using Unity.Netcode;
+using Unity.Services.Lobbies.Models;
 
-public class PLChooseGame : MonoBehaviour
+public class PLChooseGame : NetworkBehaviour
 {
 
     [Serializable]
@@ -30,6 +32,20 @@ public class PLChooseGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ulong playerId = RibbitRoyaleMultiplayer.Instance.GetPlayerData().clientId;
+        ulong ownerId = NetworkManager.Singleton.CurrentSessionOwner;
+        bool isHost = ownerId == playerId;
+        if (isHost)
+        {
+            TallyVotes();
+        } else
+        {
+            CheckForGameChange();
+        }
+    }
+
+    private void TallyVotes()
+    {
         if (games.Count == 0)
             return;
         int totalVotes = 0;
@@ -42,11 +58,26 @@ public class PLChooseGame : MonoBehaviour
                 mostPopularGame = games[i];
         }
 
-        
         int totalPlayers = RibbitRoyaleMultiplayer.Instance.GetPlayerCount();
+        // Check if all players have voted
         if (totalVotes == totalPlayers)
         {
             Loader.Load(mostPopularGame.scene);
+            return;
+        }
+    }
+    
+    private void CheckForGameChange()
+    {
+        // If player is not host, check if host has chosen a game
+        PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
+        ulong ownerId = NetworkManager.Singleton.CurrentSessionOwner;
+        PlayerData ownerData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(ownerId);
+        Debug.Log("Owner's current Scene: " + ownerData.currentScene);
+        if (playerData.currentScene != ownerData.currentScene)
+        {
+            Loader.Load(ownerData.currentScene);
+            return;
         }
     }
 

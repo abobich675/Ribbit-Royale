@@ -4,12 +4,16 @@ using Unity.Netcode;
 public class TSNetworkController : NetworkBehaviour
 {
     [SerializeField] private Transform playerPrefab;
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
+            if (IsOwner)
+            {
+                return;
+            }
             SpawnPlayer(clientId);
         }
     }
