@@ -21,6 +21,11 @@ public class ScoreManager : MonoBehaviour
     public Sprite spriteBlue;
     public Sprite spriteGreen;
     public Sprite spriteYellow;
+    
+    public Sprite rank1;
+    public Sprite rank2;
+    public Sprite rank3;
+    public Sprite rank4;
 
     private Dictionary<string, (Color, Sprite)> colorSpriteDictionary = new Dictionary<string, (Color, Sprite)>();
     private Dictionary<string, string> playerColorDictionary = new Dictionary<string, string>();
@@ -69,6 +74,25 @@ public class ScoreManager : MonoBehaviour
         scoreEntry.Initialize();
         scoreEntries.Add(scoreEntry);
         return scoreEntry;
+    }
+
+    public void UpdatePlayerRank(ScoreEntry entry, int rank)
+    {
+        switch (rank)
+        {
+            case 1:
+                entry.SetRank(rank1);
+                return;
+            case 2:
+                entry.SetRank(rank2);
+                return;
+            case 3:
+                entry.SetRank(rank3);
+                return;
+            case 4:
+                entry.SetRank(rank4);
+                return;
+        }
     }
 
     public void UpdatePlayerScore(string playerName, int score, bool isIncrement)
@@ -207,7 +231,8 @@ public class ScoreManager : MonoBehaviour
         // Really, each entry should be an object that can be easily updated, rework that next!
         for (int i = 0; i < sortedP.Count; i++)
         {
-            sortedP[i].SetRank(i+1);
+            //sortedP[i].SetRank(i+1);
+            UpdatePlayerRank(sortedP[i], i+1);
         }
         Debug.Log("AnimateRankChange Complete");
     }

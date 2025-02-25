@@ -13,6 +13,7 @@ public class ScoreEntry
     private GameObject entryGameObject;
     private GameObject inGameEntryGameObject;
     private float yPos;
+    private Sprite entryRankImage;
 
     private ScoreEntryUI uiController;
     private ScoreEntryUI uiController_inGame;
@@ -107,11 +108,13 @@ public class ScoreEntry
         return entryRank;
     }
 
-    public void SetRank(int rank)
+    public void SetRank(Sprite rank)
     {
         //Debug.Log("SetRank: " + rank);
-        entryRank = rank;
-        uiController.rankText.text = entryRank.ToString();
+        //entryRank = rank;
+        entryRankImage = rank;
+        //uiController.rankText.text = entryRank.ToString();
+        uiController.rankImg.sprite = entryRankImage;
         //uiController_inGame.rankText.text = entryRank.ToString();
     }
     
