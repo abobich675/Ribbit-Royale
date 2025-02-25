@@ -1,11 +1,9 @@
 using Unity.Netcode;
 using System;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
-using UnityEditor.Animations;
+using Unity.VisualScripting;
 
 public class PlayerController : NetworkBehaviour
 {
@@ -23,7 +21,7 @@ public class PlayerController : NetworkBehaviour
 
     public new Camera camera;
     public GameObject tongue;
-    public AnimatorController[] animators;
+    public RuntimeAnimatorController[] animators;
 
     GameObject connectedObject;
     bool isSwinging = false;
@@ -61,8 +59,14 @@ public class PlayerController : NetworkBehaviour
     }
     
     void SetColor() {
-        // This will get a players data based off the clientId 
-        PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        PlayerData playerData;
+        try {
+            // This will get a players data based off the clientId 
+            playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        } catch (Exception e) {
+            Debug.Log("Failed to get player data from clientId");
+            return;
+        }
         
         if (playerData.colorId < 0 || playerData.colorId >= animators.Length) {
             Debug.LogError("Player color ID out of bounds");

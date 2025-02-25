@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
+#if (UNITY_EDITOR) 
 public class TongueSwingTests
 {
     float MAX_LOAD_TIME = 5f;
@@ -28,3 +29,5 @@ public class TongueSwingTests
         Assert.Less(loadTime, MAX_LOAD_TIME, "Scene took too long to load!");
     }
 }
+
+#endif

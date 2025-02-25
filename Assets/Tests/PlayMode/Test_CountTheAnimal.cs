@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
+#if (UNITY_EDITOR)
 public class CountTheAnimalTests
 {
     float MAX_LOAD_TIME = 5f;
@@ -28,3 +29,4 @@ public class CountTheAnimalTests
         Assert.Less(loadTime, MAX_LOAD_TIME, "Scene took too long to load!");
     }
 }
+#endif
