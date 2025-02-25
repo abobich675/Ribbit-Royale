@@ -2,7 +2,8 @@
   "name": "Tests.PlayMode",
   "references": [
     "UnityEngine.TestRunner",
-    "UnityEditor.TestRunner"
+    "UnityEditor.TestRunner",
+    "nunit.framework"
   ],
   "includePlatforms": [],
   "allowUnsafeCode": false,
