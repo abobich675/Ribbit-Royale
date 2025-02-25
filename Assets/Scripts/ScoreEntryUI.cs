@@ -7,4 +7,5 @@ public class ScoreEntryUI : MonoBehaviour
     public Text scoreText;
     public Image avatarImage;
     public Image avatarBorder;
+    public Image rankImg;
 }
