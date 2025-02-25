@@ -1,19 +1,11 @@
 {
-    "name": "Tests.PlayMode",
-    "rootNamespace": "",
-    "references": [
-        "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner",
-        "nunit.framework",
-        "UnityEngine.UI"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "name": "Tests.PlayMode",
+  "references": [
+    "UnityEngine.TestRunner",
+    "UnityEditor.TestRunner",
+    "nunit.framework"
+  ],
+  "includePlatforms": [],
+  "allowUnsafeCode": false,
+  "autoReferenced": true
 }

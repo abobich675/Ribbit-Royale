@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using System.Linq;
-using NUnit.Framework;
 using Unity.Mathematics.Geometry;
 using Unity.VisualScripting;
 using UnityEngine.SocialPlatforms.Impl;
@@ -106,7 +105,6 @@ public class ScoreManager : MonoBehaviour
         Debug.Log("ScoreManager example instance initialization complete.");
     }
 
-    [Test]
     private ScoreEntry AddPlayer(string playerName)
     {
         // Creates new ScoreEntry object, sets parameters, adds to scoreEntries list, returns scoreEntry object
@@ -139,7 +137,6 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    [Test]
     public void UpdatePlayerScore(string playerName, int score, bool isIncrement)
     {
         foreach (ScoreEntry entry in scoreEntries)
