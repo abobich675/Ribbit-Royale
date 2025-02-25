@@ -66,6 +66,7 @@ public class PlayerController : NetworkBehaviour
         
         if (playerData.colorId < 0 || playerData.colorId >= animators.Length) {
             Debug.LogError("Player color ID out of bounds");
+            playerData.colorId = 0;
             return;
         }
 
