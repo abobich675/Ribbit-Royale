@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000026107, y: 8.2983}
-  m_SizeDelta: {x: 254.2135, y: 75.6996}
+  m_AnchoredPosition: {x: 0.000034332275, y: 0.30000877}
+  m_SizeDelta: {x: 186.9114, y: 75.6996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8490317154563945776
 CanvasRenderer:
@@ -109,8 +109,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -58, y: 8.2983}
-  m_SizeDelta: {x: 82.5153, y: 59.8053}
+  m_AnchoredPosition: {x: -42.644676, y: 0.30000877}
+  m_SizeDelta: {x: 60.6697, y: 59.8053}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2942630190402492396
 CanvasRenderer:
@@ -189,10 +189,10 @@ RectTransform:
   - {fileID: 7428185346030089293}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.3862561, y: 0.432}
-  m_AnchorMax: {x: 0.61700004, y: 0.5941917}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.44400004, y: 0.4783834}
+  m_AnchorMax: {x: 0.59400004, y: 0.6318084}
+  m_AnchoredPosition: {x: 0.27470398, y: 0.18490028}
+  m_SizeDelta: {x: -0.5494995, y: -0.36949992}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6968820536590212162
 MonoBehaviour:
@@ -210,6 +210,7 @@ MonoBehaviour:
   scoreText: {fileID: 9190547464961885352}
   avatarImage: {fileID: 2385063009715754799}
   avatarBorder: {fileID: 7264350728734334503}
+  rankImg: {fileID: 2385063009715754799}
 --- !u!1 &6167702767231084904
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,8 +431,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000009954, y: 8.2983}
-  m_SizeDelta: {x: 259.6902, y: 80.4851}
+  m_AnchoredPosition: {x: -0, y: 0.3}
+  m_SizeDelta: {x: 190.9381, y: 80.4851}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8234223705823030571
 CanvasRenderer:
@@ -481,7 +482,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7428185346030089293}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: AvatarContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -496,7 +497,7 @@ Transform:
   m_GameObject: {fileID: 8922829405576519971}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 43.097595, y: -49.82193, z: 0.5196536}
+  m_LocalPosition: {x: 8.721619, y: -57.82022, z: 0.5196536}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

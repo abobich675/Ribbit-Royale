@@ -14,6 +14,7 @@ public class ScoreEntry
     private GameObject inGameEntryGameObject;
     private float yPos;
     private Sprite entryRankImage;
+    private bool isShown;
 
     private ScoreEntryUI uiController;
     private ScoreEntryUI uiController_inGame;
@@ -28,6 +29,13 @@ public class ScoreEntry
         //entryPlayerName = "default";
         //entryGameObject = null;
         yPos = 0;
+        isShown = true;
+    }
+
+    public void SetEntryActive(bool isActive)
+    {
+        isShown = isActive;
+        entryGameObject.SetActive(false);
     }
 
     public void SetInGameGameObject(GameObject inGameObject)

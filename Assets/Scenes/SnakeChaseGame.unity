@@ -1752,11 +1752,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b367f08bcac05304bb8fb7d43e400993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   maxSpeed: 5
   dampingFactor: 0
   swingingMovementBonus: 0
   camera: {fileID: 446636920}
   tongue: {fileID: 0}
+  animators: []
 --- !u!114 &1865577803
 MonoBehaviour:
   m_ObjectHideFlags: 0

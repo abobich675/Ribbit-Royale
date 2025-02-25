@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using System.Linq;
+using Unity.Mathematics.Geometry;
 using Unity.VisualScripting;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
@@ -13,6 +15,7 @@ public class ScoreManager : MonoBehaviour
     
     public GameObject scoreEntryPrefab;
     public GameObject inGameScoreEntryPrefab;
+    public GameObject inGameTimerPrefab;
     public Transform scoreboardContent;
     public Transform inGameScoreboardContent;
     public float moveDuration = 10.0f;
@@ -26,6 +29,9 @@ public class ScoreManager : MonoBehaviour
     public Sprite rank2;
     public Sprite rank3;
     public Sprite rank4;
+
+    public bool alwaysShowScoreboard;
+    public bool isTimerEnabled;
 
     private Dictionary<string, (Color, Sprite)> colorSpriteDictionary = new Dictionary<string, (Color, Sprite)>();
     private Dictionary<string, string> playerColorDictionary = new Dictionary<string, string>();
@@ -43,6 +49,41 @@ public class ScoreManager : MonoBehaviour
         Debug.Log("ScoreManager Start() executing...");
         ScoreManager scoreboard = ScoreManager.Instance;
         CreateExampleInstance(scoreboard);
+        if (isTimerEnabled)
+        {
+            StartCoroutine(CreateTimer(300));
+            Debug.Log("Started Timer...");
+        }
+    }
+
+    private IEnumerator CreateTimer(int duration)
+    {
+        var inGameTimer = Instantiate(inGameTimerPrefab, inGameScoreboardContent);
+        inGameTimer.transform.SetSiblingIndex(2);
+        var timerUIController = inGameTimer.GetComponent<TimerUI>();
+        float timeTracker = 0;
+        float timeRemaining = duration;
+        timerUIController.currentTime.text = ((timeRemaining % 60) + ":" + (timeRemaining / 60));
+        while (timeRemaining > 0)
+        {
+            timeTracker += Time.deltaTime;
+            if (timeTracker >= 1)
+            {
+                //Debug.Log(timeTracker + "||" + timeRemaining);
+                if (timeRemaining <= 1)
+                {
+                    //Debug.Log("Timer Complete. Should terminate/end minigame, go to score screen.");
+                    timerUIController.currentTime.text = "0:00";
+                    break;
+                }
+                timeTracker = 0;
+                timeRemaining -= 1;
+                timerUIController.currentTime.text = ((timeRemaining % 60) + ":" + (timeRemaining / 60));
+            }
+        }
+        
+
+        yield return null;
     }
 
     private void CreateExampleInstance(ScoreManager scoreboard)
@@ -73,6 +114,7 @@ public class ScoreManager : MonoBehaviour
         scoreEntry.SetInGameGameObject(Instantiate(inGameScoreEntryPrefab, inGameScoreboardContent));
         scoreEntry.Initialize();
         scoreEntries.Add(scoreEntry);
+        scoreEntry.SetEntryActive(alwaysShowScoreboard);
         return scoreEntry;
     }
 

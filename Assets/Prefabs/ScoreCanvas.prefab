@@ -76,12 +76,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.9
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -125,6 +125,11 @@ MonoBehaviour:
   spriteBlue: {fileID: -511970758829080724, guid: 57a740ecfeafb5b42b39039e008c5b03, type: 3}
   spriteGreen: {fileID: 5574680864831327699, guid: 50a0758dc428cac4eb433bd3c1adf547, type: 3}
   spriteYellow: {fileID: 7875479924299485880, guid: c0ff1ca1992853b4ca7a3d3dd287e436, type: 3}
+  rank1: {fileID: -855298285791758126, guid: ca570122f43e20045b8a19fd94dfcfa5, type: 3}
+  rank2: {fileID: 6937817954938267909, guid: a60ef721eebe92e46844ae9b7cb9f6b1, type: 3}
+  rank3: {fileID: -6470460504253458178, guid: ff8c47dcde91d8c448cb321af8ee57f9, type: 3}
+  rank4: {fileID: -4178046375966092550, guid: d95eb4bbc8c2c99408279ad34baaf5a4, type: 3}
+  alwaysShowScoreboard: 0
 --- !u!1 &1615939576621393063
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,11 +163,11 @@ RectTransform:
   - {fileID: 6098339323115346089}
   m_Father: {fileID: 6796801952412280521}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.5, y: 0}
-  m_SizeDelta: {x: -1262.8, y: 200}
-  m_Pivot: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -0.25}
+  m_SizeDelta: {x: 1295.6, y: 552.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3354312023961409065
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -212,6 +217,7 @@ GameObject:
   - component: {fileID: 1244876109398939345}
   - component: {fileID: 5005190368998475762}
   - component: {fileID: 2143712976203664480}
+  - component: {fileID: 2451300935739386108}
   m_Layer: 5
   m_Name: InGameScoreboard
   m_TagString: Untagged
@@ -253,14 +259,14 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: -40
+    m_Top: 40
     m_Bottom: 0
-  m_ChildAlignment: 3
+  m_ChildAlignment: 1
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
+  m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -272,6 +278,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2469846140972485576}
   m_CullTransparentMesh: 1
+--- !u!223 &2451300935739386108
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2469846140972485576}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &6818189749883137360
 GameObject:
   m_ObjectHideFlags: 0
