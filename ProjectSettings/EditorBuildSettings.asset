@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SnakeChaseGame.unity
     guid: f0b88afdd212c7f48b164d4ef9a5b1af
+  - enabled: 1
+    path: Assets/Scenes/ScoreboardScene.unity
+    guid: 918e867de54fa214b90fb239f5b4b680
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 641b207078a3d514da06b8a5294d2421, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
