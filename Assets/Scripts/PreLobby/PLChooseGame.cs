@@ -51,8 +51,14 @@ public class PLChooseGame : MonoBehaviour
 
         int totalPlayers = RibbitRoyaleMultiplayer.Instance.GetPlayerCount();
         // Check if all players have voted
-        if (totalVotes == totalPlayers)
+        if (totalVotes >= totalPlayers)
         {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject player in players)
+            {
+                Debug.Log("Destroying player");
+                Destroy(player);
+            }
             Loader.LoadNetwork(mostPopularGame.scene);
             return;
         }

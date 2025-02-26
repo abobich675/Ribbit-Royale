@@ -250,8 +250,7 @@ public class PlayerController : NetworkBehaviour
         Debug.Log("Player reached the finish");
         try
         {
-            PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
-            playerData.finished = true;
+            RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(true);
 
             // Check if all players have finished
             bool allFinished = true;

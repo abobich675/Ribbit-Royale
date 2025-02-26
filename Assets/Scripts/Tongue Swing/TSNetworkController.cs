@@ -15,7 +15,7 @@ public class TSNetworkController : NetworkBehaviour
                 {
                     return;
                 }
-                SpawnPlayer(clientId);
+                // SpawnPlayer(clientId);
             }
         } catch (System.Exception e) {
             Debug.Log("Error: " + e);
