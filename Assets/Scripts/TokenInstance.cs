@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using UI;
+using UI.Scoreboard;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;

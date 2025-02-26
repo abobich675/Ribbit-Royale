@@ -1,0 +1,6 @@
+{
+	"name": "ScoreboardAssembly",
+	"references": [
+		"Unity.TextMeshPro"
+	]
+}

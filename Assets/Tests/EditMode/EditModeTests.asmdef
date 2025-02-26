@@ -3,7 +3,7 @@
   "references": [
     "UnityEngine.TestRunner",
     "UnityEditor.TestRunner",
-    "nunit.framework"
+    "ScoreboardAssembly"
   ],
   "includePlatforms": [
     "Editor"
