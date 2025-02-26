@@ -21,7 +21,8 @@
 - Finished Snake Game prototype
 - Created background sprite for main lobby
 ### Chase:
-- 
+- Working on menu click sound
+- Stuck on interaction sound and jump sound
 ### Luke:
 - Completed the network lobby scene where users can see the list of lobbies that are available to join
 - Added the relay asset so players can connect from any device 
@@ -43,7 +44,8 @@
 - Improve temp sprites for Snake Escape Game
 - Implement procedural/continuous generation of platforms
 ### Chase:
-- 
+- Continue on jump sound
+- Continue on interaction sound
 ### Luke:
 - Begin working on transitions between the pre lobby and the minigames
 ### Ryan:
