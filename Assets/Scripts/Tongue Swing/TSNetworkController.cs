@@ -8,13 +8,17 @@ public class TSNetworkController : NetworkBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
-        {
-            if (IsOwner)
+        try {
+            foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
             {
-                return;
+                if (IsOwner)
+                {
+                    return;
+                }
+                SpawnPlayer(clientId);
             }
-            SpawnPlayer(clientId);
+        } catch (System.Exception e) {
+            Debug.Log("Error: " + e);
         }
     }
 
