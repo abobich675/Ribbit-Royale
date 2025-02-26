@@ -34,6 +34,7 @@
 ## Plans and goals for the following week:
 ### Aidan:
 - Moving/Flying animations for Count the Animal animals (Snake, Bird, Turtle)
+- Implementing Continuous Integration via Github Actions
 ### Adam:
 - Single Player for Tongue Swinging Game
 - Single Player for Count the Animal Game
