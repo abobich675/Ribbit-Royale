@@ -6,9 +6,11 @@
 ### Next week
 - 
 
-## What you did, what worked, what you laerned, where you had trouble, and where you are stuck:
+## What you did, what worked, what you learned, where you had trouble, and where you are stuck:
 ### Aidan: 
-- 
+- Implemented Continuous Integration with test addition and building
+- Moving animations for snake and bird
+- Background art for tongue swing
 ### Adam:
 - Created prelobby scene: allows users to vote for a game and puts everyone into a minigame once everyone's voted
   - is prereq for implementing singleplayer
