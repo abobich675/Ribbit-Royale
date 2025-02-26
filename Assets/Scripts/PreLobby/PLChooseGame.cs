@@ -1,15 +1,9 @@
 using UnityEngine;
 using System;
-#if UNITY_EDITOR
-using UnityEditor.SearchService;
-#endif 
-using System.Threading;
-using Unity.VisualScripting;
 using System.Collections.Generic;
 using Unity.Netcode;
-using Unity.Services.Lobbies.Models;
 
-public class PLChooseGame : NetworkBehaviour
+public class PLChooseGame : MonoBehaviour
 {
 
     [Serializable]

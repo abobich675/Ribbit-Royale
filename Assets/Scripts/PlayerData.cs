@@ -9,8 +9,6 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
     // Create a variable to store the colorId of the user when they join the lobby
     public int colorId;
 
-    public Loader.Scene currentScene;
-
     public Vector3 playerPos;
     public Quaternion playerRot;
 
