@@ -38,9 +38,6 @@ public class PLChooseGame : NetworkBehaviour
         if (isHost)
         {
             TallyVotes();
-        } else
-        {
-            CheckForGameChange();
         }
     }
 
@@ -62,21 +59,7 @@ public class PLChooseGame : NetworkBehaviour
         // Check if all players have voted
         if (totalVotes == totalPlayers)
         {
-            Loader.Load(mostPopularGame.scene);
-            return;
-        }
-    }
-    
-    private void CheckForGameChange()
-    {
-        // If player is not host, check if host has chosen a game
-        PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
-        ulong ownerId = NetworkManager.Singleton.CurrentSessionOwner;
-        PlayerData ownerData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(ownerId);
-        Debug.Log("Owner's current Scene: " + ownerData.currentScene);
-        if (playerData.currentScene != ownerData.currentScene)
-        {
-            Loader.Load(ownerData.currentScene);
+            Loader.LoadNetwork(mostPopularGame.scene);
             return;
         }
     }
