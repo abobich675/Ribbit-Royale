@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 
@@ -26,9 +27,18 @@ namespace UI.Scoreboard
         public Sprite rank3;
         public Sprite rank4;
 
+        public GameObject player0;
+        private string timeLeftCounter = "null";
+        private List<ScoreEntry> completePlayerList = new List<ScoreEntry>();
+
+        public bool enableScoreboard = true;
+
+        // 0 == default, 1 == tongueSwing
+        public int gameType = 1;
+
         public bool alwaysShowScoreboard;
         public bool isTimerEnabled;
-        public int playerCount = 0;
+        public int TIMER_DURATION;
 
         private Dictionary<string, (Color, Sprite)> colorSpriteDictionary = new Dictionary<string, (Color, Sprite)>();
         private Dictionary<string, string> playerColorDictionary = new Dictionary<string, string>();
@@ -49,16 +59,53 @@ namespace UI.Scoreboard
     
         private void Start()
         {
-            //var cam = new Camera();
-            //Instantiate(scoreboardContent);
-            //Instantiate(inGameScoreboardContent);
-            Debug.Log("ScoreManager Start() executing...");
-            ScoreManager scoreboard = ScoreManager.Instance;
-            CreateExampleInstance(scoreboard);
-            if (isTimerEnabled)
+            if (enableScoreboard)
             {
-                StartCoroutine(CreateTimer(300));
-                Debug.Log("Started Timer...");
+                Debug.Log("ScoreManager Start() executing...");
+                ScoreManager scoreboard = ScoreManager.Instance;
+                CreateExampleInstance(scoreboard);
+                if (isTimerEnabled)
+                {
+                    StartCoroutine(CreateTimer(TIMER_DURATION));
+                    Debug.Log("Started Timer...");
+                }
+            }
+        }
+
+        // should probably call init function on each game start to reset stuff/set up appropriate update loop
+        private void Update()
+        {
+            switch (gameType)
+            {
+                case 0: // default 
+                    break;
+                case 1: // tongue swing game
+                    GetDistanceToFinish();
+                    break;
+            }
+        }
+
+        private void GetDistanceToFinish()
+        {
+            // will want to create a seperate list of players 'in' the game/alive/not beaten yet
+            foreach (ScoreEntry entry in scoreEntries)
+            {
+                if (!entry.GetPlayerGameObject()) { continue; }
+                if (completePlayerList.Contains(entry)) { continue; }
+                Vector2 playerVec = entry.GetPlayerLocation();
+                Vector2 finishVec = new Vector2(29.6f, 94.8f);
+                // sqrt[ ( a^2 + b^2) ] = c
+                var distanceAway =
+                    Mathf.Sqrt(Mathf.Pow((finishVec.x - playerVec.x), 2) + Mathf.Pow((finishVec.y - playerVec.y), 2));
+                if (distanceAway <= 1)
+                {
+                    entry.SetScore(-1, timeLeftCounter);
+                    completePlayerList.Add(entry);
+                }
+                else
+                {
+                    entry.SetScore((int)distanceAway);
+                }
             }
         }
 
@@ -69,7 +116,7 @@ namespace UI.Scoreboard
             var timerUIController = inGameTimer.GetComponent<TimerUI>();
             float timeTracker = 0;
             float timeRemaining = duration;
-            timerUIController.currentTime.text = ((timeRemaining % 60) + ":" + (timeRemaining / 60));
+            timerUIController.currentTime.text = (Mathf.Floor(timeRemaining / 60) + ":" + Mathf.Floor(timeRemaining % 60));
             timerUIController.currentTime.color = Color.black;
             while (timeRemaining > 0)
             {
@@ -82,12 +129,15 @@ namespace UI.Scoreboard
                         //Debug.Log("Timer Complete. Should terminate/end minigame, go to score screen.");
                         timerUIController.currentTime.text = "0:00";
                         timerUIController.currentTime.color = Color.red;
+                        timeLeftCounter = "0:00";
                         break;
                     }
                     timeTracker = 0;
                     timeRemaining -= 1;
-                    timerUIController.currentTime.text = ((timeRemaining % 60) + ":" + (timeRemaining / 60));
+                    timerUIController.currentTime.text = (Mathf.Floor(timeRemaining / 60) + ":" + Mathf.Floor(timeRemaining % 60));
+                    timeLeftCounter = timerUIController.currentTime.text;
                 }
+                yield return null;
             }
         
 
@@ -106,6 +156,7 @@ namespace UI.Scoreboard
             playerColorDictionary.Add("Player3", "green");
             //var getColor = RibbitRoyaleMultiplayer.GetPlayerColor(0);
             scoreboard.UpdatePlayerScore("Player0", 29, false);
+            scoreEntries[0].SetPlayerGameObject(player0);
             scoreboard.UpdatePlayerScore("Player1", 30, false);
             scoreboard.UpdatePlayerScore("Player2", 15, false);
             scoreboard.UpdatePlayerScore("Player3", 31, false);
