@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b424833bb2a286340b4c6449eac1cf88
+guid: 0274898bce7124333a2945823b5853e1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1036353632161461554
-    second: timer_bg_0
+      213: -5827685448989828797
+    second: Snake Walk1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: timer_bg_0
+      name: Snake Walk1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 240
-        height: 154
+        x: 29
+        y: 119
+        width: 482
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eca8455ccd12e91f0800000000000000
-      internalID: -1036353632161461554
+      spriteID: 3499f36e5f6ef1fa0800000000000000
+      internalID: -5827685448989828797
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      timer_bg_0: -1036353632161461554
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
