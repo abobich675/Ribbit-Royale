@@ -22,7 +22,8 @@
 ### Baron:
 - Snake Escape Game
 ### Chase:
-- 
+- Ribbit sound
+- Stuck on jump sound, can't get a good boing
 ### Luke:
 - Merged character selection branch to the master branch, fixed some merging issues
 - Start implementation of server/client connections using relay 
@@ -44,7 +45,7 @@
 ### Baron:
 - Refine Snake Escape Prototype
 ### Chase:
-- 
+- Refine sound files
 ### Luke:
 - Finish the implementation of the multiplayer so users can create lobbyies and join them while they are on different devices
 ### Ryan:
