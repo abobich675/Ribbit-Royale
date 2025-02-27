@@ -52,8 +52,12 @@ public class PlayerController : NetworkBehaviour
         SetColor();
         
         // Will find the DoNotDestroy ScoreController object and run itialize. Will finalize to run specific TS setup method.
-        scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
-        scoreController.InitializeTS();
+        
+        if (GameObject.FindGameObjectWithTag("ScoreControllerGO"))
+        {
+            scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
+            scoreController.InitializeTS();
+        }
     }
 
     // Update is called once per frame
