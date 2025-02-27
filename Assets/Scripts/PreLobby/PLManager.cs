@@ -59,9 +59,12 @@ public class PreLobbyManager : NetworkBehaviour
         Debug.Log("Connected Clients: " + NetworkManager.Singleton.ConnectedClientsIds.Count);
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
+            Debug.Log(sceneName);
             Debug.Log("OnLoad: " + clientId);
             Debug.Log("OnLoad: " + RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(clientId));
-            SpawnPlayer(clientId);
+            if (sceneName == "PreLobbyScene")
+                SpawnPlayer(clientId);
+
         }
     }
 
