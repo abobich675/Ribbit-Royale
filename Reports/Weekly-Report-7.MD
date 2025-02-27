@@ -28,7 +28,10 @@
 - Started implementing test autonation- Specifically test that the user is able to connect to a server located on the relay (Unity Services)
 - Helped integration of the multiplayer services into the minigames
 ### Ryan:
-- 
+- Implmeneted ScoreController - a persistent script attatched to a gameobject created at start.
+    Controls creation and destruction of ScoreManager objects, as well as what type of scoreboards are created.
+- Implemented ScoreboardTimer for inGameScoreboard.
+- Implemented TongueSwingGame scoreboard version. Displays distance to finish platform, records time as score at player completion.
 
 
 ## Plans and goals for the following week:
@@ -46,4 +49,7 @@
 - Implement handleing for client disconnects
 - Make sure that all of the minigames are handling multiplayer
 ### Ryan:
-- 
+- Implement round scoreboard + round scoreboard scene transfer
+- Integrate scoreboard into other minigames
+- Come up with solution to uneven UI elements
+- Make scripts more efficent where possible
