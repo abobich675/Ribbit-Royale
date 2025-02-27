@@ -161,7 +161,7 @@ namespace UI.Scoreboard
 
         public void SetScore(int score, string optionalScore = "null")
         {
-            Debug.Log("SetScore: " + score);
+            //Debug.Log("SetScore: " + score);
             entryScore = score;
             if (score == -1)
             {

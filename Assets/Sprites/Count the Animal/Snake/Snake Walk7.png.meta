@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Snake Walk7_0: -8334867776233711796
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

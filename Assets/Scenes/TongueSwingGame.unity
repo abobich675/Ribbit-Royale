@@ -1034,7 +1034,7 @@ Transform:
   m_GameObject: {fileID: 747205078}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.9, y: 2.8, z: 0}
+  m_LocalPosition: {x: 28.5, y: 108.5, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1262,7 +1262,7 @@ PrefabInstance:
       objectReference: {fileID: 747205078}
     - target: {fileID: 3207072265614383053, guid: 9abca09e545eecb28a51aeadfb6fa042, type: 3}
       propertyPath: TIMER_DURATION
-      value: 90
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3207072265614383053, guid: 9abca09e545eecb28a51aeadfb6fa042, type: 3}
       propertyPath: isTimerEnabled

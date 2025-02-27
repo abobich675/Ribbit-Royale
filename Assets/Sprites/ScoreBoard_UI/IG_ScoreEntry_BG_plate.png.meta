@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 34e0a98f77b68bf4eaf0f46cad266017
+guid: 8c5a055b48a09ff4182cc77341feafb3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2755514503640100574
-    second: Snake Walk8_0
+      213: -5365156697131242491
+    second: IG_ScoreEntry_BG_plate_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Snake Walk8_0
+      name: IG_ScoreEntry_BG_plate_0
       rect:
         serializedVersion: 2
-        x: 29
-        y: 109
-        width: 482
-        height: 92
+        x: 0
+        y: 0
+        width: 200
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2215815882272c9d0800000000000000
-      internalID: -2755514503640100574
+      spriteID: 50c2f27e8622b85b0800000000000000
+      internalID: -5365156697131242491
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Snake Walk8_0: -2755514503640100574
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

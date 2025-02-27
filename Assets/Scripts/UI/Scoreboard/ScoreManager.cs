@@ -27,6 +27,11 @@ namespace UI.Scoreboard
         public Sprite rank3;
         public Sprite rank4;
 
+        private Color blue = new Color(34f, 175f, 245f);
+        private Color green = new Color(0f, 175f, 245f);
+        private Color yellow = new Color(0f, 245f, 245f);
+        private Color red = new Color(1f, 1f, 1f);
+
         public GameObject player0;
         private string timeLeftCounter = "null";
         private List<ScoreEntry> completePlayerList = new List<ScoreEntry>();
@@ -69,6 +74,9 @@ namespace UI.Scoreboard
                     StartCoroutine(CreateTimer(TIMER_DURATION));
                     Debug.Log("Started Timer...");
                 }
+                
+                // Initialize player list
+                
             }
         }
 
@@ -85,6 +93,11 @@ namespace UI.Scoreboard
             }
         }
 
+        private void InitPlayerDataList()
+        {
+            //PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
+        }
+        
         private void GetDistanceToFinish()
         {
             // will want to create a seperate list of players 'in' the game/alive/not beaten yet
@@ -116,7 +129,8 @@ namespace UI.Scoreboard
             var timerUIController = inGameTimer.GetComponent<TimerUI>();
             float timeTracker = 0;
             float timeRemaining = duration;
-            timerUIController.currentTime.text = (Mathf.Floor(timeRemaining / 60) + ":" + Mathf.Floor(timeRemaining % 60));
+            
+            timerUIController.currentTime.text = GetTimerUpdateString(timeRemaining);
             timerUIController.currentTime.color = Color.black;
             while (timeRemaining > 0)
             {
@@ -124,17 +138,21 @@ namespace UI.Scoreboard
                 if (timeTracker >= 1)
                 {
                     //Debug.Log(timeTracker + "||" + timeRemaining);
-                    if (timeRemaining <= 1)
+                    if (timeRemaining <= 11)
                     {
-                        //Debug.Log("Timer Complete. Should terminate/end minigame, go to score screen.");
-                        timerUIController.currentTime.text = "0:00";
                         timerUIController.currentTime.color = Color.red;
-                        timeLeftCounter = "0:00";
-                        break;
+                        if (timeRemaining <= 1)
+                        {
+                            //Debug.Log("Timer Complete. Should terminate/end minigame, go to score screen.");
+                            timerUIController.currentTime.text = "0:00";
+                            timeLeftCounter = "0:00";
+                            break;
+                        }
                     }
+
                     timeTracker = 0;
                     timeRemaining -= 1;
-                    timerUIController.currentTime.text = (Mathf.Floor(timeRemaining / 60) + ":" + Mathf.Floor(timeRemaining % 60));
+                    timerUIController.currentTime.text = GetTimerUpdateString(timeRemaining);
                     timeLeftCounter = timerUIController.currentTime.text;
                 }
                 yield return null;
@@ -144,10 +162,33 @@ namespace UI.Scoreboard
             yield return null;
         }
 
+        private string GetTimerUpdateString(float timeRemaining)
+        {
+            float minutesRemaining = Mathf.Floor(timeRemaining / 60);
+            float secondsRemaining = Mathf.Floor(timeRemaining % 60);
+            string minutesRemainingText = "0";
+            string secondsRemainingText = "0";
+            
+            minutesRemainingText = minutesRemaining.ToString();
+            secondsRemainingText = secondsRemaining.ToString();
+            
+            if (minutesRemaining == 0)
+            {
+                minutesRemainingText = "0";
+            }
+            
+            if (secondsRemaining < 10)
+            {
+                secondsRemainingText = "0" + secondsRemaining;
+            }
+
+            return minutesRemainingText + ":" + secondsRemainingText;
+        }
+
         private void CreateExampleInstance(ScoreManager scoreboard)
         {
             colorSpriteDictionary.Add("red", (Color.red, spriteRed));
-            colorSpriteDictionary.Add("blue", (Color.blue, spriteBlue));
+            colorSpriteDictionary.Add("blue", (blue, spriteBlue));
             colorSpriteDictionary.Add("green", (Color.green, spriteGreen));
             colorSpriteDictionary.Add("yellow", (Color.yellow, spriteYellow));
             playerColorDictionary.Add("Player0", "red");
@@ -287,7 +328,7 @@ namespace UI.Scoreboard
 
         private IEnumerator AnimateRankChange(List<ScoreEntry> sortedP)
         {
-            Debug.Log("AnimateRankChange Entry");
+            //Debug.Log("AnimateRankChange Entry");
             yield return null;
         
             Dictionary<GameObject, float> targetPositions = new Dictionary<GameObject, float>();
@@ -296,7 +337,7 @@ namespace UI.Scoreboard
             {
                 targetPositions[player.GetGameObject()] = player.GetGameObject().transform.localPosition.y;
             }
-            Debug.Log("AnimateRankChange Pos1");
+            //Debug.Log("AnimateRankChange Pos1");
         
             float elapsed = 0f;
 
@@ -325,7 +366,7 @@ namespace UI.Scoreboard
 
                 yield return null;
             }
-            Debug.Log("AnimateRankChange While Complete");
+            //Debug.Log("AnimateRankChange While Complete");
 
             // After animation is done, iterates through sortedPlayers and assigns their rank to their index + 1
             // Really, each entry should be an object that can be easily updated, rework that next!
