@@ -12,6 +12,7 @@ namespace UI.Scoreboard
         private string entryPlayerName;
         private GameObject entryGameObject;
         private GameObject inGameEntryGameObject;
+        private GameObject playerGameObject = null;
         private float yPos;
         private Sprite entryRankImage;
         private bool isShown;
@@ -36,6 +37,21 @@ namespace UI.Scoreboard
             //entryGameObject = null;
             yPos = 0;
             isShown = true;
+        }
+
+        public void SetPlayerGameObject(GameObject playerGO)
+        {
+            playerGameObject = playerGO;
+        }
+
+        public GameObject GetPlayerGameObject()
+        {
+            return playerGameObject;
+        }
+
+        public Vector2 GetPlayerLocation()
+        {
+            return playerGameObject.transform.localPosition;
         }
 
         public void SetIsTest(bool updateIsTest)
@@ -143,11 +159,14 @@ namespace UI.Scoreboard
             return entryScore;
         }
 
-        public void SetScore(int score)
+        public void SetScore(int score, string optionalScore = "null")
         {
-            Debug.Log("SetScore: " + score);
+            //Debug.Log("SetScore: " + score);
             entryScore = score;
-            if (!isTest)
+            if (score == -1)
+            {
+                uiController_inGame.scoreText.text = optionalScore;
+            } else if (!isTest)
             {
                 uiController.scoreText.text = entryScore.ToString();
                 uiController_inGame.scoreText.text = entryScore.ToString();

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 
@@ -26,9 +27,23 @@ namespace UI.Scoreboard
         public Sprite rank3;
         public Sprite rank4;
 
+        private Color blue = new Color(34f, 175f, 245f);
+        private Color green = new Color(0f, 175f, 245f);
+        private Color yellow = new Color(0f, 245f, 245f);
+        private Color red = new Color(1f, 1f, 1f);
+
+        public GameObject player0;
+        private string timeLeftCounter = "null";
+        private List<ScoreEntry> completePlayerList = new List<ScoreEntry>();
+
+        public bool enableScoreboard = true;
+
+        // 0 == default, 1 == tongueSwing
+        public int gameType = 1;
+
         public bool alwaysShowScoreboard;
         public bool isTimerEnabled;
-        public int playerCount = 0;
+        public int TIMER_DURATION;
 
         private Dictionary<string, (Color, Sprite)> colorSpriteDictionary = new Dictionary<string, (Color, Sprite)>();
         private Dictionary<string, string> playerColorDictionary = new Dictionary<string, string>();
@@ -49,16 +64,61 @@ namespace UI.Scoreboard
     
         private void Start()
         {
-            //var cam = new Camera();
-            //Instantiate(scoreboardContent);
-            //Instantiate(inGameScoreboardContent);
-            Debug.Log("ScoreManager Start() executing...");
-            ScoreManager scoreboard = ScoreManager.Instance;
-            CreateExampleInstance(scoreboard);
-            if (isTimerEnabled)
+            if (enableScoreboard)
             {
-                StartCoroutine(CreateTimer(300));
-                Debug.Log("Started Timer...");
+                Debug.Log("ScoreManager Start() executing...");
+                ScoreManager scoreboard = ScoreManager.Instance;
+                CreateExampleInstance(scoreboard);
+                if (isTimerEnabled)
+                {
+                    StartCoroutine(CreateTimer(TIMER_DURATION));
+                    Debug.Log("Started Timer...");
+                }
+                
+                // Initialize player list
+                
+            }
+        }
+
+        // should probably call init function on each game start to reset stuff/set up appropriate update loop
+        private void Update()
+        {
+            switch (gameType)
+            {
+                case 0: // default 
+                    break;
+                case 1: // tongue swing game
+                    GetDistanceToFinish();
+                    break;
+            }
+        }
+
+        private void InitPlayerDataList()
+        {
+            //PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
+        }
+        
+        private void GetDistanceToFinish()
+        {
+            // will want to create a seperate list of players 'in' the game/alive/not beaten yet
+            foreach (ScoreEntry entry in scoreEntries)
+            {
+                if (!entry.GetPlayerGameObject()) { continue; }
+                if (completePlayerList.Contains(entry)) { continue; }
+                Vector2 playerVec = entry.GetPlayerLocation();
+                Vector2 finishVec = new Vector2(29.6f, 94.8f);
+                // sqrt[ ( a^2 + b^2) ] = c
+                var distanceAway =
+                    Mathf.Sqrt(Mathf.Pow((finishVec.x - playerVec.x), 2) + Mathf.Pow((finishVec.y - playerVec.y), 2));
+                if (distanceAway <= 1)
+                {
+                    entry.SetScore(-1, timeLeftCounter);
+                    completePlayerList.Add(entry);
+                }
+                else
+                {
+                    entry.SetScore((int)distanceAway);
+                }
             }
         }
 
@@ -69,7 +129,8 @@ namespace UI.Scoreboard
             var timerUIController = inGameTimer.GetComponent<TimerUI>();
             float timeTracker = 0;
             float timeRemaining = duration;
-            timerUIController.currentTime.text = ((timeRemaining % 60) + ":" + (timeRemaining / 60));
+            
+            timerUIController.currentTime.text = GetTimerUpdateString(timeRemaining);
             timerUIController.currentTime.color = Color.black;
             while (timeRemaining > 0)
             {
@@ -77,27 +138,57 @@ namespace UI.Scoreboard
                 if (timeTracker >= 1)
                 {
                     //Debug.Log(timeTracker + "||" + timeRemaining);
-                    if (timeRemaining <= 1)
+                    if (timeRemaining <= 11)
                     {
-                        //Debug.Log("Timer Complete. Should terminate/end minigame, go to score screen.");
-                        timerUIController.currentTime.text = "0:00";
                         timerUIController.currentTime.color = Color.red;
-                        break;
+                        if (timeRemaining <= 1)
+                        {
+                            //Debug.Log("Timer Complete. Should terminate/end minigame, go to score screen.");
+                            timerUIController.currentTime.text = "0:00";
+                            timeLeftCounter = "0:00";
+                            break;
+                        }
                     }
+
                     timeTracker = 0;
                     timeRemaining -= 1;
-                    timerUIController.currentTime.text = ((timeRemaining % 60) + ":" + (timeRemaining / 60));
+                    timerUIController.currentTime.text = GetTimerUpdateString(timeRemaining);
+                    timeLeftCounter = timerUIController.currentTime.text;
                 }
+                yield return null;
             }
         
 
             yield return null;
         }
 
+        private string GetTimerUpdateString(float timeRemaining)
+        {
+            float minutesRemaining = Mathf.Floor(timeRemaining / 60);
+            float secondsRemaining = Mathf.Floor(timeRemaining % 60);
+            string minutesRemainingText = "0";
+            string secondsRemainingText = "0";
+            
+            minutesRemainingText = minutesRemaining.ToString();
+            secondsRemainingText = secondsRemaining.ToString();
+            
+            if (minutesRemaining == 0)
+            {
+                minutesRemainingText = "0";
+            }
+            
+            if (secondsRemaining < 10)
+            {
+                secondsRemainingText = "0" + secondsRemaining;
+            }
+
+            return minutesRemainingText + ":" + secondsRemainingText;
+        }
+
         private void CreateExampleInstance(ScoreManager scoreboard)
         {
             colorSpriteDictionary.Add("red", (Color.red, spriteRed));
-            colorSpriteDictionary.Add("blue", (Color.blue, spriteBlue));
+            colorSpriteDictionary.Add("blue", (blue, spriteBlue));
             colorSpriteDictionary.Add("green", (Color.green, spriteGreen));
             colorSpriteDictionary.Add("yellow", (Color.yellow, spriteYellow));
             playerColorDictionary.Add("Player0", "red");
@@ -106,6 +197,7 @@ namespace UI.Scoreboard
             playerColorDictionary.Add("Player3", "green");
             //var getColor = RibbitRoyaleMultiplayer.GetPlayerColor(0);
             scoreboard.UpdatePlayerScore("Player0", 29, false);
+            scoreEntries[0].SetPlayerGameObject(player0);
             scoreboard.UpdatePlayerScore("Player1", 30, false);
             scoreboard.UpdatePlayerScore("Player2", 15, false);
             scoreboard.UpdatePlayerScore("Player3", 31, false);
@@ -236,7 +328,7 @@ namespace UI.Scoreboard
 
         private IEnumerator AnimateRankChange(List<ScoreEntry> sortedP)
         {
-            Debug.Log("AnimateRankChange Entry");
+            //Debug.Log("AnimateRankChange Entry");
             yield return null;
         
             Dictionary<GameObject, float> targetPositions = new Dictionary<GameObject, float>();
@@ -245,7 +337,7 @@ namespace UI.Scoreboard
             {
                 targetPositions[player.GetGameObject()] = player.GetGameObject().transform.localPosition.y;
             }
-            Debug.Log("AnimateRankChange Pos1");
+            //Debug.Log("AnimateRankChange Pos1");
         
             float elapsed = 0f;
 
@@ -274,7 +366,7 @@ namespace UI.Scoreboard
 
                 yield return null;
             }
-            Debug.Log("AnimateRankChange While Complete");
+            //Debug.Log("AnimateRankChange While Complete");
 
             // After animation is done, iterates through sortedPlayers and assigns their rank to their index + 1
             // Really, each entry should be an object that can be easily updated, rework that next!

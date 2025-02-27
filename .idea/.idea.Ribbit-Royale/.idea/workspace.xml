@@ -5,30 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80f5dd4c-6adf-4d93-835d-cdcfdeb62e1d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Scoreboard/ScoreManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tests/EditMode/Test_Scoreboard.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tests/EditMode/Test_Scoreboard.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Ribbit-Royale/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Ribbit-Royale/.idea/projectSettingsUpdater.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Ribbit-Royale/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Ribbit-Royale/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/InGameScoreEntry.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/InGameScoreEntry.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/InGameTimer.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/InGameTimer.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ScoreCanvas.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ScoreCanvas.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ScoreEntry.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ScoreEntry.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ScoreEntry.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ScoreEntry.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ScoreEntryUI.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ScoreEntryUI.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TokenInstance.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TokenInstance.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/ScoreManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/ScoreManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/TimerUI.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/TimerUI.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tests/EditMode/EditModeTests.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tests/EditMode/EditModeTests.asmdef" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tests/PlayMode/PlayModeTests.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tests/PlayMode/PlayModeTests.asmdef" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Scoreboard/InGameScoreEntry.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Scoreboard/InGameScoreEntry.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Scoreboard/ScoreEntry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Scoreboard/ScoreEntry.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Scoreboard/ScoreManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Scoreboard/ScoreManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly1.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly1.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly2.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly2.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly3.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly3.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly4.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly4.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly5.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly5.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly6.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly6.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly7.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly7.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly8.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly8.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk1.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk1.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk2.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk2.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk3.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk3.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk4.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk4.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk5.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk5.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk6.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk6.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk7.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk7.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk8.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk8.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/ScoreBoard_UI/timer_bg.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/ScoreBoard_UI/timer_bg.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Tongue Swing/Background-TS.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Tongue Swing/Background-TS.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Tongue Swing/Floor-TS.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Tongue Swing/Floor-TS.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Tongue Swing/Platform-TS.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Tongue Swing/Platform-TS.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +77,7 @@
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;tonguegame-scoreboard-integration&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -84,18 +86,11 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.C#&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\Ryan Dobkin\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\Ryan Dobkin\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\Ryan Dobkin\\AppData\\Local\\Symbols\\src&quot;
-    ]
   }
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.34f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="$USER_HOME$/Unity/Hub/Editor/6000.0.34f1/Editor/Unity" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;C:\Users\Ryan Dobkin\Desktop\Code\Ribbit-Royale&quot; -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Ryan Dobkin\Desktop\Code\Ribbit-Royale" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -103,7 +98,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.34f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="$USER_HOME$/Unity/Hub/Editor/6000.0.34f1/Editor/Unity" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath &quot;C:\Users\Ryan Dobkin\Desktop\Code\Ribbit-Royale&quot; -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Ryan Dobkin\Desktop\Code\Ribbit-Royale" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -115,6 +110,9 @@
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list />
+      </option>
       <option name="selectedOptions">
         <list />
       </option>
@@ -125,6 +123,9 @@
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list />
+      </option>
       <option name="selectedOptions">
         <list />
       </option>
@@ -152,6 +153,10 @@
       <workItem from="1740451303197" duration="7050000" />
       <workItem from="1740472628912" duration="5122000" />
       <workItem from="1740523530044" duration="13253000" />
+      <workItem from="1740537166181" duration="935000" />
+      <workItem from="1740554318442" duration="5820000" />
+      <workItem from="1740614785280" duration="3993000" />
+      <workItem from="1740619018025" duration="433000" />
     </task>
     <servers />
   </component>

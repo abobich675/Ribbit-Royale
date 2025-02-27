@@ -984,6 +984,10 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3207072265614383053, guid: 9abca09e545eecb28a51aeadfb6fa042, type: 3}
+      propertyPath: TIMER_DURATION
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207072265614383053, guid: 9abca09e545eecb28a51aeadfb6fa042, type: 3}
       propertyPath: isTimerEnabled
       value: 1
       objectReference: {fileID: 0}
