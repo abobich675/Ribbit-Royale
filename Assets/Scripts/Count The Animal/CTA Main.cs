@@ -29,6 +29,9 @@ public class CTAMain : MonoBehaviour
     public GameObject leftBarrier;
     public GameObject rightBarrier;
 
+    // Final Counted Animals Text
+    public TMPro.TextMeshProUGUI finalCountedAnimalsText;
+
     // Chosen animal for the players to count and it's image
     string countedAnimal = "";
     public Image countedAnimalImage;
@@ -43,6 +46,8 @@ public class CTAMain : MonoBehaviour
     void Start()
     {
         gameActive = true;
+        finalCountedAnimalsText.text = "";
+        finalCountedAnimalsText.gameObject.SetActive(false);
 
         ChooseAnimalToCount();
 
@@ -110,15 +115,28 @@ public class CTAMain : MonoBehaviour
     }
 
     // Ends the game
-    // Sets the time scale to 0
-    void EndGame()
+    private void EndGame()
     {
         // Stop the game
-        Time.timeScale = 0;
         gameActive = false;
+
+        // Display the final counted animals
+        int finalCount = GetAnimal(countedAnimal).count;
+        finalCountedAnimalsText.gameObject.SetActive(true);
+        finalCountedAnimalsText.text = finalCount.ToString();
 
         foreach (Animal animal in animals) {
             Debug.Log(animal.name + " count: " + animal.count);
+        }
+
+        Invoke("ReturnToLobby", 3);
+    }
+
+    private void ReturnToLobby() {
+        try {
+            Loader.LoadNetwork(Loader.Scene.PreLobbyScene);
+        } catch (Exception e) {
+            Debug.Log("Error: " + e.Message);
         }
     }
 
