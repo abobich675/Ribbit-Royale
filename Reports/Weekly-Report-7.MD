@@ -25,7 +25,8 @@
 ### Chase:
 - 
 ### Luke:
-- 
+- Started implementing test autonation- Specifically test that the user is able to connect to a server located on the relay (Unity Services)
+- Helped integration of the multiplayer services into the minigames
 ### Ryan:
 - 
 
@@ -41,6 +42,8 @@
 ### Chase:
 - 
 ### Luke:
-- 
+- Implement handleing for host disconnects
+- Implement handleing for client disconnects
+- Make sure that all of the minigames are handling multiplayer
 ### Ryan:
 - 
