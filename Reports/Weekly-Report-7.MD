@@ -16,6 +16,7 @@
   - is prereq for implementing singleplayer
 - Added Single Player for Tongue Swinging Game
   - Currently a few bugs, but playable
+- Added Single Player for Count The Animal Game
 - Implemented Background art for Tongue Swinging Game
 ### Baron:
 - 
@@ -31,7 +32,8 @@
 ### Aidan:
 - 
 ### Adam:
-- 
+- Implement Multiplayer for Tongue Swinging Game
+- Implement Multiplayer for Count The Animal
 ### Baron:
 - 
 ### Chase:
