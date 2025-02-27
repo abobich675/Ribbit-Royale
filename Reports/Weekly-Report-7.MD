@@ -1,10 +1,12 @@
 # Weekly Report: 02/19 - 02/26
 
 ## Overview
-- 
+- Implemented Single Player Functionality for Tongue Swinng Game and Count the Animal Game
+- Implemented Continuous Integration + Tests
+- Added 2 animations to the Count the Animal Game
 
 ### Next week
-- 
+- Implement Multiplayer for all 3 games
 
 ## What you did, what worked, what you learned, where you had trouble, and where you are stuck:
 ### Aidan: 
