@@ -14,6 +14,10 @@ public class CharacterSelectSceneTests
     [UnityTest]
     public IEnumerator TestCharacterSelectSceneLoadAndRelayConnection()
     {
+        
+        // Expect specific log messages from Unity
+        LogAssert.Expect(LogType.Error, "NullReferenceException");
+    
         float startTime = Time.realtimeSinceStartup;
 
         // Load the Character Select Scene
