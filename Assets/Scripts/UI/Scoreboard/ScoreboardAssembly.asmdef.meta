@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/UI/Scoreboard/ScoreboardAssembly.asmdef.meta
 guid: d1757fe94a04a654fbfd095d13feebf7
 AssemblyDefinitionImporter:
+========
+guid: d079f889c5c7d8648a5c48675da5cd9f
+PrefabImporter:
+>>>>>>>> 18fef981e9d8fa15cb22cec75bc2e4eb1775293d:Assets/Prefabs/Scoreboard/InGameScoreboard.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

@@ -1,11 +1,7 @@
 using UnityEngine;
 using System;
-#if UNITY_EDITOR
-using UnityEditor.SearchService;
-#endif 
-using System.Threading;
-using Unity.VisualScripting;
 using System.Collections.Generic;
+using Unity.Netcode;
 
 public class PLChooseGame : MonoBehaviour
 {
@@ -30,6 +26,17 @@ public class PLChooseGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ulong playerId = RibbitRoyaleMultiplayer.Instance.GetPlayerData().clientId;
+        ulong ownerId = NetworkManager.Singleton.CurrentSessionOwner;
+        bool isHost = ownerId == playerId;
+        if (isHost)
+        {
+            TallyVotes();
+        }
+    }
+
+    private void TallyVotes()
+    {
         if (games.Count == 0)
             return;
         int totalVotes = 0;
@@ -42,11 +49,18 @@ public class PLChooseGame : MonoBehaviour
                 mostPopularGame = games[i];
         }
 
-        
         int totalPlayers = RibbitRoyaleMultiplayer.Instance.GetPlayerCount();
-        if (totalVotes == totalPlayers)
+        // Check if all players have voted
+        if (totalVotes >= totalPlayers)
         {
-            Loader.Load(mostPopularGame.scene);
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject player in players)
+            {
+                Debug.Log("Destroying player");
+                Destroy(player);
+            }
+            Loader.LoadNetwork(mostPopularGame.scene);
+            return;
         }
     }
 

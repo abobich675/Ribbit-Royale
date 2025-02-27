@@ -1,9 +1,11 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CTAPlayerConroller : MonoBehaviour
 {
     public CTAMain mainScript;
+    public TextMeshProUGUI counterText;
 
 
     InputAction attackAction;
@@ -19,6 +21,8 @@ public class CTAPlayerConroller : MonoBehaviour
         PlayerInput input = GetComponent<PlayerInput>();
         attackAction = input.actions["Attack"];
         jumpAction = input.actions["Jump"];
+
+        counterText.text = counter.ToString();
     }
 
     // Update is called once per frame
@@ -32,6 +36,7 @@ public class CTAPlayerConroller : MonoBehaviour
         if (attackAction.triggered || jumpAction.triggered)
         {
             counter++;
+            counterText.text = counter.ToString();
         }
     }
 }

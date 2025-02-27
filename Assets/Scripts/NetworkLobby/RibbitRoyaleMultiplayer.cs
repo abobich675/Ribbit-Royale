@@ -206,6 +206,21 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
         }
         return -1;
     }
+    
+    public void SetPlayerFinished(bool finished){
+        SetPlayerFinishedServerRpc(finished);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SetPlayerFinishedServerRpc(bool finished, ServerRpcParams serverRpcParams = default){
+        int playerDataIndex = GetPlayerDataIndexFromClientId(serverRpcParams.Receive.SenderClientId); 
+        if (playerDataIndex == -1) return;
+
+        PlayerData playerData = playerDataNetworkList[playerDataIndex]; 
+        playerData.finished = finished;
+
+        playerDataNetworkList[playerDataIndex] = playerData;
+    }
 
     public int GetPlayerCount(){
         return playerDataNetworkList.Count;

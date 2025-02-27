@@ -63,7 +63,7 @@ public class PlayerController : NetworkBehaviour
         try {
             // This will get a players data based off the clientId 
             playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
-        } catch (Exception e) {
+        } catch {
             Debug.Log("Failed to get player data from clientId");
             return;
         }
@@ -219,19 +219,65 @@ public class PlayerController : NetworkBehaviour
     {
         // When player hits the ground
         if (collision.gameObject.GetComponent<PlatformEffector2D>() != null && !isSwinging)
+            Bounce(collision);
+    }
+
+    private void Bounce(Collision2D collision)
+    {
+        Vector2 perpendicular = Vector2.Perpendicular(collision.GetContact(0).normal);
+
+        // Project velocity onto vector parallel to the surface
+        float dot = Vector2.Dot(perpendicular, rb.linearVelocity);
+        Vector2 newVelocity = dot / math.square(perpendicular.magnitude) * perpendicular;
+
+        newVelocity = new Vector2(newVelocity.x * BounceSpeedIncrease, newVelocity.y); // Increase x speed
+        newVelocity += collision.GetContact(0).normal * BounceHeight; // Add bounce height
+
+        rb.linearVelocity = newVelocity; // Update velocity
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        // When player reaches the finish
+        if (collider.gameObject.CompareTag("Finish"))
         {
-            Vector2 perpendicular = Vector2.Perpendicular(collision.GetContact(0).normal);
-
-            // Project velocity onto vector parallel to the surface
-            float dot = Vector2.Dot(perpendicular, rb.linearVelocity);
-            Vector2 newVelocity = dot / math.square(perpendicular.magnitude) * perpendicular;
-
-            newVelocity = new Vector2(newVelocity.x * BounceSpeedIncrease, newVelocity.y); // Increase x speed
-            newVelocity += collision.GetContact(0).normal * BounceHeight; // Add bounce height
-
-            rb.linearVelocity = newVelocity; // Update velocity
+            Finish();
         }
     }
+
+    private void Finish()
+    {
+        Debug.Log("Player reached the finish");
+        try
+        {
+            RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(true);
+
+            // Check if all players have finished
+            bool allFinished = true;
+            Debug.Log("Checking if players have finished:");
+            foreach (var client in NetworkManager.Singleton.ConnectedClients)
+            {
+                ulong currentClientId = client.Key;
+                Debug.Log(RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(currentClientId).finished);
+                if (!RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(currentClientId).finished)
+                {
+                    allFinished = false;
+                    break;
+                }
+            }
+            if (allFinished)
+            {
+                Loader.LoadNetwork(Loader.Scene.PreLobbyScene);
+                return;
+            }
+        } catch
+        {
+            Debug.Log("Failed to get player data from clientId. Sending player back to prelobby");
+            Loader.Load(Loader.Scene.TongueSwingGame);
+            return;
+        }
+    }
+    
 
     void UpdateAnimator()
     {

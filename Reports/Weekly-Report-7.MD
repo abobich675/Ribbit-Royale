@@ -14,7 +14,9 @@
 ### Adam:
 - Created prelobby scene: allows users to vote for a game and puts everyone into a minigame once everyone's voted
   - is prereq for implementing singleplayer
-- 
+- Added Single Player for Tongue Swinging Game
+  - Currently a few bugs, but playable
+- Implemented Background art for Tongue Swinging Game
 ### Baron:
 - 
 ### Chase:

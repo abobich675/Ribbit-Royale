@@ -54,10 +54,17 @@ public class PreLobbyManager : NetworkBehaviour
         }
     }
 
+    // TODO: This function is being called an additional time for each time the prelobby scene is loaded
     private void SceneManager_OnLoadEventCompleted(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut){
+        Debug.Log("Connected Clients: " + NetworkManager.Singleton.ConnectedClientsIds.Count);
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
-            SpawnPlayer(clientId);
+            Debug.Log(sceneName);
+            Debug.Log("OnLoad: " + clientId);
+            Debug.Log("OnLoad: " + RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(clientId));
+            if (sceneName == "PreLobbyScene")
+                SpawnPlayer(clientId);
+
         }
     }
 
