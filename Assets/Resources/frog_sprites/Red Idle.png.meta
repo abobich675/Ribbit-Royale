@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8c5a055b48a09ff4182cc77341feafb3
+guid: 61121329f39d3f8429bf23aae7beb465
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5365156697131242491
-    second: IG_ScoreEntry_BG_plate_0
+      213: 7397415120026895254
+    second: Red Idle_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IG_ScoreEntry_BG_plate_0
+      name: Red Idle_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 200
-        height: 100
+        x: 29
+        y: 29
+        width: 142
+        height: 122
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 50c2f27e8622b85b0800000000000000
-      internalID: -5365156697131242491
+      spriteID: 6938e45cbd5e8a660800000000000000
+      internalID: 7397415120026895254
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      IG_ScoreEntry_BG_plate_0: -5365156697131242491
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

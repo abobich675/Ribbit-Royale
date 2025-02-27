@@ -24,4 +24,10 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
         serializer.SerializeValue(ref colorId);
         serializer.SerializeValue(ref finished);
     }
+    
+    // Public getter to get location of playerObject
+    public Vector3 GetPlayerDataPosition()
+    {
+        return playerPos;
+    }
 }

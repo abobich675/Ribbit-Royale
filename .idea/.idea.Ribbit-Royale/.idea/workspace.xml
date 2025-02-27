@@ -5,26 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80f5dd4c-6adf-4d93-835d-cdcfdeb62e1d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tongue Swing/TSPlayer.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tongue Swing/TSPlayer.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly1.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly1.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly2.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly2.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly3.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly3.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly4.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly4.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly5.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly5.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly6.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly6.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly7.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly7.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly8.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Bird/Bird Fly8.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk1.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk1.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk2.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk2.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk3.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk3.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk4.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk4.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk5.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk5.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk6.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk6.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk7.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk7.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk8.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Count the Animal/Snake/Snake Walk8.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Tongue Swing/Background-TS.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Tongue Swing/Background-TS.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Tongue Swing/Floor-TS.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Tongue Swing/Floor-TS.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Tongue Swing/Platform-TS.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Tongue Swing/Platform-TS.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScoreController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ScoreController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Ribbit-Royale/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Ribbit-Royale/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DefaultNetworkPrefabs.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DefaultNetworkPrefabs.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenuScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ScoreboardScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ScoreboardScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TongueSwingGame.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TongueSwingGame.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Loader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Loader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tongue Swing/TSPlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tongue Swing/TSPlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Scoreboard/ScoreEntry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Scoreboard/ScoreEntry.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Scoreboard/ScoreManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ScoreManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Scoreboard/ScoreManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ScoreManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Scoreboard/ScoreboardAssembly.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Scoreboard/ScoreboardAssembly.asmdef" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/ScoreBoard_UI/IG_ScoreEntry_BG_plate.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/ScoreBoard_UI/IG_ScoreEntry_BG_plate.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,11 +45,12 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Users/Ryan Dobkin/Desktop/Code/Ribbit-Royale/Assets/DefaultNetworkPrefabs.asset" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TokenInstance.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Ryan Dobkin/Desktop/Code/Ribbit-Royale/Assets/Tests/EditMode/EditModeTests.asmdef" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Ryan Dobkin/Desktop/Code/Ribbit-Royale/Assets/Tests/EditMode/EditModeTests.asmdef" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Ryan Dobkin/Desktop/Code/Ribbit-Royale/Assets/Tests/EditMode/EditModeTests.asmdef" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Tests/EditMode/Test_Scoreboard.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem/InputSystem/Plugins/PlayerInput/PlayerInput.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects/Runtime/Logging/NetworkLog.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects/Runtime/SceneManagement/NetworkSceneManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal/Runtime/Data/UniversalRenderPipelineAsset.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui/Runtime/TMP/TextMeshProUGUI.cs" root0="SKIP_HIGHLIGHTING" />

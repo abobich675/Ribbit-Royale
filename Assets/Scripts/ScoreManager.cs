@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
 
@@ -13,8 +14,14 @@ namespace UI.Scoreboard
         public GameObject scoreEntryPrefab;
         public GameObject inGameScoreEntryPrefab;
         public GameObject inGameTimerPrefab;
-        public Transform scoreboardContent;
-        public Transform inGameScoreboardContent;
+
+        private GameObject scoreboardContent;
+        private GameObject inGameScoreboardContent;
+
+        private Transform ScoreTransform;
+        
+        // private Transform scoreboardContent;
+        // private Transform inGameScoreboardContent;
         public float moveDuration = 10.0f;
 
         public Sprite spriteRed;
@@ -27,25 +34,30 @@ namespace UI.Scoreboard
         public Sprite rank3;
         public Sprite rank4;
 
-        private Color blue = new Color(34f, 175f, 245f);
-        private Color green = new Color(0f, 175f, 245f);
-        private Color yellow = new Color(0f, 245f, 245f);
-        private Color red = new Color(1f, 1f, 1f);
+        private List<GameObject> playerObjectList = new List<GameObject>();
+        
+        private Color blue = new Vector4(.05f, .19f, .47f, 1f);
+        private Color purple = new Vector4(0.29f, .04f, .63f, 1f);
+        private Color green = new Vector4(.52f, .84f, .22f, 1f);
+        private Color red = new Vector4(.55f, .03f, .17f, 1f);
+        private Color yellow = new Vector4(.84f, .76f, .117f, 1f);
 
-        public GameObject player0;
+        private float timeRemainingGlobal = 1;
+
+        //public GameObject player0;
         private string timeLeftCounter = "null";
         private List<ScoreEntry> completePlayerList = new List<ScoreEntry>();
 
-        public bool enableScoreboard = true;
+        public bool enableScoreboard = false;
 
-        // 0 == default, 1 == tongueSwing
-        public int gameType = 1;
+        private int gameType;
 
         public bool alwaysShowScoreboard;
         public bool isTimerEnabled;
         public int TIMER_DURATION;
 
-        private Dictionary<string, (Color, Sprite)> colorSpriteDictionary = new Dictionary<string, (Color, Sprite)>();
+        // colorId (Color, Sprite) -- 003 (Red, RedSprite)
+        private Dictionary<int, (Color, Sprite)> colorSpriteDictionary = new Dictionary<int, (Color, Sprite)>();
         private Dictionary<string, string> playerColorDictionary = new Dictionary<string, string>();
 
         //private Dictionary<string, (int score, GameObject entry)> playerEntries = new Dictionary<string, (int, GameObject)>();
@@ -64,68 +76,69 @@ namespace UI.Scoreboard
     
         private void Start()
         {
-            if (enableScoreboard)
-            {
-                Debug.Log("ScoreManager Start() executing...");
-                ScoreManager scoreboard = ScoreManager.Instance;
-                CreateExampleInstance(scoreboard);
-                if (isTimerEnabled)
-                {
-                    StartCoroutine(CreateTimer(TIMER_DURATION));
-                    Debug.Log("Started Timer...");
-                }
-                
-                // Initialize player list
-                
-            }
+            // if (gameType == 1)
+            // {
+            //     StartCoroutine(CreateTimer(TIMER_DURATION));
+            //     Debug.Log("Started Timer...");
+            // }
         }
 
         // should probably call init function on each game start to reset stuff/set up appropriate update loop
         private void Update()
         {
-            switch (gameType)
-            {
-                case 0: // default 
-                    break;
-                case 1: // tongue swing game
-                    GetDistanceToFinish();
-                    break;
-            }
+            // if (gameType == 0)
+            // { }
+            // else
+            // { GetDistanceToFinish(); }
+            // Debug.Log("Update Called");
         }
 
         private void InitPlayerDataList()
         {
             //PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
         }
+
+        public void StartDistanceToFinishCoroutine()
+        {
+            Debug.Log("StartDistance coroutine started...");
+            StartCoroutine(GetDistanceToFinish());
+        }
         
-        private void GetDistanceToFinish()
+        private IEnumerator GetDistanceToFinish()
         {
             // will want to create a seperate list of players 'in' the game/alive/not beaten yet
-            foreach (ScoreEntry entry in scoreEntries)
+            while (timeRemainingGlobal > 0)
             {
-                if (!entry.GetPlayerGameObject()) { continue; }
-                if (completePlayerList.Contains(entry)) { continue; }
-                Vector2 playerVec = entry.GetPlayerLocation();
-                Vector2 finishVec = new Vector2(29.6f, 94.8f);
-                // sqrt[ ( a^2 + b^2) ] = c
-                var distanceAway =
-                    Mathf.Sqrt(Mathf.Pow((finishVec.x - playerVec.x), 2) + Mathf.Pow((finishVec.y - playerVec.y), 2));
-                if (distanceAway <= 1)
+                foreach (var entry in scoreEntries)
                 {
-                    entry.SetScore(-1, timeLeftCounter);
-                    completePlayerList.Add(entry);
+                    //Debug.Log(entry + "|" + scoreEntries + "|" + timeRemainingGlobal);
+                    //if (!entry.GetPlayerGameObject()) { continue; }
+                    if (completePlayerList.Contains(entry)) { continue; }
+                    Vector2 playerVec = entry.GetPlayerLocation();
+                    Vector2 finishVec = new Vector2(29.6f, 94.8f);
+                    // sqrt[ ( a^2 + b^2) ] = c
+                    var distanceAway =
+                        Mathf.Sqrt(Mathf.Pow((finishVec.x - playerVec.x), 2) + Mathf.Pow((finishVec.y - playerVec.y), 2));
+                    if (distanceAway <= 1)
+                    {
+                        entry.SetScore(-1, timeLeftCounter);
+                        completePlayerList.Add(entry);
+                    }
+                    else
+                    {
+                        entry.SetScore((int)distanceAway);
+                    }
                 }
-                else
-                {
-                    entry.SetScore((int)distanceAway);
-                }
+                yield return null;
             }
+            yield return null;
         }
 
         private IEnumerator CreateTimer(int duration)
         {
-            var inGameTimer = Instantiate(inGameTimerPrefab, inGameScoreboardContent);
-            inGameTimer.transform.SetSiblingIndex(2);
+            inGameTimerPrefab = Resources.Load<GameObject>("InGameTimer");
+            var inGameTimer = Instantiate(inGameTimerPrefab, inGameScoreboardContent.transform);
+            inGameTimer.transform.SetSiblingIndex(0);
             var timerUIController = inGameTimer.GetComponent<TimerUI>();
             float timeTracker = 0;
             float timeRemaining = duration;
@@ -152,6 +165,7 @@ namespace UI.Scoreboard
 
                     timeTracker = 0;
                     timeRemaining -= 1;
+                    timeRemainingGlobal = timeRemaining;
                     timerUIController.currentTime.text = GetTimerUpdateString(timeRemaining);
                     timeLeftCounter = timerUIController.currentTime.text;
                 }
@@ -185,37 +199,107 @@ namespace UI.Scoreboard
             return minutesRemainingText + ":" + secondsRemainingText;
         }
 
-        private void CreateExampleInstance(ScoreManager scoreboard)
+        private void CreateExampleInstance(ScoreManager scoreboard = null)
         {
-            colorSpriteDictionary.Add("red", (Color.red, spriteRed));
-            colorSpriteDictionary.Add("blue", (blue, spriteBlue));
-            colorSpriteDictionary.Add("green", (Color.green, spriteGreen));
-            colorSpriteDictionary.Add("yellow", (Color.yellow, spriteYellow));
-            playerColorDictionary.Add("Player0", "red");
-            playerColorDictionary.Add("Player1", "blue");
-            playerColorDictionary.Add("Player2", "yellow");
-            playerColorDictionary.Add("Player3", "green");
+            colorSpriteDictionary.Add(0, (Color.red, spriteRed));       // red
+            colorSpriteDictionary.Add(1, (blue, spriteBlue));             // blue
+            colorSpriteDictionary.Add(2, (Color.green, spriteGreen));   // green
+            colorSpriteDictionary.Add(3, (Color.yellow, spriteYellow)); // yellow
+            // playerColorDictionary.Add("Player0", "red");
+            // playerColorDictionary.Add("Player1", "blue");
+            // playerColorDictionary.Add("Player2", "yellow");
+            // playerColorDictionary.Add("Player3", "green");
             //var getColor = RibbitRoyaleMultiplayer.GetPlayerColor(0);
-            scoreboard.UpdatePlayerScore("Player0", 29, false);
-            scoreEntries[0].SetPlayerGameObject(player0);
-            scoreboard.UpdatePlayerScore("Player1", 30, false);
-            scoreboard.UpdatePlayerScore("Player2", 15, false);
-            scoreboard.UpdatePlayerScore("Player3", 31, false);
-            scoreboard.UpdateRanking();
-            Debug.Log("ScoreManager example instance initialization complete.");
+            // scoreboard.UpdatePlayerScore("Player0", 29, false);
+            // scoreEntries[0].SetPlayerGameObject(player0);
+            // scoreboard.UpdatePlayerScore("Player1", 30, false);
+            // scoreboard.UpdatePlayerScore("Player2", 15, false);
+            // scoreboard.UpdatePlayerScore("Player3", 31, false);
+
+            // CreatePlayerEntry(00001, 0, 00000, 1);
+            //
+            // scoreboard.UpdateRanking();
+            // Debug.Log("ScoreManager example instance initialization complete.");
         }
 
-        private ScoreEntry AddPlayer(string playerName)
+        public void SetupScoreboard(Transform parent, int boardType, int playerCount, int timerDuration = 0)
+        {
+            gameType = boardType;
+            
+            spriteRed = Resources.Load<Sprite>("frog_sprites/Red Idle");
+            spriteBlue = Resources.Load<Sprite>("frog_sprites/Blue Idle");
+            spriteGreen = Resources.Load<Sprite>("frog_sprites/Green Idle");
+            spriteYellow = Resources.Load<Sprite>("frog_sprites/Yellow Idle");
+            colorSpriteDictionary.Add(1, (red, spriteRed));       // red
+            colorSpriteDictionary.Add(2, (blue, spriteBlue));             // blue
+            colorSpriteDictionary.Add(0, (green, spriteGreen));   // green
+            colorSpriteDictionary.Add(3, (yellow, spriteYellow)); // yellow
+            //colorSpriteDictionary.Add(2, (purple, spritePurple)); // purple 
+
+            if (false)
+            {
+                // make timer if applicable
+            }
+            
+            if (boardType == 0)
+            {
+                // boardType == 0 -> RoundScoreboard
+                 scoreboardContent = Instantiate(Resources.Load<GameObject>("Scoreboard"), parent);
+            }
+            else
+            {
+                // boardType == 1/else -> InGameScoreboard
+                inGameScoreboardContent = Instantiate(Resources.Load<GameObject>("InGameScoreboard"), parent);
+                StartCoroutine(CreateTimer(timerDuration));
+            }
+
+            while (playerCount > 0)
+            {
+                var playerObj = GameObject.FindGameObjectWithTag("Player");
+                playerObjectList.Add(playerObj);
+                playerCount--;
+            }
+        }
+
+        private ScoreEntry AddPlayer(string playerName, int boardType)
         {
             // Creates new ScoreEntry object, sets parameters, adds to scoreEntries list, returns scoreEntry object
             ScoreEntry scoreEntry = new ScoreEntry();
             scoreEntry.SetPlayerName(playerName);
-            scoreEntry.SetGameObject(Instantiate(scoreEntryPrefab, scoreboardContent));
-            scoreEntry.SetInGameGameObject(Instantiate(inGameScoreEntryPrefab, inGameScoreboardContent));
-            scoreEntry.Initialize();
+            if (boardType == 0)
+            {
+                // Round Scoreboard
+                scoreEntryPrefab = Resources.Load<GameObject>("ScoreEntry");
+                scoreEntry.SetGameObject(Instantiate(scoreEntryPrefab, scoreboardContent.transform));
+            }
+            else
+            {
+                // In Game Scoreboard
+                inGameScoreEntryPrefab = Resources.Load<GameObject>("InGameScoreEntry");
+                scoreEntry.SetInGameGameObject(Instantiate(inGameScoreEntryPrefab, inGameScoreboardContent.transform));    
+            }
+            scoreEntry.Initialize(boardType);
             scoreEntries.Add(scoreEntry);
-            scoreEntry.SetEntryActive(alwaysShowScoreboard);
+            //scoreEntry.SetEntryActive(alwaysShowScoreboard);
             return scoreEntry;
+        }
+
+        public void CreatePlayerEntry(ulong clientId, int score, int colorId, int boardType)
+        {
+            ScoreEntry scoreEntry = AddPlayer(clientId.ToString(), boardType);
+            foreach (var player in playerObjectList)
+            {
+                var gameObjectClientId = player.GetComponent<NetworkObject>().OwnerClientId;
+                if (gameObjectClientId == clientId)
+                {
+                    Debug.Log("Set Player Entry GO : " + clientId + " : " + gameObjectClientId);
+                    scoreEntry.SetPlayerGameObject(player);
+                }
+            }
+            //scoreEntry.SetPlayerGameObject(RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(clientId));
+            UpdateEntryColors(scoreEntry, 
+                colorSpriteDictionary[colorId].Item1, colorSpriteDictionary[colorId].Item2);
+            UpdateScoreText(scoreEntry, score);
         }
 
         public void UpdatePlayerRank(ScoreEntry entry, int rank)
@@ -254,18 +338,6 @@ namespace UI.Scoreboard
                     return;
                 }
             }
-        
-            // if creating new user in leaderboard
-            {
-                var entry = AddPlayer(playerName);
-                UpdateScoreText(entry, score);
-            
-                // temp takes color+avatar from premade dict
-                string playerColor = playerColorDictionary[playerName];
-                var tupleColor = colorSpriteDictionary[playerColor];
-            
-                UpdateEntryColors(entry, tupleColor.Item1, tupleColor.Item2);
-            }
         }
 
         public int GetPlayerScore(string playerName)
@@ -293,9 +365,8 @@ namespace UI.Scoreboard
         {
             entry.SetScore(score);
         
-            //entry.transform.Find("RankText").GetComponent<Text>().text = "?";
-            //entry.transform.Find("PointsText").GetComponent<Text>().text = $"{score}";
-            UpdateRanking();
+            // Should only be enabled if doing roundscore
+            //UpdateRanking();
         }
 
         private void UpdateRanking()
@@ -341,8 +412,6 @@ namespace UI.Scoreboard
         
             float elapsed = 0f;
 
-            //Dictionary<GameObject, float> startPositions = new Dictionary<GameObject, float>();
-
             while (elapsed < moveDuration)
                 // Iterates through animation time duration
             {
@@ -377,14 +446,5 @@ namespace UI.Scoreboard
             }
             Debug.Log("AnimateRankChange Complete");
         }
-
-//     public void RemovePlayer(string playerName)
-//     {
-//         if (playerEntries.ContainsKey(playerName))
-//         {
-//             Destroy(playerEntries[playerName].entry);
-//             playerEntries.Remove(playerName);
-//         }
-//     }
     }
 }

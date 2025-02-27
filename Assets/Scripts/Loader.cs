@@ -12,7 +12,8 @@ public static class Loader
         CharacterSelectScene,
         TongueSwingGame,
         CountTheAnimalGame,
-        SnakeChaseGame
+        SnakeChaseGame,
+        ScoreboardScene
     }
     // Varaible for the index of the target scene
     public static int targetSceneIndex;

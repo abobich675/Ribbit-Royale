@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using System;
+using UI.Scoreboard;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,6 +14,7 @@ public class PlayerController : NetworkBehaviour
     float FastFallMultiplier = 1.25f;
     float BounceSpeedIncrease = 3;
     float BounceHeight = 12.5f;
+    private ScoreController scoreController;
 
     public float maxSpeed;
     public float dampingFactor;
@@ -48,6 +50,10 @@ public class PlayerController : NetworkBehaviour
         tongue.SetActive(false);
 
         SetColor();
+        
+        // Will find the DoNotDestroy ScoreController object and run itialize. Will finalize to run specific TS setup method.
+        scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
+        scoreController.InitializeTS();
     }
 
     // Update is called once per frame

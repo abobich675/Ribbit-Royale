@@ -26,10 +26,16 @@ namespace UI.Scoreboard
             //Initialize();
         }
 
-        public void Initialize()
+        public void Initialize(int boardType)
         {
-            uiController = entryGameObject.GetComponent<ScoreEntryUI>();
-            uiController_inGame = inGameEntryGameObject.GetComponent<ScoreEntryUI>();
+            if (boardType == 0)
+            {
+                uiController = entryGameObject.GetComponent<ScoreEntryUI>();
+            }
+            else
+            {
+                uiController_inGame = inGameEntryGameObject.GetComponent<ScoreEntryUI>();
+            }
             entryColor = Color.white;
             entryRank = 0;
             entryScore = 0;
@@ -119,7 +125,7 @@ namespace UI.Scoreboard
         public void SetEntryColor(Color color)
         {
             entryColor = color;
-            uiController.avatarBorder.color = entryColor;
+            //uiController.avatarBorder.color = entryColor;
             uiController_inGame.avatarBorder.color = entryColor;
         }
     
@@ -133,7 +139,7 @@ namespace UI.Scoreboard
         {
             Debug.Log("SetAvatar: " + newAvatar);
             entryAvatar = newAvatar;
-            uiController.avatarImage.sprite = entryAvatar;
+            //uiController.avatarImage.sprite = entryAvatar;
             uiController_inGame.avatarImage.sprite = entryAvatar;
         }
     
@@ -168,7 +174,7 @@ namespace UI.Scoreboard
                 uiController_inGame.scoreText.text = optionalScore;
             } else if (!isTest)
             {
-                uiController.scoreText.text = entryScore.ToString();
+                //uiController.scoreText.text = entryScore.ToString();
                 uiController_inGame.scoreText.text = entryScore.ToString();
             }
         }
