@@ -4,7 +4,10 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "nunit.framework"
+        "nunit.framework",
+        "Unity.Netcode.Runtime",
+        "Unity.Services.Relay",
+        "Unity.Netcode.Transports.UTP"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
