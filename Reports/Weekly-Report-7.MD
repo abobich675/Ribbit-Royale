@@ -36,7 +36,8 @@
 
 ## Plans and goals for the following week:
 ### Aidan:
-- 
+- Moving animations for Monkey, Snake and Turtle
+- Game selection scene icons
 ### Adam:
 - Implement Multiplayer for Tongue Swinging Game
 - Implement Multiplayer for Count The Animal
