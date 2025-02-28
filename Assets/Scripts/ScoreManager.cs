@@ -22,7 +22,7 @@ namespace UI.Scoreboard
         
         // private Transform scoreboardContent;
         // private Transform inGameScoreboardContent;
-        public float moveDuration = 10.0f;
+        public float moveDuration = 0.5f;
 
         public Sprite spriteRed;
         public Sprite spriteBlue;
@@ -134,7 +134,7 @@ namespace UI.Scoreboard
             yield return null;
         }
 
-        private IEnumerator CreateTimer(int duration)
+        private IEnumerator CreateTimer(int duration, float timerStartDelay)
         {
             inGameTimerPrefab = Resources.Load<GameObject>("InGameTimer");
             var inGameTimer = Instantiate(inGameTimerPrefab, inGameScoreboardContent.transform);
@@ -145,6 +145,8 @@ namespace UI.Scoreboard
             
             timerUIController.currentTime.text = GetTimerUpdateString(timeRemaining);
             timerUIController.currentTime.color = Color.black;
+            
+            yield return new WaitForSeconds(timerStartDelay);
             while (timeRemaining > 0)
             {
                 timeTracker += Time.deltaTime;
@@ -222,7 +224,7 @@ namespace UI.Scoreboard
             // Debug.Log("ScoreManager example instance initialization complete.");
         }
 
-        public void SetupScoreboard(Transform parent, int boardType, int playerCount, int timerDuration = 0)
+        public void SetupScoreboard(Transform parent, int boardType, int playerCount, int timerDuration = 0, float timerStartDelay = 0f)
         {
             gameType = boardType;
             
@@ -236,10 +238,11 @@ namespace UI.Scoreboard
             colorSpriteDictionary.Add(3, (yellow, spriteYellow)); // yellow
             //colorSpriteDictionary.Add(2, (purple, spritePurple)); // purple 
 
-            if (false)
-            {
-                // make timer if applicable
-            }
+            rank1 = Resources.Load<Sprite>("ui_sprites/1");
+            rank2 = Resources.Load<Sprite>("ui_sprites/2");
+            rank3 = Resources.Load<Sprite>("ui_sprites/3");
+            rank4 = Resources.Load<Sprite>("ui_sprites/4");
+            
             
             if (boardType == 0)
             {
@@ -250,7 +253,7 @@ namespace UI.Scoreboard
             {
                 // boardType == 1/else -> InGameScoreboard
                 inGameScoreboardContent = Instantiate(Resources.Load<GameObject>("InGameScoreboard"), parent);
-                StartCoroutine(CreateTimer(timerDuration));
+                StartCoroutine(CreateTimer(timerDuration, timerStartDelay));
             }
 
             while (playerCount > 0)
@@ -278,6 +281,7 @@ namespace UI.Scoreboard
                 inGameScoreEntryPrefab = Resources.Load<GameObject>("InGameScoreEntry");
                 scoreEntry.SetInGameGameObject(Instantiate(inGameScoreEntryPrefab, inGameScoreboardContent.transform));    
             }
+            scoreEntry.SetEntryType(boardType);
             scoreEntry.Initialize(boardType);
             scoreEntries.Add(scoreEntry);
             //scoreEntry.SetEntryActive(alwaysShowScoreboard);
@@ -287,13 +291,16 @@ namespace UI.Scoreboard
         public void CreatePlayerEntry(ulong clientId, int score, int colorId, int boardType)
         {
             ScoreEntry scoreEntry = AddPlayer(clientId.ToString(), boardType);
-            foreach (var player in playerObjectList)
+            if (boardType == 1)
             {
-                var gameObjectClientId = player.GetComponent<NetworkObject>().OwnerClientId;
-                if (gameObjectClientId == clientId)
+                foreach (var player in playerObjectList)
                 {
-                    Debug.Log("Set Player Entry GO : " + clientId + " : " + gameObjectClientId);
-                    scoreEntry.SetPlayerGameObject(player);
+                    var gameObjectClientId = player.GetComponent<NetworkObject>().OwnerClientId;
+                    if (gameObjectClientId == clientId)
+                    {
+                        Debug.Log("Set Player Entry GO : " + clientId + " : " + gameObjectClientId);
+                        scoreEntry.SetPlayerGameObject(player);
+                    }
                 }
             }
             //scoreEntry.SetPlayerGameObject(RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(clientId));
@@ -369,7 +376,7 @@ namespace UI.Scoreboard
             //UpdateRanking();
         }
 
-        private void UpdateRanking()
+        public void UpdateRanking()
         {
             var sortedP = scoreEntries;
 

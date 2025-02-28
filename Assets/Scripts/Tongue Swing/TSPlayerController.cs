@@ -277,13 +277,14 @@ public class PlayerController : NetworkBehaviour
             }
             if (allFinished)
             {
-                Loader.LoadNetwork(Loader.Scene.PreLobbyScene);
+                //Loader.LoadNetwork(Loader.Scene.PreLobbyScene);
+                scoreController.TransitionToRoundScoreboard();
                 return;
             }
         } catch
         {
             Debug.Log("Failed to get player data from clientId. Sending player back to prelobby");
-            Loader.Load(Loader.Scene.TongueSwingGame);
+            Loader.Load(Loader.Scene.PreLobbyScene);
             return;
         }
     }
