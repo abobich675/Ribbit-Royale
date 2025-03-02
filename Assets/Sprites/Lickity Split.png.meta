@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c139733d1eaf8a44ba341ffe679355df
+guid: 508f68820370bd949a5cb1d629ab9345
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4093375037466377339
-    second: color_bg_0
+      213: -8658678011817466392
+    second: Lickity Split_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: color_bg_0
+      name: Lickity Split_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 26
-        height: 18
+        x: 39
+        y: 299
+        width: 1202
+        height: 602
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b7c72a0b8e69ec830800000000000000
-      internalID: 4093375037466377339
+      spriteID: 8e56221593236d780800000000000000
+      internalID: -8658678011817466392
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      color_bg_0: 4093375037466377339
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
