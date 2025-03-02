@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Snake Chase_0: -200522747485520307
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
