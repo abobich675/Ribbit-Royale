@@ -1,6 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerCtrl : NetworkBehaviour
 {
@@ -11,8 +12,14 @@ public class PlayerCtrl : NetworkBehaviour
 
     InputAction moveAction;
 
+    private bool canMove = true;
+
     void Start()
     {
+        // Disable movement if in Character Select scene
+        if (SceneManager.GetActiveScene().name == "CharacterSelectScene"){
+            canMove = false;
+        }
         PlayerInput input = GetComponent<PlayerInput>();
         moveAction = input.actions["Move"];
 
@@ -28,7 +35,7 @@ public class PlayerCtrl : NetworkBehaviour
 
     void Update()
     {
-        if (!IsOwner)
+        if (!IsOwner || !canMove)
         {
             return;
         }
