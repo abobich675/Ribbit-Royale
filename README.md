@@ -7,15 +7,16 @@ Featuring a playful art style and a variety of unique, frog-themed interactions,
 The objective is to provide a distinctive experience that blends competitive gameplay with quirky mechanics, making each mini-game feel fresh and enjoyable. Players can compete in up to four-player multiplayer mode, with a series of mini-games designed to test their skills and cooperation. Ribbit Royale offers at least three unique games with visually differentiated elements that make each challenge memorable and fun. Through the creation of this game, we aim to push the boundaries of the typical party game genre by incorporating fun mechanics that highlight the playful essence of frogs, making it not only an entertaining experience for players but also an intriguing marketable product. And best of all, our product will be made ***FREE***, putting us ahead of our competitors. 
 
 ## How to Build and Test
--- Clone the repository: git clone https://github.com/abobich675/Ribbit-Royale.git.
--- Open the project in Unity (ensure the correct Unity version is installed).
--- Build the project by selecting File > Build Settings and then choosing your target platform.
--- Click Build and Run to compile and launch the game.
--- Use Unity Test Runner to run tests
+- Clone the repository: git clone https://github.com/abobich675/Ribbit-Royale.git.
+- Open the project in Unity (ensure the correct Unity version is installed).
+- Build the project by selecting File > Build Settings and then choosing your target platform.
+- Click Build and Run to compile and launch the game.
+- Use Unity Test Runner to run tests
 
 ## How to Run the System
--- To run if also build and testing, after you build you can run.
--- A Built package will be available to download shortly.
+- To run the game, you must aquire a build file. To do this, you can follow the instructons above. Once aquired, you can play the game by simply running the build file.
+- A Built package will be available to download shortly.
+
 As a team of newcomers to game development, this project also provides a unique opportunity to grow our skills in game design, networking, and the Unity engine, while contributing to a project that could offer both personal and professional rewards.
 
 Trello: https://trello.com/b/ebDvr63Y/software-engineering-2
