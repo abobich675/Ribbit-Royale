@@ -15,7 +15,8 @@ public class PreLobbyManager : NetworkBehaviour
         GameOver
     }
     // A field to spawn in ta playerPrefab
-    [SerializeField] private Transform playerPrefab;
+    [SerializeField] private Transform PrelobbyPrefab;
+    [SerializeField] private Transform TongueSwingPrefab;
     // The state of the game is synced over a network
     private NetworkVariable<State> state = new NetworkVariable<State>(State.GamePlaying);
     // Implement an option when the user pauses the game
@@ -49,7 +50,11 @@ public class PreLobbyManager : NetworkBehaviour
     public override void OnNetworkSpawn(){
         if (IsServer)
         {
+            // Add this to remove the event first
+            NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= SceneManager_OnLoadEventCompleted;
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadEventCompleted;
+            // Add this to remove the event for the client connection
+            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
         }
     }
@@ -59,22 +64,30 @@ public class PreLobbyManager : NetworkBehaviour
         Debug.Log("Connected Clients: " + NetworkManager.Singleton.ConnectedClientsIds.Count);
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
-            Debug.Log(sceneName);
             Debug.Log("OnLoad: " + clientId);
             Debug.Log("OnLoad: " + RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(clientId));
-            if (sceneName == "PreLobbyScene")
-                SpawnPlayer(clientId);
+
+            switch (sceneName)
+            {
+                case "PreLobbyScene":
+                    SpawnPlayer(PrelobbyPrefab, clientId);
+                    break;
+                case "TongueSwingGame":
+                    SpawnPlayer(TongueSwingPrefab, clientId);
+                    break;
+            }
+
 
         }
     }
 
     private void OnClientConnected(ulong clientId){
         // Spawn a player for the newly connected client
-        SpawnPlayer(clientId);
+        SpawnPlayer(PrelobbyPrefab, clientId);
     }
 
-    private void SpawnPlayer(ulong clientId){
-        Transform playerTransform = Instantiate(playerPrefab);
+    private void SpawnPlayer(Transform prefab, ulong clientId){
+        Transform playerTransform = Instantiate(prefab);
         playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
     }
 }

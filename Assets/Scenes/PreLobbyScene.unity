@@ -1094,7 +1094,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  playerPrefab: {fileID: 5040148770044511259, guid: e051155fbf49d594e8c454cb5675e290, type: 3}
+  PrelobbyPrefab: {fileID: 5040148770044511259, guid: e051155fbf49d594e8c454cb5675e290, type: 3}
+  TongueSwingPrefab: {fileID: 7271673477805879662, guid: fd6b1f47bb004c841b387d88863264ce, type: 3}
 --- !u!4 &1590050257
 Transform:
   m_ObjectHideFlags: 0
