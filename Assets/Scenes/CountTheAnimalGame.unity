@@ -1309,6 +1309,12 @@ MonoBehaviour:
   rightBarrier: {fileID: 1313467461}
   finalCountedAnimalsText: {fileID: 1202561254}
   countedAnimalImage: {fileID: 605323819}
+  playerCountPrefab: {fileID: 4335472797179540418, guid: 292283d4e4bf431488c12b0f05c82a67, type: 3}
+  playerSprites:
+  - {fileID: 5574680864831327699, guid: 50a0758dc428cac4eb433bd3c1adf547, type: 3}
+  - {fileID: -511970758829080724, guid: 57a740ecfeafb5b42b39039e008c5b03, type: 3}
+  - {fileID: 7397415120026895254, guid: 0cb5727d34d30f44696b165aa9ba06a8, type: 3}
+  - {fileID: 7875479924299485880, guid: c0ff1ca1992853b4ca7a3d3dd287e436, type: 3}
   animals:
   - name: bird
     animalPrefab: {fileID: 7785681747683816628, guid: d28147b04cd664fea815ad8405078664, type: 3}

@@ -23,7 +23,7 @@ public class PlayerController : NetworkBehaviour
 
     public new Camera camera;
     public GameObject tongue;
-    public RuntimeAnimatorController[] animators;
+    public RuntimeAnimatorController[] animators; // Green Blue Red Yellow
 
     GameObject connectedObject;
     bool isSwinging = false;

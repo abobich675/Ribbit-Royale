@@ -13,6 +13,7 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
 
     // Count The Animal Game
     public int countedAnimalIndex;
+    public int currentCount;
     public int finalCount;
     public int playerScore;
 
@@ -27,6 +28,7 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
         serializer.SerializeValue(ref clientId);
         serializer.SerializeValue(ref colorId);
         serializer.SerializeValue(ref countedAnimalIndex);
+        serializer.SerializeValue(ref currentCount);
         serializer.SerializeValue(ref finalCount);
     }
 }
