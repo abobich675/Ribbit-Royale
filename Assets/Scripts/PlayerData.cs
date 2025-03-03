@@ -14,11 +14,6 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
     // Count The Animal Game
     public int countedAnimalIndex;
     public int finalCount;
-
-
-
-    public Vector3 playerPos;
-    public Quaternion playerRot;
     public int playerScore;
 
     // This function will store player data based off of that players clientId
