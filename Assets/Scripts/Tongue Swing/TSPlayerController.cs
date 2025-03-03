@@ -330,11 +330,17 @@ public class PlayerController : NetworkBehaviour
 
     private IEnumerator WaitForPopupDelay(float popupDelay)
     {
-        rb.gravityScale = 0;
+        SetPlayerActivity(false);
         yield return new WaitForSeconds(popupDelay);
         timerOver = true;
-        rb.gravityScale = GRAVITYSCALE;
+        SetPlayerActivity(true);
         yield return null;
+    }
+
+    private void SetPlayerActivity(bool active)
+    {
+        GetComponent<Collider2D>().enabled = active;
+        rb.gravityScale = active ? GRAVITYSCALE : 0;
     }
     
 }
