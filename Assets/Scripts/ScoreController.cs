@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UI.Scoreboard;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -19,6 +20,10 @@ public class ScoreController : NetworkBehaviour
     public int timerDuration;
     private GameObject infoPanel;
     private float timerStartDelay = 8f;
+    private List<ScoreEntry> scoreEntries = new List<ScoreEntry>();
+    
+    private Dictionary<ulong, int> rankedIds = new Dictionary<ulong, int>();
+    private Dictionary<ulong, int> countDict = new Dictionary<ulong, int>();
 
     void Awake()
     {
@@ -27,7 +32,6 @@ public class ScoreController : NetworkBehaviour
         DontDestroyOnLoad(scoreCanvas);
     }
     
-    // 
     void Start()
     {
         Debug.Log("ScoreController Start...");
@@ -45,7 +49,14 @@ public class ScoreController : NetworkBehaviour
     private void DestroyScoreboard()
     {
         Debug.Log("Destroying nonpersistScoreCanvas, scoreManager=null...");
-        Destroy(nonpersistScoreCanvas);
+        try
+        {
+            Destroy(nonpersistScoreCanvas);
+        } catch (Exception e)
+        {
+            Debug.Log("DestroyScoreboard No ScoreboardManager to destroy..." + e);
+        }
+        
         scoreManager = null;
     }
     
@@ -68,17 +79,25 @@ public class ScoreController : NetworkBehaviour
         {
             Debug.Log("_playerCount != true player count! ERROR");
         }
-        
         CreateInGameScoreboard();
     }
     
 
     public void TransitionToRoundScoreboard()
     {
+        StartCoroutine(CoroutineTransitionToRoundScoreboard());
+    }
+
+    private IEnumerator CoroutineTransitionToRoundScoreboard()
+    {
+        yield return new WaitForSeconds(3f);
         DestroyScoreboard();
         Loader.LoadNetwork(Loader.Scene.ScoreboardScene);
-        Invoke(nameof(SpinUpNewRoundScoreManager), 1f);
-        Invoke(nameof(LoadPreLobbyScene), 5f);
+        yield return new WaitForSeconds(0.4f);
+        SpinUpNewRoundScoreManager();
+        yield return new WaitForSeconds(5f);
+        LoadPreLobbyScene();
+        yield return null;
     }
 
     private void LoadPreLobbyScene()
@@ -86,8 +105,58 @@ public class ScoreController : NetworkBehaviour
         Debug.Log("LoadPreLobbyScene");
         Loader.LoadNetwork(Loader.Scene.PreLobbyScene);
     }
-    
 
+    public void CalculatePlayerScores()
+    {
+        scoreEntries = scoreManager.GetEntryList();
+        ulong entryId;
+        int entryRank;
+        rankedIds.Clear();
+        foreach (var entry in scoreEntries)
+        {
+            // Gets player ulong id and rank, adds to rankedIds dict
+            entryId = entry.GetPlayerName();
+            entryRank = entry.GetRank();
+            rankedIds.Add(entryId, entryRank);
+        }
+
+        foreach (var rankEntry in rankedIds)
+        {
+            if (rankEntry.Value == 1)
+            {
+                RibbitRoyaleMultiplayer.Instance.IncPlayerScore(1, rankEntry.Key);
+            }
+        }
+        TransitionToRoundScoreboard();
+        return;
+    }
+
+    public void CTA_CalculatePlayerScores(int playerCount, int finalCount)
+    {
+        // Currently only functional for 1 call for singleplayer
+        // Will rewrite when we get multiplayer working
+
+        // Gets owner clientID
+        PlayerData ctaPlayerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
+        ulong ctaPlayerId = ctaPlayerData.clientId;
+        ulong ownerId = NetworkManager.Singleton.CurrentSessionOwner;
+        var isHost = ctaPlayerId == ownerId;
+        if (!isHost)
+        {
+            return;
+        }
+        
+        // Need to check highest score, single player implementation below
+        // Should check who's score has the smallest difference to finalCount, award multiple if ties
+        RibbitRoyaleMultiplayer.Instance.IncPlayerScore(1, ctaPlayerId);
+        TransitionToRoundScoreboard();
+    }
+
+    private PlayerData GetPlayerData(ulong playerId)
+    {
+        return RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(playerId);
+    }
+    
     private ScoreManager SpinUpNewRoundScoreManager()
     {
         InstantiateNonPersistScoreCanvas();
@@ -95,9 +164,10 @@ public class ScoreController : NetworkBehaviour
         scoreManager.SetupScoreboard(nonpersistScoreCanvas.transform, 0, _playerCount, timerDuration, timerStartDelay);
         foreach (var entry in playerDataDict)
         {
-            //Debug.Log("COLOR: " + entry.Value.clientId);
-            var score = entry.Value.playerScore;
-            scoreManager.CreatePlayerEntry(entry.Key, score, entry.Value.colorId, 0);
+            var pData = GetPlayerData(entry.Key);
+            var score = pData.GetPlayerScore();
+            var prevScore = pData.previousRoundPlayerScore;
+            scoreManager.CreatePlayerEntry(entry.Key, score, entry.Value.colorId, 0, prevScore);
         }
 
         scoreManager.UpdateRanking();
@@ -119,10 +189,12 @@ public class ScoreController : NetworkBehaviour
         if (gameType == 1)
         {
             // TongueSwing
-            infoPanel.GetComponent<infoUI>().infoTitle.text = "Tongue Swing";
-            infoPanel.GetComponent<infoUI>().infoText.text = "Welcome to Tongue Swing! To move, use WASD. " +
-             "To swing, click near a grapple to pull yourself towards it. " +
-             "Get to the green finish platform at the top before time runs out!";
+            infoPanel.GetComponent<infoUI>().infoTitle.text = "Lickity Split";
+            infoPanel.GetComponent<infoUI>().infoText.text =
+                "Welcome to Lickity Split! To move, use WASD. \n" +
+                "To swing, click near a grapple to pull yourself towards it. \n" +
+                "Reach the final platform at the top before time runs out! \n" +
+                "Your score is your distance to the finish in meters.";
         }
         Invoke(nameof(DestroyInfoPanel), 8f);
     }
@@ -130,6 +202,19 @@ public class ScoreController : NetworkBehaviour
     private void DestroyInfoPanel()
     {
         Destroy(infoPanel);
+    }
+
+    public float GetPopupTimer(int gameType)
+    {
+        // if TS
+        if (gameType == 0)
+        {
+            return timerStartDelay;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     private ScoreManager SpinUpNewScoreManager()
@@ -148,8 +233,13 @@ public class ScoreController : NetworkBehaviour
         return scoreManager;
     }
 
+    public void RemovePlayerScore(ulong playerId)
+    {
+        // Should remove player if Network calls disconnection hook
+    }
+
     public void SetFinished()
     {
-        
+        // Should set finished on TSPlayerController finished call
     }
 }

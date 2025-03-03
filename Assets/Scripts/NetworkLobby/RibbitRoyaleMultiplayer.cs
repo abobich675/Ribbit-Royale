@@ -225,17 +225,18 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
     }
 
     // Count the Animal Game
-    public void SetCTAPlayerData(int countedAnimalIndex, int finalCount){
-        SetCTAPlayerDataServerRpc(countedAnimalIndex, finalCount);
+    public void SetCTAPlayerData(int countedAnimalIndex, int currentCount, int finalCount){
+        SetCTAPlayerDataServerRpc(countedAnimalIndex, currentCount, finalCount);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void SetCTAPlayerDataServerRpc(int countedAnimalIndex, int finalCount, ServerRpcParams serverRpcParams = default){
+    private void SetCTAPlayerDataServerRpc(int countedAnimalIndex, int currentCount, int finalCount, ServerRpcParams serverRpcParams = default){
         int playerDataIndex = GetPlayerDataIndexFromClientId(serverRpcParams.Receive.SenderClientId); 
         if (playerDataIndex == -1) return;
 
         PlayerData playerData = playerDataNetworkList[playerDataIndex]; 
         playerData.countedAnimalIndex = countedAnimalIndex;
+        playerData.currentCount = currentCount;
         playerData.finalCount = finalCount;
 
         playerDataNetworkList[playerDataIndex] = playerData;
@@ -245,4 +246,23 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
     public int GetPlayerCount(){
         return playerDataNetworkList.Count;
     }
+
+    public void IncPlayerScore(int score, ulong playerId)
+    {
+        IncPlayerScoreServerRpc(score, playerId);
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    private void IncPlayerScoreServerRpc(int score, ulong playerId, ServerRpcParams serverRpcParams = default)
+    {
+        int playerDataIndex = GetPlayerDataIndexFromClientId(playerId);
+        if (playerDataIndex == -1) return;
+
+        PlayerData playerData = playerDataNetworkList[playerDataIndex];
+        playerData.previousRoundPlayerScore = playerData.playerScore;
+        playerData.playerScore += score;
+
+        playerDataNetworkList[playerDataIndex] = playerData;
+    }
+    
 }

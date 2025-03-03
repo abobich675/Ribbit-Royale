@@ -1,5 +1,7 @@
 using Unity.Netcode;
 using System;
+using System.Collections;
+using System.Net;
 using UI.Scoreboard;
 using Unity.Mathematics;
 using UnityEngine;
@@ -10,21 +12,23 @@ public class PlayerController : NetworkBehaviour
 {
     const float GRAVITYSCALE = 2f;
 
-    float Acceleration = 5;
+    float Acceleration = 30;
     float FastFallMultiplier = 1.25f;
-    float BounceSpeedIncrease = 3;
-    float BounceHeight = 12.5f;
+    float BounceSpeedIncrease = 1;
+    float BounceHeight = 15f;
     private ScoreController scoreController;
+    private bool timerOver = false;
 
     public float maxSpeed;
     public float dampingFactor;
 
     public float swingingMovementBonus;
     public GameObject tongue;
-    public RuntimeAnimatorController[] animators;
+    public RuntimeAnimatorController[] animators; // Green Blue Red Yellow
 
     GameObject connectedObject;
     bool isSwinging = false;
+    Vector2 swingBoost = Vector2.zero;
 
 
 
@@ -55,25 +59,33 @@ public class PlayerController : NetworkBehaviour
 
         SetColor();
         
-        // Will find the DoNotDestroy ScoreController object and run itialize. Will finalize to run specific TS setup method.
+        // Will find the DoNotDestroy ScoreController object and initialize tongue swing score setup.
         
         if (GameObject.FindGameObjectWithTag("ScoreControllerGO"))
         {
             scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
             scoreController.InitializeTS();
+            var infoPanelDuration = scoreController.GetPopupTimer(0);
+            StartCoroutine(WaitForPopupDelay(infoPanelDuration));
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (IsOwner)
+        if (IsOwner && timerOver)
         {
             DoInteraction();
             DoMovement();
         }
         
         UpdateAnimator();
+    }
+
+    // Fixed update for physics calculations
+    void FixedUpdate()
+    {
+        DoForces();
     }
     
     void SetColor() {
@@ -92,8 +104,6 @@ public class PlayerController : NetworkBehaviour
         }
 
         animator.runtimeAnimatorController = animators[playerData.colorId];
-        // Using the player data call the function SetPlayerColor, get the players color using the playerData
-        // RibbitRoyaleMultiplayer.Instance.GetPlayerColor(playerData.colorId)
     }
 
     void DoInteraction()
@@ -158,32 +168,39 @@ public class PlayerController : NetworkBehaviour
 
             // Add swinging movement bonus
             // Increases speed of the player rotating around the node
-            if (transform.position.y < connectedObject.transform.position.y)
+            swingBoost = Vector2.zero;
+            if (transform.position.y < connectedObject.transform.position.y) // under the object
             {
                 if (rb.linearVelocityX > 0)
                 {
-                    rb.AddForce(Vector2.right * swingingMovementBonus);
+                    swingBoost += Vector2.right;
                 }
                 else if (rb.linearVelocityX < 0)
                 {
-                    rb.AddForce(Vector2.left * swingingMovementBonus);
+                    swingBoost += Vector2.left;
                 }
 
                 if (rb.linearVelocityY > 0)
                 {
-                    rb.AddForce(Vector2.up * swingingMovementBonus);
+                    swingBoost += Vector2.up;
                 }
                 else if (rb.linearVelocityY < 0)
                 {
-                    rb.AddForce(Vector2.down * swingingMovementBonus);
+                    swingBoost += Vector2.down;
                 }
             }
         }
     }
 
+    void DoForces()
+    {
+        if (isSwinging)
+            rb.AddForce(swingBoost * swingingMovementBonus);
+        DoMovement();
+    }
+
     void DoMovement()
     {
-        
         Vector2 moveInput = moveAction.ReadValue<Vector2>();
 
         if (isSwinging)
@@ -194,6 +211,10 @@ public class PlayerController : NetworkBehaviour
             {
                 rb.AddForce(new Vector2(moveInput.x * Acceleration / 2, 0));
             }
+
+            // % Damping
+            Vector2 counterForce = new Vector2(-rb.linearVelocityX / dampingFactor / 2, 0);
+            rb.AddForce(counterForce);
         }
         else
         {
@@ -286,7 +307,7 @@ public class PlayerController : NetworkBehaviour
             if (allFinished)
             {
                 //Loader.LoadNetwork(Loader.Scene.PreLobbyScene);
-                scoreController.TransitionToRoundScoreboard();
+                scoreController.CalculatePlayerScores();
                 return;
             }
         } catch
@@ -303,4 +324,12 @@ public class PlayerController : NetworkBehaviour
         animator.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
         animator.SetBool("isSwinging", isSwinging);
     }
+
+    private IEnumerator WaitForPopupDelay(float popupDelay)
+    {
+        yield return new WaitForSeconds(popupDelay);
+        timerOver = true;
+        yield return null;
+    }
+    
 }

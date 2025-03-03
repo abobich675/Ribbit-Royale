@@ -4,6 +4,9 @@ using System;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
 using Unity.Netcode;
+using System.Collections.Generic;
+using Unity.Services.Lobbies.Models;
+using TMPro;
 
 public class CTAMain : NetworkBehaviour
 {
@@ -37,6 +40,17 @@ public class CTAMain : NetworkBehaviour
     string countedAnimal = "";
     public Image countedAnimalImage;
 
+    struct Counter
+    {
+        public ulong clientId;
+        public TextMeshProUGUI text;
+    }
+
+    // Prefab for player counts
+    public GameObject playerCountPrefab;
+    List<Counter> playerCounters = new List<Counter>();
+    public Sprite[] playerSprites; // Green Blue Red Yellow
+
     // Array of animals
     public Animal[] animals;
 
@@ -49,6 +63,8 @@ public class CTAMain : NetworkBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        CreatePlayerCounters();
+        
         PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
         ulong playerId = playerData.clientId;
         ulong ownerId = NetworkManager.Singleton.CurrentSessionOwner;
@@ -82,7 +98,45 @@ public class CTAMain : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        UpdatePlayerCounters();
+    }
+
+    private void CreatePlayerCounters()
+    {
+        // Create a counter for each player
+        int playerIndex = 0;
+        foreach (var client in NetworkManager.Singleton.ConnectedClients)
+        {
+            ulong currentClientId = client.Key;
+            PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(currentClientId);
+            
+            GameObject counterObject = Instantiate(playerCountPrefab, GameObject.Find("Canvas").transform);
+            // Adjust the height based on how many players have already been added
+            float counterHeight = counterObject.GetComponent<RectTransform>().rect.height;
+            Vector3 positionAdjustment = new Vector3(0, counterHeight * playerIndex, 0);
+            counterObject.transform.position += positionAdjustment;
+
+            playerIndex++;
+
+            // Set the player's color
+            Image counterImage = counterObject.GetComponentInChildren<Image>();
+            Sprite playerSprite = playerSprites[playerData.colorId];
+            counterImage.sprite = playerSprite;
+
+            Counter counter = new Counter();
+            counter.clientId = currentClientId;
+            counter.text = counterObject.GetComponentInChildren<TextMeshProUGUI>();
+            playerCounters.Add(counter);
+        }
+    }
+
+    private void UpdatePlayerCounters()
+    {
+        foreach (Counter counter in playerCounters)
+        {
+            PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(counter.clientId);
+            counter.text.text = playerData.currentCount.ToString();
+        }
     }
 
     Animal GetAnimal(string name) {
@@ -102,7 +156,7 @@ public class CTAMain : NetworkBehaviour
         countedAnimal = animals[animalIndex].name;
         countedAnimalImage.sprite = animals[animalIndex].animalPrefab.GetComponent<SpriteRenderer>().sprite;
         
-        RibbitRoyaleMultiplayer.Instance.SetCTAPlayerData(animalIndex, 0);
+        RibbitRoyaleMultiplayer.Instance.SetCTAPlayerData(animalIndex, 0, 0);
     }
 
     void ChooseAnimalToCount(int animalIndex)
@@ -145,7 +199,7 @@ public class CTAMain : NetworkBehaviour
         finalCount = GetAnimal(countedAnimal).count;
         PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
         
-        RibbitRoyaleMultiplayer.Instance.SetCTAPlayerData(playerData.countedAnimalIndex, finalCount);
+        RibbitRoyaleMultiplayer.Instance.SetCTAPlayerData(playerData.countedAnimalIndex, playerData.currentCount, finalCount);
     }
 
     // Ends the game
@@ -172,7 +226,10 @@ public class CTAMain : NetworkBehaviour
         //     Debug.Log(animal.name + " count: " + animal.count);
         // }
 
-        Invoke("ReturnToLobby", 3);
+        //Invoke("ReturnToLobby", 3);
+        
+        var scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
+        scoreController.CTA_CalculatePlayerScores(GetComponent<CTAPlayerConroller>().counter, finalCount);
     }
 
     private void ReturnToLobby() {
@@ -187,7 +244,3 @@ public class CTAMain : NetworkBehaviour
         return gameActive;
     }
 }
-
-
-// RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(true);
-// Debug.Log(RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(currentClientId).finished);

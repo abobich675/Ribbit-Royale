@@ -36,7 +36,13 @@ public class CTAPlayerConroller : MonoBehaviour
         if (attackAction.triggered || jumpAction.triggered)
         {
             counter++;
+
+            PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
+            RibbitRoyaleMultiplayer.Instance.SetCTAPlayerData(playerData.countedAnimalIndex, counter, playerData.finalCount);
             counterText.text = counter.ToString();
         }
     }
+
+    // get the counter field
+    public int CTA_GetPlayerCounter() { return counter; }
 }
