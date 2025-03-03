@@ -76,16 +76,18 @@ public class PlayerController : NetworkBehaviour
         if (IsOwner && timerOver)
         {
             DoInteraction();
-            DoMovement();
+            UpdateAnimator();
         }
-        
-        UpdateAnimator();
     }
 
     // Fixed update for physics calculations
     void FixedUpdate()
     {
-        DoForces();
+        if (IsOwner && timerOver)
+        {
+            DoForces();
+        }
+        
     }
     
     void SetColor() {
@@ -327,8 +329,10 @@ public class PlayerController : NetworkBehaviour
 
     private IEnumerator WaitForPopupDelay(float popupDelay)
     {
+        rb.gravityScale = 0;
         yield return new WaitForSeconds(popupDelay);
         timerOver = true;
+        rb.gravityScale = GRAVITYSCALE;
         yield return null;
     }
     
