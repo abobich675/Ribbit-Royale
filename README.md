@@ -17,6 +17,15 @@ Features that we're still working on:
 - Pregame instructions
 - Various Art
 - Sound Effects / Music
+- Scorebaord
+
+Known Bugs:
+- In Prelobby, multiplayer frogs are shown as the user's color instead of their chosen color.
+- In Lickity Split Game, reaching the goal doesn't end the game + send you to the scoreboard screen for a few seconds.
+- In Swamp Spotting Game, some animals are facing the wrong direction in multiplayer.
+- Seemingly random white lines appear in some of the scenes.
+- Returning to the prelobby creates duplicates of the frogs.
+- Scoreboard breaks in multiplayer.
 
 ## How to Build and Test
 - Clone the repository: git clone https://github.com/abobich675/Ribbit-Royale.git.
