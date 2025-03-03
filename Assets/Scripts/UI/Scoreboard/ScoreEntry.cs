@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 namespace UI.Scoreboard
@@ -8,8 +9,9 @@ namespace UI.Scoreboard
         private Color entryColor;
         private int entryRank;
         private int entryScore;
+        private string entryScoreString;
         private Sprite entryAvatar;
-        private string entryPlayerName;
+        private ulong entryPlayerName;
         private GameObject entryGameObject;
         private GameObject inGameEntryGameObject;
         private GameObject playerGameObject = null;
@@ -112,12 +114,12 @@ namespace UI.Scoreboard
         }
     
         // get, set name
-        public string GetPlayerName()
+        public ulong GetPlayerName()
         {
             return entryPlayerName;
         }
 
-        public void SetPlayerName(string playerName)
+        public void SetPlayerName(ulong playerName)
         {
             entryPlayerName = playerName;
         }
@@ -166,11 +168,17 @@ namespace UI.Scoreboard
         {
             return entryRank;
         }
+        
+        public Sprite GetRankImg()
+        {
+            return entryRankImage;
+        }
 
-        public void SetRank(Sprite rank)
+        public void SetRank(Sprite rank, int rankNum)
         {
             //Debug.Log("SetRank: " + rank);
             //entryRank = rank;
+            entryRank = rankNum;
             entryRankImage = rank;
             if (entryType == 0)
             {
@@ -180,7 +188,7 @@ namespace UI.Scoreboard
             }
             else
             {
-                uiController_inGame.rankText.text = entryRank.ToString();
+                //uiController_inGame.rankText.text = entryRank.ToString();
             }
         }
     

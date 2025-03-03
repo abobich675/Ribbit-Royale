@@ -1,5 +1,7 @@
 using Unity.Netcode;
 using System;
+using System.Collections;
+using System.Net;
 using UI.Scoreboard;
 using Unity.Mathematics;
 using UnityEngine;
@@ -14,7 +16,9 @@ public class PlayerController : NetworkBehaviour
     float FastFallMultiplier = 1.25f;
     float BounceSpeedIncrease = 3;
     float BounceHeight = 12.5f;
+    
     private ScoreController scoreController;
+    private bool timerOver = false;
 
     public float maxSpeed;
     public float dampingFactor;
@@ -51,21 +55,27 @@ public class PlayerController : NetworkBehaviour
 
         SetColor();
         
-        // Will find the DoNotDestroy ScoreController object and run itialize. Will finalize to run specific TS setup method.
+        // Will find the DoNotDestroy ScoreController object and initialize tongue swing score setup.
         
         if (GameObject.FindGameObjectWithTag("ScoreControllerGO"))
         {
             scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
             scoreController.InitializeTS();
+            var infoPanelDuration = scoreController.GetPopupTimer(0);
+            StartCoroutine(WaitForPopupDelay(infoPanelDuration));
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        DoInteraction();
-        DoMovement();
-        UpdateAnimator();
+        // checks if timer for Popup Panel is over
+        if (timerOver)
+        {
+            DoInteraction();
+            DoMovement();
+            UpdateAnimator();
+        }
     }
     
     void SetColor() {
@@ -278,7 +288,8 @@ public class PlayerController : NetworkBehaviour
             if (allFinished)
             {
                 //Loader.LoadNetwork(Loader.Scene.PreLobbyScene);
-                scoreController.TransitionToRoundScoreboard();
+                //scoreController.TransitionToRoundScoreboard();
+                scoreController.CalculatePlayerScores();
                 return;
             }
         } catch
@@ -295,4 +306,12 @@ public class PlayerController : NetworkBehaviour
         animator.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
         animator.SetBool("isSwinging", isSwinging);
     }
+
+    private IEnumerator WaitForPopupDelay(float popupDelay)
+    {
+        yield return new WaitForSeconds(popupDelay);
+        timerOver = true;
+        yield return null;
+    }
+    
 }
