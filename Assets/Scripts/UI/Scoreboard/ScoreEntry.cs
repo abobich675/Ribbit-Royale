@@ -17,6 +17,7 @@ namespace UI.Scoreboard
         private Sprite entryRankImage;
         private bool isShown;
         private bool isTest = false;
+        private int entryType;
 
         private ScoreEntryUI uiController;
         private ScoreEntryUI uiController_inGame;
@@ -24,6 +25,11 @@ namespace UI.Scoreboard
         public ScoreEntry()
         {
             //Initialize();
+        }
+
+        public void SetEntryType(int entryGameType)
+        {
+            entryType = entryGameType;
         }
 
         public void Initialize(int boardType)
@@ -125,8 +131,14 @@ namespace UI.Scoreboard
         public void SetEntryColor(Color color)
         {
             entryColor = color;
-            //uiController.avatarBorder.color = entryColor;
-            uiController_inGame.avatarBorder.color = entryColor;
+            if (entryType == 0)
+            {
+                uiController.avatarBorder.color = entryColor;
+            }
+            else
+            {
+                uiController_inGame.avatarBorder.color = entryColor;
+            }
         }
     
         // get, set avatar
@@ -139,8 +151,14 @@ namespace UI.Scoreboard
         {
             Debug.Log("SetAvatar: " + newAvatar);
             entryAvatar = newAvatar;
-            //uiController.avatarImage.sprite = entryAvatar;
-            uiController_inGame.avatarImage.sprite = entryAvatar;
+            if (entryType == 0)
+            {
+                uiController.avatarImage.sprite = entryAvatar;
+            }
+            else
+            {
+                uiController_inGame.avatarImage.sprite = entryAvatar;
+            }
         }
     
         // get, set rank
@@ -154,9 +172,16 @@ namespace UI.Scoreboard
             //Debug.Log("SetRank: " + rank);
             //entryRank = rank;
             entryRankImage = rank;
-            //uiController.rankText.text = entryRank.ToString();
-            uiController.rankImg.sprite = entryRankImage;
-            //uiController_inGame.rankText.text = entryRank.ToString();
+            if (entryType == 0)
+            {
+                //uiController.rankText.text = entryRank.ToString();
+                uiController.rankImg.sprite = entryRankImage;
+                uiController.rankImg.color = Color.white;
+            }
+            else
+            {
+                uiController_inGame.rankText.text = entryRank.ToString();
+            }
         }
     
         // get, set score
@@ -174,8 +199,14 @@ namespace UI.Scoreboard
                 uiController_inGame.scoreText.text = optionalScore;
             } else if (!isTest)
             {
-                //uiController.scoreText.text = entryScore.ToString();
-                uiController_inGame.scoreText.text = entryScore.ToString();
+                if (entryType == 0)
+                {
+                    uiController.scoreText.text = entryScore.ToString();
+                }
+                else
+                {
+                    uiController_inGame.scoreText.text = entryScore.ToString();
+                }
             }
         }
     }

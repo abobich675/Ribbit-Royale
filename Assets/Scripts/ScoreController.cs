@@ -1,7 +1,9 @@
 using Unity.Netcode;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UI.Scoreboard;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -15,6 +17,8 @@ public class ScoreController : NetworkBehaviour
     private GameObject nonpersistScoreCanvas;
     public int boardType;
     public int timerDuration;
+    private GameObject infoPanel;
+    private float timerStartDelay = 8f;
 
     void Awake()
     {
@@ -34,14 +38,17 @@ public class ScoreController : NetworkBehaviour
     {
         // Creates new inGameScoreboard when called
         scoreManager = SpinUpNewScoreManager();
+        SpinUpNewInfoPanel(1);
         //Instantiate(scoreManager, GetComponent<Camera>());
     }
     
-    private void DestroyInGameScoreboard()
+    private void DestroyScoreboard()
     {
+        Debug.Log("Destroying nonpersistScoreCanvas, scoreManager=null...");
         Destroy(nonpersistScoreCanvas);
         scoreManager = null;
     }
+    
 
     public void InitializeTS()
     {
@@ -64,38 +71,77 @@ public class ScoreController : NetworkBehaviour
         
         CreateInGameScoreboard();
     }
+    
 
     public void TransitionToRoundScoreboard()
     {
-        DestroyInGameScoreboard();
+        DestroyScoreboard();
         Loader.LoadNetwork(Loader.Scene.ScoreboardScene);
-        scoreManager = SpinUpNewRoundScoreManager();
+        Invoke(nameof(SpinUpNewRoundScoreManager), 1f);
         Invoke(nameof(LoadPreLobbyScene), 5f);
     }
 
     private void LoadPreLobbyScene()
     {
+        Debug.Log("LoadPreLobbyScene");
         Loader.LoadNetwork(Loader.Scene.PreLobbyScene);
     }
     
 
     private ScoreManager SpinUpNewRoundScoreManager()
     {
-        scoreManager = gameObject.AddComponent<ScoreManager>();
-        //Instantiate(scoreManager);
+        InstantiateNonPersistScoreCanvas();
+        scoreManager = nonpersistScoreCanvas.AddComponent<ScoreManager>();
+        scoreManager.SetupScoreboard(nonpersistScoreCanvas.transform, 0, _playerCount, timerDuration, timerStartDelay);
+        foreach (var entry in playerDataDict)
+        {
+            //Debug.Log("COLOR: " + entry.Value.clientId);
+            var score = entry.Value.playerScore;
+            scoreManager.CreatePlayerEntry(entry.Key, score, entry.Value.colorId, 0);
+        }
+
+        scoreManager.UpdateRanking();
+        Debug.Log("New ScoreboardRound set up...");
+        //scoreManager.UpdateRanking();
         return scoreManager;
+    }
+
+    private void InstantiateNonPersistScoreCanvas()
+    {
+        nonpersistScoreCanvas = Instantiate(Resources.Load<GameObject>("nonpersistScoreCanvas"));
+    }
+
+    private void SpinUpNewInfoPanel(int gameType)
+    {
+        // Get infoUI prefab, instantiate as child of existing nonpersistScoreCanvas
+        var infoPrefab = Resources.Load<GameObject>("infoPopup");
+        infoPanel = Instantiate(infoPrefab, nonpersistScoreCanvas.transform);
+        if (gameType == 1)
+        {
+            // TongueSwing
+            infoPanel.GetComponent<infoUI>().infoTitle.text = "Tongue Swing";
+            infoPanel.GetComponent<infoUI>().infoText.text = "Welcome to Tongue Swing! To move, use WASD. " +
+             "To swing, click near a grapple to pull yourself towards it. " +
+             "Get to the green finish platform at the top before time runs out!";
+        }
+        Invoke(nameof(DestroyInfoPanel), 8f);
+    }
+
+    private void DestroyInfoPanel()
+    {
+        Destroy(infoPanel);
     }
 
     private ScoreManager SpinUpNewScoreManager()
     {
-        nonpersistScoreCanvas = Instantiate(Resources.Load<GameObject>("nonpersistScoreCanvas"));
+        InstantiateNonPersistScoreCanvas();
         scoreManager = nonpersistScoreCanvas.AddComponent<ScoreManager>();
-        scoreManager.SetupScoreboard(nonpersistScoreCanvas.transform, boardType, _playerCount, timerDuration);
+        scoreManager.SetupScoreboard(nonpersistScoreCanvas.transform, 1, _playerCount, timerDuration, timerStartDelay);
         // Create player entries for all players in playerDataDict 
         foreach (var entry in playerDataDict)
         {
             //Debug.Log("COLOR: " + entry.Value.clientId);
-            scoreManager.CreatePlayerEntry(entry.Key, 0, entry.Value.colorId, boardType);
+            scoreManager.CreatePlayerEntry(entry.Key, 0, entry.Value.colorId, 1);
         }
         
         scoreManager.StartDistanceToFinishCoroutine();

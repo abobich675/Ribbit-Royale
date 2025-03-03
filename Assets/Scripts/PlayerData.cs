@@ -19,6 +19,7 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
 
     public Vector3 playerPos;
     public Quaternion playerRot;
+    public int playerScore;
 
     // This function will store player data based off of that players clientId
     public bool Equals(PlayerData other)
@@ -32,11 +33,5 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
         serializer.SerializeValue(ref colorId);
         serializer.SerializeValue(ref countedAnimalIndex);
         serializer.SerializeValue(ref finalCount);
-    }
-    
-    // Public getter to get location of playerObject
-    public Vector3 GetPlayerDataPosition()
-    {
-        return playerPos;
     }
 }
