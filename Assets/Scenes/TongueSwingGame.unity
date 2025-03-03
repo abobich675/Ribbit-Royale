@@ -2268,6 +2268,22 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 742085408}
+    - target: {fileID: 2988117642893254213, guid: fd6b1f47bb004c841b387d88863264ce, type: 3}
+      propertyPath: maxSpeed
+      value: 12.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2988117642893254213, guid: fd6b1f47bb004c841b387d88863264ce, type: 3}
+      propertyPath: dampingFactor
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3576655878096409080, guid: fd6b1f47bb004c841b387d88863264ce, type: 3}
+      propertyPath: m_Distance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3576655878096409080, guid: fd6b1f47bb004c841b387d88863264ce, type: 3}
+      propertyPath: m_DampingRatio
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3576655878096409080, guid: fd6b1f47bb004c841b387d88863264ce, type: 3}
       propertyPath: m_ConnectedRigidBody
       value: 
@@ -2275,10 +2291,6 @@ PrefabInstance:
     - target: {fileID: 4254839942703892652, guid: fd6b1f47bb004c841b387d88863264ce, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 4063489551
-      objectReference: {fileID: 0}
-    - target: {fileID: 4254839942703892652, guid: fd6b1f47bb004c841b387d88863264ce, type: 3}
-      propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 3950898419
       objectReference: {fileID: 0}
     - target: {fileID: 4532234024122026284, guid: fd6b1f47bb004c841b387d88863264ce, type: 3}
       propertyPath: m_Name

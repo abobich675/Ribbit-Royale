@@ -106,8 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1465185915
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 4063489551
+  InScenePlacedSourceGlobalObjectIdHash: 3950898419
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   maxSpeed: 10
-  dampingFactor: 8
+  dampingFactor: 2
   swingingMovementBonus: 0.1
   camera: {fileID: 0}
   tongue: {fileID: 8838113352694672605, guid: c45ee84891523ae458242adc07ec4c59, type: 3}
@@ -167,7 +167,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &4964081775914930236
 MonoBehaviour:
@@ -218,7 +218,7 @@ SpringJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
   m_Distance: 1
-  m_DampingRatio: 0.7
+  m_DampingRatio: 0.6
   m_Frequency: 1
 --- !u!95 &7077384492828827768
 Animator:
