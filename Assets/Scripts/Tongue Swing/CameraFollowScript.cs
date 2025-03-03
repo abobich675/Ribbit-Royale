@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 
 public class CameraFollowScript : MonoBehaviour
@@ -5,10 +6,27 @@ public class CameraFollowScript : MonoBehaviour
     public float followRate = 10;
     public float xOffset = 0;
     public float yOffset = 0;
-    public Transform target;
+    Transform target;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        try 
+        {
+            foreach (GameObject player in players)
+            {
+                if (player.GetComponent<NetworkObject>().IsOwner)
+                {
+                    target = player.transform;
+                }
+            }
+        } catch {
+            target = players[0].transform;
+        }
+        
+        
+
         transform.position = new Vector3(target.position.x + xOffset, target.position.y + yOffset, -10);
     }
 
