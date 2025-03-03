@@ -10,6 +10,11 @@ public class CameraFollowScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        FindPlayer();
+        transform.position = new Vector3(target.position.x + xOffset, target.position.y + yOffset, -10);
+    }
+
+    void FindPlayer() {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
         try 
@@ -24,16 +29,16 @@ public class CameraFollowScript : MonoBehaviour
         } catch {
             target = players[0].transform;
         }
-        
-        
-
-        transform.position = new Vector3(target.position.x + xOffset, target.position.y + yOffset, -10);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 targetPosition = new Vector3(target.position.x + xOffset, target.position.y + yOffset, -10);
-        transform.position += (targetPosition - transform.position) / followRate; // Move camera to the middle of the target and the camera
+        try {
+            Vector3 targetPosition = new Vector3(target.position.x + xOffset, target.position.y + yOffset, -10);
+            transform.position += (targetPosition - transform.position) / followRate; // Move camera to the middle of the target and the camera
+        } catch {
+            FindPlayer();
+        }
     }
 }

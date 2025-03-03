@@ -134,8 +134,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  maxSpeed: 10
-  dampingFactor: 2
+  maxSpeed: 12.5
+  dampingFactor: 0.5
   swingingMovementBonus: 0.1
   tongue: {fileID: 8838113352694672605, guid: c45ee84891523ae458242adc07ec4c59, type: 3}
   animators:
@@ -219,7 +219,7 @@ SpringJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
   m_Distance: 1
-  m_DampingRatio: 0.6
+  m_DampingRatio: 0.5
   m_Frequency: 1
 --- !u!95 &7077384492828827768
 Animator:
@@ -293,7 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkTransformExpanded: 0
-  AuthorityMode: 0
+  AuthorityMode: 1
   TickSyncChildren: 0
   UseUnreliableDeltas: 0
   SyncPositionX: 1
@@ -329,6 +329,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkRigidbodyBaseExpanded: 0
-  UseRigidBodyForMotion: 0
+  UseRigidBodyForMotion: 1
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1

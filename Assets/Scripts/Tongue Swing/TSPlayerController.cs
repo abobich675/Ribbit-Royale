@@ -50,8 +50,9 @@ public class PlayerController : NetworkBehaviour
         tongue = Instantiate(tongue);
         tongue.SetActive(false);
         
-        if (IsOwner)
-            GetComponent<NetworkObject>().Spawn();
+        if (!IsOwner)
+            return;
+        //     GetComponent<NetworkObject>().Spawn();
 
         PlayerInput input = GetComponent<PlayerInput>();
         moveAction = input.actions["Move"];
