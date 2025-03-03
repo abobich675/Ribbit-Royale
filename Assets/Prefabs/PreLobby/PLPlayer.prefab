@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3025909043203801142}
   - component: {fileID: 1261070495666260438}
   - component: {fileID: -4178224365377203762}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PLPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -253,10 +253,10 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
