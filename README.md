@@ -8,7 +8,7 @@ The objective is to provide a distinctive experience that blends competitive gam
 
 ## Current State of the Game
 The game is currently in early production, so not all game features are implemented yet. Here are some of the features we *have* implemented:
-- Lickity Split Game (Singleplayer Only)
+- Lickity Split Game (Singleplayer, Partial Implementation for Multiplayer)
 - Swamp Spotting Game (Singleplayer or Multiplayer)
 
 Features that we're still working on:
@@ -23,7 +23,6 @@ Known Bugs:
 - In Prelobby, multiplayer frogs are shown as the user's color instead of their chosen color.
 - In Lickity Split Game, reaching the goal doesn't end the game + send you to the scoreboard screen for a few seconds.
 - In Swamp Spotting Game, some animals are facing the wrong direction in multiplayer.
-- Seemingly random white lines appear in some of the scenes.
 - Returning to the prelobby creates duplicates of the frogs.
 - Scoreboard breaks in multiplayer.
 
