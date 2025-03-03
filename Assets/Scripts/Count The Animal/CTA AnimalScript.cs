@@ -1,6 +1,8 @@
 using UnityEngine;
+using Unity.Netcode;
+using NUnit.Framework;
 
-public class CTAAnimalScript : MonoBehaviour
+public class CTAAnimalScript : NetworkBehaviour
 {
     public float VELOCITY = 1;
     public string animalType = null;
@@ -10,9 +12,19 @@ public class CTAAnimalScript : MonoBehaviour
     Rigidbody2D rb;
     int spawnLocation;
 
+    private bool isHost;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
+        ulong playerId = playerData.clientId;
+        ulong ownerId = NetworkManager.Singleton.CurrentSessionOwner;
+        isHost = playerId == ownerId;
+        if (!isHost)
+            return;
+        
+        GetComponent<NetworkObject>().Spawn();
 
         rb = GetComponent<Rigidbody2D>();
 
@@ -108,6 +120,9 @@ public class CTAAnimalScript : MonoBehaviour
     // Destroys the animal if it collides with the proper barrier
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if (!isHost)
+            return;
+
         if (rb.linearVelocityX < 0 && collision.gameObject == leftBarrier)
         {
             Destroy(gameObject);

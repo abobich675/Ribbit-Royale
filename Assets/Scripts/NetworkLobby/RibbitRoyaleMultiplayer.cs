@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class RibbitRoyaleMultiplayer : NetworkBehaviour
 {
@@ -207,6 +208,7 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
         return -1;
     }
     
+    // Set the player finished
     public void SetPlayerFinished(bool finished){
         SetPlayerFinishedServerRpc(finished);
     }
@@ -221,6 +223,24 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
 
         playerDataNetworkList[playerDataIndex] = playerData;
     }
+
+    // Count the Animal Game
+    public void SetCTAPlayerData(int countedAnimalIndex, int finalCount){
+        SetCTAPlayerDataServerRpc(countedAnimalIndex, finalCount);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SetCTAPlayerDataServerRpc(int countedAnimalIndex, int finalCount, ServerRpcParams serverRpcParams = default){
+        int playerDataIndex = GetPlayerDataIndexFromClientId(serverRpcParams.Receive.SenderClientId); 
+        if (playerDataIndex == -1) return;
+
+        PlayerData playerData = playerDataNetworkList[playerDataIndex]; 
+        playerData.countedAnimalIndex = countedAnimalIndex;
+        playerData.finalCount = finalCount;
+
+        playerDataNetworkList[playerDataIndex] = playerData;
+    }
+    
 
     public int GetPlayerCount(){
         return playerDataNetworkList.Count;

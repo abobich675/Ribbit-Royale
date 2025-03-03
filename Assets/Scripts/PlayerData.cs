@@ -1,6 +1,7 @@
 using System;
 using Unity.Netcode;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
 {
@@ -9,6 +10,13 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
     // Create a variable to store the colorId of the user when they join the lobby
     public int colorId;
     public bool finished;
+
+    // Count The Animal Game
+    public int countedAnimalIndex;
+    public int finalCount;
+
+
+
     public Vector3 playerPos;
     public Quaternion playerRot;
 
@@ -22,7 +30,8 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
     {
         serializer.SerializeValue(ref clientId);
         serializer.SerializeValue(ref colorId);
-        serializer.SerializeValue(ref finished);
+        serializer.SerializeValue(ref countedAnimalIndex);
+        serializer.SerializeValue(ref finalCount);
     }
     
     // Public getter to get location of playerObject

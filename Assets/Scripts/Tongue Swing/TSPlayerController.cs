@@ -268,7 +268,7 @@ public class PlayerController : NetworkBehaviour
             foreach (var client in NetworkManager.Singleton.ConnectedClients)
             {
                 ulong currentClientId = client.Key;
-                Debug.Log(RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(currentClientId).finished);
+                // Debug.Log(RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(currentClientId).finished);
                 if (!RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(currentClientId).finished)
                 {
                     allFinished = false;

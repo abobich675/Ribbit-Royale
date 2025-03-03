@@ -3,8 +3,9 @@ using UnityEditor;
 using System;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
+using Unity.Netcode;
 
-public class CTAMain : MonoBehaviour
+public class CTAMain : NetworkBehaviour
 {
 
     public float GAME_LENGTH = 10;
@@ -42,9 +43,29 @@ public class CTAMain : MonoBehaviour
 
     bool gameActive;
 
+    private bool isHost;
+    private int finalCount;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
+        ulong playerId = playerData.clientId;
+        ulong ownerId = NetworkManager.Singleton.CurrentSessionOwner;
+        isHost = playerId == ownerId;
+        if (!isHost)
+        {
+            gameActive = true;
+            finalCountedAnimalsText.text = "";
+            finalCountedAnimalsText.gameObject.SetActive(false);
+            
+            PlayerData hostData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(ownerId);
+            ChooseAnimalToCount(hostData.countedAnimalIndex);
+
+            Invoke("EndGame", GAME_LENGTH);
+            return;
+        }
+
         gameActive = true;
         finalCountedAnimalsText.text = "";
         finalCountedAnimalsText.gameObject.SetActive(false);
@@ -80,6 +101,14 @@ public class CTAMain : MonoBehaviour
         int animalIndex = Random.Range(0, 5);
         countedAnimal = animals[animalIndex].name;
         countedAnimalImage.sprite = animals[animalIndex].animalPrefab.GetComponent<SpriteRenderer>().sprite;
+        
+        RibbitRoyaleMultiplayer.Instance.SetCTAPlayerData(animalIndex, 0);
+    }
+
+    void ChooseAnimalToCount(int animalIndex)
+    {
+        countedAnimal = animals[animalIndex].name;
+        countedAnimalImage.sprite = animals[animalIndex].animalPrefab.GetComponent<SpriteRenderer>().sprite;
     }
 
     // Summon a Random Animal
@@ -112,6 +141,11 @@ public class CTAMain : MonoBehaviour
     void StopSpawning()
     {
         CancelInvoke("SummonRandomAnimal");
+
+        finalCount = GetAnimal(countedAnimal).count;
+        PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
+        
+        RibbitRoyaleMultiplayer.Instance.SetCTAPlayerData(playerData.countedAnimalIndex, finalCount);
     }
 
     // Ends the game
@@ -120,14 +154,23 @@ public class CTAMain : MonoBehaviour
         // Stop the game
         gameActive = false;
 
-        // Display the final counted animals
-        int finalCount = GetAnimal(countedAnimal).count;
+        if (!isHost)
+        {
+            ulong ownerId = NetworkManager.Singleton.CurrentSessionOwner;
+            PlayerData hostData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(ownerId);
+            finalCount = hostData.finalCount;
+
+            Debug.Log("CountedAnimalIndex: " + hostData.countedAnimalIndex);
+            Debug.Log("Final Count: " + finalCount);
+        }
+
+        
         finalCountedAnimalsText.gameObject.SetActive(true);
         finalCountedAnimalsText.text = finalCount.ToString();
 
-        foreach (Animal animal in animals) {
-            Debug.Log(animal.name + " count: " + animal.count);
-        }
+        // foreach (Animal animal in animals) {
+        //     Debug.Log(animal.name + " count: " + animal.count);
+        // }
 
         Invoke("ReturnToLobby", 3);
     }
@@ -144,3 +187,7 @@ public class CTAMain : MonoBehaviour
         return gameActive;
     }
 }
+
+
+// RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(true);
+// Debug.Log(RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(currentClientId).finished);

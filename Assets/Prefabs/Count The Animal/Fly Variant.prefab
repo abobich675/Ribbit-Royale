@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4950168393439334685, guid: b60482a481c4249f391604290f14d481, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4950168393439334685, guid: b60482a481c4249f391604290f14d481, type: 3}
       propertyPath: m_LocalPosition.z
@@ -101,14 +101,48 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8239391400089155684, guid: b60482a481c4249f391604290f14d481, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 8260996511448323646}
+    - targetCorrespondingSourceObject: {fileID: 8239391400089155684, guid: b60482a481c4249f391604290f14d481, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4656512370362322779}
+    - targetCorrespondingSourceObject: {fileID: 8239391400089155684, guid: b60482a481c4249f391604290f14d481, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2247755455494029968}
+    - targetCorrespondingSourceObject: {fileID: 8239391400089155684, guid: b60482a481c4249f391604290f14d481, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -856022715903269795}
   m_SourcePrefab: {fileID: 100100000, guid: b60482a481c4249f391604290f14d481, type: 3}
 --- !u!1 &735621576292293585 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8239391400089155684, guid: b60482a481c4249f391604290f14d481, type: 3}
   m_PrefabInstance: {fileID: 8677663799739360181}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8260996511448323646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735621576292293585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 221751751
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!212 &4656512370362322779
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -164,3 +198,59 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2247755455494029968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735621576292293585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 148304b103a2e794d86b57a233f1bf57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkTransformExpanded: 0
+  AuthorityMode: 0
+  TickSyncChildren: 0
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  SwitchTransformSpaceWhenParented: 0
+  Interpolate: 1
+  SlerpPosition: 0
+--- !u!114 &-856022715903269795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735621576292293585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 9132691100404510336}
+--- !u!95 &9132691100404510336 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 491058475116285237, guid: b60482a481c4249f391604290f14d481, type: 3}
+  m_PrefabInstance: {fileID: 8677663799739360181}
+  m_PrefabAsset: {fileID: 0}
