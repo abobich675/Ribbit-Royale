@@ -14,8 +14,8 @@ The objective is to provide a distinctive experience that blends competitive gam
 - Use Unity Test Runner to run tests
 
 ## How to Run the System
-- To run the game, you must aquire a build file. To do this, you can follow the instructons above. Once aquired, you can play the game by simply running the build file.
-- A Built package will be available to download shortly.
+- The current released version of the game can be found in the Builds folder of the repository (https://github.com/abobich675/Ribbit-Royale/tree/master/Builds). Locate the build for your computer architecture. Downloading and running the build will allow you to play Ribbit Royale.
+- To run the game using the latest version of the repository, regardless of the last released build you must create your own build file, following the instructons above.
 
 As a team of newcomers to game development, this project also provides a unique opportunity to grow our skills in game design, networking, and the Unity engine, while contributing to a project that could offer both personal and professional rewards.
 
