@@ -63,7 +63,11 @@ public class CTAMain : NetworkBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        CreatePlayerCounters();
+        try {
+            CreatePlayerCounters();
+        } catch {
+            return;
+        }
         
         PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
         ulong playerId = playerData.clientId;
