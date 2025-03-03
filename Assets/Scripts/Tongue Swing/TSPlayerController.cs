@@ -20,8 +20,6 @@ public class PlayerController : NetworkBehaviour
     public float dampingFactor;
 
     public float swingingMovementBonus;
-
-    public new Camera camera;
     public GameObject tongue;
     public RuntimeAnimatorController[] animators;
 
@@ -36,18 +34,24 @@ public class PlayerController : NetworkBehaviour
     InputAction moveAction;
     InputAction attackAction;
 
+    private bool isHost;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        PlayerInput input = GetComponent<PlayerInput>();
-        moveAction = input.actions["Move"];
-        attackAction = input.actions["Attack"];
 
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
         tongue = Instantiate(tongue);
         tongue.SetActive(false);
+        
+        if (IsOwner)
+            GetComponent<NetworkObject>().Spawn();
+
+        PlayerInput input = GetComponent<PlayerInput>();
+        moveAction = input.actions["Move"];
+        attackAction = input.actions["Attack"];
 
         SetColor();
         
@@ -63,8 +67,12 @@ public class PlayerController : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        DoInteraction();
-        DoMovement();
+        if (IsOwner)
+        {
+            DoInteraction();
+            DoMovement();
+        }
+        
         UpdateAnimator();
     }
     
@@ -94,7 +102,7 @@ public class PlayerController : NetworkBehaviour
         if (attackAction.triggered)
         {
             // Locate object to connect to
-            Vector2 mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D[] hits = Physics2D.RaycastAll(mousePosition, Vector2.zero);
 
             int bestHitIndex = -1;
