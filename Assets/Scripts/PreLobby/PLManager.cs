@@ -70,10 +70,10 @@ public class PreLobbyManager : NetworkBehaviour
             switch (sceneName)
             {
                 case "PreLobbyScene":
-                    SpawnPlayer(PrelobbyPrefab, clientId);
+                    SpawnPlayer(PrelobbyPrefab, clientId, 1f);
                     break;
                 case "TongueSwingGame":
-                    SpawnPlayer(TongueSwingPrefab, clientId);
+                    SpawnPlayer(TongueSwingPrefab, clientId, 10f);
                     break;
             }
 
@@ -86,8 +86,10 @@ public class PreLobbyManager : NetworkBehaviour
         SpawnPlayer(PrelobbyPrefab, clientId);
     }
 
-    private void SpawnPlayer(Transform prefab, ulong clientId){
+    private void SpawnPlayer(Transform prefab, ulong clientId, float randX = 0){
         Transform playerTransform = Instantiate(prefab);
         playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
+        // Randomize X pos by a little bit
+        playerTransform.position += Vector3.right * UnityEngine.Random.Range(-randX, randX);
     }
 }
