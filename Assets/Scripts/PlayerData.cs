@@ -12,11 +12,15 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
     public Vector3 playerPos;
     public Quaternion playerRot;
     public int playerScore;
+    public int previousRoundPlayerScore;
 
     // This function will store player data based off of that players clientId
     public bool Equals(PlayerData other)
     {
-        return clientId == other.clientId && colorId == other.colorId && playerScore == other.playerScore;
+        return clientId == other.clientId && 
+               colorId == other.colorId &&
+               playerScore == other.playerScore && 
+               previousRoundPlayerScore == other.previousRoundPlayerScore;
     }
     // This function will allow you to transfer the player data over a network
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
@@ -25,11 +29,7 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
         serializer.SerializeValue(ref colorId);
         serializer.SerializeValue(ref finished);
         serializer.SerializeValue(ref playerScore);
-    }
-
-    public void IncrementPlayerScore(int incScore)
-    {
-        playerScore += incScore;
+        serializer.SerializeValue(ref previousRoundPlayerScore);
     }
 
     public int GetPlayerScore()

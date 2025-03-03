@@ -21,7 +21,9 @@ public class ScoreController : NetworkBehaviour
     private GameObject infoPanel;
     private float timerStartDelay = 8f;
     private List<ScoreEntry> scoreEntries = new List<ScoreEntry>();
+    
     private Dictionary<ulong, int> rankedIds = new Dictionary<ulong, int>();
+    private Dictionary<ulong, int> countDict = new Dictionary<ulong, int>();
 
     void Awake()
     {
@@ -30,7 +32,6 @@ public class ScoreController : NetworkBehaviour
         DontDestroyOnLoad(scoreCanvas);
     }
     
-    // 
     void Start()
     {
         Debug.Log("ScoreController Start...");
@@ -48,7 +49,14 @@ public class ScoreController : NetworkBehaviour
     private void DestroyScoreboard()
     {
         Debug.Log("Destroying nonpersistScoreCanvas, scoreManager=null...");
-        Destroy(nonpersistScoreCanvas);
+        try
+        {
+            Destroy(nonpersistScoreCanvas);
+        } catch (Exception e)
+        {
+            Debug.Log("DestroyScoreboard No ScoreboardManager to destroy..." + e);
+        }
+        
         scoreManager = null;
     }
     
@@ -71,17 +79,25 @@ public class ScoreController : NetworkBehaviour
         {
             Debug.Log("_playerCount != true player count! ERROR");
         }
-        
         CreateInGameScoreboard();
     }
     
 
     public void TransitionToRoundScoreboard()
     {
+        StartCoroutine(CoroutineTransitionToRoundScoreboard());
+    }
+
+    private IEnumerator CoroutineTransitionToRoundScoreboard()
+    {
+        yield return new WaitForSeconds(3f);
         DestroyScoreboard();
         Loader.LoadNetwork(Loader.Scene.ScoreboardScene);
-        Invoke(nameof(SpinUpNewRoundScoreManager), 1f);
-        Invoke(nameof(LoadPreLobbyScene), 5f);
+        yield return new WaitForSeconds(0.4f);
+        SpinUpNewRoundScoreManager();
+        yield return new WaitForSeconds(5f);
+        LoadPreLobbyScene();
+        yield return null;
     }
 
     private void LoadPreLobbyScene()
@@ -95,6 +111,7 @@ public class ScoreController : NetworkBehaviour
         scoreEntries = scoreManager.GetEntryList();
         ulong entryId;
         int entryRank;
+        rankedIds.Clear();
         foreach (var entry in scoreEntries)
         {
             // Gets player ulong id and rank, adds to rankedIds dict
@@ -107,22 +124,39 @@ public class ScoreController : NetworkBehaviour
         {
             if (rankEntry.Value == 1)
             {
-                var pData = GetPlayerData(rankEntry.Key);
-                pData.IncrementPlayerScore(1);
-                Debug.Log("Setting player playerID: " + rankEntry.Key + " | Score: " + rankEntry.Value
-                 + "\n PlayerData: " + pData.GetPlayerScore() + " | " + pData.playerScore);
+                RibbitRoyaleMultiplayer.Instance.IncPlayerScore(1, rankEntry.Key);
             }
         }
         TransitionToRoundScoreboard();
         return;
     }
 
+    public void CTA_CalculatePlayerScores(int playerCount, int finalCount)
+    {
+        // Currently only functional for 1 call for singleplayer
+        // Will rewrite when we get multiplayer working
+
+        // Gets owner clientID
+        PlayerData ctaPlayerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
+        ulong ctaPlayerId = ctaPlayerData.clientId;
+        ulong ownerId = NetworkManager.Singleton.CurrentSessionOwner;
+        var isHost = ctaPlayerId == ownerId;
+        if (!isHost)
+        {
+            return;
+        }
+        
+        // Need to check highest score, single player implementation below
+        // Should check who's score has the smallest difference to finalCount, award multiple if ties
+        RibbitRoyaleMultiplayer.Instance.IncPlayerScore(1, ctaPlayerId);
+        TransitionToRoundScoreboard();
+    }
+
     private PlayerData GetPlayerData(ulong playerId)
     {
         return RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(playerId);
     }
-
-
+    
     private ScoreManager SpinUpNewRoundScoreManager()
     {
         InstantiateNonPersistScoreCanvas();
@@ -130,11 +164,10 @@ public class ScoreController : NetworkBehaviour
         scoreManager.SetupScoreboard(nonpersistScoreCanvas.transform, 0, _playerCount, timerDuration, timerStartDelay);
         foreach (var entry in playerDataDict)
         {
-            //Debug.Log("COLOR: " + entry.Value.clientId);
             var pData = GetPlayerData(entry.Key);
             var score = pData.GetPlayerScore();
-            Debug.Log("RoundScoreManager uID: " + entry.Key + " | score: " + entry.Value.GetPlayerScore());
-            scoreManager.CreatePlayerEntry(entry.Key, score, entry.Value.colorId, 0);
+            var prevScore = pData.previousRoundPlayerScore;
+            scoreManager.CreatePlayerEntry(entry.Key, score, entry.Value.colorId, 0, prevScore);
         }
 
         scoreManager.UpdateRanking();

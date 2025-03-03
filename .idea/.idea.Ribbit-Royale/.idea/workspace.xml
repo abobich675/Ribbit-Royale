@@ -6,42 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="80f5dd4c-6adf-4d93-835d-cdcfdeb62e1d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Ribbit-Royale/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Ribbit-Royale/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/infoPopup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/infoPopup.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ScoreboardScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ScoreboardScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ScoreEntry.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ScoreEntry.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Count The Animal/CTA Main.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Count The Animal/CTA Main.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Count The Animal/CTA PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Count The Animal/CTA PlayerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/NetworkLobby/RibbitRoyaleMultiplayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NetworkLobby/RibbitRoyaleMultiplayer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/ScoreController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ScoreController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/ScoreManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ScoreManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TokenInstance.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TokenInstance.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tongue Swing/TSPlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tongue Swing/TSPlayerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Scoreboard/ScoreEntry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Scoreboard/ScoreEntry.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/Managed/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/Managed/Assembly-CSharp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/Managed/ScoreboardAssembly.dll" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/Managed/ScoreboardAssembly.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/Managed/Tests.PlayMode.dll" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/Managed/Tests.PlayMode.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/boot.config" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/boot.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/globalgamemanagers" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/globalgamemanagers" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/globalgamemanagers.assets" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/globalgamemanagers.assets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/level0" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/level0" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/level1" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/level1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/level2" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/level2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/level3" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/level3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/level4" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/level4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/level5" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/level5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/level6" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/level6" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/resources.assets" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/resources.assets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/resources.assets.resS" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/resources.assets.resS" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/sharedassets0.assets" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/sharedassets0.assets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/sharedassets1.assets" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/sharedassets1.assets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/sharedassets2.assets" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/sharedassets2.assets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/sharedassets3.assets" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/sharedassets3.assets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/sharedassets3.assets.resS" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/sharedassets3.assets.resS" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/sharedassets4.assets" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/sharedassets4.assets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/sharedassets4.assets.resS" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/sharedassets4.assets.resS" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/sharedassets5.assets" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/sharedassets5.assets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/sharedassets6.assets" beforeDir="false" afterPath="$PROJECT_DIR$/build_directory/Ribbit Royale_Data/sharedassets6.assets" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,30 +56,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.C#&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "scoreboard-integration",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.sourceCode.C#",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\Ryan Dobkin\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\Ryan Dobkin\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\Ryan Dobkin\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\Ryan Dobkin\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\Ryan Dobkin\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\Ryan Dobkin\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$PROJECT_DIR$/build_directory\Ribbit Royale.exe" />
@@ -183,7 +155,7 @@
       <workItem from="1740701155822" duration="6972000" />
       <workItem from="1740709228359" duration="9647000" />
       <workItem from="1740722568703" duration="526000" />
-      <workItem from="1740965601435" duration="10475000" />
+      <workItem from="1740965601435" duration="25501000" />
     </task>
     <servers />
   </component>

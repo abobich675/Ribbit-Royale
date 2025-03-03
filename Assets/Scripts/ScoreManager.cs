@@ -295,7 +295,7 @@ namespace UI.Scoreboard
             return scoreEntry;
         }
 
-        public void CreatePlayerEntry(ulong clientId, int score, int colorId, int boardType)
+        public void CreatePlayerEntry(ulong clientId, int score, int colorId, int boardType, int prevScore = 0)
         {
             ScoreEntry scoreEntry = AddPlayer(clientId, boardType);
             if (boardType == 1)
@@ -309,10 +309,14 @@ namespace UI.Scoreboard
                         scoreEntry.SetPlayerGameObject(player);
                     }
                 }
+            } else if (gameType == 0)
+            {
+                UpdatePlayerRank(scoreEntry, prevScore);
             }
             UpdateEntryColors(scoreEntry, 
                 colorSpriteDictionary[colorId].Item1, colorSpriteDictionary[colorId].Item2);
             UpdateScoreText(scoreEntry, score);
+            
         }
 
         public List<ScoreEntry> GetEntryList()
