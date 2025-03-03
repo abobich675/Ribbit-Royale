@@ -6,6 +6,18 @@ Featuring a playful art style and a variety of unique, frog-themed interactions,
 ## Objective
 The objective is to provide a distinctive experience that blends competitive gameplay with quirky mechanics, making each mini-game feel fresh and enjoyable. Players can compete in up to four-player multiplayer mode, with a series of mini-games designed to test their skills and cooperation. Ribbit Royale offers at least three unique games with visually differentiated elements that make each challenge memorable and fun. Through the creation of this game, we aim to push the boundaries of the typical party game genre by incorporating fun mechanics that highlight the playful essence of frogs, making it not only an entertaining experience for players but also an intriguing marketable product. And best of all, our product will be made ***FREE***, putting us ahead of our competitors. 
 
+## Current State of the Game
+The game is currently in early production, so not all game features are implemented yet. Here are some of the features we *have* implemented:
+- Lickity Split Game (Singleplayer Only)
+- Swamp Spotting Game (Singleplayer or Multiplayer)
+
+Features that we're still working on:
+- Lickity Split Game (Multiplayer + Final Map Layout)
+- Snake Chase Game
+- Pregame instructions
+- Various Art
+- Sound Effects / Music
+
 ## How to Build and Test
 - Clone the repository: git clone https://github.com/abobich675/Ribbit-Royale.git.
 - Open the project in Unity (ensure the correct Unity version is installed).
