@@ -42,4 +42,7 @@ public class CTAPlayerConroller : MonoBehaviour
             counterText.text = counter.ToString();
         }
     }
+
+    // get the counter field
+    public int CTA_GetPlayerCounter() { return counter; }
 }

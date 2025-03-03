@@ -226,7 +226,10 @@ public class CTAMain : NetworkBehaviour
         //     Debug.Log(animal.name + " count: " + animal.count);
         // }
 
-        Invoke("ReturnToLobby", 3);
+        //Invoke("ReturnToLobby", 3);
+        
+        var scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
+        scoreController.CTA_CalculatePlayerScores(GetComponent<CTAPlayerConroller>().counter, finalCount);
     }
 
     private void ReturnToLobby() {

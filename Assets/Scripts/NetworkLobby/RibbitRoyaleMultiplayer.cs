@@ -246,4 +246,23 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
     public int GetPlayerCount(){
         return playerDataNetworkList.Count;
     }
+
+    public void IncPlayerScore(int score, ulong playerId)
+    {
+        IncPlayerScoreServerRpc(score, playerId);
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    private void IncPlayerScoreServerRpc(int score, ulong playerId, ServerRpcParams serverRpcParams = default)
+    {
+        int playerDataIndex = GetPlayerDataIndexFromClientId(playerId);
+        if (playerDataIndex == -1) return;
+
+        PlayerData playerData = playerDataNetworkList[playerDataIndex];
+        playerData.previousRoundPlayerScore = playerData.playerScore;
+        playerData.playerScore += score;
+
+        playerDataNetworkList[playerDataIndex] = playerData;
+    }
+    
 }

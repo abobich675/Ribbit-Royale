@@ -43,16 +43,13 @@ namespace UI.Scoreboard
         private Color yellow = new Vector4(.84f, .76f, .117f, 1f);
 
         private float timeRemainingGlobal = 1;
-
-        //public GameObject player0;
+        
         private string timeLeftCounter = "null";
         private List<ScoreEntry> completePlayerList = new List<ScoreEntry>();
-
-        public bool enableScoreboard = false;
+        
 
         private int gameType;
-
-        public bool alwaysShowScoreboard;
+        
         public bool isTimerEnabled;
         public int TIMER_DURATION;
 
@@ -111,18 +108,18 @@ namespace UI.Scoreboard
             {
                 foreach (var entry in scoreEntries)
                 {
-                    //Debug.Log(entry + "|" + scoreEntries + "|" + timeRemainingGlobal);
-                    //if (!entry.GetPlayerGameObject()) { continue; }
                     if (completePlayerList.Contains(entry)) { continue; }
+                    //if (entry.GetPlayerGameObject())
                     Vector2 playerVec = entry.GetPlayerLocation();
                     Vector2 finishVec = new Vector2(29.6f, 94.8f);
                     // sqrt[ ( a^2 + b^2) ] = c
                     var distanceAway =
                         Mathf.Sqrt(Mathf.Pow((finishVec.x - playerVec.x), 2) + Mathf.Pow((finishVec.y - playerVec.y), 2));
-                    if (distanceAway <= 1)
+                    if (distanceAway <= 5)
                     {
                         entry.SetScore(-1, timeLeftCounter);
                         completePlayerList.Add(entry);
+                        UpdatePlayerRank(entry, completePlayerList.Count);
                     }
                     else
                     {
@@ -161,6 +158,16 @@ namespace UI.Scoreboard
                             //Debug.Log("Timer Complete. Should terminate/end minigame, go to score screen.");
                             timerUIController.currentTime.text = "0:00";
                             timeLeftCounter = "0:00";
+                            foreach (var entry in completePlayerList)
+                            {
+                                entry.SetScore(-1, "DNF");
+                            }
+
+                            Debug.Log("Out of time! Ending Minigame...");
+                            yield return new WaitForSeconds(3f);
+                            
+                            ScoreController scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();;
+                            scoreController.CalculatePlayerScores();
                             break;
                         }
                     }
@@ -264,11 +271,11 @@ namespace UI.Scoreboard
             }
         }
 
-        private ScoreEntry AddPlayer(string playerName, int boardType)
+        private ScoreEntry AddPlayer(ulong playerId, int boardType)
         {
             // Creates new ScoreEntry object, sets parameters, adds to scoreEntries list, returns scoreEntry object
             ScoreEntry scoreEntry = new ScoreEntry();
-            scoreEntry.SetPlayerName(playerName);
+            scoreEntry.SetPlayerName(playerId);
             if (boardType == 0)
             {
                 // Round Scoreboard
@@ -288,9 +295,9 @@ namespace UI.Scoreboard
             return scoreEntry;
         }
 
-        public void CreatePlayerEntry(ulong clientId, int score, int colorId, int boardType)
+        public void CreatePlayerEntry(ulong clientId, int score, int colorId, int boardType, int prevScore = 0)
         {
-            ScoreEntry scoreEntry = AddPlayer(clientId.ToString(), boardType);
+            ScoreEntry scoreEntry = AddPlayer(clientId, boardType);
             if (boardType == 1)
             {
                 foreach (var player in playerObjectList)
@@ -298,15 +305,23 @@ namespace UI.Scoreboard
                     var gameObjectClientId = player.GetComponent<NetworkObject>().OwnerClientId;
                     if (gameObjectClientId == clientId)
                     {
-                        Debug.Log("Set Player Entry GO : " + clientId + " : " + gameObjectClientId);
+                        Debug.Log("Set Player Entry GO : clientId: " + clientId + " | gameObjectClientId: " + gameObjectClientId);
                         scoreEntry.SetPlayerGameObject(player);
                     }
                 }
+            } else if (gameType == 0)
+            {
+                UpdatePlayerRank(scoreEntry, prevScore);
             }
-            //scoreEntry.SetPlayerGameObject(RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(clientId));
             UpdateEntryColors(scoreEntry, 
                 colorSpriteDictionary[colorId].Item1, colorSpriteDictionary[colorId].Item2);
             UpdateScoreText(scoreEntry, score);
+            
+        }
+
+        public List<ScoreEntry> GetEntryList()
+        {
+            return scoreEntries;
         }
 
         public void UpdatePlayerRank(ScoreEntry entry, int rank)
@@ -314,25 +329,25 @@ namespace UI.Scoreboard
             switch (rank)
             {
                 case 1:
-                    entry.SetRank(rank1);
+                    entry.SetRank(rank1, 1);
                     return;
                 case 2:
-                    entry.SetRank(rank2);
+                    entry.SetRank(rank2, 2);
                     return;
                 case 3:
-                    entry.SetRank(rank3);
+                    entry.SetRank(rank3, 3);
                     return;
                 case 4:
-                    entry.SetRank(rank4);
+                    entry.SetRank(rank4, 4);
                     return;
             }
         }
 
-        public void UpdatePlayerScore(string playerName, int score, bool isIncrement)
+        public void UpdatePlayerScore(ulong playerId, int score, bool isIncrement)
         {
             foreach (ScoreEntry entry in scoreEntries)
             {
-                if (entry.GetPlayerName() == playerName)
+                if (entry.GetPlayerName() == playerId)
                 {
                     if (isIncrement)
                     {
@@ -347,11 +362,11 @@ namespace UI.Scoreboard
             }
         }
 
-        public int GetPlayerScore(string playerName)
+        public int GetPlayerScore(ulong playerId)
         {
             foreach (ScoreEntry entry in scoreEntries)
             {
-                if (entry.GetPlayerName() == playerName)
+                if (entry.GetPlayerName() == playerId)
                 {
                     return entry.GetScore();
                 }
@@ -398,10 +413,7 @@ namespace UI.Scoreboard
             }
 
             Debug.Log("Rankings Sorted, Starting AnimateRankChange() : " + scoreEntries + " : " + sortedP);
-            //if (sortedP != scoreEntries)
-            //{
             StartCoroutine(AnimateRankChange(sortedP));
-            //}
         }
 
         private IEnumerator AnimateRankChange(List<ScoreEntry> sortedP)
