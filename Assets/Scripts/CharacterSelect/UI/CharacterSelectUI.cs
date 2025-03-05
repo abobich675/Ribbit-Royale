@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using Unity.Netcode;
 using Unity.Services.Lobbies.Models;
@@ -30,6 +31,7 @@ public class CharacterSelectUI : MonoBehaviour
             CharacterSelectReady.Instance.SetPlayerReady();
         });
     }
+
 
     private void Start(){
         // Get lobby information when the character select scene starts 

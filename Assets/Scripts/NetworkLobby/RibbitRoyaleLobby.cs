@@ -34,6 +34,7 @@ public class RibbitRoyaleLobby : MonoBehaviour{
     private float heartbeatTimer;
     // Timer for diplaying a lobby periodically
     private float listLobbiesTimer;
+    
 
     private void Awake(){
         // Set a singleton instance 
@@ -90,7 +91,7 @@ public class RibbitRoyaleLobby : MonoBehaviour{
             // Once the timer reaches 0
             if(heartbeatTimer <= 0f){
                 // The max the heartbeat timer is at is 15 seconds 
-                float heartbeatTimerMax = 15f;
+                float heartbeatTimerMax = 3f;
                 // Set the heartbeat timer to 
                 heartbeatTimer = heartbeatTimerMax;
                 //Send the heartbeat to the lobby to make sure it stays active
@@ -235,32 +236,41 @@ public class RibbitRoyaleLobby : MonoBehaviour{
     }
 
     // When a lobby is deleted (ended) the delete lobbby asyc function will be used passing the id of the lobby and set the joined lobby variable to null
-    public async void DeleteLobby(){
-        if (joinedLobby != null){
-            try{
-                await LobbyService.Instance.DeleteLobbyAsync(joinedLobby.Id);
-
-                joinedLobby = null;
-            } catch(LobbyServiceException e){
-                Debug.Log(e);
-            }
-        }
-    }
-
-    // When the user leaves the lobby it will remove the user from the lobby id and set joined lobby to null
     public async void LeaveLobby(){
         if (joinedLobby != null){
             try{
+                Debug.Log($"[RibbitRoyaleLobby] Leaving lobby: {joinedLobby.Id}");
                 await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
                 joinedLobby = null;
+                Debug.Log("[RibbitRoyaleLobby] Successfully left the lobby.");
             } catch(LobbyServiceException e){
-                Debug.Log(e);
+                Debug.LogError($"[RibbitRoyaleLobby] Error leaving lobby: {e}");
             }
+        } else {
+            Debug.LogWarning("[RibbitRoyaleLobby] LeaveLobby() called, but there is no joined lobby.");
         }
     }
+
+    public async void DeleteLobby(){
+        if (joinedLobby != null){
+            try{
+                Debug.Log($"[RibbitRoyaleLobby] Deleting lobby: {joinedLobby.Id}");
+                await LobbyService.Instance.DeleteLobbyAsync(joinedLobby.Id);
+                joinedLobby = null;
+                Debug.Log("[RibbitRoyaleLobby] Successfully deleted the lobby.");
+            } catch(LobbyServiceException e){
+                Debug.LogError($"[RibbitRoyaleLobby] Error deleting lobby: {e}");
+            }
+        } else {
+            Debug.LogWarning("[RibbitRoyaleLobby] DeleteLobby() called, but there is no joined lobby.");
+        }
+    }
+
 
     // This function will return the lobby the user has connected to
     public Lobby GetLobby(){
         return joinedLobby;
     }
+
+
 }
