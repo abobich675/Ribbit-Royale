@@ -165,6 +165,7 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
     // Initiates a server RPC to change the player's color using the provided colorId
     public void ChangePlayerColor(int colorId){
         ChangePlayerColorServerRpc(colorId);
+    
     }
 
     // Server-side RPC that changes the player's color if available and updates the player data

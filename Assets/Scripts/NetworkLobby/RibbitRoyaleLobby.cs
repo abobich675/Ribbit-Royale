@@ -271,6 +271,4 @@ public class RibbitRoyaleLobby : MonoBehaviour{
     public Lobby GetLobby(){
         return joinedLobby;
     }
-
-
 }

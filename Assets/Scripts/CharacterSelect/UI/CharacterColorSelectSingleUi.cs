@@ -12,12 +12,9 @@ public class Character : MonoBehaviour
 
     // Awake function for the different color options (buttons)
     private void Awake() {
-        // This will get the button component of the prefab CharacterColorSelectUI
-        var button = GetComponent<Button>();
-        // When the button is cliecked
-        button.onClick.AddListener(() => {
-            // Call the instance for the ChangePlayerColor function passing in the colorId of the button that has been pressed to set the character to the color of the button
+        GetComponent<Button>().onClick.AddListener(() => {
             RibbitRoyaleMultiplayer.Instance.ChangePlayerColor(colorId);
+            UpdateIsSelected();
         });
     }
 private void Start() {

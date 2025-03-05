@@ -58,7 +58,7 @@ public class LobbyUI : MonoBehaviour
  
     }
 
-    private void Oestroy()
+    private void OnDestroy()
     {
         RibbitRoyaleLobby.Instance.OnLobbyListChanged -= RibbitRoyaleLobby_OnLobbyListChanged;
 
