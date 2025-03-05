@@ -14,7 +14,7 @@ public class Character : MonoBehaviour
     private void Awake() {
         GetComponent<Button>().onClick.AddListener(() => {
             RibbitRoyaleMultiplayer.Instance.ChangePlayerColor(colorId);
-            UpdateIsSelected();
+
         });
     }
 private void Start() {
