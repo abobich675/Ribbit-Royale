@@ -20,16 +20,26 @@ public class CharacterSelectUI : MonoBehaviour
         mainMenuButton.onClick.AddListener(() =>{
             // Call the leave lobby function which removes the user from the lobby 
             RibbitRoyaleLobby.Instance.LeaveLobby();
-            // Shutdown the network connection
-            NetworkManager.Singleton.Shutdown();
-            // Load the main menu scene
-            Loader.Load(Loader.Scene.MainMenuScene);
+            // Start the coroutine to add a delay before loading the main menu
+            StartCoroutine(LoadMainMenuWithDelay());
         });
         // When the ready button is clicked
         readyButton.onClick.AddListener(() =>{
             // Call the set player ready functiion
             CharacterSelectReady.Instance.SetPlayerReady();
         });
+    }
+
+    // Coroutine to add a delay before loading the main menu
+    private IEnumerator LoadMainMenuWithDelay() {
+        // Wait for 5 seconds
+        yield return new WaitForSeconds(5f);
+
+        // Shutdown the network connection
+        NetworkManager.Singleton.Shutdown();
+
+        // Load the main menu scene
+        Loader.Load(Loader.Scene.MainMenuScene);
     }
 
 
