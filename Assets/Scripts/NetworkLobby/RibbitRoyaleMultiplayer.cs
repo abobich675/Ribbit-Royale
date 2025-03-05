@@ -183,6 +183,8 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
         playerData.colorId = colorId;
 
         playerDataNetworkList[playerDataIndex] = playerData;
+
+
     }
 
     // Checks if the requested colorId is available by verifying its not already assigned to another player

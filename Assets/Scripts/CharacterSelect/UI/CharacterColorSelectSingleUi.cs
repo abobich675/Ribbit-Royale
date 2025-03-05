@@ -35,6 +35,7 @@ private void Start() {
     private void UpdateIsSelected(){
         // Create an instance of the RibbitRoyaleMultiplayer and call function to get the colorId
         //If the colorId matches the colorId of the button then set image to the selectedGameObject
+        Debug.Log($"Checking selection for colorId {colorId}, Current Player Color ID: {RibbitRoyaleMultiplayer.Instance.GetPlayerData().colorId}");
         if (RibbitRoyaleMultiplayer.Instance.GetPlayerData().colorId == colorId){
             selectedGameObject.SetActive(true);
         } else{
