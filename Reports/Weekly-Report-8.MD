@@ -15,7 +15,8 @@
 - Polished Single Player for Tongue Swing Game and Count the Animal
 - Resolved the issue where Tongue Swing Game physics was inconsistent between Unity Player and Build
 ### Baron:
-- 
+- Finishing sprite work
+- Implementing continuous playability of Snake Chase Game
 ### Chase:
 - 
 ### Luke:
@@ -30,7 +31,7 @@
 ### Adam:
 - 
 ### Baron:
-- 
+- Finishing Snake Chase Game
 ### Chase:
 - 
 ### Luke:
