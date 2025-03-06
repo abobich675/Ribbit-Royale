@@ -21,7 +21,8 @@
 - Added Single Player for Count The Animal Game
 - Implemented Background art for Tongue Swinging Game
 ### Baron:
-- 
+- Implemented test cases for Continuous Integration
+- Background art for Snake Chase Game
 ### Chase:
 - 
 ### Luke:
@@ -42,7 +43,8 @@
 - Implement Multiplayer for Tongue Swinging Game
 - Implement Multiplayer for Count The Animal
 ### Baron:
-- 
+- Adding moving animations to Snake Chase Game
+- Adding multiplayer to Snake Chase Game
 ### Chase:
 - 
 ### Luke:
