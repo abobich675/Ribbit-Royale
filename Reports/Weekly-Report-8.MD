@@ -8,7 +8,7 @@
 
 ## What you did, what worked, what you learned, where you had trouble, and where you are stuck:
 ### Aidan: 
-- 
+- finish spritework
 ### Adam:
 - Implemented Tongue Swinging Game Multiplayer
 - Implemented Count the Animal Multiplayer
