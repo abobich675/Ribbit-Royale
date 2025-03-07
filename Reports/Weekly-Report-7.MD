@@ -24,7 +24,8 @@
 - Implemented test cases for Continuous Integration
 - Background art for Snake Chase Game
 ### Chase:
-- 
+- Created Functions to play the sounds
+- Have yet to implement calling the functions
 ### Luke:
 - Started implementing test autonation- Specifically test that the user is able to connect to a server located on the relay (Unity Services)
 - Helped integration of the multiplayer services into the minigames
@@ -46,7 +47,8 @@
 - Adding moving animations to Snake Chase Game
 - Adding multiplayer to Snake Chase Game
 ### Chase:
-- 
+- Add more sounds to the sounds function
+- Start implementing the sounds
 ### Luke:
 - Implement handleing for host disconnects
 - Implement handleing for client disconnects
