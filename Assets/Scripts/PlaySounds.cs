@@ -6,6 +6,7 @@ public class FrogSoundManager : MonoBehaviour
     public AudioClip frogCroak;      // Croak sound
     public AudioClip frogJump;     // Ribbit sound
     public AudioClip frogTongue;     // Tongue sound
+    public AudioClip backgroundMusic; // Background Music
 
     void Start()
     {
@@ -14,8 +15,11 @@ public class FrogSoundManager : MonoBehaviour
         {
             audioSource = GetComponent<AudioSource>();  // Make sure AudioSource is attached
             frogCroak = Resources.Load<AudioClip>("Sounds/croak");
-            frogTongue = Resources.Load<AudioClip>("Sounds/tongue_sound");
+            frogTongue = Resources.Load<AudioClip>("Sounds/tongue-sound");
             frogJump = Resources.Load<AudioClip>("Sounds/jump");
+            backgroundMusic = Resources.Load<AudioClip>("Sounds/music");
+            ambientNoise = Resources.Load<AudioClip>("Sounds/ambience-pond");
+
         }
     }
 
@@ -37,5 +41,16 @@ public class FrogSoundManager : MonoBehaviour
         audioSource.PlayOneShot(frogTongue);
     }
 
+    // Play the background music
+    public void PlayMusic()
+    {
+        audioSource.PlayOneShot(backgroundMusic);
+    }
+
+    // Play ambience pond
+    public void PlayAmbience()
+    {
+        audioSource.PlayOneShot(ambientNoise);
+    }
     
 }
