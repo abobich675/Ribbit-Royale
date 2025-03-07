@@ -7,6 +7,7 @@ public class FrogSoundManager : MonoBehaviour
     public AudioClip frogJump;     // Ribbit sound
     public AudioClip frogTongue;     // Tongue sound
     public AudioClip backgroundMusic; // Background Music
+    public AudioClip ambientNoise;    // Ambient Noise
 
     void Start()
     {
