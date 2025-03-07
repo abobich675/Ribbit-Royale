@@ -33,7 +33,7 @@
 ### Baron:
 - Finishing Snake Chase Game
 ### Chase:
-- 
+- All sounds implemented
 ### Luke:
 - 
 ### Ryan:
