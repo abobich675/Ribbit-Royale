@@ -131,6 +131,11 @@ public class ScoreController : NetworkBehaviour
         return;
     }
 
+    public void DropPlayerOnDisconnect()
+    {
+        //
+    }
+
     public void CTA_CalculatePlayerScores(int playerCount, int finalCount)
     {
         // Currently only functional for 1 call for singleplayer
@@ -186,6 +191,8 @@ public class ScoreController : NetworkBehaviour
         // Get infoUI prefab, instantiate as child of existing nonpersistScoreCanvas
         var infoPrefab = Resources.Load<GameObject>("infoPopup");
         infoPanel = Instantiate(infoPrefab, nonpersistScoreCanvas.transform);
+        infoPanel.GetComponent<infoUI>().infoTitle.color = Color.black;
+        infoPanel.GetComponent<infoUI>().infoText.color = Color.black;
         if (gameType == 1)
         {
             // TongueSwing
@@ -195,6 +202,15 @@ public class ScoreController : NetworkBehaviour
                 "To swing, click near a grapple to pull yourself towards it. \n" +
                 "Reach the final platform at the top before time runs out! \n" +
                 "Your score is your distance to the finish in meters.";
+        } else if (gameType == 2)
+        {
+            // Count The Animals
+            infoPanel.GetComponent<infoUI>().infoTitle.text = "Count The Animals";
+            infoPanel.GetComponent<infoUI>().infoText.text =
+                "Welcome to Count The Animals! \n" +
+                "In this game, different animals will cross your screen." +
+                "You must keep track of your animal, specified on the right of your screen." +
+                "Click whenever you see your animal and try to get as close as you can to win!";
         }
         Invoke(nameof(DestroyInfoPanel), 8f);
     }
