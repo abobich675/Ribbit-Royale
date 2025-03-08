@@ -1232,7 +1232,7 @@ MonoBehaviour:
     animalPrefab: {fileID: 7785681747683816628, guid: d28147b04cd664fea815ad8405078664, type: 3}
     count: 0
   - name: bat
-    animalPrefab: {fileID: 3549610215065581747, guid: e17500206a2584d8199c95904a2270b0, type: 3}
+    animalPrefab: {fileID: 735621576292293585, guid: 8a85642ac90bc4258b12dab38a676c50, type: 3}
     count: 0
   - name: fly
     animalPrefab: {fileID: 735621576292293585, guid: 8a85642ac90bc4258b12dab38a676c50, type: 3}
