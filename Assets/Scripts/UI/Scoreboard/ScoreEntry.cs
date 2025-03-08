@@ -211,6 +211,11 @@ namespace UI.Scoreboard
         {
             return entryScore;
         }
+        
+        public string GetScoreString()
+        {
+            return entryScoreString;
+        }
 
         public void SetScore(int score, string optionalScore = "null")
         {
@@ -219,6 +224,7 @@ namespace UI.Scoreboard
             if (score == -1)
             {
                 uiController_inGame.scoreText.text = optionalScore;
+                entryScoreString = optionalScore;
             } else if (!isTest)
             {
                 if (entryType == 0)

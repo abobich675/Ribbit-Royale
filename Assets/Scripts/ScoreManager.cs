@@ -92,20 +92,24 @@ namespace UI.Scoreboard
                     Vector2 finishVec = finish.transform.localPosition;
                     var distanceAway =
                         Mathf.Sqrt(Mathf.Pow((finishVec.x - playerVec.x), 2) + Mathf.Pow((finishVec.y - playerVec.y), 2));
-                    if (distanceAway <= 1)
-                    {
-                        entry.SetScore(-1, timeLeftCounter);
-                        completePlayerList.Add(entry);
-                        UpdatePlayerRank(entry, completePlayerList.Count);
-                    }
-                    else
-                    {
-                        entry.SetScore((int)distanceAway);
-                    }
+                    entry.SetScore((int)distanceAway);
                 }
                 yield return null;
             }
             yield return null;
+        }
+
+        public void SetFinished(ulong playerId)
+        {
+            foreach (var entry in scoreEntries)
+            {
+                if (entry.GetPlayerName() == playerId)
+                {
+                    entry.SetScore(-1, timeLeftCounter);
+                    completePlayerList.Add(entry);
+                    UpdatePlayerRank(entry, completePlayerList.Count);
+                }
+            }
         }
 
         private IEnumerator CreateTimer(int duration, float timerStartDelay)
@@ -141,7 +145,7 @@ namespace UI.Scoreboard
                             }
 
                             Debug.Log("Out of time! Ending Minigame...");
-                            yield return new WaitForSeconds(3f);
+                            yield return new WaitForSeconds(1f);
                             
                             ScoreController scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();;
                             scoreController.CalculatePlayerScores();
@@ -160,6 +164,12 @@ namespace UI.Scoreboard
         
 
             yield return null;
+        }
+
+        public void GameOver_StopCoroutines()
+        {
+            StopCoroutine("GetDistanceToFinish");
+            StopCoroutine("CreateTimer");
         }
 
         private string GetTimerUpdateString(float timeRemaining)
@@ -183,29 +193,6 @@ namespace UI.Scoreboard
             }
 
             return minutesRemainingText + ":" + secondsRemainingText;
-        }
-
-        private void CreateExampleInstance(ScoreManager scoreboard = null)
-        {
-            colorSpriteDictionary.Add(0, (Color.red, spriteRed));       // red
-            colorSpriteDictionary.Add(1, (blue, spriteBlue));             // blue
-            colorSpriteDictionary.Add(2, (Color.green, spriteGreen));   // green
-            colorSpriteDictionary.Add(3, (Color.yellow, spriteYellow)); // yellow
-            // playerColorDictionary.Add("Player0", "red");
-            // playerColorDictionary.Add("Player1", "blue");
-            // playerColorDictionary.Add("Player2", "yellow");
-            // playerColorDictionary.Add("Player3", "green");
-            //var getColor = RibbitRoyaleMultiplayer.GetPlayerColor(0);
-            // scoreboard.UpdatePlayerScore("Player0", 29, false);
-            // scoreEntries[0].SetPlayerGameObject(player0);
-            // scoreboard.UpdatePlayerScore("Player1", 30, false);
-            // scoreboard.UpdatePlayerScore("Player2", 15, false);
-            // scoreboard.UpdatePlayerScore("Player3", 31, false);
-
-            // CreatePlayerEntry(00001, 0, 00000, 1);
-            //
-            // scoreboard.UpdateRanking();
-            // Debug.Log("ScoreManager example instance initialization complete.");
         }
 
         public void SetupScoreboard(Transform parent, int boardType, int playerCount, int timerDuration = 0, float timerStartDelay = 0f)
@@ -334,7 +321,7 @@ namespace UI.Scoreboard
                 {
                     if (isIncrement)
                     {
-                        UpdateScoreText(entry, entry.GetScore() + score);
+                        //UpdateScoreText(entry, entry.GetScore() + score);
                     }
                     else
                     {

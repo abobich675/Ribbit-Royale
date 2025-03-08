@@ -293,6 +293,7 @@ public class PlayerController : NetworkBehaviour
         try
         {
             RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(true);
+            scoreController.SetPlayerFinished(RibbitRoyaleMultiplayer.Instance.GetPlayerData().clientId);
 
             // Check if all players have finished
             bool allFinished = true;
@@ -310,7 +311,6 @@ public class PlayerController : NetworkBehaviour
             if (allFinished)
             {
                 //Loader.LoadNetwork(Loader.Scene.PreLobbyScene);
-                // TODO: GameOverOverlay()
                 scoreController.CalculatePlayerScores();
                 return;
             }

@@ -19,6 +19,7 @@ public class ScoreController : NetworkBehaviour
     public int boardType;
     public int timerDuration = 90;
     private GameObject infoPanel;
+    private GameObject gameOver;
     private float timerStartDelay = 8f;
     private List<ScoreEntry> scoreEntries = new List<ScoreEntry>();
     
@@ -59,7 +60,6 @@ public class ScoreController : NetworkBehaviour
         
         scoreManager = null;
     }
-    
 
     public void InitializeTS()
     {
@@ -81,7 +81,6 @@ public class ScoreController : NetworkBehaviour
         }
         CreateInGameScoreboard();
     }
-    
 
     public void TransitionToRoundScoreboard()
     {
@@ -108,6 +107,7 @@ public class ScoreController : NetworkBehaviour
 
     public void CalculatePlayerScores()
     {
+        SpinUpNewGameOverPanel();
         scoreEntries = scoreManager.GetEntryList();
         ulong entryId;
         int entryRank;
@@ -131,11 +131,6 @@ public class ScoreController : NetworkBehaviour
         return;
     }
 
-    public void DropPlayerOnDisconnect()
-    {
-        //
-    }
-
     public void CTA_CalculatePlayerScores(int playerCount, int finalCount)
     {
         // Currently only functional for 1 call for singleplayer
@@ -157,6 +152,11 @@ public class ScoreController : NetworkBehaviour
         TransitionToRoundScoreboard();
     }
 
+    public void SetPlayerFinished(ulong playerId)
+    {
+        scoreManager.SetFinished(playerId);
+    }
+
     private PlayerData GetPlayerData(ulong playerId)
     {
         return RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(playerId);
@@ -169,6 +169,7 @@ public class ScoreController : NetworkBehaviour
         scoreManager.SetupScoreboard(nonpersistScoreCanvas.transform, 0, _playerCount, timerDuration, timerStartDelay);
         foreach (var entry in playerDataDict)
         {
+            Debug.Log("Adding Player to Round Score Manager => clientId: " + entry.Value.clientId);
             var pData = GetPlayerData(entry.Key);
             var score = pData.GetPlayerScore();
             var prevScore = pData.previousRoundPlayerScore;
@@ -213,6 +214,26 @@ public class ScoreController : NetworkBehaviour
                 "Click whenever you see your animal and try to get as close as you can to win!";
         }
         Invoke(nameof(DestroyInfoPanel), 8f);
+    }
+
+    private void SpinUpNewGameOverPanel()
+    {
+        // Stop Timer
+        scoreManager.GameOver_StopCoroutines();
+        // Create GameOver overlay
+        var gameOverPrefab = Resources.Load<GameObject>("gameOverOverlay");
+        gameOver = Instantiate(gameOverPrefab, nonpersistScoreCanvas.transform);
+        gameOver.GetComponent<infoUI>().infoTitle.color = Color.black;
+        gameOver.GetComponent<infoUI>().infoText.color = Color.black;
+
+        gameOver.GetComponent<infoUI>().infoTitle.text = "Game Over";
+        var bodyText = "";
+        foreach (var entry in scoreEntries)
+        {
+            bodyText += "Player " + entry.GetPlayerName() + ": " + entry.GetScoreString() + "\n";
+        }
+        gameOver.GetComponent<infoUI>().infoText.text = bodyText;
+        
     }
 
     private void DestroyInfoPanel()
