@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Token
   - ScoreControllerGO
+  - FinishContainer
   layers:
   - Default
   - TransparentFX

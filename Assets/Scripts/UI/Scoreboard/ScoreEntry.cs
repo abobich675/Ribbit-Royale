@@ -90,7 +90,12 @@ namespace UI.Scoreboard
     
         public GameObject GetInGameGameObject()
         {
-            return inGameEntryGameObject;
+            if (inGameEntryGameObject)
+            {
+                return inGameEntryGameObject;
+            }
+
+            return null;
         }
     
     
@@ -109,7 +114,12 @@ namespace UI.Scoreboard
         // get, set gameobject
         public GameObject GetGameObject()
         {
-            return entryGameObject;
+            if (entryGameObject)
+            {
+                return entryGameObject;
+            }
+
+            return null;
         }
 
         public void SetGameObject(GameObject gameObject)

@@ -81,6 +81,7 @@ namespace UI.Scoreboard
         private IEnumerator GetDistanceToFinish()
         {
             // will want to create a seperate list of players 'in' the game/alive/not beaten yet
+            var finish = GameObject.FindGameObjectWithTag("FinishContainer");
             while (timeRemainingGlobal > 0)
             {
                 foreach (var entry in scoreEntries)
@@ -88,10 +89,10 @@ namespace UI.Scoreboard
                     if (!entry.GetInGameGameObject()) { continue;}
                     if (completePlayerList.Contains(entry)) { continue; }
                     Vector2 playerVec = entry.GetPlayerLocation();
-                    Vector2 finishVec = new Vector2(29.6f, 94.8f);
+                    Vector2 finishVec = finish.transform.localPosition;
                     var distanceAway =
                         Mathf.Sqrt(Mathf.Pow((finishVec.x - playerVec.x), 2) + Mathf.Pow((finishVec.y - playerVec.y), 2));
-                    if (distanceAway <= 5)
+                    if (distanceAway <= 1)
                     {
                         entry.SetScore(-1, timeLeftCounter);
                         completePlayerList.Add(entry);
@@ -452,6 +453,7 @@ namespace UI.Scoreboard
         {
             foreach (ScoreEntry entry in scoreEntries)
             {
+                Debug.Log("RemovePlayerEntry playerId: " + playerId + "; entry playerId: "+ entry.GetPlayerName());
                 if (entry.GetPlayerName() == playerId)
                 {
                     if (entry.GetGameObject())

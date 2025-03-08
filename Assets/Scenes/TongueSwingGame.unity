@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 162649298}
   m_Layer: 0
   m_Name: Win Platform
-  m_TagString: Untagged
+  m_TagString: FinishContainer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
