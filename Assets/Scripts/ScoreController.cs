@@ -17,7 +17,7 @@ public class ScoreController : NetworkBehaviour
     private GameObject scoreCanvas;
     private GameObject nonpersistScoreCanvas;
     public int boardType;
-    public int timerDuration;
+    public int timerDuration = 90;
     private GameObject infoPanel;
     private float timerStartDelay = 8f;
     private List<ScoreEntry> scoreEntries = new List<ScoreEntry>();
@@ -251,7 +251,10 @@ public class ScoreController : NetworkBehaviour
 
     public void RemovePlayerScore(ulong playerId)
     {
-        // Should remove player if Network calls disconnection hook
+        // Remove player if Network calls disconnection hook
+        scoreManager.RemovePlayerEntry(playerId);
+        playerDataDict.Remove(playerId);
+        Debug.Log("Removed Player: '" + playerId + "' from scoreboard...");
     }
 
     public void SetFinished()

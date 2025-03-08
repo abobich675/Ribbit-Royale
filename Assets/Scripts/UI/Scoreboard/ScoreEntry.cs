@@ -65,6 +65,10 @@ namespace UI.Scoreboard
 
         public Vector2 GetPlayerLocation()
         {
+            if (!playerGameObject)
+            {
+                return new Vector2(0, 0);
+            }
             return playerGameObject.transform.localPosition;
         }
 

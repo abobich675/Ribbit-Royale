@@ -58,6 +58,8 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
             if(playerData.clientId == clientId){
                 // Disconnected 
                 playerDataNetworkList.RemoveAt(i);
+                // Remove from current scoreboard instance
+                GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>().RemovePlayerScore(clientId);
             }
         }
     }
