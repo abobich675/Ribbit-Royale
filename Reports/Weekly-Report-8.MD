@@ -4,7 +4,7 @@
 - Implemented Multiplayer in Tongue Swing Game and Count the Animal
 
 ### Next week
-- 
+- Bugfixing in Prelobby + Tongue Swing Game
 
 ## What you did, what worked, what you learned, where you had trouble, and where you are stuck:
 ### Aidan: 
@@ -29,7 +29,8 @@
 ### Aidan:
 - 
 ### Adam:
-- 
+- Fix Prelobby + Tongue Swing Game bug where multiple instances of the player spawn
+- Improve Tongue Swing game map
 ### Baron:
 - Finishing Snake Chase Game
 ### Chase:
