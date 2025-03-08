@@ -70,30 +70,7 @@ namespace UI.Scoreboard
         {
             Instance = this;
         }
-    
-        private void Start()
-        {
-            // if (gameType == 1)
-            // {
-            //     StartCoroutine(CreateTimer(TIMER_DURATION));
-            //     Debug.Log("Started Timer...");
-            // }
-        }
-
-        // should probably call init function on each game start to reset stuff/set up appropriate update loop
-        private void Update()
-        {
-            // if (gameType == 0)
-            // { }
-            // else
-            // { GetDistanceToFinish(); }
-            // Debug.Log("Update Called");
-        }
-
-        private void InitPlayerDataList()
-        {
-            //PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
-        }
+        
 
         public void StartDistanceToFinishCoroutine()
         {
@@ -108,11 +85,10 @@ namespace UI.Scoreboard
             {
                 foreach (var entry in scoreEntries)
                 {
+                    if (!entry.GetInGameGameObject()) { continue;}
                     if (completePlayerList.Contains(entry)) { continue; }
-                    //if (entry.GetPlayerGameObject())
                     Vector2 playerVec = entry.GetPlayerLocation();
                     Vector2 finishVec = new Vector2(29.6f, 94.8f);
-                    // sqrt[ ( a^2 + b^2) ] = c
                     var distanceAway =
                         Mathf.Sqrt(Mathf.Pow((finishVec.x - playerVec.x), 2) + Mathf.Pow((finishVec.y - playerVec.y), 2));
                     if (distanceAway <= 5)
@@ -263,11 +239,17 @@ namespace UI.Scoreboard
                 StartCoroutine(CreateTimer(timerDuration, timerStartDelay));
             }
 
-            while (playerCount > 0)
+            var objects = GameObject.FindGameObjectsWithTag("Player");
+            foreach (var playerObj in objects)
             {
-                var playerObj = GameObject.FindGameObjectWithTag("Player");
                 playerObjectList.Add(playerObj);
                 playerCount--;
+                Debug.Log("Recorded New Player with id: " + playerObj.GetComponent<NetworkObject>().OwnerClientId);
+            }
+
+            if (playerCount != 0)
+            {
+                Debug.Log("PlayerCount != 0");
             }
         }
 
@@ -464,6 +446,28 @@ namespace UI.Scoreboard
                 UpdatePlayerRank(sortedP[i], i+1);
             }
             Debug.Log("AnimateRankChange Complete");
+        }
+
+        public void RemovePlayerEntry(ulong playerId)
+        {
+            foreach (ScoreEntry entry in scoreEntries)
+            {
+                if (entry.GetPlayerName() == playerId)
+                {
+                    if (entry.GetGameObject())
+                    {
+                        Destroy(entry.GetGameObject());
+                        entry.SetGameObject(null);
+                    }
+                    else
+                    {
+                        Destroy(entry.GetInGameGameObject());
+                        entry.SetInGameGameObject(null);
+                    }
+                    Debug.Log("Destroyed Entry: " + playerId + " GameObject set null...");
+                    //scoreEntries.Remove(entry);
+                }
+            }
         }
     }
 }
