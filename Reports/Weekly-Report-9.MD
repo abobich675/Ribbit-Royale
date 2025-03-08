@@ -5,7 +5,8 @@
 
 ## What you did, what worked, what you learned, where you had trouble, and where you are stuck:
 ### Aidan: 
-- 
+- Finishing Count the Animal sprites
+- Options Menu 
 ### Adam:
 - Fixed Prelobby + Tongue Swing Game bug where multiple instances of the player spawn
 - Improved Tongue Swing game map
