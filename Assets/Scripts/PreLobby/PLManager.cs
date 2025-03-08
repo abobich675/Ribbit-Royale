@@ -51,21 +51,16 @@ public class PreLobbyManager : NetworkBehaviour
         if (IsServer)
         {
             // Add this to remove the event first
-            NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= SceneManager_OnLoadEventCompleted;
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += SceneManager_OnLoadEventCompleted;
             // Add this to remove the event for the client connection
-            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
         }
     }
 
     // TODO: This function is being called an additional time for each time the prelobby scene is loaded
     private void SceneManager_OnLoadEventCompleted(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut){
-        Debug.Log("Connected Clients: " + NetworkManager.Singleton.ConnectedClientsIds.Count);
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
-            Debug.Log("OnLoad: " + clientId);
-            Debug.Log("OnLoad: " + RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(clientId));
 
             switch (sceneName)
             {
@@ -76,8 +71,6 @@ public class PreLobbyManager : NetworkBehaviour
                     SpawnPlayer(TongueSwingPrefab, clientId, 10f);
                     break;
             }
-
-
         }
     }
 
@@ -91,5 +84,10 @@ public class PreLobbyManager : NetworkBehaviour
         playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
         // Randomize X pos by a little bit
         playerTransform.position += Vector3.right * UnityEngine.Random.Range(-randX, randX);
+    }
+
+    private void OnDestroy(){
+        NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= SceneManager_OnLoadEventCompleted;
+        NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
     }
 }
