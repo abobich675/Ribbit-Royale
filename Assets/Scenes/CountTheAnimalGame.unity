@@ -527,7 +527,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 6.28, y: 2.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1230,6 +1230,9 @@ MonoBehaviour:
   animals:
   - name: bird
     animalPrefab: {fileID: 7785681747683816628, guid: d28147b04cd664fea815ad8405078664, type: 3}
+    count: 0
+  - name: bat
+    animalPrefab: {fileID: 735621576292293585, guid: 8a85642ac90bc4258b12dab38a676c50, type: 3}
     count: 0
   - name: fly
     animalPrefab: {fileID: 735621576292293585, guid: 8a85642ac90bc4258b12dab38a676c50, type: 3}
