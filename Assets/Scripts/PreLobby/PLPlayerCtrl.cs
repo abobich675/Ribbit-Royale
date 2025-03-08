@@ -1,4 +1,6 @@
+using System;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -58,14 +60,11 @@ public class PlayerCtrl : NetworkBehaviour
         animator.SetFloat("Speed", rb.linearVelocity.magnitude);
         if (rb.linearVelocityX > 0)
         {
-            SpriteRenderer sr = GetComponent<SpriteRenderer>();
-            sr.flipX = false;
+            transform.localScale = new Vector3(1, 1, 1);
         }
         else if (rb.linearVelocityX < 0)
         {
-            SpriteRenderer sr = GetComponent<SpriteRenderer>();
-            sr.flipX = true;
-
+            transform.localScale = new Vector3(-1, 1, 1);
         }
 
         if (!IsOwner || !canMove)
