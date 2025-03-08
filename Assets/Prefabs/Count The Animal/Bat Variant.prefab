@@ -30,11 +30,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2137891627087611147, guid: b60482a481c4249f391604290f14d481, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 4.82
+      value: 2.42
       objectReference: {fileID: 0}
     - target: {fileID: 2137891627087611147, guid: b60482a481c4249f391604290f14d481, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 2.82
+      value: 1.42
       objectReference: {fileID: 0}
     - target: {fileID: 2137891627087611147, guid: b60482a481c4249f391604290f14d481, type: 3}
       propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
@@ -94,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8239391400089155684, guid: b60482a481c4249f391604290f14d481, type: 3}
       propertyPath: m_Name
-      value: Fly Variant
+      value: Bat Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -187,7 +187,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7373972504780143647, guid: 2d3dd5775ad49b14fb85bfa5069b6448, type: 3}
+  m_Sprite: {fileID: -3164809945750340594, guid: fad3f77743cea2741b2e4dbe73b09fb6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
