@@ -54,7 +54,6 @@ public class PlayerController : NetworkBehaviour
         
         if (!IsOwner)
             return;
-            // GetComponent<NetworkObject>().Spawn();
 
         PlayerInput input = GetComponent<PlayerInput>();
         moveAction = input.actions["Move"];
