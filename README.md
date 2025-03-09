@@ -22,8 +22,8 @@ The objective is to provide a distinctive experience that blends competitive gam
 - Chase Bennett: Lead of sound design
 - Adam Bobich: "Lickity Split" and "Swamp Spotting" minigames lead developer
 - Aidan Caughey: Lead of art design, options menu and lead of testing and problem detection
-- Ryan Dobkin: Networking, lobby management, multiplayer management and UI
-- Luke Garci: UI and Scoreboard functionality
+- Luke Garci: Networking, lobby management, multiplayer management and UI
+- Ryan Dobkin: UI and Scoreboard functionality
 
 ## Current State of the Game
 The game is currently in early production, so not all game features are implemented yet. Here are some of the features we *have* implemented:
