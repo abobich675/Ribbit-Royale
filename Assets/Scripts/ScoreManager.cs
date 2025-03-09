@@ -33,7 +33,8 @@ namespace UI.Scoreboard
         public Sprite rank2;
         public Sprite rank3;
         public Sprite rank4;
-
+        public Sprite rank_;
+        
         private List<GameObject> playerObjectList = new List<GameObject>();
         
         private Color blue = new Vector4(.05f, .19f, .47f, 1f);
@@ -101,8 +102,10 @@ namespace UI.Scoreboard
 
         public void SetFinished(ulong playerId)
         {
+            Debug.Log("ScoreManager SetFinished()...");
             foreach (var entry in scoreEntries)
             {
+                Debug.Log("ScoreManager playerId: " + playerId + "; entryId: " + entry.GetPlayerName());
                 if (entry.GetPlayerName() == playerId)
                 {
                     entry.SetScore(-1, timeLeftCounter);
@@ -110,6 +113,7 @@ namespace UI.Scoreboard
                     UpdatePlayerRank(entry, completePlayerList.Count);
                 }
             }
+            Debug.Log("ScoreManager SetFinished() Complete...");
         }
 
         private IEnumerator CreateTimer(int duration, float timerStartDelay)
@@ -209,10 +213,11 @@ namespace UI.Scoreboard
             colorSpriteDictionary.Add(3, (yellow, spriteYellow)); // yellow
             //colorSpriteDictionary.Add(2, (purple, spritePurple)); // purple 
 
-            rank1 = Resources.Load<Sprite>("ui_sprites/1");
-            rank2 = Resources.Load<Sprite>("ui_sprites/2");
-            rank3 = Resources.Load<Sprite>("ui_sprites/3");
-            rank4 = Resources.Load<Sprite>("ui_sprites/4");
+            rank1 = Resources.Load<Sprite>("ui_sprites/1_4x");
+            rank2 = Resources.Load<Sprite>("ui_sprites/2_4x");
+            rank3 = Resources.Load<Sprite>("ui_sprites/3_4x");
+            rank4 = Resources.Load<Sprite>("ui_sprites/4_4x");
+            rank_ = Resources.Load<Sprite>("ui_sprites/__4x");
             
             
             if (boardType == 0)
@@ -298,6 +303,9 @@ namespace UI.Scoreboard
         {
             switch (rank)
             {
+                case 0:
+                    entry.SetRank(rank_, 0);
+                    return;
                 case 1:
                     entry.SetRank(rank1, 1);
                     return;

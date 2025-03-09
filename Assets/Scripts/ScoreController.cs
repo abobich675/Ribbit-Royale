@@ -107,8 +107,8 @@ public class ScoreController : NetworkBehaviour
 
     public void CalculatePlayerScores()
     {
-        SpinUpNewGameOverPanel();
         scoreEntries = scoreManager.GetEntryList();
+        SpinUpNewGameOverPanel();
         ulong entryId;
         int entryRank;
         rankedIds.Clear();
@@ -133,8 +133,6 @@ public class ScoreController : NetworkBehaviour
 
     public void CTA_CalculatePlayerScores(int playerCount, int finalCount)
     {
-        // Currently only functional for 1 call for singleplayer
-        // Will rewrite when we get multiplayer working
 
         // Gets owner clientID
         PlayerData ctaPlayerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
@@ -152,8 +150,12 @@ public class ScoreController : NetworkBehaviour
         TransitionToRoundScoreboard();
     }
 
-    public void SetPlayerFinished(ulong playerId)
+    public void SetPlayerFinished()
     {
+        Debug.Log("ScoreController SetPlayerFinished() Started...");
+        PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
+        ulong playerId = playerData.clientId;
+        Debug.Log("ScoreController SetPlayerFinished() Calling SM SetPlayerFinished() with value: " + playerId + "...");
         scoreManager.SetFinished(playerId);
     }
 
@@ -277,9 +279,5 @@ public class ScoreController : NetworkBehaviour
         playerDataDict.Remove(playerId);
         Debug.Log("Removed Player: '" + playerId + "' from scoreboard...");
     }
-
-    public void SetFinished()
-    {
-        // Should set finished on TSPlayerController finished call
-    }
+    
 }

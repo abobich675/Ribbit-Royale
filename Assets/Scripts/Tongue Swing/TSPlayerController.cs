@@ -293,7 +293,9 @@ public class PlayerController : NetworkBehaviour
         try
         {
             RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(true);
-            scoreController.SetPlayerFinished(RibbitRoyaleMultiplayer.Instance.GetPlayerData().clientId);
+            Debug.Log("RRM SetPlayerFinished Successfully...");
+            scoreController.SetPlayerFinished();
+            Debug.Log("ScoreController SetPlayerFinished Successfully...");
 
             // Check if all players have finished
             bool allFinished = true;
