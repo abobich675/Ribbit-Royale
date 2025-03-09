@@ -255,9 +255,14 @@ public class CTAMain : NetworkBehaviour
     
     private IEnumerator ScoreboardStartup()
     {
-        scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
-        scoreController.InitializeCTA();
-        scoreController.SpinUpNewInfoPanel(2);
+        try
+        {
+            scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
+            scoreController.InitializeCTA();
+            scoreController.SpinUpNewInfoPanel(2);
+        } catch (Exception e) {
+            Debug.Log("CTAMain() ScoreboardController Uninitialized, error: " + e + "...");
+        }
         yield return null;
     }
     
