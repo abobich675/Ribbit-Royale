@@ -1048,9 +1048,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1590050257}
   - component: {fileID: 1590050255}
-  - component: {fileID: 1590050256}
+  - component: {fileID: 1590050258}
   m_Layer: 0
-  m_Name: PreLobbyManager
+  m_Name: Scene Initializer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1081,21 +1081,6 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &1590050256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1590050254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6669a5b3626d87a4ba19dd2e35d20571, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  PrelobbyPrefab: {fileID: 5040148770044511259, guid: e051155fbf49d594e8c454cb5675e290, type: 3}
-  TongueSwingPrefab: {fileID: 7271673477805879662, guid: fd6b1f47bb004c841b387d88863264ce, type: 3}
 --- !u!4 &1590050257
 Transform:
   m_ObjectHideFlags: 0
@@ -1111,6 +1096,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1590050258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590050254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6669a5b3626d87a4ba19dd2e35d20571, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  PrelobbyPrefab: {fileID: 5040148770044511259, guid: e051155fbf49d594e8c454cb5675e290, type: 3}
+  TongueSwingPrefab: {fileID: 7271673477805879662, guid: fd6b1f47bb004c841b387d88863264ce, type: 3}
 --- !u!1 &1749301759
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,8 +1499,8 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1590050257}
   - {fileID: 239376547}
   - {fileID: 329898084}
-  - {fileID: 1590050257}
   - {fileID: 637733208}
   - {fileID: 949183687}
