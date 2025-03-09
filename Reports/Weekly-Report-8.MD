@@ -4,11 +4,13 @@
 - Implemented Multiplayer in Tongue Swing Game and Count the Animal
 
 ### Next week
-- 
+- Bugfixing in Prelobby + Tongue Swing Game
 
 ## What you did, what worked, what you learned, where you had trouble, and where you are stuck:
 ### Aidan: 
-- finish spritework
+- Created Turtle animation
+- New bat character
+- Setting up test assembly
 ### Adam:
 - Implemented Tongue Swinging Game Multiplayer
 - Implemented Count the Animal Multiplayer
@@ -27,9 +29,10 @@
 
 ## Plans and goals for the following week:
 ### Aidan:
-- 
+- Options Menu and finish animations
 ### Adam:
-- 
+- Fix Prelobby + Tongue Swing Game bug where multiple instances of the player spawn
+- Improve Tongue Swing game map
 ### Baron:
 - Finishing Snake Chase Game
 ### Chase:

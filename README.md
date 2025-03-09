@@ -17,34 +17,26 @@ The objective is to provide a distinctive experience that blends competitive gam
 - The current released version of the game can be found in the Release_Builds folder of the repository (https://github.com/abobich675/Ribbit-Royale/tree/master/Release_Builds). Locate the build for your computer architecture. Downloading and running the build will allow you to play Ribbit Royale.
 - To run the game using the latest version of the repository, regardless of the last released build you must create your own build file, following the instructons above.
 
-As a team of newcomers to game development, this project also provides a unique opportunity to grow our skills in game design, networking, and the Unity engine, while contributing to a project that could offer both personal and professional rewards.
-
-Trello: https://trello.com/b/ebDvr63Y/software-engineering-2
-
 ## Who Worked on What:
 - Baron Baker: "Snake Chase" minigame and background art
 - Chase Bennett: Lead of sound design
 - Adam Bobich: "Lickity Split" and "Swamp Spotting" minigames lead developer
 - Aidan Caughey: Lead of art design, options menu and lead of testing and problem detection
-- Ryan Dobkin: Networking, lobby management, multiplayer management and UI
-- Luke Garci: UI and Scoreboard functionality
+- Luke Garci: Networking, lobby management, multiplayer management and UI
+- Ryan Dobkin: UI and Scoreboard functionality
 
 ## Current State of the Game
 The game is currently in early production, so not all game features are implemented yet. Here are some of the features we *have* implemented:
 - Lickity Split Game (Singleplayer, Partial Implementation for Multiplayer)
 - Swamp Spotting Game (Singleplayer or Multiplayer)
 
-Features that we're still working on:
-- Lickity Split Game (Multiplayer + Final Map Layout)
-- Snake Chase Game
-- Pregame instructions
-- Various Art
-- Sound Effects / Music
-- Scorebaord
-
-Known Bugs:
+## Known Bugs:
 - In Prelobby, multiplayer frogs are shown as the user's color instead of their chosen color.
 - In Lickity Split Game, reaching the goal doesn't end the game + send you to the scoreboard screen for a few seconds.
 - In Swamp Spotting Game, some animals are facing the wrong direction in multiplayer.
 - Returning to the prelobby creates duplicates of the frogs.
 - Scoreboard breaks in multiplayer.
+
+As a team of newcomers to game development, this project also provides a unique opportunity to grow our skills in game design, networking, and the Unity engine, while contributing to a project that could offer both personal and professional rewards.
+
+Trello: https://trello.com/b/ebDvr63Y/software-engineering-2

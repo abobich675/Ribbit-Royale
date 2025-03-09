@@ -49,18 +49,14 @@ public class CTAAnimalScript : NetworkBehaviour
         float yPos = 0;
         switch (animalType)
         {
-            case "fly":
-                yPos = Random.Range(1f, 4f);
-                break;
+            case "bat":
             case "bird":
                 yPos = Random.Range(1f, 4f);
                 break;
             case "monkey":
                 yPos = Random.Range(-2f, 2f);
                 break;
-            case "turtle":  
-                yPos = Random.Range(-1f, -4f);
-                break;
+            case "turtle":
             case "snake":
                 yPos = Random.Range(-1f, -4f);
                 break;
@@ -88,18 +84,14 @@ public class CTAAnimalScript : NetworkBehaviour
         float yVel = 0;
         switch (animalType)
         {
-            case "fly":
-                yVel = Random.Range(-1f, 0.5f);
-                break;
+            case "bat":
             case "bird":
                 yVel = Random.Range(-1f, 0.5f);
                 break;
             case "monkey":
                 yVel = 0;
                 break;
-            case "turtle":  
-                yVel = Random.Range(-0.5f, 1f);
-                break;
+            case "turtle":
             case "snake":
                 yVel = Random.Range(-0.5f, 1f);
                 break;

@@ -1,3 +1,14 @@
+// Author - Ryan Dobkin
+// Email - dobkinr@oregonstate.edu
+// Last Updated - 3/9/25
+
+// ScoreManager, a script which is spawned by ScoreController.
+// When created, takes a given scoreboard type, 0 for round and 1 for in game
+// Instantiates given elements, taking player data from RMM, maintains timer, rank animations,
+// and or distance counter as the score. Updates round score via PlayerData.
+// Automatically assigns correctly* colored score plates/avatars to relevant players.
+
+
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
@@ -11,19 +22,20 @@ namespace UI.Scoreboard
     {
         public static ScoreManager Instance { get; private set; }
     
+        // GameObject definitions
         public GameObject scoreEntryPrefab;
         public GameObject inGameScoreEntryPrefab;
         public GameObject inGameTimerPrefab;
-
         private GameObject scoreboardContent;
         private GameObject inGameScoreboardContent;
 
         private Transform ScoreTransform;
         
-        // private Transform scoreboardContent;
-        // private Transform inGameScoreboardContent;
+        // Round Score animation duration
         public float moveDuration = 0.5f;
 
+        
+        // Sprite definitions
         public Sprite spriteRed;
         public Sprite spriteBlue;
         public Sprite spriteGreen;
@@ -33,21 +45,27 @@ namespace UI.Scoreboard
         public Sprite rank2;
         public Sprite rank3;
         public Sprite rank4;
-
-        private List<GameObject> playerObjectList = new List<GameObject>();
+        public Sprite rank_;
         
+        
+        // Color definitions
         private Color blue = new Vector4(.05f, .19f, .47f, 1f);
-        private Color purple = new Vector4(0.29f, .04f, .63f, 1f);
         private Color green = new Vector4(.52f, .84f, .22f, 1f);
         private Color red = new Vector4(.55f, .03f, .17f, 1f);
         private Color yellow = new Vector4(.84f, .76f, .117f, 1f);
+        //private Color purple = new Vector4(0.29f, .04f, .63f, 1f);
+        
+        
+        public bool stopCoroutines = false;
+        
+        private List<GameObject> playerObjectList = new List<GameObject>();
 
+        
         private float timeRemainingGlobal = 1;
         
         private string timeLeftCounter = "null";
         private List<ScoreEntry> completePlayerList = new List<ScoreEntry>();
         
-
         private int gameType;
         
         public bool isTimerEnabled;
@@ -59,41 +77,13 @@ namespace UI.Scoreboard
 
         //private Dictionary<string, (int score, GameObject entry)> playerEntries = new Dictionary<string, (int, GameObject)>();
         private List<ScoreEntry> scoreEntries = new List<ScoreEntry>();
-
-        public ScoreManager()
-        {
-            //Awake();
-            //Start();
-        }
+        
 
         private void Awake()
         {
             Instance = this;
         }
-    
-        private void Start()
-        {
-            // if (gameType == 1)
-            // {
-            //     StartCoroutine(CreateTimer(TIMER_DURATION));
-            //     Debug.Log("Started Timer...");
-            // }
-        }
-
-        // should probably call init function on each game start to reset stuff/set up appropriate update loop
-        private void Update()
-        {
-            // if (gameType == 0)
-            // { }
-            // else
-            // { GetDistanceToFinish(); }
-            // Debug.Log("Update Called");
-        }
-
-        private void InitPlayerDataList()
-        {
-            //PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
-        }
+        
 
         public void StartDistanceToFinishCoroutine()
         {
@@ -104,35 +94,46 @@ namespace UI.Scoreboard
         private IEnumerator GetDistanceToFinish()
         {
             // will want to create a seperate list of players 'in' the game/alive/not beaten yet
+            var finish = GameObject.FindGameObjectWithTag("FinishContainer");
             while (timeRemainingGlobal > 0)
             {
+                if (stopCoroutines) { break; }
                 foreach (var entry in scoreEntries)
                 {
+                    if (!entry.GetInGameGameObject()) { continue;}
                     if (completePlayerList.Contains(entry)) { continue; }
-                    //if (entry.GetPlayerGameObject())
                     Vector2 playerVec = entry.GetPlayerLocation();
-                    Vector2 finishVec = new Vector2(29.6f, 94.8f);
-                    // sqrt[ ( a^2 + b^2) ] = c
+                    Vector2 finishVec = finish.transform.localPosition;
                     var distanceAway =
                         Mathf.Sqrt(Mathf.Pow((finishVec.x - playerVec.x), 2) + Mathf.Pow((finishVec.y - playerVec.y), 2));
-                    if (distanceAway <= 5)
-                    {
-                        entry.SetScore(-1, timeLeftCounter);
-                        completePlayerList.Add(entry);
-                        UpdatePlayerRank(entry, completePlayerList.Count);
-                    }
-                    else
-                    {
-                        entry.SetScore((int)distanceAway);
-                    }
+                    entry.SetScore((int)distanceAway);
                 }
                 yield return null;
             }
             yield return null;
         }
 
+        public void SetFinished(ulong playerId)
+        {
+            Debug.Log("ScoreManager SetFinished()...");
+            foreach (var entry in scoreEntries)
+            {
+                Debug.Log("ScoreManager playerId: " + playerId + "; entryId: " + entry.GetPlayerName());
+                if (entry.GetPlayerName() == playerId)
+                {
+                    entry.SetScore(-1, timeLeftCounter);
+                    completePlayerList.Add(entry);
+                    UpdatePlayerRank(entry, completePlayerList.Count);
+                }
+            }
+            Debug.Log("ScoreManager SetFinished() Complete...");
+        }
+
         private IEnumerator CreateTimer(int duration, float timerStartDelay)
         {
+            // Creates a timer object as a Coroutine
+            // Counts down from duration, stops if game finished
+            // If the time runs out before game is finished, set unfinished player score to 'DNF'
             inGameTimerPrefab = Resources.Load<GameObject>("InGameTimer");
             var inGameTimer = Instantiate(inGameTimerPrefab, inGameScoreboardContent.transform);
             inGameTimer.transform.SetSiblingIndex(0);
@@ -146,25 +147,27 @@ namespace UI.Scoreboard
             yield return new WaitForSeconds(timerStartDelay);
             while (timeRemaining > 0)
             {
+                if (stopCoroutines) { break; }
                 timeTracker += Time.deltaTime;
                 if (timeTracker >= 1)
                 {
-                    //Debug.Log(timeTracker + "||" + timeRemaining);
                     if (timeRemaining <= 11)
                     {
                         timerUIController.currentTime.color = Color.red;
                         if (timeRemaining <= 1)
                         {
-                            //Debug.Log("Timer Complete. Should terminate/end minigame, go to score screen.");
                             timerUIController.currentTime.text = "0:00";
                             timeLeftCounter = "0:00";
-                            foreach (var entry in completePlayerList)
+                            foreach (var entry in scoreEntries)
                             {
-                                entry.SetScore(-1, "DNF");
+                                if (!completePlayerList.Contains(entry))
+                                {
+                                    entry.SetScore(-1, "DNF");
+                                }
                             }
 
                             Debug.Log("Out of time! Ending Minigame...");
-                            yield return new WaitForSeconds(3f);
+                            yield return new WaitForSeconds(1f);
                             
                             ScoreController scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();;
                             scoreController.CalculatePlayerScores();
@@ -183,6 +186,11 @@ namespace UI.Scoreboard
         
 
             yield return null;
+        }
+
+        public void GameOver_StopCoroutines()
+        {
+            stopCoroutines = true;
         }
 
         private string GetTimerUpdateString(float timeRemaining)
@@ -208,47 +216,30 @@ namespace UI.Scoreboard
             return minutesRemainingText + ":" + secondsRemainingText;
         }
 
-        private void CreateExampleInstance(ScoreManager scoreboard = null)
-        {
-            colorSpriteDictionary.Add(0, (Color.red, spriteRed));       // red
-            colorSpriteDictionary.Add(1, (blue, spriteBlue));             // blue
-            colorSpriteDictionary.Add(2, (Color.green, spriteGreen));   // green
-            colorSpriteDictionary.Add(3, (Color.yellow, spriteYellow)); // yellow
-            // playerColorDictionary.Add("Player0", "red");
-            // playerColorDictionary.Add("Player1", "blue");
-            // playerColorDictionary.Add("Player2", "yellow");
-            // playerColorDictionary.Add("Player3", "green");
-            //var getColor = RibbitRoyaleMultiplayer.GetPlayerColor(0);
-            // scoreboard.UpdatePlayerScore("Player0", 29, false);
-            // scoreEntries[0].SetPlayerGameObject(player0);
-            // scoreboard.UpdatePlayerScore("Player1", 30, false);
-            // scoreboard.UpdatePlayerScore("Player2", 15, false);
-            // scoreboard.UpdatePlayerScore("Player3", 31, false);
-
-            // CreatePlayerEntry(00001, 0, 00000, 1);
-            //
-            // scoreboard.UpdateRanking();
-            // Debug.Log("ScoreManager example instance initialization complete.");
-        }
-
         public void SetupScoreboard(Transform parent, int boardType, int playerCount, int timerDuration = 0, float timerStartDelay = 0f)
         {
             gameType = boardType;
             
+            // Load player icon sprites
             spriteRed = Resources.Load<Sprite>("frog_sprites/Red Idle");
             spriteBlue = Resources.Load<Sprite>("frog_sprites/Blue Idle");
             spriteGreen = Resources.Load<Sprite>("frog_sprites/Green Idle");
             spriteYellow = Resources.Load<Sprite>("frog_sprites/Yellow Idle");
-            colorSpriteDictionary.Add(1, (red, spriteRed));       // red
-            colorSpriteDictionary.Add(2, (blue, spriteBlue));             // blue
-            colorSpriteDictionary.Add(0, (green, spriteGreen));   // green
-            colorSpriteDictionary.Add(3, (yellow, spriteYellow)); // yellow
-            //colorSpriteDictionary.Add(2, (purple, spritePurple)); // purple 
+            
+            // Add player sprites + color into dictionary for color id
+            // Dict <colorId, (Color, Sprite)>
+            colorSpriteDictionary.Add(1, (red, spriteRed));         // red
+            colorSpriteDictionary.Add(2, (blue, spriteBlue));       // blue
+            colorSpriteDictionary.Add(0, (green, spriteGreen));     // green
+            colorSpriteDictionary.Add(3, (yellow, spriteYellow));   // yellow
+            //colorSpriteDictionary.Add(2, (purple, spritePurple)); // purple tbd
 
-            rank1 = Resources.Load<Sprite>("ui_sprites/1");
-            rank2 = Resources.Load<Sprite>("ui_sprites/2");
-            rank3 = Resources.Load<Sprite>("ui_sprites/3");
-            rank4 = Resources.Load<Sprite>("ui_sprites/4");
+            // Load rank sprites
+            rank1 = Resources.Load<Sprite>("ui_sprites/1_4x");
+            rank2 = Resources.Load<Sprite>("ui_sprites/2_4x");
+            rank3 = Resources.Load<Sprite>("ui_sprites/3_4x");
+            rank4 = Resources.Load<Sprite>("ui_sprites/4_4x");
+            rank_ = Resources.Load<Sprite>("ui_sprites/__4x");
             
             
             if (boardType == 0)
@@ -263,11 +254,17 @@ namespace UI.Scoreboard
                 StartCoroutine(CreateTimer(timerDuration, timerStartDelay));
             }
 
-            while (playerCount > 0)
+            var objects = GameObject.FindGameObjectsWithTag("Player");
+            foreach (var playerObj in objects)
             {
-                var playerObj = GameObject.FindGameObjectWithTag("Player");
                 playerObjectList.Add(playerObj);
                 playerCount--;
+                Debug.Log("Recorded New Player with id: " + playerObj.GetComponent<NetworkObject>().OwnerClientId);
+            }
+
+            if (playerCount != 0)
+            {
+                Debug.Log("PlayerCount != 0");
             }
         }
 
@@ -326,8 +323,12 @@ namespace UI.Scoreboard
 
         public void UpdatePlayerRank(ScoreEntry entry, int rank)
         {
+            // Updates ScoreEntry entry rankNum and rankImg values
             switch (rank)
             {
+                case 0:
+                    entry.SetRank(rank_, 0);
+                    return;
                 case 1:
                     entry.SetRank(rank1, 1);
                     return;
@@ -342,48 +343,16 @@ namespace UI.Scoreboard
                     return;
             }
         }
-
-        public void UpdatePlayerScore(ulong playerId, int score, bool isIncrement)
-        {
-            foreach (ScoreEntry entry in scoreEntries)
-            {
-                if (entry.GetPlayerName() == playerId)
-                {
-                    if (isIncrement)
-                    {
-                        UpdateScoreText(entry, entry.GetScore() + score);
-                    }
-                    else
-                    {
-                        UpdateScoreText(entry, score);
-                    }
-                    return;
-                }
-            }
-        }
-
-        public int GetPlayerScore(ulong playerId)
-        {
-            foreach (ScoreEntry entry in scoreEntries)
-            {
-                if (entry.GetPlayerName() == playerId)
-                {
-                    return entry.GetScore();
-                }
-            }
-
-            return -1;
-        }
+        
 
         public void UpdateEntryColors(ScoreEntry entry, Color teamColor, Sprite avatar)
         {
+            // Sets ScoreEntry entry avatar sprite and panel color
             entry.SetAvatar(avatar);
             entry.SetEntryColor(teamColor);
         }
 
         private void UpdateScoreText(ScoreEntry entry, int score)
-            // Updates the score field of a given player
-            // Takes GameObject entry [player entry in scoreboard], playerName [string], score [int]
         {
             entry.SetScore(score);
         
@@ -464,6 +433,29 @@ namespace UI.Scoreboard
                 UpdatePlayerRank(sortedP[i], i+1);
             }
             Debug.Log("AnimateRankChange Complete");
+        }
+
+        public void RemovePlayerEntry(ulong playerId)
+        {
+            foreach (ScoreEntry entry in scoreEntries)
+            {
+                Debug.Log("RemovePlayerEntry playerId: " + playerId + "; entry playerId: "+ entry.GetPlayerName());
+                if (entry.GetPlayerName() == playerId)
+                {
+                    if (entry.GetGameObject())
+                    {
+                        Destroy(entry.GetGameObject());
+                        entry.SetGameObject(null);
+                    }
+                    else
+                    {
+                        Destroy(entry.GetInGameGameObject());
+                        entry.SetInGameGameObject(null);
+                    }
+                    Debug.Log("Destroyed Entry: " + playerId + " GameObject set null...");
+                    //scoreEntries.Remove(entry);
+                }
+            }
         }
     }
 }

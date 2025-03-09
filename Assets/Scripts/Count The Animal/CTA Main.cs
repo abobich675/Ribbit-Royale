@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using System;
+using System.Collections;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
 using Unity.Netcode;
@@ -14,6 +15,7 @@ public class CTAMain : NetworkBehaviour
     public float GAME_LENGTH = 10;
     public float MIN_SPAWN_DELAY = 0.1f;
     public float MAX_SPAWN_DELAY = 1f;
+    private float POPUP_GAME_START_DELAY = 10f;
 
 
 
@@ -53,16 +55,19 @@ public class CTAMain : NetworkBehaviour
 
     // Array of animals
     public Animal[] animals;
-
-
+    
     bool gameActive;
-
     private bool isHost;
     private int finalCount;
+    private ScoreController scoreController;
 
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Sets up scoreboard for CTA
+        StartCoroutine(ScoreboardStartup());
+        
         try {
             CreatePlayerCounters();
         } catch {
@@ -82,7 +87,7 @@ public class CTAMain : NetworkBehaviour
             PlayerData hostData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(ownerId);
             ChooseAnimalToCount(hostData.countedAnimalIndex);
 
-            Invoke("EndGame", GAME_LENGTH);
+            Invoke("EndGame", GAME_LENGTH + POPUP_GAME_START_DELAY);
             return;
         }
 
@@ -93,10 +98,10 @@ public class CTAMain : NetworkBehaviour
         ChooseAnimalToCount();
 
         // Start the game timer
-        Invoke("StopSpawning", GAME_LENGTH - 3);
-        Invoke("EndGame", GAME_LENGTH);
+        Invoke("StopSpawning", GAME_LENGTH - 3 + POPUP_GAME_START_DELAY);
+        Invoke("EndGame", GAME_LENGTH + POPUP_GAME_START_DELAY);
 
-        Invoke("SummonRandomAnimal", MAX_SPAWN_DELAY);
+        Invoke("SummonRandomAnimal", MAX_SPAWN_DELAY + POPUP_GAME_START_DELAY);
     }
 
     // Update is called once per frame
@@ -114,7 +119,7 @@ public class CTAMain : NetworkBehaviour
             ulong currentClientId = client.Key;
             PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(currentClientId);
             
-            GameObject counterObject = Instantiate(playerCountPrefab, GameObject.Find("Canvas").transform);
+            GameObject counterObject = Instantiate(playerCountPrefab, GameObject.Find("CounterContainer").transform);
             // Adjust the height based on how many players have already been added
             float counterHeight = counterObject.GetComponent<RectTransform>().rect.height;
             Vector3 positionAdjustment = new Vector3(0, counterHeight * playerIndex, 0);
@@ -203,6 +208,7 @@ public class CTAMain : NetworkBehaviour
         finalCount = GetAnimal(countedAnimal).count;
         PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
         
+        Debug.Log("CTA Updating playerdata - index: " + playerData.countedAnimalIndex + "; currentCount: " + playerData.currentCount + "; finalCount: " + finalCount + "...");
         RibbitRoyaleMultiplayer.Instance.SetCTAPlayerData(playerData.countedAnimalIndex, playerData.currentCount, finalCount);
     }
 
@@ -232,8 +238,7 @@ public class CTAMain : NetworkBehaviour
 
         //Invoke("ReturnToLobby", 3);
         
-        var scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
-        scoreController.CTA_CalculatePlayerScores(GetComponent<CTAPlayerConroller>().counter, finalCount);
+        scoreController.CTA_CalculatePlayerScores();
     }
 
     private void ReturnToLobby() {
@@ -247,4 +252,18 @@ public class CTAMain : NetworkBehaviour
     public bool GameActive() {
         return gameActive;
     }
+    
+    private IEnumerator ScoreboardStartup()
+    {
+        try
+        {
+            scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
+            scoreController.InitializeCTA();
+            scoreController.SpinUpNewInfoPanel(2);
+        } catch (Exception e) {
+            Debug.Log("CTAMain() ScoreboardController Uninitialized, error: " + e + "...");
+        }
+        yield return null;
+    }
+    
 }

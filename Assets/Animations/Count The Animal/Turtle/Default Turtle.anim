@@ -22,6 +22,22 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 4475490405032367770, guid: 51c7f4e2af66eb64c99ec9e173d62e89, type: 3}
+    - time: 0.016666668
+      value: {fileID: -2945745905702322664, guid: 25b9c1e72a981584d8da76748416fe76, type: 3}
+    - time: 0.033333335
+      value: {fileID: -7743859587203287311, guid: f9f2927866798f54cab35a78673d6eb0, type: 3}
+    - time: 0.05
+      value: {fileID: 8568702906405589156, guid: 184092d925d7baa42b0359ee02437d64, type: 3}
+    - time: 0.06666667
+      value: {fileID: 5258289564138385080, guid: 38f1c1155bda1264c874de15c19b7662, type: 3}
+    - time: 0.083333336
+      value: {fileID: 4172532056731212484, guid: d1aba37d5fe285941a2b7e6ba361f4e7, type: 3}
+    - time: 0.1
+      value: {fileID: 2037876658834877712, guid: 5c2024ee04f0b0e45b9e3fe1b7420439, type: 3}
+    - time: 0.11666667
+      value: {fileID: 2610676703029082635, guid: 4e45fc7b6733281458430e9fffb0e7b6, type: 3}
+    - time: 0.13333334
+      value: {fileID: 4038259583288600773, guid: d810f1adbe69f854092da2abf77671d3, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -45,12 +61,20 @@ AnimationClip:
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
     - {fileID: 4475490405032367770, guid: 51c7f4e2af66eb64c99ec9e173d62e89, type: 3}
+    - {fileID: -2945745905702322664, guid: 25b9c1e72a981584d8da76748416fe76, type: 3}
+    - {fileID: -7743859587203287311, guid: f9f2927866798f54cab35a78673d6eb0, type: 3}
+    - {fileID: 8568702906405589156, guid: 184092d925d7baa42b0359ee02437d64, type: 3}
+    - {fileID: 5258289564138385080, guid: 38f1c1155bda1264c874de15c19b7662, type: 3}
+    - {fileID: 4172532056731212484, guid: d1aba37d5fe285941a2b7e6ba361f4e7, type: 3}
+    - {fileID: 2037876658834877712, guid: 5c2024ee04f0b0e45b9e3fe1b7420439, type: 3}
+    - {fileID: 2610676703029082635, guid: 4e45fc7b6733281458430e9fffb0e7b6, type: 3}
+    - {fileID: 4038259583288600773, guid: d810f1adbe69f854092da2abf77671d3, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.016666668
+    m_StopTime: 0.15
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

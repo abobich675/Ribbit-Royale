@@ -49,16 +49,15 @@ public class PlayerController : NetworkBehaviour
 
         tongue = Instantiate(tongue);
         tongue.SetActive(false);
+
+        SetColor();
         
         if (!IsOwner)
             return;
-        //     GetComponent<NetworkObject>().Spawn();
 
         PlayerInput input = GetComponent<PlayerInput>();
         moveAction = input.actions["Move"];
         attackAction = input.actions["Attack"];
-
-        SetColor();
         
         // Will find the DoNotDestroy ScoreController object and initialize tongue swing score setup.
         
@@ -77,8 +76,8 @@ public class PlayerController : NetworkBehaviour
         if (IsOwner && timerOver)
         {
             DoInteraction();
-            UpdateAnimator();
         }
+        UpdateAnimator();
     }
 
     // Fixed update for physics calculations
@@ -94,8 +93,9 @@ public class PlayerController : NetworkBehaviour
     void SetColor() {
         PlayerData playerData;
         try {
-            // This will get a players data based off the clientId 
-            playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+            // This will get a players data based off the clientId
+            ulong clientId = GetComponent<NetworkObject>().OwnerClientId;
+            playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(clientId);
         } catch {
             Debug.Log("Failed to get player data from clientId");
             return;
@@ -293,6 +293,9 @@ public class PlayerController : NetworkBehaviour
         try
         {
             RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(true);
+            Debug.Log("RRM SetPlayerFinished Successfully...");
+            scoreController.SetPlayerFinished();
+            Debug.Log("ScoreController SetPlayerFinished Successfully...");
 
             // Check if all players have finished
             bool allFinished = true;

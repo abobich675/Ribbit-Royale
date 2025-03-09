@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 3025909043203801142}
   - component: {fileID: 1261070495666260438}
   - component: {fileID: -4178224365377203762}
+  - component: {fileID: -3675670737962555778}
+  - component: {fileID: -1713340462824772949}
   m_Layer: 6
   m_Name: PLPlayer
   m_TagString: Player
@@ -133,6 +135,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   playerVisual: {fileID: 3025909043203801142}
+  animators:
+  - {fileID: 9100000, guid: 3da9bea081c92a041a38b065d77bcca7, type: 2}
+  - {fileID: 9100000, guid: 7e83bdf1c05e4b04dbde06a09834ce0e, type: 2}
+  - {fileID: 9100000, guid: 9012d4e7b84524d4199484d77130400e, type: 2}
+  - {fileID: 9100000, guid: 5b8fda6eaf4bf9a42b4daacd479a615f, type: 2}
   movSpeed: 10
 --- !u!50 &6340637032291644613
 Rigidbody2D:
@@ -184,7 +191,7 @@ MonoBehaviour:
   SyncRotAngleX: 1
   SyncRotAngleY: 1
   SyncRotAngleZ: 0
-  SyncScaleX: 0
+  SyncScaleX: 1
   SyncScaleY: 0
   SyncScaleZ: 0
   PositionThreshold: 0.001
@@ -276,3 +283,40 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!95 &-3675670737962555778
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5917321770002816415}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3da9bea081c92a041a38b065d77bcca7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-1713340462824772949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5917321770002816415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList: []
+  m_Animator: {fileID: -3675670737962555778}

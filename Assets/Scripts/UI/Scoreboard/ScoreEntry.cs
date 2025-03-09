@@ -65,6 +65,10 @@ namespace UI.Scoreboard
 
         public Vector2 GetPlayerLocation()
         {
+            if (!playerGameObject)
+            {
+                return new Vector2(0, 0);
+            }
             return playerGameObject.transform.localPosition;
         }
 
@@ -86,7 +90,12 @@ namespace UI.Scoreboard
     
         public GameObject GetInGameGameObject()
         {
-            return inGameEntryGameObject;
+            if (inGameEntryGameObject)
+            {
+                return inGameEntryGameObject;
+            }
+
+            return null;
         }
     
     
@@ -105,7 +114,12 @@ namespace UI.Scoreboard
         // get, set gameobject
         public GameObject GetGameObject()
         {
-            return entryGameObject;
+            if (entryGameObject)
+            {
+                return entryGameObject;
+            }
+
+            return null;
         }
 
         public void SetGameObject(GameObject gameObject)
@@ -151,7 +165,7 @@ namespace UI.Scoreboard
 
         public void SetAvatar(Sprite newAvatar)
         {
-            Debug.Log("SetAvatar: " + newAvatar);
+            //Debug.Log("SetAvatar: " + newAvatar);
             entryAvatar = newAvatar;
             if (entryType == 0)
             {
@@ -197,6 +211,11 @@ namespace UI.Scoreboard
         {
             return entryScore;
         }
+        
+        public string GetScoreString()
+        {
+            return entryScoreString;
+        }
 
         public void SetScore(int score, string optionalScore = "null")
         {
@@ -205,6 +224,7 @@ namespace UI.Scoreboard
             if (score == -1)
             {
                 uiController_inGame.scoreText.text = optionalScore;
+                entryScoreString = optionalScore;
             } else if (!isTest)
             {
                 if (entryType == 0)
