@@ -241,15 +241,16 @@ public class ScoreController : NetworkBehaviour
         {
             // Count The Animals
             InstantiateNonPersistScoreCanvas();
-            var infoPrefabCTA = Resources.Load<GameObject>("infoPopupCTA");
+            var infoPrefabCTA = Resources.Load<GameObject>("infoPopup");
             infoPanel = Instantiate(infoPrefabCTA, nonpersistScoreCanvas.transform);
             infoPanel.GetComponent<infoUI>().infoTitle.color = Color.black;
             infoPanel.GetComponent<infoUI>().infoText.color = Color.black;
             infoPanel.GetComponent<infoUI>().infoTitle.text = "Count The Animals";
             infoPanel.GetComponent<infoUI>().infoText.text =
+                "Welcome to Count The Animals!\n" +
                 "\nClick every time you see your animal!\n" +
-                "Get your count as close as you can to win!";
-            Invoke(nameof(DestroyInfoPanel), 10f);
+                "Get your count as close to accurate as you can to win!";
+            Invoke(nameof(DestroyInfoPanel), 8f);
         }
         
     }

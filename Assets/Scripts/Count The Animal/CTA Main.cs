@@ -15,6 +15,7 @@ public class CTAMain : NetworkBehaviour
     public float GAME_LENGTH = 10;
     public float MIN_SPAWN_DELAY = 0.1f;
     public float MAX_SPAWN_DELAY = 1f;
+    private float POPUP_GAME_START_DELAY = 10f;
 
 
 
@@ -97,10 +98,10 @@ public class CTAMain : NetworkBehaviour
         ChooseAnimalToCount();
 
         // Start the game timer
-        Invoke("StopSpawning", GAME_LENGTH - 3);
-        Invoke("EndGame", GAME_LENGTH);
+        Invoke("StopSpawning", GAME_LENGTH - 3 + POPUP_GAME_START_DELAY);
+        Invoke("EndGame", GAME_LENGTH + POPUP_GAME_START_DELAY);
 
-        Invoke("SummonRandomAnimal", MAX_SPAWN_DELAY);
+        Invoke("SummonRandomAnimal", MAX_SPAWN_DELAY + POPUP_GAME_START_DELAY);
     }
 
     // Update is called once per frame
