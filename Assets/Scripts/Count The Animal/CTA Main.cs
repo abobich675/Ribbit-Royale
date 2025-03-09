@@ -87,7 +87,7 @@ public class CTAMain : NetworkBehaviour
             PlayerData hostData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(ownerId);
             ChooseAnimalToCount(hostData.countedAnimalIndex);
 
-            Invoke("EndGame", GAME_LENGTH);
+            Invoke("EndGame", GAME_LENGTH + POPUP_GAME_START_DELAY);
             return;
         }
 
