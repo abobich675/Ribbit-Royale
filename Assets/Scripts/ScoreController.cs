@@ -2,6 +2,7 @@ using Unity.Netcode;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UI.Scoreboard;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -13,7 +14,7 @@ public class ScoreController : NetworkBehaviour
     public static ScoreController Instance { get; private set; }
     private int _playerCount;
     private Dictionary<ulong, PlayerData> playerDataDict = new Dictionary<ulong, PlayerData>();
-    private ScoreManager scoreManager; // currently existing scoremanager object
+    private ScoreManager scoreManager; // current ScoreManager object
     private GameObject scoreCanvas;
     private GameObject nonpersistScoreCanvas;
     public int boardType;
@@ -66,12 +67,10 @@ public class ScoreController : NetworkBehaviour
         _playerCount = RibbitRoyaleMultiplayer.Instance.GetPlayerCount();
         
         // Create dict of <clientId, gameData> pairs playerDataDict
+        playerDataDict.Clear();
         foreach (var client in NetworkManager.Singleton.ConnectedClients)
         {
-            if (!playerDataDict.ContainsKey(client.Key))
-            {
-                playerDataDict.Add(client.Key, RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(client.Key));
-            }
+            playerDataDict.Add(client.Key, RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(client.Key));
         }
 
         // Make sure player count is correct
@@ -80,6 +79,17 @@ public class ScoreController : NetworkBehaviour
             Debug.Log("_playerCount != true player count! ERROR");
         }
         CreateInGameScoreboard();
+    }
+
+    public void InitializeCTA()
+    {
+        _playerCount = RibbitRoyaleMultiplayer.Instance.GetPlayerCount();
+        // Create dict of <clientId, gameData> pairs playerDataDict
+        playerDataDict.Clear();
+        foreach (var client in NetworkManager.Singleton.ConnectedClients)
+        {
+            playerDataDict.Add(client.Key, RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(client.Key));
+        }
     }
 
     public void TransitionToRoundScoreboard()
@@ -131,22 +141,43 @@ public class ScoreController : NetworkBehaviour
         return;
     }
 
-    public void CTA_CalculatePlayerScores(int playerCount, int finalCount)
+    public void CTA_CalculatePlayerScores()
     {
+        Debug.Log("CTA_CalculatePlayerScores() Started...");
+        DestroyScoreboard();
 
-        // Gets owner clientID
-        PlayerData ctaPlayerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
-        ulong ctaPlayerId = ctaPlayerData.clientId;
-        ulong ownerId = NetworkManager.Singleton.CurrentSessionOwner;
-        var isHost = ctaPlayerId == ownerId;
-        if (!isHost)
+        Dictionary<ulong, int> CTADiffList = new Dictionary<ulong, int>();
+        Dictionary<ulong, int> MaxList = new Dictionary<ulong, int>();
+        foreach (var player in playerDataDict)
         {
-            return;
+            var pData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(player.Key);
+            var actual = pData.currentCount;
+            var total = pData.finalCount;
+            var diff = total - actual;
+            Debug.Log("playerId: " + player.Key + "; actual: " + actual + "; total: " + total + "; diff: " + diff);
+            CTADiffList.Add(player.Key, diff);
         }
         
-        // Need to check highest score, single player implementation below
-        // Should check who's score has the smallest difference to finalCount, award multiple if ties
-        RibbitRoyaleMultiplayer.Instance.IncPlayerScore(1, ctaPlayerId);
+        var max = 9999;
+        foreach (var x in CTADiffList)
+        {
+            if (x.Value <= max)
+            {
+                MaxList.Clear();
+                MaxList.Add(x.Key, x.Value);
+                max = x.Value;
+            }
+            else if (x.Value == max)
+            {
+                MaxList.Add(x.Key, x.Value);
+            }
+        }
+
+        foreach (var player in MaxList)
+        {
+            RibbitRoyaleMultiplayer.Instance.IncPlayerScore(1, player.Key);
+        }
+        
         TransitionToRoundScoreboard();
     }
 
@@ -189,33 +220,38 @@ public class ScoreController : NetworkBehaviour
         nonpersistScoreCanvas = Instantiate(Resources.Load<GameObject>("nonpersistScoreCanvas"));
     }
 
-    private void SpinUpNewInfoPanel(int gameType)
+    public void SpinUpNewInfoPanel(int gameType)
     {
         // Get infoUI prefab, instantiate as child of existing nonpersistScoreCanvas
-        var infoPrefab = Resources.Load<GameObject>("infoPopup");
-        infoPanel = Instantiate(infoPrefab, nonpersistScoreCanvas.transform);
-        infoPanel.GetComponent<infoUI>().infoTitle.color = Color.black;
-        infoPanel.GetComponent<infoUI>().infoText.color = Color.black;
         if (gameType == 1)
         {
             // TongueSwing
+            var infoPrefab = Resources.Load<GameObject>("infoPopup");
+            infoPanel = Instantiate(infoPrefab, nonpersistScoreCanvas.transform);
+            infoPanel.GetComponent<infoUI>().infoTitle.color = Color.black;
+            infoPanel.GetComponent<infoUI>().infoText.color = Color.black;
             infoPanel.GetComponent<infoUI>().infoTitle.text = "Lickity Split";
             infoPanel.GetComponent<infoUI>().infoText.text =
                 "Welcome to Lickity Split! To move, use WASD. \n" +
                 "To swing, click near a grapple to pull yourself towards it. \n" +
                 "Reach the final platform at the top before time runs out! \n" +
                 "Your score is your distance to the finish in meters.";
+            Invoke(nameof(DestroyInfoPanel), 8f);
         } else if (gameType == 2)
         {
             // Count The Animals
+            InstantiateNonPersistScoreCanvas();
+            var infoPrefabCTA = Resources.Load<GameObject>("infoPopupCTA");
+            infoPanel = Instantiate(infoPrefabCTA, nonpersistScoreCanvas.transform);
+            infoPanel.GetComponent<infoUI>().infoTitle.color = Color.black;
+            infoPanel.GetComponent<infoUI>().infoText.color = Color.black;
             infoPanel.GetComponent<infoUI>().infoTitle.text = "Count The Animals";
             infoPanel.GetComponent<infoUI>().infoText.text =
-                "Welcome to Count The Animals! \n" +
-                "In this game, different animals will cross your screen." +
-                "You must keep track of your animal, specified on the right of your screen." +
-                "Click whenever you see your animal and try to get as close as you can to win!";
+                "\nClick every time you see your animal!\n" +
+                "Get your count as close as you can to win!";
+            Invoke(nameof(DestroyInfoPanel), 10f);
         }
-        Invoke(nameof(DestroyInfoPanel), 8f);
+        
     }
 
     private void SpinUpNewGameOverPanel()

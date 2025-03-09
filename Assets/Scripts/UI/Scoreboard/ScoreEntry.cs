@@ -165,7 +165,7 @@ namespace UI.Scoreboard
 
         public void SetAvatar(Sprite newAvatar)
         {
-            Debug.Log("SetAvatar: " + newAvatar);
+            //Debug.Log("SetAvatar: " + newAvatar);
             entryAvatar = newAvatar;
             if (entryType == 0)
             {

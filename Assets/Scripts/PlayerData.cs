@@ -15,8 +15,9 @@ public struct PlayerData : IEquatable<PlayerData>, INetworkSerializable
     public int countedAnimalIndex;
     public int currentCount;
     public int finalCount;
-    public int playerScore;
     
+    // Scoreboard
+    public int playerScore;
     public int previousRoundPlayerScore;
 
     // This function will store player data based off of that players clientId

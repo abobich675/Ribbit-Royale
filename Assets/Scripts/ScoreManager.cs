@@ -1,3 +1,14 @@
+// Author - Ryan Dobkin
+// Email - dobkinr@oregonstate.edu
+// Last Updated - 3/9/25
+
+// ScoreManager, a script which is spawned by ScoreController.
+// When created, takes a given scoreboard type, 0 for round and 1 for in game
+// Instantiates given elements, taking player data from RMM, maintains timer, rank animations,
+// and or distance counter as the score. Updates round score via PlayerData.
+// Automatically assigns correctly* colored score plates/avatars to relevant players.
+
+
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
@@ -11,19 +22,20 @@ namespace UI.Scoreboard
     {
         public static ScoreManager Instance { get; private set; }
     
+        // GameObject definitions
         public GameObject scoreEntryPrefab;
         public GameObject inGameScoreEntryPrefab;
         public GameObject inGameTimerPrefab;
-
         private GameObject scoreboardContent;
         private GameObject inGameScoreboardContent;
 
         private Transform ScoreTransform;
         
-        // private Transform scoreboardContent;
-        // private Transform inGameScoreboardContent;
+        // Round Score animation duration
         public float moveDuration = 0.5f;
 
+        
+        // Sprite definitions
         public Sprite spriteRed;
         public Sprite spriteBlue;
         public Sprite spriteGreen;
@@ -35,20 +47,25 @@ namespace UI.Scoreboard
         public Sprite rank4;
         public Sprite rank_;
         
-        private List<GameObject> playerObjectList = new List<GameObject>();
         
+        // Color definitions
         private Color blue = new Vector4(.05f, .19f, .47f, 1f);
-        private Color purple = new Vector4(0.29f, .04f, .63f, 1f);
         private Color green = new Vector4(.52f, .84f, .22f, 1f);
         private Color red = new Vector4(.55f, .03f, .17f, 1f);
         private Color yellow = new Vector4(.84f, .76f, .117f, 1f);
+        //private Color purple = new Vector4(0.29f, .04f, .63f, 1f);
+        
+        
+        public bool stopCoroutines = false;
+        
+        private List<GameObject> playerObjectList = new List<GameObject>();
 
+        
         private float timeRemainingGlobal = 1;
         
         private string timeLeftCounter = "null";
         private List<ScoreEntry> completePlayerList = new List<ScoreEntry>();
         
-
         private int gameType;
         
         public bool isTimerEnabled;
@@ -60,12 +77,7 @@ namespace UI.Scoreboard
 
         //private Dictionary<string, (int score, GameObject entry)> playerEntries = new Dictionary<string, (int, GameObject)>();
         private List<ScoreEntry> scoreEntries = new List<ScoreEntry>();
-
-        public ScoreManager()
-        {
-            //Awake();
-            //Start();
-        }
+        
 
         private void Awake()
         {
@@ -85,6 +97,7 @@ namespace UI.Scoreboard
             var finish = GameObject.FindGameObjectWithTag("FinishContainer");
             while (timeRemainingGlobal > 0)
             {
+                if (stopCoroutines) { break; }
                 foreach (var entry in scoreEntries)
                 {
                     if (!entry.GetInGameGameObject()) { continue;}
@@ -118,6 +131,9 @@ namespace UI.Scoreboard
 
         private IEnumerator CreateTimer(int duration, float timerStartDelay)
         {
+            // Creates a timer object as a Coroutine
+            // Counts down from duration, stops if game finished
+            // If the time runs out before game is finished, set unfinished player score to 'DNF'
             inGameTimerPrefab = Resources.Load<GameObject>("InGameTimer");
             var inGameTimer = Instantiate(inGameTimerPrefab, inGameScoreboardContent.transform);
             inGameTimer.transform.SetSiblingIndex(0);
@@ -131,21 +147,23 @@ namespace UI.Scoreboard
             yield return new WaitForSeconds(timerStartDelay);
             while (timeRemaining > 0)
             {
+                if (stopCoroutines) { break; }
                 timeTracker += Time.deltaTime;
                 if (timeTracker >= 1)
                 {
-                    //Debug.Log(timeTracker + "||" + timeRemaining);
                     if (timeRemaining <= 11)
                     {
                         timerUIController.currentTime.color = Color.red;
                         if (timeRemaining <= 1)
                         {
-                            //Debug.Log("Timer Complete. Should terminate/end minigame, go to score screen.");
                             timerUIController.currentTime.text = "0:00";
                             timeLeftCounter = "0:00";
-                            foreach (var entry in completePlayerList)
+                            foreach (var entry in scoreEntries)
                             {
-                                entry.SetScore(-1, "DNF");
+                                if (!completePlayerList.Contains(entry))
+                                {
+                                    entry.SetScore(-1, "DNF");
+                                }
                             }
 
                             Debug.Log("Out of time! Ending Minigame...");
@@ -172,8 +190,7 @@ namespace UI.Scoreboard
 
         public void GameOver_StopCoroutines()
         {
-            StopCoroutine("GetDistanceToFinish");
-            StopCoroutine("CreateTimer");
+            stopCoroutines = true;
         }
 
         private string GetTimerUpdateString(float timeRemaining)
@@ -203,16 +220,21 @@ namespace UI.Scoreboard
         {
             gameType = boardType;
             
+            // Load player icon sprites
             spriteRed = Resources.Load<Sprite>("frog_sprites/Red Idle");
             spriteBlue = Resources.Load<Sprite>("frog_sprites/Blue Idle");
             spriteGreen = Resources.Load<Sprite>("frog_sprites/Green Idle");
             spriteYellow = Resources.Load<Sprite>("frog_sprites/Yellow Idle");
-            colorSpriteDictionary.Add(1, (red, spriteRed));       // red
-            colorSpriteDictionary.Add(2, (blue, spriteBlue));             // blue
-            colorSpriteDictionary.Add(0, (green, spriteGreen));   // green
-            colorSpriteDictionary.Add(3, (yellow, spriteYellow)); // yellow
-            //colorSpriteDictionary.Add(2, (purple, spritePurple)); // purple 
+            
+            // Add player sprites + color into dictionary for color id
+            // Dict <colorId, (Color, Sprite)>
+            colorSpriteDictionary.Add(1, (red, spriteRed));         // red
+            colorSpriteDictionary.Add(2, (blue, spriteBlue));       // blue
+            colorSpriteDictionary.Add(0, (green, spriteGreen));     // green
+            colorSpriteDictionary.Add(3, (yellow, spriteYellow));   // yellow
+            //colorSpriteDictionary.Add(2, (purple, spritePurple)); // purple tbd
 
+            // Load rank sprites
             rank1 = Resources.Load<Sprite>("ui_sprites/1_4x");
             rank2 = Resources.Load<Sprite>("ui_sprites/2_4x");
             rank3 = Resources.Load<Sprite>("ui_sprites/3_4x");
@@ -301,6 +323,7 @@ namespace UI.Scoreboard
 
         public void UpdatePlayerRank(ScoreEntry entry, int rank)
         {
+            // Updates ScoreEntry entry rankNum and rankImg values
             switch (rank)
             {
                 case 0:
@@ -320,48 +343,16 @@ namespace UI.Scoreboard
                     return;
             }
         }
-
-        public void UpdatePlayerScore(ulong playerId, int score, bool isIncrement)
-        {
-            foreach (ScoreEntry entry in scoreEntries)
-            {
-                if (entry.GetPlayerName() == playerId)
-                {
-                    if (isIncrement)
-                    {
-                        //UpdateScoreText(entry, entry.GetScore() + score);
-                    }
-                    else
-                    {
-                        UpdateScoreText(entry, score);
-                    }
-                    return;
-                }
-            }
-        }
-
-        public int GetPlayerScore(ulong playerId)
-        {
-            foreach (ScoreEntry entry in scoreEntries)
-            {
-                if (entry.GetPlayerName() == playerId)
-                {
-                    return entry.GetScore();
-                }
-            }
-
-            return -1;
-        }
+        
 
         public void UpdateEntryColors(ScoreEntry entry, Color teamColor, Sprite avatar)
         {
+            // Sets ScoreEntry entry avatar sprite and panel color
             entry.SetAvatar(avatar);
             entry.SetEntryColor(teamColor);
         }
 
         private void UpdateScoreText(ScoreEntry entry, int score)
-            // Updates the score field of a given player
-            // Takes GameObject entry [player entry in scoreboard], playerName [string], score [int]
         {
             entry.SetScore(score);
         
