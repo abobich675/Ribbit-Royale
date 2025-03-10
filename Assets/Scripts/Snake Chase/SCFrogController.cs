@@ -125,7 +125,9 @@ public class FrogController : NetworkBehaviour
             RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(true);
             GetComponent<Collider2D>().enabled = false;
             Debug.Log("RRM SetPlayerFinished Successfully...");
-            scoreController.SetPlayerFinished();
+            //scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
+            //scoreController.SetPlayerFinished();
+            RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(true);
             Debug.Log("ScoreController SetPlayerFinished Successfully...");
 
             // Check if all players have finished
@@ -144,7 +146,7 @@ public class FrogController : NetworkBehaviour
             if (allFinished)
             {
                 //Loader.LoadNetwork(Loader.Scene.PreLobbyScene);
-                scoreController.CalculatePlayerScores();
+                //scoreController.CalculatePlayerScores();
                 return;
             }
         }

@@ -56,7 +56,14 @@ public class SceneInitializer : NetworkBehaviour
     }
 
     private void OnDestroy(){
-        NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= SceneManager_OnLoadEventCompleted;
-        NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
+        try
+        {
+            NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= SceneManager_OnLoadEventCompleted;
+            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Could not destroy: " + e);
+        }
     }
 }
