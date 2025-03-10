@@ -1,16 +1,29 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class MainMenu : MonoBehaviour
 {
-    // When the user clicks the Play button the user will be taken to the network lobby scene
-    public void PlayGame(){
+    [SerializeField] private GameObject OptionsMenu;
+    [SerializeField] private GameObject Menu;
+    public void PlayGame()
+    {
         Loader.Load(Loader.Scene.NetworkLobbyScene);
-        
     }
 
-    // When the user cliks the Quit button the users game window will be closed
-    public void DoExitGame(){
+    public void OpenOptionsMenu()
+    {
+        OptionsMenu.SetActive(true);  // Show Options Menu and disable main menu
+        Menu.SetActive(false);
+    }
+
+    public void CloseOptionsMenu()
+    {
+        OptionsMenu.SetActive(false); // Hide Options Menu and show main menu 
+        Menu.SetActive(true);
+    }
+
+    public void DoExitGame()
+    {
         Application.Quit();
     }
-
 }
