@@ -825,8 +825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b89dd0c0fb6e1b6499f72df4140507a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeSlider: {fileID: 1935892235}
-  fullscreenToggle: {fileID: 1385387249}
+  audioMixer: {fileID: 24100000, guid: 2fdaaa6d4ebf40145a2a4566cf6238d7, type: 2}
 --- !u!1 &914560686
 GameObject:
   m_ObjectHideFlags: 0
@@ -2238,7 +2237,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 868481235}
+        m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
+        m_MethodName: SetFullscreen
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1620515820
 GameObject:
