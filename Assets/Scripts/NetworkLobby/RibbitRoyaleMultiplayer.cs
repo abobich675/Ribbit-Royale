@@ -226,6 +226,7 @@ public class RibbitRoyaleMultiplayer : NetworkBehaviour
 
         PlayerData playerData = playerDataNetworkList[playerDataIndex]; 
         playerData.finished = finished;
+        Debug.Log("RMM FINISHED clientId: " + playerData.clientId + "; finished: " + playerData.finished);
 
         playerDataNetworkList[playerDataIndex] = playerData;
     }

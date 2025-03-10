@@ -297,6 +297,7 @@ public class PlayerController : NetworkBehaviour
         Debug.Log("Player reached the finish");
         try
         {
+            Debug.Log("Finished Called");
             RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(true);
             var x = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
             Debug.Log("Updated Finished for clientId: " + x.clientId + "; finished: " + x.finished);
