@@ -135,6 +135,7 @@ public class ScoreController : NetworkBehaviour
         yield return new WaitForSeconds(0.4f);
         SpinUpNewRoundScoreManager();
         yield return new WaitForSeconds(5f);
+        RibbitRoyaleMultiplayer.Instance.SetCTAPlayerData(0, 0, 0);
         LoadPreLobbyScene();
         yield return null;
     }

@@ -306,6 +306,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d07152afa890a9489cc546a95b3b599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OptionsMenu: {fileID: 868481232}
+  Menu: {fileID: 50860137}
 --- !u!1 &329900473
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,7 +715,7 @@ RectTransform:
   m_Father: {fileID: 949870214}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -765,13 +767,14 @@ GameObject:
   m_Component:
   - component: {fileID: 868481233}
   - component: {fileID: 868481234}
+  - component: {fileID: 868481235}
   m_Layer: 5
   m_Name: OptionsMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &868481233
 RectTransform:
   m_ObjectHideFlags: 0
@@ -791,9 +794,9 @@ RectTransform:
   - {fileID: 1385387248}
   m_Father: {fileID: 329900474}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1025.2416, y: -612.6794}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &868481234
@@ -808,6 +811,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d07152afa890a9489cc546a95b3b599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OptionsMenu: {fileID: 868481232}
+  Menu: {fileID: 50860137}
+--- !u!114 &868481235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868481232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89dd0c0fb6e1b6499f72df4140507a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 2fdaaa6d4ebf40145a2a4566cf6238d7, type: 2}
 --- !u!1 &914560686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1141,7 +1159,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 868481234}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: DoExitGame
+        m_MethodName: CloseOptionsMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1150,7 +1168,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &1076303688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1164,7 +1182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.37647063, g: 0.5019608, b: 0.28627452, a: 0}
+  m_Color: {r: 0.37647063, g: 0.5019608, b: 0.28627452, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1876,6 +1894,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d07152afa890a9489cc546a95b3b599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OptionsMenu: {fileID: 0}
+  Menu: {fileID: 0}
 --- !u!1 &1306376258
 GameObject:
   m_ObjectHideFlags: 0
@@ -2217,7 +2237,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 868481235}
+        m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
+        m_MethodName: SetFullscreen
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1620515820
 GameObject:
@@ -2379,7 +2411,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 50860139}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: PlayGame
+        m_MethodName: OpenOptionsMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2668,7 +2700,7 @@ RectTransform:
   m_Father: {fileID: 2082340681}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
