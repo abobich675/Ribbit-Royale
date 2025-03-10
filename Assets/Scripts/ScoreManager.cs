@@ -74,7 +74,6 @@ namespace UI.Scoreboard
 
         // colorId (Color, Sprite) -- 003 (Red, RedSprite)
         private Dictionary<int, (Color, Sprite)> colorSpriteDictionary = new Dictionary<int, (Color, Sprite)>();
-        private Dictionary<string, string> playerColorDictionary = new Dictionary<string, string>();
 
         //private Dictionary<string, (int score, GameObject entry)> playerEntries = new Dictionary<string, (int, GameObject)>();
         private List<ScoreEntry> scoreEntries = new List<ScoreEntry>();
@@ -90,13 +89,13 @@ namespace UI.Scoreboard
         {
             Debug.Log("StartDistance coroutine started...");
             StartCoroutine(GetDistanceToFinish());
+            StartCoroutine(CheckIfFinished());
         }
         
         private IEnumerator GetDistanceToFinish()
         {
             // will want to create a seperate list of players 'in' the game/alive/not beaten yet
             var finish = GameObject.FindGameObjectWithTag("FinishContainer");
-            StartCoroutine(CheckIfFinished());
             while (timeRemainingGlobal > 0)
             {
                 if (stopCoroutines) { break; }
@@ -117,47 +116,41 @@ namespace UI.Scoreboard
 
         private IEnumerator CheckIfFinished()
         {
-            while (completePlayerList.Count != scoreEntries.Count)
+            Debug.Log("CHECKIFFINISHED ==== CompleteCount: " + completePlayerList.Count + "; EntriesCount: " + scoreEntries.Count );
+            while (completePlayerList.Count < scoreEntries.Count)
             {
-                try
+                if (stopCoroutines) { break; }
+
+                foreach (var entry in scoreEntries)
                 {
-                    foreach (var pEntry in NetworkManager.Singleton.ConnectedClients)
+                    var playerName = entry.GetPlayerName();
+                    var pData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(playerName);
+                    // Debug.Log("clientId: " + playerName + "; finished: " + pData.finished + "; \n" +
+                    //           "pData.finished: " + pData.finished + "; completeContains(entry): " + completePlayerList.Contains(entry));
+                    try
                     {
-                        var playerName = pEntry.Key;
-                        var pData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(playerName);
-                        Debug.Log("clientId: " + playerName + "finished: " + pData.finished);
-                        ScoreEntry entry = null;
-                        foreach (var sE in scoreEntries)
+                        if (pData.finished && (!completePlayerList.Contains(entry)))
                         {
-                            if (sE.GetPlayerName() == playerName)
-                            {
-                                entry = sE;
-                                break;
-                            }
+                            completePlayerList.Add(entry);
+                            entry.SetScore(-1, timeLeftCounter);
+                            UpdatePlayerRank(entry, completePlayerList.Count);
+                            Debug.Log("ScoreManager Set Finished playerId: " + playerName);
                         }
 
-                        try
+                        if (completePlayerList.Count == scoreEntries.Count)
                         {
-                            if (pData.finished && (!completePlayerList.Contains(entry)))
-                            {
-                                completePlayerList.Add(entry);
-                                entry.SetScore(-1, timeLeftCounter);
-                                UpdatePlayerRank(entry, completePlayerList.Count);
-                                Debug.Log("ScoreManager Set Finished playerId: " + playerName);
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            Debug.Log("Failed to init entry: ERROR " + e);
+                            ScoreController scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
+                            scoreController.CalculatePlayerScores();
                         }
                     }
-                }
-                catch (Exception e)
-                {
-                    Debug.Log("Failed to CheckIfFinished(): ERROR" + e);
+                    catch (Exception e)
+                    {
+                        Debug.Log("Failed to init entry: ERROR " + e);
+                    }
                 }
 
-                yield return new WaitForSeconds(1);
+                //yield return new WaitForSeconds(1);
+                yield return null;
             }
 
             yield return null;
@@ -203,7 +196,7 @@ namespace UI.Scoreboard
                             Debug.Log("Out of time! Ending Minigame...");
                             yield return new WaitForSeconds(1f);
                             
-                            ScoreController scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();;
+                            ScoreController scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
                             scoreController.CalculatePlayerScores();
                             break;
                         }

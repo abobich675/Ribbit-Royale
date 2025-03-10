@@ -297,8 +297,9 @@ public class PlayerController : NetworkBehaviour
         Debug.Log("Player reached the finish");
         try
         {
-            Debug.Log("SetPlayerFinished() for clientId: " + RibbitRoyaleMultiplayer.Instance.GetPlayerData().clientId);
             RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(true);
+            var x = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
+            Debug.Log("Updated Finished for clientId: " + x.clientId + "; finished: " + x.finished);
             scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
             //scoreController.SetPlayerFinished();
 
@@ -318,7 +319,7 @@ public class PlayerController : NetworkBehaviour
             if (allFinished)
             {
                 //Loader.LoadNetwork(Loader.Scene.PreLobbyScene);
-                scoreController.CalculatePlayerScores();
+                //scoreController.CalculatePlayerScores();
                 return;
             }
         } catch (Exception e)

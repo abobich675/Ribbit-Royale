@@ -120,7 +120,12 @@ public class ScoreController : NetworkBehaviour
     {
         if (GetIsHostClient())
         {
+            Debug.Log("CalculatePlayerScores() Host...");
             scoreEntries = scoreManager.GetEntryList();
+            foreach (var entry in scoreEntries)
+            {
+                Debug.Log("ENTRY: playerId: " + entry.GetPlayerName() + "; Rank: " + entry.GetRank());
+            }
             SpinUpNewGameOverPanel();
             ulong entryId;
             int entryRank;
@@ -198,6 +203,7 @@ public class ScoreController : NetworkBehaviour
         ulong playerId = playerData.clientId;
         ulong ownerId = NetworkManager.Singleton.CurrentSessionOwner;
         bool isHost = playerId == ownerId;
+        Debug.Log("GetIsHostClient playerId: " + playerId + "; ownerId: " + ownerId);
         return isHost;
     }
     
