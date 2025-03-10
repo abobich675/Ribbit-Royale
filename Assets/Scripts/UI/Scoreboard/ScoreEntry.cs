@@ -20,9 +20,20 @@ namespace UI.Scoreboard
         private bool isShown;
         private bool isTest = false;
         private int entryType;
+        private bool isConnected = true;
 
         private ScoreEntryUI uiController;
         private ScoreEntryUI uiController_inGame;
+
+        public void SetConnected(bool connected)
+        {
+            isConnected = connected;
+        }
+
+        public bool GetConnectionStatus()
+        {
+            return isConnected;
+        }
 
         public ScoreEntry()
         {
