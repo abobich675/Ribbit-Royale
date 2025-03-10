@@ -9,6 +9,7 @@
 // Automatically assigns correctly* colored score plates/avatars to relevant players.
 
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
@@ -95,6 +96,7 @@ namespace UI.Scoreboard
         {
             // will want to create a seperate list of players 'in' the game/alive/not beaten yet
             var finish = GameObject.FindGameObjectWithTag("FinishContainer");
+            StartCoroutine(CheckIfFinished());
             while (timeRemainingGlobal > 0)
             {
                 if (stopCoroutines) { break; }
@@ -113,20 +115,52 @@ namespace UI.Scoreboard
             yield return null;
         }
 
-        public void SetFinished(ulong playerId)
+        private IEnumerator CheckIfFinished()
         {
-            Debug.Log("ScoreManager SetFinished()...");
-            foreach (var entry in scoreEntries)
+            while (completePlayerList.Count != scoreEntries.Count)
             {
-                Debug.Log("ScoreManager playerId: " + playerId + "; entryId: " + entry.GetPlayerName());
-                if (entry.GetPlayerName() == playerId)
+                try
                 {
-                    entry.SetScore(-1, timeLeftCounter);
-                    completePlayerList.Add(entry);
-                    UpdatePlayerRank(entry, completePlayerList.Count);
+                    foreach (var pEntry in NetworkManager.Singleton.ConnectedClients)
+                    {
+                        var playerName = pEntry.Key;
+                        var pData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(playerName);
+                        Debug.Log("clientId: " + playerName + "finished: " + pData.finished);
+                        ScoreEntry entry = null;
+                        foreach (var sE in scoreEntries)
+                        {
+                            if (sE.GetPlayerName() == playerName)
+                            {
+                                entry = sE;
+                                break;
+                            }
+                        }
+
+                        try
+                        {
+                            if (pData.finished && (!completePlayerList.Contains(entry)))
+                            {
+                                completePlayerList.Add(entry);
+                                entry.SetScore(-1, timeLeftCounter);
+                                UpdatePlayerRank(entry, completePlayerList.Count);
+                                Debug.Log("ScoreManager Set Finished playerId: " + playerName);
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.Log("Failed to init entry: ERROR " + e);
+                        }
+                    }
                 }
+                catch (Exception e)
+                {
+                    Debug.Log("Failed to CheckIfFinished(): ERROR" + e);
+                }
+
+                yield return new WaitForSeconds(1);
             }
-            Debug.Log("ScoreManager SetFinished() Complete...");
+
+            yield return null;
         }
 
         private IEnumerator CreateTimer(int duration, float timerStartDelay)
@@ -259,12 +293,12 @@ namespace UI.Scoreboard
             {
                 playerObjectList.Add(playerObj);
                 playerCount--;
-                Debug.Log("Recorded New Player with id: " + playerObj.GetComponent<NetworkObject>().OwnerClientId);
+                //Debug.Log("Recorded New Player with id: " + playerObj.GetComponent<NetworkObject>().OwnerClientId);
             }
 
             if (playerCount != 0)
             {
-                Debug.Log("PlayerCount != 0");
+                //Debug.Log("PlayerCount != 0");
             }
         }
 
@@ -442,14 +476,17 @@ namespace UI.Scoreboard
                 Debug.Log("RemovePlayerEntry playerId: " + playerId + "; entry playerId: "+ entry.GetPlayerName());
                 if (entry.GetPlayerName() == playerId)
                 {
+                    entry.SetConnected(false);
                     if (entry.GetGameObject())
                     {
-                        Destroy(entry.GetGameObject());
+                        //Destroy(entry.GetGameObject());
+                        entry.GetGameObject().SetActive(false);
                         entry.SetGameObject(null);
                     }
                     else
                     {
-                        Destroy(entry.GetInGameGameObject());
+                        //Destroy(entry.GetInGameGameObject());
+                        entry.GetGameObject().SetActive(false);
                         entry.SetInGameGameObject(null);
                     }
                     Debug.Log("Destroyed Entry: " + playerId + " GameObject set null...");

@@ -60,13 +60,17 @@ public class PlayerController : NetworkBehaviour
         attackAction = input.actions["Attack"];
         
         // Will find the DoNotDestroy ScoreController object and initialize tongue swing score setup.
-        
-        if (GameObject.FindGameObjectWithTag("ScoreControllerGO"))
+
+        try
         {
             scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
             scoreController.InitializeTS();
             var infoPanelDuration = scoreController.GetPopupTimer(0);
             StartCoroutine(WaitForPopupDelay(infoPanelDuration));
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Could not set scoreController: ERROR " + e);
         }
     }
 
@@ -283,6 +287,7 @@ public class PlayerController : NetworkBehaviour
         // When player reaches the finish
         if (collider.gameObject.CompareTag("Finish"))
         {
+            //Debug.Log("Collider: " + GameObject.GetComponent<NetworkObject>().OwnerClientId);
             Finish();
         }
     }
@@ -292,10 +297,10 @@ public class PlayerController : NetworkBehaviour
         Debug.Log("Player reached the finish");
         try
         {
+            Debug.Log("SetPlayerFinished() for clientId: " + RibbitRoyaleMultiplayer.Instance.GetPlayerData().clientId);
             RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(true);
-            Debug.Log("RRM SetPlayerFinished Successfully...");
-            scoreController.SetPlayerFinished();
-            Debug.Log("ScoreController SetPlayerFinished Successfully...");
+            scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
+            //scoreController.SetPlayerFinished();
 
             // Check if all players have finished
             bool allFinished = true;
@@ -316,9 +321,9 @@ public class PlayerController : NetworkBehaviour
                 scoreController.CalculatePlayerScores();
                 return;
             }
-        } catch
+        } catch (Exception e)
         {
-            Debug.Log("Failed to get player data from clientId. Sending player back to prelobby");
+            Debug.Log("Failed to get player data from clientId. Sending player back to prelobby: ERROR " + e);
             Loader.Load(Loader.Scene.PreLobbyScene);
             return;
         }

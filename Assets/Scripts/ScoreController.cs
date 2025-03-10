@@ -118,24 +118,27 @@ public class ScoreController : NetworkBehaviour
 
     public void CalculatePlayerScores()
     {
-        scoreEntries = scoreManager.GetEntryList();
-        SpinUpNewGameOverPanel();
-        ulong entryId;
-        int entryRank;
-        rankedIds.Clear();
-        foreach (var entry in scoreEntries)
+        if (GetIsHostClient())
         {
-            // Gets player ulong id and rank, adds to rankedIds dict
-            entryId = entry.GetPlayerName();
-            entryRank = entry.GetRank();
-            rankedIds.Add(entryId, entryRank);
-        }
-
-        foreach (var rankEntry in rankedIds)
-        {
-            if (rankEntry.Value == 1)
+            scoreEntries = scoreManager.GetEntryList();
+            SpinUpNewGameOverPanel();
+            ulong entryId;
+            int entryRank;
+            rankedIds.Clear();
+            foreach (var entry in scoreEntries)
             {
-                RibbitRoyaleMultiplayer.Instance.IncPlayerScore(1, rankEntry.Key);
+                // Gets player ulong id and rank, adds to rankedIds dict
+                entryId = entry.GetPlayerName();
+                entryRank = entry.GetRank();
+                rankedIds.Add(entryId, entryRank);
+            }
+
+            foreach (var rankEntry in rankedIds)
+            {
+                if (rankEntry.Value == 1)
+                {
+                    RibbitRoyaleMultiplayer.Instance.IncPlayerScore(1, rankEntry.Key);
+                }
             }
         }
         TransitionToRoundScoreboard();
@@ -144,56 +147,58 @@ public class ScoreController : NetworkBehaviour
 
     public void CTA_CalculatePlayerScores()
     {
-        Debug.Log("CTA_CalculatePlayerScores() Started...");
-        DestroyScoreboard();
+        if (GetIsHostClient())
+        {
+            Debug.Log("CTA_CalculatePlayerScores() Started...");
+            DestroyScoreboard();
 
-        Dictionary<ulong, int> CTADiffList = new Dictionary<ulong, int>();
-        Dictionary<ulong, int> MaxList = new Dictionary<ulong, int>();
-        foreach (var player in playerDataDict)
-        {
-            var pData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(player.Key);
-            var actual = pData.currentCount;
-            var total = pData.finalCount;
-            var diff = total - actual;
-            Debug.Log("playerId: " + player.Key + "; actual: " + actual + "; total: " + total + "; diff: " + diff);
-            CTADiffList.Add(player.Key, diff);
-        }
-        
-        var max = 9999;
-        foreach (var x in CTADiffList)
-        {
-            if (x.Value <= max)
+            Dictionary<ulong, int> CTADiffList = new Dictionary<ulong, int>();
+            Dictionary<ulong, int> MaxList = new Dictionary<ulong, int>();
+            foreach (var player in playerDataDict)
             {
-                MaxList.Clear();
-                MaxList.Add(x.Key, x.Value);
-                max = x.Value;
+                var pData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(player.Key);
+                var actual = pData.currentCount;
+                var total = pData.finalCount;
+                var diff = total - actual;
+                Debug.Log("playerId: " + player.Key + "; actual: " + actual + "; total: " + total + "; diff: " + diff);
+                CTADiffList.Add(player.Key, diff);
             }
-            else if (x.Value == max)
-            {
-                MaxList.Add(x.Key, x.Value);
-            }
-        }
 
-        foreach (var player in MaxList)
-        {
-            RibbitRoyaleMultiplayer.Instance.IncPlayerScore(1, player.Key);
+            var max = 9999;
+            foreach (var x in CTADiffList)
+            {
+                if (x.Value <= max)
+                {
+                    MaxList.Clear();
+                    MaxList.Add(x.Key, x.Value);
+                    max = x.Value;
+                }
+                else if (x.Value == max)
+                {
+                    MaxList.Add(x.Key, x.Value);
+                }
+            }
+
+            foreach (var player in MaxList)
+            {
+                RibbitRoyaleMultiplayer.Instance.IncPlayerScore(1, player.Key);
+            }
         }
-        
         TransitionToRoundScoreboard();
-    }
-
-    public void SetPlayerFinished()
-    {
-        Debug.Log("ScoreController SetPlayerFinished() Started...");
-        PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
-        ulong playerId = playerData.clientId;
-        Debug.Log("ScoreController SetPlayerFinished() Calling SM SetPlayerFinished() with value: " + playerId + "...");
-        scoreManager.SetFinished(playerId);
     }
 
     private PlayerData GetPlayerData(ulong playerId)
     {
         return RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(playerId);
+    }
+
+    private Boolean GetIsHostClient()
+    {
+        PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
+        ulong playerId = playerData.clientId;
+        ulong ownerId = NetworkManager.Singleton.CurrentSessionOwner;
+        bool isHost = playerId == ownerId;
+        return isHost;
     }
     
     private ScoreManager SpinUpNewRoundScoreManager()
@@ -313,6 +318,7 @@ public class ScoreController : NetworkBehaviour
     public void RemovePlayerScore(ulong playerId)
     {
         // Remove player if Network calls disconnection hook
+        Debug.Log("Called RemovePlayerScore() playerId: " + playerId);
         scoreManager.RemovePlayerEntry(playerId);
         playerDataDict.Remove(playerId);
         Debug.Log("Removed Player: '" + playerId + "' from scoreboard...");
