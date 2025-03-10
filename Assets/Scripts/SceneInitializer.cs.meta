@@ -1,13 +1,2 @@
 fileFormatVersion: 2
 guid: 6669a5b3626d87a4ba19dd2e35d20571
-MonoImporter:
-  externalObjects: {}
-  serializedVersion: 2
-  defaultReferences:
-  - PrelobbyPrefab: {fileID: 5040148770044511259, guid: e051155fbf49d594e8c454cb5675e290, type: 3}
-  - TongueSwingPrefab: {fileID: 7271673477805879662, guid: fd6b1f47bb004c841b387d88863264ce, type: 3}
-  executionOrder: 0
-  icon: {instanceID: 0}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 

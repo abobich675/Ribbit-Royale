@@ -40,11 +40,22 @@ public class ScoreController : NetworkBehaviour
         //CreateInGameScoreboard();
     }
 
-    public void CreateInGameScoreboard()
+    public void CreateInGameScoreboard(int game)
     {
         // Creates new inGameScoreboard when called
         scoreManager = SpinUpNewScoreManager();
-        SpinUpNewInfoPanel(1);
+        if (game == 1)
+        {
+            SpinUpNewInfoPanel(game);
+        }
+        else if (game == 2)
+        {
+            SpinUpNewInfoPanel(game);
+        }
+        else if (game == 3)
+        {
+            SpinUpNewInfoPanel(game);
+        }
         //Instantiate(scoreManager, GetComponent<Camera>());
     }
     
@@ -78,7 +89,26 @@ public class ScoreController : NetworkBehaviour
         {
             Debug.Log("_playerCount != true player count! ERROR");
         }
-        CreateInGameScoreboard();
+        CreateInGameScoreboard(1);
+    }
+
+    public void InitializeSC()
+    {
+        _playerCount = RibbitRoyaleMultiplayer.Instance.GetPlayerCount();
+
+        // Create dict of <clientId, gameData> pairs playerDataDict
+        playerDataDict.Clear();
+        foreach (var client in NetworkManager.Singleton.ConnectedClients)
+        {
+            playerDataDict.Add(client.Key, RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(client.Key));
+        }
+
+        // Make sure player count is correct
+        if (playerDataDict.Count != _playerCount)
+        {
+            Debug.Log("_playerCount != true player count! ERROR");
+        }
+        CreateInGameScoreboard(3);
     }
 
     public void InitializeCTA()
@@ -252,7 +282,23 @@ public class ScoreController : NetworkBehaviour
                 "Get your count as close to accurate as you can to win!";
             Invoke(nameof(DestroyInfoPanel), 8f);
         }
-        
+        else if (gameType == 3)
+        {
+            // Snake Chase
+            InstantiateNonPersistScoreCanvas();
+            var infoPrefabCTA = Resources.Load<GameObject>("infoPopup");
+            infoPanel = Instantiate(infoPrefabCTA, nonpersistScoreCanvas.transform);
+            infoPanel.GetComponent<infoUI>().infoTitle.color = Color.black;
+            infoPanel.GetComponent<infoUI>().infoText.color = Color.black;
+            infoPanel.GetComponent<infoUI>().infoTitle.text = "Snake Chase";
+            infoPanel.GetComponent<infoUI>().infoText.text =
+                "Welcome to Snake Chase!\n" +
+                "\nTo move use A and D, SPACE to jump!\n" +
+                "\nRun away from the snake he wants to eat you!\n" +
+                "Get as close to the end as possible to win!";
+            Invoke(nameof(DestroyInfoPanel), 8f);
+        }
+
     }
 
     private void SpinUpNewGameOverPanel()
@@ -269,7 +315,7 @@ public class ScoreController : NetworkBehaviour
         var bodyText = "";
         foreach (var entry in scoreEntries)
         {
-            bodyText += "Player " + entry.GetPlayerName() + ": " + entry.GetScoreString() + "\n";
+            bodyText += "Player " + entry.GetPlayerName() + 1 + ": " + entry.GetScoreString() + "\n";
         }
         gameOver.GetComponent<infoUI>().infoText.text = bodyText;
         

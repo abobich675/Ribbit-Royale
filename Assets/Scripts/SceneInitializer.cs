@@ -10,6 +10,7 @@ public class SceneInitializer : NetworkBehaviour
     // A field to spawn in ta playerPrefab
     [SerializeField] private Transform PrelobbyPrefab;
     [SerializeField] private Transform TongueSwingPrefab;
+    [SerializeField] private Transform SnakeChasePrefab;
 
     private void Awake(){
         Instance = this;
@@ -34,6 +35,9 @@ public class SceneInitializer : NetworkBehaviour
                     break;
                 case "TongueSwingGame":
                     SpawnPlayer(TongueSwingPrefab, clientId, 10f);
+                    break;
+                case "SnakeChaseGame":
+                    SpawnPlayer(SnakeChasePrefab, clientId, 1f);
                     break;
             }
         }

@@ -7,6 +7,9 @@ TagManager:
   - Token
   - ScoreControllerGO
   - FinishContainer
+  - Snake
+  - HitBox
+  - Platform
   layers:
   - Default
   - TransparentFX
