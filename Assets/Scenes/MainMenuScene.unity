@@ -767,6 +767,7 @@ GameObject:
   m_Component:
   - component: {fileID: 868481233}
   - component: {fileID: 868481234}
+  - component: {fileID: 868481235}
   m_Layer: 5
   m_Name: OptionsMenu
   m_TagString: Untagged
@@ -812,6 +813,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OptionsMenu: {fileID: 868481232}
   Menu: {fileID: 50860137}
+--- !u!114 &868481235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868481232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89dd0c0fb6e1b6499f72df4140507a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 1935892235}
+  fullscreenToggle: {fileID: 1385387249}
 --- !u!1 &914560686
 GameObject:
   m_ObjectHideFlags: 0
