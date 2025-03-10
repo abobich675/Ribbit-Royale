@@ -18,7 +18,7 @@ The objective is to provide a distinctive experience that blends competitive gam
 - To run the game using the latest version of the repository, regardless of the last released build you must create your own build file, following the instructons above.
 
 ## Who Worked on What:
-- Baron Baker: "Snake Chase" minigame and background art
+- Baron Baker: "Snake Chase" minigame lead developer and background/sprite art
 - Chase Bennett: Lead of sound design
 - Adam Bobich: "Lickity Split" and "Swamp Spotting" minigames lead developer
 - Aidan Caughey: Lead of art design, options menu and lead of testing and problem detection
