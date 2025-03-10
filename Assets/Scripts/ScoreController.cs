@@ -148,6 +148,7 @@ public class ScoreController : NetworkBehaviour
 
     public void CalculatePlayerScores()
     {
+        RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(false);
         if (GetIsHostClient())
         {
             Debug.Log("CalculatePlayerScores() Host...");
