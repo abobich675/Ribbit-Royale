@@ -29,6 +29,7 @@ The objective is to provide a distinctive experience that blends competitive gam
 The game is currently in early production, so not all game features are implemented yet. Here are some of the features we *have* implemented:
 - Lickity Split Game (Singleplayer, Partial Implementation for Multiplayer)
 - Swamp Spotting Game (Singleplayer or Multiplayer)
+- Snake Chase Game (Singeplayer, Partial Implementation for Multiplayer)
 
 ## Known Bugs:
 - In Prelobby, multiplayer frogs are shown as the user's color instead of their chosen color.
@@ -36,6 +37,7 @@ The game is currently in early production, so not all game features are implemen
 - In Swamp Spotting Game, some animals are facing the wrong direction in multiplayer.
 - Returning to the prelobby creates duplicates of the frogs.
 - Scoreboard breaks in multiplayer.
+- In Snake Chase, Colors of frogs are not applying because of incorrect PlayerData values
 
 As a team of newcomers to game development, this project also provides a unique opportunity to grow our skills in game design, networking, and the Unity engine, while contributing to a project that could offer both personal and professional rewards.
 
