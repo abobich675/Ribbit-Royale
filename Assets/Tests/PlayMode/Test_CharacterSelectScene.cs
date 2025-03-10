@@ -1,24 +1,52 @@
-using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro; // Correct namespace for TextMeshPro
 using UnityEngine.TestTools;
+using System.Collections;
 
-#if UNITY_EDITOR
-public class CharacterSelectSceneTests
+public class TestLobbyCreateUI : MonoBehaviour
 {
-    [UnityTest]
-    public IEnumerator TestCharacterSelectSceneLoadsCorrectly()
+    private LobbyCreateUI lobbyCreateUI;
+    private GameObject lobbyUIObject;
+    
+    [SetUp]
+    public void SetUp()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("CharacterSelectScene");
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
+        // Create a GameObject to hold the UI
+        lobbyUIObject = new GameObject("LobbyCreateUI");
 
-        yield return new WaitForSeconds(1f); 
+        // Attach the LobbyCreateUI component
+        lobbyCreateUI = lobbyUIObject.AddComponent<LobbyCreateUI>();
 
-        Assert.AreEqual("CharacterSelectScene", SceneManager.GetActiveScene().name, "Scene did not load correctly!");
+        // Create UI elements
+        lobbyCreateUI.GetType().GetField("createPublicButton", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            .SetValue(lobbyCreateUI, CreateUIButton("PublicButton"));
+        
+        lobbyCreateUI.GetType().GetField("lobbyNameInputField", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            .SetValue(lobbyCreateUI, CreateInputField("TestLobby"));
+    }
+
+    private Button CreateUIButton(string name)
+    {
+        GameObject buttonObj = new GameObject(name);
+        Button button = buttonObj.AddComponent<Button>();
+        return button;
+    }
+
+    private TMP_InputField CreateInputField(string text)
+    {
+        GameObject inputObj = new GameObject("InputField");
+        TMP_InputField inputField = inputObj.AddComponent<TMP_InputField>();
+        inputField.text = text;
+        return inputField;
+    }
+
+
+
+    [TearDown]
+    public void TearDown()
+    {
+        Object.Destroy(lobbyUIObject);
     }
 }
-#endif

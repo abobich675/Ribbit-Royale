@@ -7,7 +7,9 @@
         "nunit.framework",
         "Unity.Netcode.Runtime",
         "Unity.Services.Relay",
-        "Unity.Netcode.Transports.UTP"
+        "Unity.Netcode.Transports.UTP",
+        "UnityEngine.UI", 
+        "Unity.TextMeshPro" 
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
