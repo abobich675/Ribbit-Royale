@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -7,7 +8,14 @@ public class FinishColliderScript : MonoBehaviour
     void Awake()
     {
         //var thisCol = gameObject.GetComponent<BoxCollider2D>();
-        scoreCon = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
+        try
+        {
+            scoreCon = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Could not create scoreCon variable: ERROR " + e);
+        }
     }
     
     void OnTriggerEnter2D(Collider2D other)
