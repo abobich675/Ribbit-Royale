@@ -299,9 +299,8 @@ public class PlayerController : NetworkBehaviour
         {
             Debug.Log("Finished Called");
             RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(true);
-            var x = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
-            Debug.Log("Updated Finished for clientId: " + x.clientId + "; finished: " + x.finished);
-            scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
+            //scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
+            //scoreController.DidFinish(RibbitRoyaleMultiplayer.Instance.GetPlayerData().clientId);
             //scoreController.SetPlayerFinished();
 
             // Check if all players have finished

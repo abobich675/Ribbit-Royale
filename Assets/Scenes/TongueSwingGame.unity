@@ -2046,6 +2046,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   PrelobbyPrefab: {fileID: 5040148770044511259, guid: e051155fbf49d594e8c454cb5675e290, type: 3}
   TongueSwingPrefab: {fileID: 7271673477805879662, guid: fd6b1f47bb004c841b387d88863264ce, type: 3}
+  SnakeChasePrefab: {fileID: 0}
 --- !u!4 &982353254 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6490052769684828384, guid: f96091ba4d54108409c37fdf2ecf9592, type: 3}
@@ -3805,6 +3806,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1813326187}
   - component: {fileID: 1813326188}
+  - component: {fileID: 1813326189}
   m_Layer: 0
   m_Name: Win Area
   m_TagString: Finish
@@ -3873,6 +3875,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.95, y: 0.2}
   m_EdgeRadius: 0
+--- !u!114 &1813326189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813326186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53deec82cdec4e06aed00a1c10830c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1815735055
 PrefabInstance:
   m_ObjectHideFlags: 0

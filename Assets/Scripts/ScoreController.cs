@@ -7,6 +7,7 @@ using UI.Scoreboard;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class ScoreController : NetworkBehaviour
@@ -132,10 +133,11 @@ public class ScoreController : NetworkBehaviour
         yield return new WaitForSeconds(3f);
         DestroyScoreboard();
         Loader.LoadNetwork(Loader.Scene.ScoreboardScene);
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(1f);
         SpinUpNewRoundScoreManager();
         yield return new WaitForSeconds(5f);
         RibbitRoyaleMultiplayer.Instance.SetCTAPlayerData(0, 0, 0);
+        RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(false);
         LoadPreLobbyScene();
         yield return null;
     }
@@ -146,24 +148,25 @@ public class ScoreController : NetworkBehaviour
         Loader.LoadNetwork(Loader.Scene.PreLobbyScene);
     }
 
+    public void DidFinish(ulong playerId)
+    {
+        scoreManager.DidFinish(playerId);
+    }
+
     public void CalculatePlayerScores()
     {
-        RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(false);
+        scoreEntries = scoreManager.GetEntryList();
+        SpinUpNewGameOverPanel();
+        rankedIds.Clear();
+        ulong entryId;
+        int entryRank;
         if (GetIsHostClient())
         {
             Debug.Log("CalculatePlayerScores() Host...");
-            scoreEntries = scoreManager.GetEntryList();
-            foreach (var entry in scoreEntries)
-            {
-                Debug.Log("ENTRY: playerId: " + entry.GetPlayerName() + "; Rank: " + entry.GetRank());
-            }
-            SpinUpNewGameOverPanel();
-            ulong entryId;
-            int entryRank;
-            rankedIds.Clear();
             foreach (var entry in scoreEntries)
             {
                 // Gets player ulong id and rank, adds to rankedIds dict
+                Debug.Log("ENTRY: playerId: " + entry.GetPlayerName() + "; Rank: " + entry.GetRank());
                 entryId = entry.GetPlayerName();
                 entryRank = entry.GetRank();
                 rankedIds.Add(entryId, entryRank);
@@ -328,7 +331,7 @@ public class ScoreController : NetworkBehaviour
         var bodyText = "";
         foreach (var entry in scoreEntries)
         {
-            bodyText += "Player " + entry.GetPlayerName() + 1 + ": " + entry.GetScoreString() + "\n";
+            bodyText += "Player " + entry.GetPlayerName() + ": " + entry.GetScoreString() + "\n";
         }
         gameOver.GetComponent<infoUI>().infoText.text = bodyText;
         

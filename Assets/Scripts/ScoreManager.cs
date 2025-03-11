@@ -74,6 +74,8 @@ namespace UI.Scoreboard
 
         // colorId (Color, Sprite) -- 003 (Red, RedSprite)
         private Dictionary<int, (Color, Sprite)> colorSpriteDictionary = new Dictionary<int, (Color, Sprite)>();
+        private List<ulong> didFinishList = new List<ulong>();
+        private List<ulong> disconnectList = new List<ulong>();
 
         //private Dictionary<string, (int score, GameObject entry)> playerEntries = new Dictionary<string, (int, GameObject)>();
         private List<ScoreEntry> scoreEntries = new List<ScoreEntry>();
@@ -123,37 +125,36 @@ namespace UI.Scoreboard
 
                 foreach (var entry in scoreEntries)
                 {
-                    var playerName = entry.GetPlayerName();
-                    var pData = RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(playerName);
-                    // Debug.Log("clientId: " + playerName + "; finished: " + pData.finished + "; \n" +
-                    //           "pData.finished: " + pData.finished + "; completeContains(entry): " + completePlayerList.Contains(entry));
-                    try
+                    if (didFinishList.Contains(entry.GetPlayerName()) && !completePlayerList.Contains(entry))
                     {
-                        if (pData.finished && (!completePlayerList.Contains(entry)))
-                        {
-                            completePlayerList.Add(entry);
-                            entry.SetScore(-1, timeLeftCounter);
-                            UpdatePlayerRank(entry, completePlayerList.Count);
-                            Debug.Log("ScoreManager Set Finished playerId: " + playerName);
-                        }
-
-                        if (completePlayerList.Count == scoreEntries.Count)
-                        {
-                            ScoreController scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
-                            scoreController.CalculatePlayerScores();
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.Log("Failed to init entry: ERROR " + e);
+                        completePlayerList.Add(entry);
+                        entry.SetScore(-1, timeLeftCounter);
+                        UpdatePlayerRank(entry, completePlayerList.Count);
+                        Debug.Log("ScoreManager Set Finished playerId: " + entry.GetPlayerName());
                     }
                 }
+                
+                if (completePlayerList.Count == scoreEntries.Count - disconnectList.Count)
+                {
+                    ScoreController scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
+                    scoreController.CalculatePlayerScores();
+                    break;
+                }
+                
 
-                //yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(0.1f);
                 yield return null;
             }
 
             yield return null;
+        }
+
+        public void DidFinish(ulong playerId)
+        {
+            if (!didFinishList.Contains(playerId))
+            {
+                didFinishList.Add(playerId);
+            }
         }
 
         private IEnumerator CreateTimer(int duration, float timerStartDelay)
@@ -472,16 +473,17 @@ namespace UI.Scoreboard
                     entry.SetConnected(false);
                     if (entry.GetGameObject())
                     {
-                        //Destroy(entry.GetGameObject());
-                        entry.GetGameObject().SetActive(false);
+                        Destroy(entry.GetGameObject());
+                        //entry.GetGameObject().SetActive(false);
                         entry.SetGameObject(null);
                     }
                     else
                     {
-                        //Destroy(entry.GetInGameGameObject());
-                        entry.GetGameObject().SetActive(false);
+                        Destroy(entry.GetInGameGameObject());
+                        //entry.GetGameObject().SetActive(false);
                         entry.SetInGameGameObject(null);
                     }
+                    disconnectList.Add(playerId);
                     Debug.Log("Destroyed Entry: " + playerId + " GameObject set null...");
                     //scoreEntries.Remove(entry);
                 }
