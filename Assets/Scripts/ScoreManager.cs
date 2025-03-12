@@ -216,6 +216,18 @@ namespace UI.Scoreboard
             yield return null;
         }
 
+        public void SetPlayerEntryDNF(ulong playerId)
+        {
+            foreach (var entry in scoreEntries)
+            {
+                if (entry.GetPlayerName() == playerId)
+                {
+                    completePlayerList.Add(entry);
+                    entry.SetScore(-1, "DNF");
+                }
+            }
+        }
+
         public void GameOver_StopCoroutines()
         {
             stopCoroutines = true;

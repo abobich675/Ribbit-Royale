@@ -153,6 +153,11 @@ public class ScoreController : NetworkBehaviour
         scoreManager.DidFinish(playerId);
     }
 
+    public void SetPlayerDNF(ulong playerId)
+    {
+        scoreManager.SetPlayerEntryDNF(playerId);
+    }
+
     public void CalculatePlayerScores()
     {
         scoreEntries = scoreManager.GetEntryList();
