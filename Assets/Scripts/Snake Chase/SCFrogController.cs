@@ -16,8 +16,9 @@ public class FrogController : NetworkBehaviour
     private Rigidbody2D rb;         // Reference to the Rigidbody2D component
     private bool timerOver = false;
     private ScoreController scoreController;
-    //Animator animator;
-    //public RuntimeAnimatorController[] animators; // Green Blue Red Yellow
+    Animator animator;
+    public RuntimeAnimatorController[] animators; // Green Blue Red Yellow
+    [SerializeField] private PlayerVisual playerVisual; // Reference to PlayerVisual    
 
     //InputAction moveAction;
 
@@ -31,9 +32,9 @@ public class FrogController : NetworkBehaviour
         rb = GetComponent<Rigidbody2D>();
         moveSpeed = 0f;
 
-        //PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
-        //playerVisual.SetPlayerColor(RibbitRoyaleMultiplayer.Instance.GetPlayerColor(playerData.colorId));
-        //animator = GetComponent<Animator>();
+        PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
+        playerVisual.SetPlayerColor(RibbitRoyaleMultiplayer.Instance.GetPlayerColor(playerData.colorId));
+        animator = GetComponent<Animator>();
 
         SetColor();
 
@@ -82,13 +83,13 @@ public class FrogController : NetworkBehaviour
             return;
         }
 
-        //if (playerData.colorId < 0 || playerData.colorId >= animators.Length)
-        //{
-        //    Debug.LogError("Player color ID out of bounds");
-        //    return;
-        //}
+        if (playerData.colorId < 0 || playerData.colorId >= animators.Length)
+        {
+            Debug.LogError("Player color ID out of bounds");
+            return;
+        }
 
-        //animator.runtimeAnimatorController = animators[playerData.colorId];
+        animator.runtimeAnimatorController = animators[playerData.colorId];
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -125,9 +126,9 @@ public class FrogController : NetworkBehaviour
             RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(true);
             GetComponent<Collider2D>().enabled = false;
             Debug.Log("RRM SetPlayerFinished Successfully...");
-            //scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
+            scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
             //scoreController.SetPlayerFinished();
-            RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(true);
+            //RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(true);
             Debug.Log("ScoreController SetPlayerFinished Successfully...");
 
             // Check if all players have finished
@@ -146,7 +147,7 @@ public class FrogController : NetworkBehaviour
             if (allFinished)
             {
                 //Loader.LoadNetwork(Loader.Scene.PreLobbyScene);
-                //scoreController.CalculatePlayerScores();
+                scoreController.CalculatePlayerScores();
                 return;
             }
         }
