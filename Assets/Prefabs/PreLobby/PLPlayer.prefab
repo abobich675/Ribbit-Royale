@@ -137,8 +137,8 @@ MonoBehaviour:
   playerVisual: {fileID: 3025909043203801142}
   animators:
   - {fileID: 9100000, guid: 3da9bea081c92a041a38b065d77bcca7, type: 2}
-  - {fileID: 9100000, guid: 7e83bdf1c05e4b04dbde06a09834ce0e, type: 2}
   - {fileID: 9100000, guid: 9012d4e7b84524d4199484d77130400e, type: 2}
+  - {fileID: 9100000, guid: 7e83bdf1c05e4b04dbde06a09834ce0e, type: 2}
   - {fileID: 9100000, guid: 5b8fda6eaf4bf9a42b4daacd479a615f, type: 2}
   movSpeed: 10
 --- !u!50 &6340637032291644613

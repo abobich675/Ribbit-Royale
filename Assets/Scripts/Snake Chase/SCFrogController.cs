@@ -18,6 +18,7 @@ public class FrogController : NetworkBehaviour
     private ScoreController scoreController;
 
     InputAction moveAction;
+    float moveHorizontal;
 
     Animator animator;
     public RuntimeAnimatorController[] animators; // Green Blue Red Yellow
@@ -34,7 +35,16 @@ public class FrogController : NetworkBehaviour
         moveSpeed = 0f;
 
         PlayerInput input = GetComponent<PlayerInput>();
-        moveAction = input.actions["Move"];
+        if (input != null)
+        {
+            moveAction = input.actions["Move"];
+            moveAction.Enable(); // Ensure the action is enabled
+        }
+        else
+        {
+            Debug.LogError("PlayerInput component missing on: " + gameObject.name);
+        }
+
 
         PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
         playerVisual.SetPlayerColor(RibbitRoyaleMultiplayer.Instance.GetPlayerColor(playerData.colorId));
@@ -43,7 +53,9 @@ public class FrogController : NetworkBehaviour
         SetColor();
 
         if (!IsOwner)
+        {
             return;
+        }
 
         if (GameObject.FindGameObjectWithTag("ScoreControllerGO"))
         {
@@ -57,30 +69,33 @@ public class FrogController : NetworkBehaviour
 
     void Update()
     {
-        if (timerOver)
+        if (!timerOver || !IsOwner) return;
+
+        // Read movement input from PlayerInput component
+        Vector2 moveInput = moveAction?.ReadValue<Vector2>() ?? Vector2.zero; // Safely read input
+
+        if (moveInput != Vector2.zero)
         {
-            // Read movement input from PlayerInput component
-            Vector2 moveInput = moveAction.ReadValue<Vector2>();
             rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
+        }
 
-            // Update animation / sprite direction
-            animator.SetFloat("Speed", rb.linearVelocity.magnitude);
+        // Update animation / sprite direction
+        animator.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
 
-            if (rb.linearVelocity.x > 0)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-            }
-            else if (rb.linearVelocity.x < 0)
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-            }
+        if (rb.linearVelocity.x > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (rb.linearVelocity.x < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
 
-            // Handle jumping
-            if (moveInput.y > 0 && isGrounded) // Using 'y' axis instead of KeyCode.W
-            {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-                isGrounded = false; // Prevent multiple jumps mid-air
-            }
+        // Handle jumping
+        if (moveInput.y > 0.5f && isGrounded) // Using 'y' axis instead of KeyCode.W
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            isGrounded = false; // Prevent multiple jumps mid-air
         }
     }
 
@@ -125,7 +140,23 @@ public class FrogController : NetworkBehaviour
         // When player reaches the finish
         if (collider.gameObject.CompareTag("Snake"))
         {
-            Finish();
+            bool allFinished = true;
+            foreach (var client in NetworkManager.Singleton.ConnectedClients)
+            {
+                ulong currentClientId = client.Key;
+                // Debug.Log(RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(currentClientId).finished);
+                if (!RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(currentClientId).finished)
+                {
+                    allFinished = false;
+                    break;
+                }
+            }
+            if (allFinished)
+            {
+                //Loader.LoadNetwork(Loader.Scene.PreLobbyScene);
+                //scoreController.CalculatePlayerScores();
+                Finish();
+            }
         }
 
         if (collider.gameObject.CompareTag("Finish"))
