@@ -29,3 +29,7 @@ Adam Bobich, Aidan Caughey, Baron Baker, Chase Bennett, Luke Garci, Ryan Dobkin
   3. Follow the build instructions above to create a final release build.
   4. Run sanity checks to verify game functionality.
   5. Upload the build.
+
+## Attribution:
+  1. Background ambient noise: Pond song.wav by dibko -- https://freesound.org/s/577575/ -- License: Attribution 4.0
+  2. Background music: CC4.0 Manuel Graf - https://manuelgraf.com/
