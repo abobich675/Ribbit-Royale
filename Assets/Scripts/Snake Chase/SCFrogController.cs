@@ -16,6 +16,9 @@ public class FrogController : NetworkBehaviour
     private Rigidbody2D rb;         // Reference to the Rigidbody2D component
     private bool timerOver = false;
     private ScoreController scoreController;
+
+    InputAction moveAction;
+
     Animator animator;
     public RuntimeAnimatorController[] animators; // Green Blue Red Yellow
     [SerializeField] private PlayerVisual playerVisual; // Reference to PlayerVisual    
@@ -31,6 +34,9 @@ public class FrogController : NetworkBehaviour
         // Initialize the Rigidbody2D
         rb = GetComponent<Rigidbody2D>();
         moveSpeed = 0f;
+
+        PlayerInput input = GetComponent<PlayerInput>();
+        moveAction = input.actions["Move"];
 
         PlayerData playerData = RibbitRoyaleMultiplayer.Instance.GetPlayerData();
         playerVisual.SetPlayerColor(RibbitRoyaleMultiplayer.Instance.GetPlayerColor(playerData.colorId));
@@ -58,6 +64,18 @@ public class FrogController : NetworkBehaviour
             // Handle horizontal movement
             float horizontalInput = Input.GetAxisRaw("Horizontal");
             rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
+
+            // Update animation / sprite direction
+            animator.SetFloat("Speed", rb.linearVelocity.magnitude);
+
+            if (rb.linearVelocity.x > 0)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+            else if (rb.linearVelocity.x < 0)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
 
             // Handle jumping
             if (Input.GetKeyDown(KeyCode.W) && isGrounded)
@@ -126,7 +144,7 @@ public class FrogController : NetworkBehaviour
             RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(true);
             GetComponent<Collider2D>().enabled = false;
             Debug.Log("RRM SetPlayerFinished Successfully...");
-            scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
+            //scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
             //scoreController.SetPlayerFinished();
             //RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(true);
             Debug.Log("ScoreController SetPlayerFinished Successfully...");
@@ -147,7 +165,7 @@ public class FrogController : NetworkBehaviour
             if (allFinished)
             {
                 //Loader.LoadNetwork(Loader.Scene.PreLobbyScene);
-                scoreController.CalculatePlayerScores();
+                //scoreController.CalculatePlayerScores();
                 return;
             }
         }

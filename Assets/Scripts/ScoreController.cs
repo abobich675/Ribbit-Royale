@@ -309,7 +309,7 @@ public class ScoreController : NetworkBehaviour
             infoPanel.GetComponent<infoUI>().infoTitle.text = "Snake Chase";
             infoPanel.GetComponent<infoUI>().infoText.text =
                 "Welcome to Snake Chase!\n" +
-                "\nTo move use A and D, SPACE to jump!\n" +
+                "\nTo move use A and D, W to jump!\n" +
                 "\nRun away from the snake he wants to eat you!\n" +
                 "Get as close to the end as possible to win!";
             Invoke(nameof(DestroyInfoPanel), 8f);

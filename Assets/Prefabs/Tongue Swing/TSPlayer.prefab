@@ -140,8 +140,8 @@ MonoBehaviour:
   tongue: {fileID: 8838113352694672605, guid: c45ee84891523ae458242adc07ec4c59, type: 3}
   animators:
   - {fileID: 9100000, guid: 29bdcbd42eadf4311b2996d9cb847301, type: 2}
-  - {fileID: 9100000, guid: 2e4f5bd955d0449d29a6360c0672075a, type: 2}
   - {fileID: 9100000, guid: d5921f83003264c49a5fc1b89a6bad3e, type: 2}
+  - {fileID: 9100000, guid: 2e4f5bd955d0449d29a6360c0672075a, type: 2}
   - {fileID: 9100000, guid: 8e2179e0e60aa4330bc581b65ecc2aae, type: 2}
 --- !u!50 &4701521043987845081
 Rigidbody2D:

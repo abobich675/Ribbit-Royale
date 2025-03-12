@@ -1341,6 +1341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 493714780}
   - component: {fileID: 493714781}
+  - component: {fileID: 493714782}
   m_Layer: 0
   m_Name: Win Area
   m_TagString: Finish
@@ -1409,6 +1410,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.95, y: 0.2}
   m_EdgeRadius: 0
+--- !u!114 &493714782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493714779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53deec82cdec4e06aed00a1c10830c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &495307413
 GameObject:
   m_ObjectHideFlags: 0
@@ -2366,6 +2379,7 @@ GameObject:
   - component: {fileID: 734327989}
   - component: {fileID: 734327988}
   - component: {fileID: 734327992}
+  - component: {fileID: 734327993}
   m_Layer: 0
   m_Name: Square
   m_TagString: Finish
@@ -2510,8 +2524,8 @@ Transform:
   m_GameObject: {fileID: 734327987}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 57.14, y: -0.79, z: 0}
-  m_LocalScale: {x: 187.6266, y: 1, z: 1}
+  m_LocalPosition: {x: 65.1648, y: -0.79, z: 0}
+  m_LocalScale: {x: 203.66867, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2562,6 +2576,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &734327993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734327987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53deec82cdec4e06aed00a1c10830c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &984399231
 GameObject:
   m_ObjectHideFlags: 0
@@ -4464,6 +4490,7 @@ GameObject:
   - component: {fileID: 2007211818}
   - component: {fileID: 2007211817}
   - component: {fileID: 2007211819}
+  - component: {fileID: 2007211820}
   m_Layer: 0
   m_Name: Snake
   m_TagString: Snake
@@ -4509,7 +4536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  moveSpeed: 5
+  moveSpeed: 50
 --- !u!61 &2007211813
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4647,7 +4674,7 @@ Transform:
   m_GameObject: {fileID: 2007211810}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.024725148, w: 0.99969435}
-  m_LocalPosition: {x: -12.53, y: 6.04, z: 0}
+  m_LocalPosition: {x: -12.87, y: 6.04, z: 0}
   m_LocalScale: {x: 10.249813, y: 11.477255, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4752,6 +4779,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.09, y: 0.99}
   m_EdgeRadius: 0
+--- !u!114 &2007211820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007211810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53deec82cdec4e06aed00a1c10830c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2035264120
 GameObject:
   m_ObjectHideFlags: 0

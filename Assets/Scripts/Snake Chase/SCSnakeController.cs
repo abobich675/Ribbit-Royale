@@ -11,7 +11,7 @@ using Unity.VisualScripting;
 public class SnakeController : NetworkBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public float moveSpeed = 4.0f;
+    public float moveSpeed = 5.0f;
     private Transform target;
     private Rigidbody2D rb;
     private bool timerOver = false;
@@ -22,7 +22,7 @@ public class SnakeController : NetworkBehaviour
 
         StartCoroutine(StartDelay());
 
-        moveSpeed = 4.0f;
+        moveSpeed = 5.0f;
         FindPlayer();
 
     }
