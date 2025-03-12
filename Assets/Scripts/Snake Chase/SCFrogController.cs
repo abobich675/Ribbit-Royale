@@ -151,36 +151,10 @@ public class FrogController : NetworkBehaviour
 
     private void HandlePlayerCaught()
     {
-        Debug.Log($"Player {OwnerClientId} hit by snake, setting score to DNF...");
-
-        // Ensure ScoreManager is available
-        if (ScoreManager.Instance != null)
-        {
-            foreach (var entry in ScoreManager.Instance.GetEntryList())
-            {
-                if (entry.GetPlayerName() == OwnerClientId)
-                {
-                    entry.SetScore(-1, "DNF"); // Mark player as DNF immediately
-                    Debug.Log($"Player {OwnerClientId} marked as DNF on scoreboard.");
-                    break;
-                }
-            }
-        }
-        else
-        {
-            Debug.LogError("ScoreManager instance not found!");
-        }
 
         // Prevent further movement and interactions
         moveSpeed = 0f;
         GetComponent<Collider2D>().enabled = false;
-
-        // Remove player from the network
-        NetworkObject networkObject = GetComponent<NetworkObject>();
-        if (networkObject != null && networkObject.IsSpawned)
-        {
-            networkObject.Despawn();
-        }
 
 
         // Check if all players have finished
