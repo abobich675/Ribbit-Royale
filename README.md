@@ -36,10 +36,7 @@ The game is currently in early production, so not all game features are implemen
 
 ## Known Bugs:
 - In Prelobby, multiplayer frogs are shown as the user's color instead of their chosen color.
-- In Lickity Split Game, reaching the goal doesn't end the game + send you to the scoreboard screen for a few seconds.
 - In Swamp Spotting Game, some animals are facing the wrong direction in multiplayer.
-- Returning to the prelobby creates duplicates of the frogs.
-- Scoreboard breaks in multiplayer.
 - In Snake Chase, Colors of frogs are not applying because of incorrect PlayerData values
 
 As a team of newcomers to game development, this project also provides a unique opportunity to grow our skills in game design, networking, and the Unity engine, while contributing to a project that could offer both personal and professional rewards.
