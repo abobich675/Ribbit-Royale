@@ -42,3 +42,8 @@ Ribbit Royale is a multiplayer party game built in Unity for PC. The game offers
 ## Known Bugs:
   - Some animations may not play smoothly (Work in Progress)
   - Sound effects missing in some minigames (Work in Progress)
+
+## Attribution:
+  1. Background ambient noise: Pond song.wav by dibko -- https://freesound.org/s/577575/ -- License: Attribution 4.0
+  2. Background music: CC4.0 Manuel Graf - https://manuelgraf.com/
+
