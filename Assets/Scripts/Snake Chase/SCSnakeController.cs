@@ -47,9 +47,18 @@ public class SnakeController : NetworkBehaviour
         // Move towards the player
         if (timerOver)
         {
-            Vector3 targetPosition = new Vector3(target.position.x, target.position.y + 3, target.position.z);
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            if (IsServer) // Ensure only the server moves the snake
+            {
+                MoveSnakeServerRpc(target.position.x);
+            }
         }
+    }
+
+    [ServerRpc]
+    void MoveSnakeServerRpc(float playerX)
+    {
+        Vector3 targetPosition = new Vector3(playerX, transform.position.y, transform.position.z);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -58,27 +67,46 @@ public class SnakeController : NetworkBehaviour
         {
             Destroy(collision.gameObject, 0.1f);
         }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            NetworkObject playerNetworkObject = collision.gameObject.GetComponent<NetworkObject>();
+            if (playerNetworkObject != null && playerNetworkObject.IsSpawned)
+            {
+                playerNetworkObject.Despawn();
+            }
+
+            FindPlayer();
+        }
     }
 
     void FindPlayer()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
-        try
+        if (players.Length == 0)
         {
-            foreach (GameObject player in players)
+            target = null; // No players left to chase
+            return;
+        }
+
+        Transform closestPlayer = null;
+        float minDistance = Mathf.Infinity;
+
+        foreach (GameObject player in players)
+        {
+            // Ensure player has a NetworkObject and is still active
+            NetworkObject netObj = player.GetComponent<NetworkObject>();
+            if (netObj != null && netObj.IsSpawned)
             {
-                if (player.GetComponent<NetworkObject>().IsOwner)
+                float distance = Vector3.Distance(transform.position, player.transform.position);
+                if (distance < minDistance)
                 {
-                    target = player.transform;
-                    return;
+                    minDistance = distance;
+                    closestPlayer = player.transform;
                 }
             }
         }
-        catch
-        {
-            if (players.Length > 0)
-                target = players[0].transform;
-        }
+
+        target = closestPlayer;
     }
 }

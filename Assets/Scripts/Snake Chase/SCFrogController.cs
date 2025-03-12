@@ -137,31 +137,70 @@ public class FrogController : NetworkBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        // When player reaches the finish
+        // When player hits the snake
         if (collider.gameObject.CompareTag("Snake"))
         {
-            bool allFinished = true;
-            foreach (var client in NetworkManager.Singleton.ConnectedClients)
-            {
-                ulong currentClientId = client.Key;
-                // Debug.Log(RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(currentClientId).finished);
-                if (!RibbitRoyaleMultiplayer.Instance.GetPlayerDataFromClientId(currentClientId).finished)
-                {
-                    allFinished = false;
-                    break;
-                }
-            }
-            if (allFinished)
-            {
-                //Loader.LoadNetwork(Loader.Scene.PreLobbyScene);
-                //scoreController.CalculatePlayerScores();
-                Finish();
-            }
+            HandlePlayerCaught();
         }
 
         if (collider.gameObject.CompareTag("Finish"))
         {
             Finish();
+        }
+    }
+
+    private void HandlePlayerCaught()
+    {
+        Debug.Log($"Player {OwnerClientId} hit by snake, setting score to DNF...");
+
+        // Ensure ScoreManager is available
+        if (ScoreManager.Instance != null)
+        {
+            foreach (var entry in ScoreManager.Instance.GetEntryList())
+            {
+                if (entry.GetPlayerName() == OwnerClientId)
+                {
+                    entry.SetScore(-1, "DNF"); // Mark player as DNF immediately
+                    Debug.Log($"Player {OwnerClientId} marked as DNF on scoreboard.");
+                    break;
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("ScoreManager instance not found!");
+        }
+
+        // Prevent further movement and interactions
+        moveSpeed = 0f;
+        GetComponent<Collider2D>().enabled = false;
+
+        // Remove player from the network
+        NetworkObject networkObject = GetComponent<NetworkObject>();
+        if (networkObject != null && networkObject.IsSpawned)
+        {
+            networkObject.Despawn();
+        }
+
+
+        // Check if all players have finished
+        if (ScoreManager.Instance != null)
+        {
+            var allFinished = true;
+            foreach (var entry in ScoreManager.Instance.GetEntryList())
+            {
+                if (entry.GetScore() != -1) // If any player is still active, don't finish
+                {
+                    allFinished = false;
+                    break;
+                }
+            }
+
+            if (allFinished)
+            {
+                Debug.Log("All players have finished or are DNF. Ending game...");
+                Finish(); // Call Finish() to end the game early
+            }
         }
     }
 
@@ -171,7 +210,7 @@ public class FrogController : NetworkBehaviour
         try
         {
             RibbitRoyaleMultiplayer.Instance.SetPlayerFinished(true);
-            GetComponent<Collider2D>().enabled = false;
+            //GetComponent<Collider2D>().enabled = false;
             Debug.Log("RRM SetPlayerFinished Successfully...");
             //scoreController = GameObject.FindGameObjectWithTag("ScoreControllerGO").GetComponent<ScoreController>();
             //scoreController.SetPlayerFinished();
@@ -198,9 +237,9 @@ public class FrogController : NetworkBehaviour
                 return;
             }
         }
-        catch
+        catch (Exception e)
         {
-            Debug.Log("Failed to get player data from clientId. Sending player back to prelobby");
+            Debug.Log("Failed to get player data from clientId. Sending player back to prelobby: ERROR \" + e");
             Loader.Load(Loader.Scene.PreLobbyScene);
             return;
         }
