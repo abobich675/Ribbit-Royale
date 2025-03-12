@@ -23,9 +23,7 @@ public class FrogController : NetworkBehaviour
     public RuntimeAnimatorController[] animators; // Green Blue Red Yellow
     [SerializeField] private PlayerVisual playerVisual; // Reference to PlayerVisual    
 
-    //InputAction moveAction;
-
-    //private bool isHost;
+    private bool isHost;
 
     //GameObject connectedObject;
 
@@ -61,9 +59,9 @@ public class FrogController : NetworkBehaviour
     {
         if (timerOver)
         {
-            // Handle horizontal movement
-            float horizontalInput = Input.GetAxisRaw("Horizontal");
-            rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
+            // Read movement input from PlayerInput component
+            Vector2 moveInput = moveAction.ReadValue<Vector2>();
+            rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
 
             // Update animation / sprite direction
             animator.SetFloat("Speed", rb.linearVelocity.magnitude);
@@ -78,7 +76,7 @@ public class FrogController : NetworkBehaviour
             }
 
             // Handle jumping
-            if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+            if (moveInput.y > 0 && isGrounded) // Using 'y' axis instead of KeyCode.W
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
                 isGrounded = false; // Prevent multiple jumps mid-air
