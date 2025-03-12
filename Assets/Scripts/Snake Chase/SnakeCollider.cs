@@ -3,7 +3,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UI.Scoreboard;
 
-public class SnakeCollider : MonoBehaviour
+public class SnakeCollider : NetworkBehaviour
 {
     private ScoreController scoreCon;
     void Awake()

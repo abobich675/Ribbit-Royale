@@ -69,12 +69,6 @@ public class SnakeController : NetworkBehaviour
         }
         if (collision.gameObject.CompareTag("Player"))
         {
-            NetworkObject playerNetworkObject = collision.gameObject.GetComponent<NetworkObject>();
-            if (playerNetworkObject != null && playerNetworkObject.IsSpawned)
-            {
-                playerNetworkObject.Despawn();
-            }
-
             FindPlayer();
         }
     }
@@ -96,13 +90,17 @@ public class SnakeController : NetworkBehaviour
         {
             // Ensure player has a NetworkObject and is still active
             NetworkObject netObj = player.GetComponent<NetworkObject>();
+
             if (netObj != null && netObj.IsSpawned)
             {
-                float distance = Vector3.Distance(transform.position, player.transform.position);
-                if (distance < minDistance)
+                if (player.transform.position.y > -10)
                 {
-                    minDistance = distance;
-                    closestPlayer = player.transform;
+                    float distance = Vector3.Distance(transform.position, player.transform.position);
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        closestPlayer = player.transform;
+                    }
                 }
             }
         }

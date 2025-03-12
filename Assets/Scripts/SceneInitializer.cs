@@ -37,7 +37,7 @@ public class SceneInitializer : NetworkBehaviour
                     SpawnPlayer(TongueSwingPrefab, clientId, 10f);
                     break;
                 case "SnakeChaseGame":
-                    SpawnPlayer(SnakeChasePrefab, clientId, 1f);
+                    SpawnPlayer(SnakeChasePrefab, clientId, 3f);
                     break;
             }
         }

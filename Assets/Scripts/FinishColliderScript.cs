@@ -2,7 +2,7 @@ using System;
 using Unity.Netcode;
 using UnityEngine;
 
-public class FinishColliderScript : MonoBehaviour
+public class FinishColliderScript : NetworkBehaviour
 {
     private ScoreController scoreCon;
     void Awake()
