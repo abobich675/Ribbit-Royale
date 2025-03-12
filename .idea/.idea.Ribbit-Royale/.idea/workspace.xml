@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="80f5dd4c-6adf-4d93-835d-cdcfdeb62e1d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Ribbit-Royale/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Ribbit-Royale/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ScoreController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ScoreController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,11 +31,8 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Tests/EditMode/Test_Scoreboard.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Ryan Dobkin/Desktop/Code/Ribbit-Royale/Assets/UniversalRenderPipelineGlobalSettings.asset" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Ryan Dobkin/Desktop/Code/Ribbit-Royale/Assets/UniversalRenderPipelineGlobalSettings.asset" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Ryan Dobkin/Desktop/Code/Ribbit-Royale/Assets/UniversalRenderPipelineGlobalSettings.asset" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Ryan Dobkin/Desktop/Code/Ribbit-Royale/Assets/UniversalRenderPipelineGlobalSettings.asset" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem/InputSystem/Plugins/PlayerInput/PlayerInput.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects/Runtime/Connection/NetworkConnectionManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects/Runtime/Core/NetworkObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects/Runtime/Logging/NetworkLog.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects/Runtime/Messaging/NetworkMessageManager.cs" root0="SKIP_HIGHLIGHTING" />
@@ -156,7 +152,11 @@
       <workItem from="1740709228359" duration="9647000" />
       <workItem from="1740722568703" duration="526000" />
       <workItem from="1740965601435" duration="25501000" />
-      <workItem from="1741590689657" duration="457000" />
+      <workItem from="1741590689657" duration="691000" />
+      <workItem from="1741657359716" duration="7816000" />
+      <workItem from="1741665473867" duration="84000" />
+      <workItem from="1741738953425" duration="1429000" />
+      <workItem from="1741759818031" duration="1884000" />
     </task>
     <servers />
   </component>
