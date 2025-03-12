@@ -10,7 +10,7 @@ Library: C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royal
 --linker-options=PdbAltPath="Ribbit Royale_Data/Plugins/x86_64/lib_burst_generated.pdb"
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royale\Temp\Burst
---key-folder=C:/Program Files/Unity/Hub/Editor/6000.0.34f1-x86_64/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
+--key-folder=C:/Program Files/Unity/Hub/Editor/6000.0.34f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
 --decode-folder=C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royale\Library\Burst
 --output=C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royale\Temp\BurstOutput\Data\Plugins\x86_64\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
@@ -82,7 +82,7 @@ Library: C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royal
 --linker-options=PdbAltPath="Ribbit Royale_Data/Plugins/x86_64/lib_burst_generated.pdb"
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royale\Temp\Burst
---key-folder=C:/Program Files/Unity/Hub/Editor/6000.0.34f1-x86_64/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
+--key-folder=C:/Program Files/Unity/Hub/Editor/6000.0.34f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
 --decode-folder=C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royale\Library\Burst
 --output=C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royale\Temp\BurstOutput\Data\Plugins\x86_64\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
@@ -156,7 +156,7 @@ Library: C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royal
 --linker-options=PdbAltPath="Ribbit Royale_Data/Plugins/x86_64/lib_burst_generated.pdb"
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royale\Temp\Burst
---key-folder=C:/Program Files/Unity/Hub/Editor/6000.0.34f1-x86_64/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
+--key-folder=C:/Program Files/Unity/Hub/Editor/6000.0.34f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
 --decode-folder=C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royale\Library\Burst
 --output=C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royale\Temp\BurstOutput\Data\Plugins\x86_64\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
@@ -176,7 +176,7 @@ Library: C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royal
 --linker-options=PdbAltPath="Ribbit Royale_Data/Plugins/x86_64/lib_burst_generated.pdb"
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royale\Temp\Burst
---key-folder=C:/Program Files/Unity/Hub/Editor/6000.0.34f1-x86_64/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
+--key-folder=C:/Program Files/Unity/Hub/Editor/6000.0.34f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
 --decode-folder=C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royale\Library\Burst
 --output=C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royale\Temp\BurstOutput\Data\Plugins\x86_64\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
@@ -194,7 +194,7 @@ Library: C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royal
 --linker-options=PdbAltPath="Ribbit Royale_Data/Plugins/x86_64/lib_burst_generated.pdb"
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royale\Temp\Burst
---key-folder=C:/Program Files/Unity/Hub/Editor/6000.0.34f1-x86_64/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
+--key-folder=C:/Program Files/Unity/Hub/Editor/6000.0.34f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
 --decode-folder=C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royale\Library\Burst
 --output=C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royale\Temp\BurstOutput\Data\Plugins\x86_64\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
@@ -310,7 +310,7 @@ Library: C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royal
 --linker-options=PdbAltPath="Ribbit Royale_Data/Plugins/x86_64/lib_burst_generated.pdb"
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royale\Temp\Burst
---key-folder=C:/Program Files/Unity/Hub/Editor/6000.0.34f1-x86_64/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
+--key-folder=C:/Program Files/Unity/Hub/Editor/6000.0.34f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
 --decode-folder=C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royale\Library\Burst
 --output=C:\Users\caugh\Pictures\Assignments\Software Engineering 2\Ribbit Royale\Temp\BurstOutput\Data\Plugins\x86_64\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
