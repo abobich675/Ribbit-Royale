@@ -19,7 +19,8 @@ The objective is to provide a distinctive experience that blends competitive gam
 ## How to Run the System
 - The current released version of the game can be found in the Release_Builds folder of the repository (https://github.com/abobich675/Ribbit-Royale/tree/master/Release_Builds). Locate the build for your computer architecture. Downloading and running the build will allow you to play Ribbit Royale.
 - To run the game using the latest version of the repository, regardless of the last released build you must create your own build file, following the instructons above.
-- NOTE: Due to networking limitations, the clients must be run on devices with a wired internet connection. Wireless connections present too much latency for our network model to work properly.
+
+### **NOTE: Due to networking limitations, the clients must be run on devices with a wired internet connection. Wireless connections present too much latency for our network model to work properly. Multiple clients can be run on the same computer if desired, but this must still be on a wired connection.**
 
 ## Who Worked on What:
 - Baron Baker: "Snake Chase" minigame lead developer and background/sprite art
